@@ -41,7 +41,7 @@ export function dashboardPage(): string {
     <div class="flex flex-wrap gap-2 mb-8">
       <button class="text-xs px-3 py-1.5 rounded-md bg-epig-card border border-epig-border text-epig-textDim hover:text-white hover:border-blue-500 transition-all date-btn" data-range="30d" onclick="switchDateRange('30d')">30D</button>
       <button class="text-xs px-3 py-1.5 rounded-md bg-epig-card border border-epig-border text-epig-textDim hover:text-white hover:border-blue-500 transition-all date-btn" data-range="90d" onclick="switchDateRange('90d')">90D</button>
-      <button class="text-xs px-3 py-1.5 rounded-md bg-blue-500/20 border border-blue-500/50 text-blue-400 font-semibold transition-all date-btn active" data-range="all" onclick="switchDateRange('all')">All</button>
+      <button class="text-xs px-3 py-1.5 rounded-md bg-blue-500/20 border border-blue-500/50 text-blue-400 font-semibold transition-all date-btn active" data-range="all" onclick="switchDateRange('all')">YTD</button>
     </div>
 
     <!-- ═══════════════════ KPI Grid: Combined Portfolio ═══════════════════ -->
@@ -419,14 +419,14 @@ export function dashboardPage(): string {
       if (d && (d.totalFills > 0 || d.totalTrades > 0)) {
         banner.classList.remove('hidden');
         const range = d.dataRange || {};
-        const rangeLabel = currentDateRange === '30d' ? 'Last 30 days' : currentDateRange === '90d' ? 'Last 90 days' : 'All data';
+        const rangeLabel = currentDateRange === '30d' ? 'Last 30 days' : currentDateRange === '90d' ? 'Last 90 days' : '2026 YTD';
           const rolling = d.rollingMetrics || {};
-          const r = currentDateRange === '30d' ? rolling['30d'] : currentDateRange === '90d' ? rolling['90d'] : null;
-          const shownTrades = r ? (r.trades || 0) : (d.totalTrades || 0);
-          const shownFills = r ? '' : (d.totalFills || 0) + ' IB fills → ';
+          const rBanner = currentDateRange === '30d' ? rolling['30d'] : currentDateRange === '90d' ? rolling['90d'] : null;
+          const shownTrades = rBanner ? (rBanner.trades || 0) : (d.totalTrades || 0);
+          const shownFills = rBanner ? '' : (d.totalFills || 0) + ' IB fills → ';
           text.textContent = rangeLabel + ': ' + shownFills + shownTrades + ' closed round-trips' +
-          (!r && d.openTrades ? ' (' + d.openTrades + ' open)' : '') +
-          (!r && range.firstDate ? ' | ' + range.firstDate + ' to ' + range.lastDate + ' (' + range.daySpan + ' days)' : '');
+          (!rBanner && d.openTrades ? ' (' + d.openTrades + ' open)' : '') +
+          (!rBanner && range.firstDate ? ' | ' + range.firstDate + ' to ' + range.lastDate + ' (' + range.daySpan + ' days)' : '');
       } else {
         banner.classList.add('hidden');
       }
