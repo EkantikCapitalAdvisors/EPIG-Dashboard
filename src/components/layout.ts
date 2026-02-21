@@ -1,10 +1,62 @@
-export function layout(title: string, content: string): string {
+interface SocialMeta {
+  title?: string
+  description?: string
+  path?: string
+  image?: string
+}
+
+const SITE_URL = 'https://epig-dashboard.pages.dev'
+const DEFAULT_DESCRIPTION = 'Verified IB trade data \u00b7 3 strategies \u00b7 Real-time Discord alerts \u00b7 Full transparency. See exactly how we protect capital and compound returns \u2014 every trade tracked from a live brokerage account.'
+const DEFAULT_IMAGE = SITE_URL + '/static/og-image.png'
+
+export function layout(title: string, content: string, social?: SocialMeta): string {
+  const ogTitle = social?.title || title
+  const ogDesc = social?.description || DEFAULT_DESCRIPTION
+  const ogImage = social?.image || DEFAULT_IMAGE
+  const ogUrl = SITE_URL + (social?.path || '/')
+
   return `<!DOCTYPE html>
 <html lang="en" class="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>${title}</title>
+
+  <!-- Primary Meta Tags -->
+  <meta name="title" content="${ogTitle}">
+  <meta name="description" content="${ogDesc}">
+  <meta name="author" content="Ekantik Capital Advisors LLC">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="${ogUrl}">
+
+  <!-- Open Graph / Facebook / WhatsApp / Telegram / LinkedIn -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="${ogUrl}">
+  <meta property="og:title" content="${ogTitle}">
+  <meta property="og:description" content="${ogDesc}">
+  <meta property="og:image" content="${ogImage}">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:site_name" content="EPIG Investment Design">
+  <meta property="og:locale" content="en_US">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="${ogUrl}">
+  <meta name="twitter:title" content="${ogTitle}">
+  <meta name="twitter:description" content="${ogDesc}">
+  <meta name="twitter:image" content="${ogImage}">
+
+  <!-- WhatsApp / Telegram specifics (they read og: tags primarily) -->
+  <!-- Additional Telegram-specific -->
+  <meta name="telegram:channel" content="@ekantikcapital">
+
+  <!-- Apple / Mobile -->
+  <meta name="apple-mobile-web-app-title" content="EPIG">
+  <meta name="theme-color" content="#0a0e17">
+  <meta name="msapplication-TileColor" content="#0a0e17">
+
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {

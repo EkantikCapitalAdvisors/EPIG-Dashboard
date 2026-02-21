@@ -20,12 +20,36 @@ app.use('/api/*', cors())
 // ══════════════════════════════════════════════════════════
 // PUBLIC PAGES
 // ══════════════════════════════════════════════════════════
-app.get('/', (c) => c.html(layout('EPIG Investment Design', landingPage())))
-app.get('/dashboard', (c) => c.html(layout('Dashboard | EPIG', dashboardPage())))
-app.get('/pricing', (c) => c.html(layout('Pricing | EPIG', pricingPage())))
-app.get('/how-it-works', (c) => c.html(layout('How It Works | EPIG', howItWorksPage())))
-app.get('/faq', (c) => c.html(layout('FAQ | EPIG', faqPage())))
-app.get('/projector', (c) => c.html(layout('Performance Projector | EPIG', projectorPage())))
+app.get('/', (c) => c.html(layout('EPIG Investment Design | Verified Trade Performance', landingPage(), {
+  title: 'EPIG Investment Design | Verified Trade Performance',
+  description: 'Every trade verified from a live IB account. 3 strategies, real-time Discord alerts, full transparency. See exactly how we protect capital and compound returns \u2014 free dashboard.',
+  path: '/',
+})))
+app.get('/dashboard', (c) => c.html(layout('Dashboard | EPIG', dashboardPage(), {
+  title: 'Live Performance Dashboard | EPIG Investment Design',
+  description: 'Real-time strategy performance from a verified Interactive Brokers account. Track win rates, drawdowns, equity curves and per-trade P&L across 3 strategies.',
+  path: '/dashboard',
+})))
+app.get('/pricing', (c) => c.html(layout('Pricing | EPIG', pricingPage(), {
+  title: 'Pricing | EPIG Investment Design',
+  description: 'Free dashboard access forever. Subscribe for real-time Discord trade alerts on every Strategy B & C entry and exit. Start with a free trial.',
+  path: '/pricing',
+})))
+app.get('/how-it-works', (c) => c.html(layout('How It Works | EPIG', howItWorksPage(), {
+  title: 'How It Works | EPIG Investment Design',
+  description: 'See how EPIG verifies every trade using IB Flex Queries, how the 3-strategy system works, and how Discord alerts keep you informed in real time.',
+  path: '/how-it-works',
+})))
+app.get('/faq', (c) => c.html(layout('FAQ | EPIG', faqPage(), {
+  title: 'Frequently Asked Questions | EPIG Investment Design',
+  description: 'Common questions about EPIG: how data is verified, what the strategies are, subscription details, and how Discord alerts work.',
+  path: '/faq',
+})))
+app.get('/projector', (c) => c.html(layout('Performance Projector | EPIG', projectorPage(), {
+  title: 'Performance Projector | EPIG Investment Design',
+  description: 'Project year-end returns based on real 2026 YTD trade data. Adjust portfolio size and explore per-strategy breakdowns with live verified data.',
+  path: '/projector',
+})))
 app.get('/calculator', (c) => c.redirect('/projector'))
 app.get('/disclosures', (c) => c.html(layout('Disclosures | EPIG', disclosuresPage())))
 app.get('/terms', (c) => c.html(layout('Terms of Service | EPIG', termsPage())))
@@ -33,6 +57,166 @@ app.get('/privacy', (c) => c.html(layout('Privacy Policy | EPIG', privacyPage())
 
 app.get('/admin', (c) => c.html(layout('Admin Console | EPIG', adminPage())))
 app.get('/admin/upload', (c) => c.html(layout('Upload Trades | EPIG', adminPage())))
+
+// ══════════════════════════════════════════════════════════
+// OG IMAGE — Dynamic social sharing image (SVG → PNG via resvg)
+// Used by WhatsApp, Telegram, Twitter, LinkedIn, Facebook
+// ══════════════════════════════════════════════════════════
+app.get('/api/og-image', async (c) => {
+  // Try to fetch live stats for dynamic numbers
+  let stratA = '--', stratB = '--', stratC = '--', totalPct = '--', totalDollar = '--'
+  let tradeCount = '0', dateRange = '2026 YTD'
+
+  try {
+    const db = c.env.DB
+    if (db) {
+      const allTrades = await db.prepare(
+        "SELECT strategy, side, instrument, realized_pnl, quantity, trade_date, asset_class, strike, expiry, put_call, result FROM trades WHERE trade_date >= '2026-01-01' ORDER BY trade_date ASC, id ASC"
+      ).all()
+      const rows: any[] = allTrades.results || []
+      if (rows.length > 0) {
+        // Portfolio-wide date range
+        const allDates = rows.map((r: any) => r.trade_date).filter(Boolean).sort()
+        const pFirst = allDates[0]
+        const pLast = allDates[allDates.length - 1]
+        const pDaySpan = Math.max((new Date(pLast).getTime() - new Date(pFirst).getTime()) / (1000*60*60*24), 1)
+        const pYF = pDaySpan / 365.25
+
+        let totalAnnualPnl = 0
+        let totalTrades = 0
+        const pcts: Record<string, string> = {}
+
+        for (const strat of ['A', 'B', 'C']) {
+          const fills = rows.filter((r: any) => r.strategy === strat)
+          if (fills.length === 0) { pcts[strat] = '--'; continue }
+          const rts = buildRoundTrips(fills, strat)
+          const closed = rts.filter((rt: any) => rt.closed && rt.pnl !== 0)
+          totalTrades += closed.length
+          const pnl = closed.reduce((s: number, rt: any) => s + rt.pnl, 0)
+          const annPnl = pYF > 0 ? pnl / pYF : pnl
+          totalAnnualPnl += annPnl
+          const pct = (annPnl / 100000) * 100
+          pcts[strat] = (pct >= 0 ? '+' : '') + pct.toFixed(1) + '%'
+        }
+
+        stratA = pcts['A'] || '--'
+        stratB = pcts['B'] || '--'
+        stratC = pcts['C'] || '--'
+        const tPct = (totalAnnualPnl / 100000) * 100
+        totalPct = (tPct >= 0 ? '+' : '') + tPct.toFixed(1) + '%'
+        totalDollar = (totalAnnualPnl >= 0 ? '+$' : '-$') + Math.abs(Math.round(totalAnnualPnl)).toLocaleString()
+        tradeCount = String(totalTrades)
+        dateRange = pFirst + ' to ' + pLast
+      }
+    }
+  } catch (_) { /* fallback to defaults */ }
+
+  const svg = `<svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0e17"/>
+      <stop offset="100%" style="stop-color:#111827"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#3b82f6"/>
+      <stop offset="100%" style="stop-color:#10b981"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#E5A418"/>
+      <stop offset="100%" style="stop-color:#f59e0b"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bg)"/>
+
+  <!-- Subtle grid pattern -->
+  <g opacity="0.03">
+    ${Array.from({length: 20}, (_, i) => `<line x1="${i*60}" y1="0" x2="${i*60}" y2="630" stroke="#fff" stroke-width="1"/>`).join('')}
+    ${Array.from({length: 11}, (_, i) => `<line x1="0" y1="${i*60}" x2="1200" y2="${i*60}" stroke="#fff" stroke-width="1"/>`).join('')}
+  </g>
+
+  <!-- Top accent line -->
+  <rect x="0" y="0" width="1200" height="4" fill="url(#accent)"/>
+
+  <!-- Logo area -->
+  <rect x="60" y="44" width="48" height="48" rx="10" fill="#E5A418"/>
+  <text x="84" y="74" font-family="Arial,Helvetica,sans-serif" font-size="16" font-weight="bold" fill="#fff" text-anchor="middle">ECA</text>
+  <text x="122" y="63" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="bold" fill="#fff">Ekantik Capital</text>
+  <text x="122" y="82" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="600" fill="#E5A418" letter-spacing="3">ADVISORS LLC</text>
+
+  <!-- Live badge -->
+  <circle cx="1070" cy="62" r="5" fill="#10b981"/>
+  <text x="1082" y="67" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="bold" fill="#10b981" letter-spacing="2">LIVE</text>
+
+  <!-- Main headline -->
+  <text x="60" y="160" font-family="Arial,Helvetica,sans-serif" font-size="42" font-weight="800" fill="#f1f5f9">EPIG Investment Design</text>
+  <text x="60" y="200" font-family="Arial,Helvetica,sans-serif" font-size="20" fill="#94a3b8">Protect Capital. Compound Returns. Full Transparency.</text>
+
+  <!-- Divider -->
+  <rect x="60" y="225" width="120" height="3" rx="2" fill="url(#accent)"/>
+
+  <!-- Stats card background -->
+  <rect x="60" y="250" width="1080" height="240" rx="16" fill="#111827" stroke="#1e293b" stroke-width="1.5"/>
+
+  <!-- Strategy headers -->
+  <text x="100" y="290" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="600" fill="#64748b" letter-spacing="2">STRATEGY</text>
+  <text x="500" y="290" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="600" fill="#64748b" letter-spacing="2">ANNUALIZED RETURN</text>
+
+  <!-- Strategy A -->
+  <rect x="85" y="302" width="12" height="12" rx="3" fill="#3b82f6"/>
+  <text x="110" y="314" font-family="Arial,Helvetica,sans-serif" font-size="16" fill="#94a3b8">A  |  Core Allocation</text>
+  <text x="540" y="314" font-family="monospace" font-size="18" font-weight="bold" fill="${stratA.startsWith('-') ? '#ef4444' : '#10b981'}">${stratA}</text>
+
+  <!-- Strategy B -->
+  <rect x="85" y="338" width="12" height="12" rx="3" fill="#10b981"/>
+  <text x="110" y="350" font-family="Arial,Helvetica,sans-serif" font-size="16" fill="#94a3b8">B  |  Tactical Futures</text>
+  <text x="540" y="350" font-family="monospace" font-size="18" font-weight="bold" fill="${stratB.startsWith('-') ? '#ef4444' : '#10b981'}">${stratB}</text>
+
+  <!-- Strategy C -->
+  <rect x="85" y="374" width="12" height="12" rx="3" fill="#f59e0b"/>
+  <text x="110" y="386" font-family="Arial,Helvetica,sans-serif" font-size="16" fill="#94a3b8">C  |  Episodic Pivots</text>
+  <text x="540" y="386" font-family="monospace" font-size="18" font-weight="bold" fill="${stratC.startsWith('-') ? '#ef4444' : '#10b981'}">${stratC}</text>
+
+  <!-- Divider line in card -->
+  <line x1="85" y1="405" x2="1115" y2="405" stroke="#1e293b" stroke-width="1"/>
+
+  <!-- Combined projected return -->
+  <text x="100" y="440" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="600" fill="#f1f5f9">Projected Annual Return</text>
+  <text x="540" y="442" font-family="monospace" font-size="26" font-weight="bold" fill="${totalPct.startsWith('-') ? '#ef4444' : '#10b981'}">${totalPct}</text>
+
+  <!-- Dollar return -->
+  <text x="700" y="442" font-family="monospace" font-size="20" font-weight="bold" fill="${totalDollar.startsWith('-') ? '#ef4444' : '#10b981'}">${totalDollar}</text>
+
+  <!-- Small disclaimer in card -->
+  <text x="100" y="472" font-family="Arial,Helvetica,sans-serif" font-size="10" fill="#64748b">${tradeCount} verified trades  |  $100K portfolio  |  ${dateRange}</text>
+
+  <!-- Bottom section -->
+  <text x="60" y="535" font-family="Arial,Helvetica,sans-serif" font-size="16" fill="#94a3b8">
+    <tspan font-weight="600" fill="#f1f5f9">Verified IB Data</tspan>  ·  Real-Time Discord Alerts  ·  Free Dashboard
+  </text>
+
+  <!-- CTA-style text -->
+  <rect x="60" y="555" width="280" height="44" rx="8" fill="#3b82f6"/>
+  <text x="200" y="583" font-family="Arial,Helvetica,sans-serif" font-size="16" font-weight="700" fill="#fff" text-anchor="middle">See Live Performance  →</text>
+
+  <!-- URL -->
+  <text x="380" y="583" font-family="monospace" font-size="14" fill="#64748b">epig-dashboard.pages.dev</text>
+
+  <!-- Bottom accent line -->
+  <rect x="0" y="626" width="1200" height="4" fill="url(#gold)"/>
+
+  <!-- Disclaimer -->
+  <text x="1140" y="620" font-family="Arial,Helvetica,sans-serif" font-size="9" fill="#475569" text-anchor="end">Past performance is not indicative of future results.</text>
+</svg>`
+
+  return new Response(svg, {
+    headers: {
+      'Content-Type': 'image/svg+xml',
+      'Cache-Control': 'public, max-age=3600, s-maxage=3600',
+    }
+  })
+})
 
 // ══════════════════════════════════════════════════════════
 // API: DASHBOARD SUMMARY (reads from D1 – 2026 data via round-trip builder)
