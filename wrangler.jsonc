@@ -10,7 +10,7 @@
     {
       "binding": "DB",
       "database_name": "epig-production",
-      "database_id": "local-dev-placeholder"
+      "database_id": "dd146fe7-5904-43d6-9b86-2de9ff67f1e5"
     }
   ]
 }
