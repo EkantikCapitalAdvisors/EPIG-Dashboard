@@ -97,7 +97,7 @@ export function layout(title: string, content: string): string {
           <a href="/calculator" class="nav-link">Calculator</a>
           <a href="/how-it-works" class="nav-link">How It Works</a>
           <a href="/pricing" class="nav-link">Pricing</a>
-          <a href="/updates" class="nav-link">Updates</a>
+          <a href="/updates" class="nav-link flex items-center gap-1.5">Updates <span class="bg-emerald-500 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full leading-none">NEW</span></a>
           <a href="/admin" class="nav-link">Admin</a>
         </div>
         <div class="flex items-center gap-3">
@@ -122,12 +122,13 @@ export function layout(title: string, content: string): string {
     </div>
   </nav>
 
-  <!-- Trial banner -->
-  <div class="bg-gradient-to-r from-blue-600/20 to-emerald-600/20 border-b border-blue-500/20">
+  <!-- Latest update banner -->
+  <div class="bg-gradient-to-r from-emerald-600/15 via-blue-600/10 to-purple-600/15 border-b border-emerald-500/20">
     <div class="max-w-7xl mx-auto px-4 py-2.5 flex items-center justify-center gap-3 text-sm">
       <div class="pulse-dot"></div>
-      <span class="text-epig-textMuted">Want real-time notifications?</span>
-      <a href="/pricing" class="text-blue-400 font-semibold hover:text-blue-300 no-underline">Start your 60-day free trial &rarr;</a>
+      <span class="text-emerald-400 font-semibold">Latest Update</span>
+      <span class="text-epig-textMuted">Feb 17 &mdash; Weekly data uploaded: 12 new Strategy B trades, 3 Strategy C trades</span>
+      <a href="/updates" class="text-blue-400 font-semibold hover:text-blue-300 no-underline">View all updates &rarr;</a>
     </div>
   </div>
 
