@@ -35,62 +35,60 @@ export function calculatorPage(): string {
         <div class="space-y-5">
           <div>
             <div class="flex justify-between text-sm mb-1">
-              <span class="text-epig-textDim">SPY Allocation</span>
-              <span class="font-mono text-blue-400" id="spy-val">80%</span>
+              <span class="text-epig-textDim">Win Rate</span>
+              <span class="font-mono text-blue-400" id="a-winrate-val">55%</span>
             </div>
-            <input type="range" id="spy-pct" min="70" max="100" value="80" class="w-full" oninput="updateA()">
+            <input type="range" id="a-winrate" min="30" max="85" value="55" class="w-full" oninput="recalculate()">
           </div>
           <div>
             <div class="flex justify-between text-sm mb-1">
-              <span class="text-epig-textDim">Stock Sleeve</span>
-              <span class="font-mono text-blue-400" id="stock-val">15%</span>
+              <span class="text-epig-textDim">Avg Win (R)</span>
+              <span class="font-mono text-blue-400" id="a-avgwin-val">1.2</span>
             </div>
-            <input type="range" id="stock-pct" min="0" max="25" value="15" class="w-full" oninput="updateA()">
+            <input type="range" id="a-avgwin" min="0.5" max="5" value="1.2" step="0.1" class="w-full" oninput="recalculate()">
           </div>
-          <div class="flex justify-between text-sm">
-            <span class="text-epig-textDim">Cash / Treasuries</span>
-            <span class="font-mono text-blue-400" id="cash-val">5%</span>
+          <div>
+            <div class="flex justify-between text-sm mb-1">
+              <span class="text-epig-textDim">Avg Loss (R)</span>
+              <span class="font-mono text-red-400" id="a-avgloss-val">1.0</span>
+            </div>
+            <input type="range" id="a-avgloss" min="0.5" max="3" value="1" step="0.1" class="w-full" oninput="recalculate()">
+          </div>
+          <div class="flex justify-between items-center">
+            <span class="text-sm text-epig-textDim">Trades / Year</span>
+            <input type="number" id="a-trades" value="120" min="10" max="500" step="10"
+              class="w-20 bg-epig-bg border border-epig-border rounded px-2 py-1 text-sm font-mono text-right text-white focus:outline-none focus:border-blue-500"
+              oninput="recalculate()">
+          </div>
+          <div class="flex justify-between items-center">
+            <span class="text-sm text-epig-textDim">Risk per Trade</span>
+            <div class="flex items-center gap-1">
+              <input type="number" id="a-risk" value="1" min="0.25" max="5" step="0.25"
+                class="w-16 bg-epig-bg border border-epig-border rounded px-2 py-1 text-sm font-mono text-right text-white focus:outline-none focus:border-blue-500"
+                oninput="recalculate()">
+              <span class="text-epig-textDim text-sm">%</span>
+            </div>
           </div>
 
-          <div class="border-t border-epig-border pt-4 space-y-3">
-            <div class="text-xs text-epig-textDim uppercase tracking-wider font-semibold">Return Assumptions</div>
-            <div class="flex justify-between items-center">
-              <span class="text-sm text-epig-textDim">SPY Annual Return</span>
-              <div class="flex items-center gap-1">
-                <input type="number" id="spy-return" value="10" min="-20" max="50" step="0.5"
-                  class="w-16 bg-epig-bg border border-epig-border rounded px-2 py-1 text-sm font-mono text-right text-white focus:outline-none focus:border-blue-500"
-                  oninput="recalculate()">
-                <span class="text-epig-textDim text-sm">%</span>
-              </div>
+          <div class="border-t border-epig-border pt-4 space-y-2">
+            <div class="flex justify-between items-center text-sm">
+              <span class="text-epig-textDim">EV per Trade (R)</span>
+              <span class="font-mono text-blue-400" id="a-ev">+0.21</span>
             </div>
-            <div class="flex justify-between items-center">
-              <span class="text-sm text-epig-textDim">Stock Sleeve Return</span>
-              <div class="flex items-center gap-1">
-                <input type="number" id="stock-return" value="15" min="-30" max="80" step="0.5"
-                  class="w-16 bg-epig-bg border border-epig-border rounded px-2 py-1 text-sm font-mono text-right text-white focus:outline-none focus:border-blue-500"
-                  oninput="recalculate()">
-                <span class="text-epig-textDim text-sm">%</span>
-              </div>
-            </div>
-            <div class="flex justify-between items-center">
-              <span class="text-sm text-epig-textDim">Cash Yield</span>
-              <div class="flex items-center gap-1">
-                <input type="number" id="cash-return" value="4.5" min="0" max="10" step="0.1"
-                  class="w-16 bg-epig-bg border border-epig-border rounded px-2 py-1 text-sm font-mono text-right text-white focus:outline-none focus:border-blue-500"
-                  oninput="recalculate()">
-                <span class="text-epig-textDim text-sm">%</span>
-              </div>
+            <div class="flex justify-between items-center text-sm">
+              <span class="text-epig-textDim">Expected Annual R</span>
+              <span class="font-mono text-blue-400" id="a-annual-r">+25.2</span>
             </div>
           </div>
 
           <div class="border-t border-epig-border pt-4">
             <div class="flex justify-between items-center">
               <span class="font-semibold text-sm">Expected Annual Return</span>
-              <span class="font-mono font-bold text-lg text-blue-400" id="a-return">+10.5%</span>
+              <span class="font-mono font-bold text-lg text-blue-400" id="a-return">+2.5%</span>
             </div>
             <div class="flex justify-between items-center mt-1">
               <span class="text-epig-textDim text-sm">Dollar Return</span>
-              <span class="font-mono font-bold text-blue-400" id="a-dollar">$105,000</span>
+              <span class="font-mono font-bold text-blue-400" id="a-dollar">$25,200</span>
             </div>
           </div>
         </div>
@@ -294,33 +292,25 @@ export function calculatorPage(): string {
   </div>
 
   <script>
-    function updateA() {
-      const spy = parseInt(document.getElementById('spy-pct').value);
-      const stock = parseInt(document.getElementById('stock-pct').value);
-      const maxStock = 100 - spy;
-      const adjustedStock = Math.min(stock, maxStock);
-      document.getElementById('stock-pct').value = adjustedStock;
-      const cash = 100 - spy - adjustedStock;
-
-      document.getElementById('spy-val').textContent = spy + '%';
-      document.getElementById('stock-val').textContent = adjustedStock + '%';
-      document.getElementById('cash-val').textContent = cash + '%';
-      recalculate();
-    }
-
     function recalculate() {
       const portfolio = parseFloat(document.getElementById('portfolio-size').value) || 0;
 
-      // Strategy A
-      const spyPct = parseInt(document.getElementById('spy-pct').value) / 100;
-      const stockPct = parseInt(document.getElementById('stock-pct').value) / 100;
-      const cashPct = 1 - spyPct - stockPct;
-      const spyRet = parseFloat(document.getElementById('spy-return').value) / 100;
-      const stockRet = parseFloat(document.getElementById('stock-return').value) / 100;
-      const cashRet = parseFloat(document.getElementById('cash-return').value) / 100;
-      const aReturn = spyPct * spyRet + stockPct * stockRet + cashPct * cashRet;
+      // Strategy A — EV-based (same formula as B and C)
+      const aWinRate = parseInt(document.getElementById('a-winrate').value) / 100;
+      const aAvgWin = parseFloat(document.getElementById('a-avgwin').value);
+      const aAvgLoss = parseFloat(document.getElementById('a-avgloss').value);
+      const aTrades = parseInt(document.getElementById('a-trades').value);
+      const aRisk = parseFloat(document.getElementById('a-risk').value) / 100;
+      const aEV = aWinRate * aAvgWin - (1 - aWinRate) * aAvgLoss;
+      const aAnnualR = aEV * aTrades;
+      const aReturn = aEV * aTrades * aRisk;
       const aDollar = portfolio * aReturn;
 
+      document.getElementById('a-winrate-val').textContent = Math.round(aWinRate * 100) + '%';
+      document.getElementById('a-avgwin-val').textContent = aAvgWin.toFixed(1);
+      document.getElementById('a-avgloss-val').textContent = aAvgLoss.toFixed(1);
+      document.getElementById('a-ev').textContent = (aEV >= 0 ? '+' : '') + aEV.toFixed(2);
+      document.getElementById('a-annual-r').textContent = (aAnnualR >= 0 ? '+' : '') + aAnnualR.toFixed(1);
       document.getElementById('a-return').textContent = (aReturn >= 0 ? '+' : '') + (aReturn * 100).toFixed(1) + '%';
       document.getElementById('a-dollar').textContent = '$' + Math.round(aDollar).toLocaleString();
 
