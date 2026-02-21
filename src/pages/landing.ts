@@ -48,52 +48,119 @@ export function landingPage(): string {
     </div>
   </section>
 
-  <!-- ════ SECTION 2: STRUCTURAL CHALLENGES ════ -->
+  <!-- ════ SECTION 2: LIMITATIONS OF CURRENT PARADIGM ════ -->
   <section class="section-divider">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
       <div class="text-center mb-14">
-        <h2 class="text-3xl sm:text-4xl font-bold mb-4">Why Traditional Portfolios Fail</h2>
-        <p class="text-epig-textMuted text-lg max-w-2xl mx-auto">
-          Four structural problems that erode wealth over time &mdash; even in "good" markets.
+        <span class="inline-block text-xs font-bold uppercase tracking-widest text-red-400 border border-red-500/40 rounded-full px-5 py-1.5 mb-6">Limitations of Current Paradigm</span>
+        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold mb-5 leading-tight">
+          Why Traditional Approaches Generate Lower<br>Risk-Adjusted Returns
+        </h2>
+        <p class="text-epig-textMuted text-lg max-w-3xl mx-auto leading-relaxed">
+          It&rsquo;s not about stock picking or manager skill &mdash; it&rsquo;s about <span class="text-red-400 font-semibold">structural market challenges</span> that reduce returns for
+          passive investors. EPIG is designed to neutralize these four fundamental constraints.
         </p>
       </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <div class="kpi-card">
-          <div class="w-12 h-12 rounded-xl bg-red-500/10 flex items-center justify-center mb-4">
-            <i class="fas fa-chart-bar text-red-400 text-xl"></i>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+        <!-- Card 1: P/E Dependence -->
+        <div class="rounded-2xl border border-red-500/20 bg-red-500/[0.04] p-7">
+          <div class="flex items-center gap-3 mb-5">
+            <div class="w-10 h-10 rounded-full bg-red-500/20 flex items-center justify-center">
+              <span class="text-red-400 font-bold text-sm">1</span>
+            </div>
+            <h3 class="text-xl font-bold text-red-400">P/E Dependence</h3>
           </div>
-          <h3 class="font-semibold text-lg mb-2">P/E Dependence</h3>
-          <p class="text-epig-textDim text-sm leading-relaxed">
-            At elevated valuations (S&P 500 P/E > 25), forward 10-year returns have historically averaged only 2&ndash;4% annually. Most portfolios are fully exposed to this risk.
-          </p>
-        </div>
-        <div class="kpi-card">
-          <div class="w-12 h-12 rounded-xl bg-red-500/10 flex items-center justify-center mb-4">
-            <i class="fas fa-link text-red-400 text-xl"></i>
+          <p class="text-white font-semibold text-sm mb-4">Future returns depend on entry P/E:</p>
+          <div class="rounded-xl bg-[#0d0d18]/60 border border-[#2a2a3e] p-4 mb-4 space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="text-sm text-[#c0c8d8]">P/E = 5</span>
+              <span class="text-sm font-bold text-emerald-400">~20% return</span>
+            </div>
+            <div class="h-px bg-[#2a2a3e]"></div>
+            <div class="flex items-center justify-between">
+              <span class="text-sm text-[#c0c8d8]">P/E = 15</span>
+              <span class="text-sm font-bold text-amber-400">~12% return</span>
+            </div>
+            <div class="h-px bg-[#2a2a3e]"></div>
+            <div class="flex items-center justify-between">
+              <span class="text-sm text-[#c0c8d8]">P/E = 30</span>
+              <span class="text-sm font-bold text-red-400">~3% return</span>
+            </div>
           </div>
-          <h3 class="font-semibold text-lg mb-2">Correlation Spikes</h3>
-          <p class="text-epig-textDim text-sm leading-relaxed">
-            In crashes, asset classes move together. The diversification you thought you had evaporates when you need it most. 2020 and 2022 proved this conclusively.
-          </p>
+          <p class="text-xs text-[#8892a6] italic">High starting P/E = Lower 10-year returns</p>
         </div>
-        <div class="kpi-card">
-          <div class="w-12 h-12 rounded-xl bg-red-500/10 flex items-center justify-center mb-4">
-            <i class="fas fa-arrow-trend-down text-red-400 text-xl"></i>
+
+        <!-- Card 2: Correlation Challenge -->
+        <div class="rounded-2xl border border-red-500/20 bg-red-500/[0.04] p-7">
+          <div class="flex items-center gap-3 mb-5">
+            <div class="w-10 h-10 rounded-full bg-red-500/20 flex items-center justify-center">
+              <span class="text-red-400 font-bold text-sm">2</span>
+            </div>
+            <h3 class="text-xl font-bold text-red-400">Correlation Challenge</h3>
           </div>
-          <h3 class="font-semibold text-lg mb-2">Drawdown Math</h3>
-          <p class="text-epig-textDim text-sm leading-relaxed">
-            A 50% drawdown requires a 100% recovery. A 33% drawdown needs a 50% gain. The asymmetry of loss is the single greatest threat to compounding.
-          </p>
-        </div>
-        <div class="kpi-card">
-          <div class="w-12 h-12 rounded-xl bg-red-500/10 flex items-center justify-center mb-4">
-            <i class="fas fa-clock text-red-400 text-xl"></i>
+          <p class="text-white font-semibold text-sm mb-5">Most stocks move with the market:</p>
+          <div class="space-y-4">
+            <div class="flex items-start gap-3">
+              <span class="text-red-400 mt-0.5">&rarr;</span>
+              <p class="text-sm text-[#c0c8d8]">Diversification &ne; Protection</p>
+            </div>
+            <div class="flex items-start gap-3">
+              <span class="text-red-400 mt-0.5">&rarr;</span>
+              <p class="text-sm text-[#c0c8d8]">Still suffer full market drawdowns</p>
+            </div>
+            <div class="flex items-start gap-3">
+              <span class="text-red-400 mt-0.5">&rarr;</span>
+              <p class="text-sm text-[#c0c8d8]">Diluted returns from winners</p>
+            </div>
           </div>
-          <h3 class="font-semibold text-lg mb-2">Lost Decades</h3>
-          <p class="text-epig-textDim text-sm leading-relaxed">
-            2000&ndash;2010 returned 0% for S&P 500 investors. 13 years to recover from 2000 peak. Buy-and-hold assumes you have unlimited time.
-          </p>
         </div>
+
+        <!-- Card 3: Full Exposure Required -->
+        <div class="rounded-2xl border border-red-500/20 bg-red-500/[0.04] p-7">
+          <div class="flex items-center gap-3 mb-5">
+            <div class="w-10 h-10 rounded-full bg-red-500/20 flex items-center justify-center">
+              <span class="text-red-400 font-bold text-sm">3</span>
+            </div>
+            <h3 class="text-xl font-bold text-red-400">Full Exposure Required</h3>
+          </div>
+          <p class="text-white font-semibold text-sm mb-5">Must invest 100% to get average returns:</p>
+          <div class="space-y-4">
+            <div class="flex items-start gap-3">
+              <i class="fas fa-xmark text-red-400 mt-0.5 w-4 text-center"></i>
+              <p class="text-sm text-[#c0c8d8]">No liquidity for opportunities</p>
+            </div>
+            <div class="flex items-start gap-3">
+              <i class="fas fa-xmark text-red-400 mt-0.5 w-4 text-center"></i>
+              <p class="text-sm text-[#c0c8d8]">No control over downside</p>
+            </div>
+            <div class="flex items-start gap-3">
+              <i class="fas fa-xmark text-red-400 mt-0.5 w-4 text-center"></i>
+              <p class="text-sm text-[#c0c8d8]">Cannot leverage selectively</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 4: Lost Decades -->
+        <div class="rounded-2xl border border-red-500/20 bg-red-500/[0.04] p-7">
+          <div class="flex items-center gap-3 mb-5">
+            <div class="w-10 h-10 rounded-full bg-red-500/20 flex items-center justify-center">
+              <span class="text-red-400 font-bold text-sm">4</span>
+            </div>
+            <h3 class="text-xl font-bold text-red-400">Lost Decades</h3>
+          </div>
+          <p class="text-white font-semibold text-sm mb-5">Cannot generate returns in down/sideways markets:</p>
+          <div class="rounded-xl bg-[#0d0d18]/60 border border-[#2a2a3e] p-5">
+            <p class="text-sm text-[#8892a6] mb-2">Example: 2000&ndash;2010</p>
+            <div class="flex items-baseline gap-2 mb-1">
+              <span class="text-4xl font-extrabold text-red-400 font-mono">~0%</span>
+              <span class="text-sm text-[#c0c8d8]">S&amp;P 500 return</span>
+            </div>
+            <p class="text-xs text-[#8892a6] italic">10 years of capital locked up, zero growth</p>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
