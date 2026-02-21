@@ -165,6 +165,152 @@ export function landingPage(): string {
     </div>
   </section>
 
+  <!-- ════ SECTION 2B: INTRODUCING THE EPIG INVESTMENT STRATEGY ════ -->
+  <section class="section-divider">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+
+      <!-- Header -->
+      <div class="text-center mb-12">
+        <span class="inline-block text-xs font-bold uppercase tracking-widest text-amber-400 border border-amber-500/40 rounded-full px-5 py-1.5 mb-6">
+          Paradigm with Asymmetrical Risk Rewards
+        </span>
+        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold mb-4 leading-tight tracking-tight" style="font-family:'Montserrat',sans-serif;">
+          Introducing the EPIG Investment Strategy
+        </h2>
+      </div>
+
+      <!-- EPIG Defined callout -->
+      <div class="max-w-3xl mx-auto mb-14 rounded-2xl border border-amber-500/25 bg-amber-500/[0.03] p-6 md:p-8">
+        <div class="flex items-start gap-4">
+          <div class="w-10 h-10 rounded-full bg-amber-500/20 flex items-center justify-center flex-shrink-0 mt-0.5">
+            <i class="fas fa-star text-amber-400"></i>
+          </div>
+          <div>
+            <p class="text-lg mb-2">
+              <span class="text-amber-400 font-semibold">EPIG Defined:</span>
+              <strong class="text-white">Enduring Principal-Protected Income &amp; Growth</strong>
+            </p>
+            <p class="text-epig-textMuted text-[15px] leading-relaxed">
+              Our proprietary investment approach designed to maximize returns while protecting capital during market downturns. EPIG functions as a
+              <span class="text-amber-400 font-semibold underline decoration-amber-400/40 underline-offset-2">complete solution</span> or a
+              <span class="text-amber-400 font-semibold">&ldquo;bolt-on&rdquo;</span> to existing portfolios.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- EPIG Key Benefits — 6-card grid -->
+      <h3 class="text-2xl font-bold text-center mb-8">EPIG Key Benefits</h3>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-14">
+        <!-- Card 1: Beats Market -->
+        <div class="rounded-xl border border-emerald-500/20 bg-emerald-500/[0.03] p-6 text-center hover:border-emerald-500/40 transition-colors">
+          <div class="w-12 h-12 rounded-full bg-emerald-500/20 flex items-center justify-center mx-auto mb-4">
+            <i class="fas fa-chart-line text-emerald-400 text-lg"></i>
+          </div>
+          <h4 class="text-amber-400 font-bold mb-2">Beats Market Longer Term</h4>
+          <p class="text-epig-textMuted text-sm">Absolute returns &gt;10% with lower volatility</p>
+        </div>
+        <!-- Card 2: Drawdown Protection -->
+        <div class="rounded-xl border border-emerald-500/20 bg-emerald-500/[0.03] p-6 text-center hover:border-emerald-500/40 transition-colors">
+          <div class="w-12 h-12 rounded-full bg-emerald-500/20 flex items-center justify-center mx-auto mb-4">
+            <i class="fas fa-shield-halved text-emerald-400 text-lg"></i>
+          </div>
+          <h4 class="text-amber-400 font-bold mb-2">Drawdown Protection</h4>
+          <p class="text-epig-textMuted text-sm">Shields portfolios from major market corrections</p>
+        </div>
+        <!-- Card 3: Liquidity -->
+        <div class="rounded-xl border border-emerald-500/20 bg-emerald-500/[0.03] p-6 text-center hover:border-emerald-500/40 transition-colors">
+          <div class="w-12 h-12 rounded-full bg-emerald-500/20 flex items-center justify-center mx-auto mb-4">
+            <i class="fas fa-hand-holding-dollar text-emerald-400 text-lg"></i>
+          </div>
+          <h4 class="text-amber-400 font-bold mb-2">Cash-Like Liquidity</h4>
+          <p class="text-epig-textMuted text-sm">Access to funds when you need them</p>
+        </div>
+        <!-- Card 4: Income -->
+        <div class="rounded-xl border border-emerald-500/20 bg-emerald-500/[0.03] p-6 text-center hover:border-emerald-500/40 transition-colors">
+          <div class="w-12 h-12 rounded-full bg-emerald-500/20 flex items-center justify-center mx-auto mb-4">
+            <i class="fas fa-sack-dollar text-emerald-400 text-lg"></i>
+          </div>
+          <h4 class="text-amber-400 font-bold mb-2">Income Potential</h4>
+          <p class="text-epig-textMuted text-sm">Generate yields up to 1% per month</p>
+        </div>
+        <!-- Card 5: Investment Chassis -->
+        <div class="rounded-xl border border-emerald-500/20 bg-emerald-500/[0.03] p-6 text-center hover:border-emerald-500/40 transition-colors">
+          <div class="w-12 h-12 rounded-full bg-emerald-500/20 flex items-center justify-center mx-auto mb-4">
+            <i class="fas fa-gears text-emerald-400 text-lg"></i>
+          </div>
+          <h4 class="text-amber-400 font-bold mb-2">Investment Chassis</h4>
+          <p class="text-epig-textMuted text-sm">Complete solution or bolt-on to existing portfolios</p>
+        </div>
+        <!-- Card 6: P/E Independence -->
+        <div class="rounded-xl border border-emerald-500/20 bg-emerald-500/[0.03] p-6 text-center hover:border-emerald-500/40 transition-colors">
+          <div class="w-12 h-12 rounded-full bg-emerald-500/20 flex items-center justify-center mx-auto mb-4">
+            <i class="fas fa-calendar-check text-emerald-400 text-lg"></i>
+          </div>
+          <h4 class="text-amber-400 font-bold mb-2">P/E Ratio Independence</h4>
+          <p class="text-epig-textMuted text-sm">Returns not dependent on market entry timing</p>
+        </div>
+      </div>
+
+      <!-- How EPIG Neutralizes These Challenges -->
+      <div class="max-w-4xl mx-auto">
+        <div class="text-center mb-8">
+          <span class="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-wider text-emerald-400 bg-emerald-500/10 border border-emerald-500/30 rounded-full px-5 py-2">
+            <i class="fas fa-check-circle"></i>
+            How EPIG Neutralizes These Challenges
+          </span>
+        </div>
+
+        <div class="rounded-2xl border border-emerald-500/20 bg-[#0a1a14] p-6 md:p-8 mb-6">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Neutralizer 1 -->
+            <div class="rounded-xl bg-[#0d1520] border border-[#1e293b] p-5">
+              <div class="flex items-center gap-2 mb-3">
+                <i class="fas fa-crosshairs text-emerald-400"></i>
+                <h4 class="font-bold text-white text-sm">Dynamic Positioning</h4>
+              </div>
+              <p class="text-epig-textMuted text-sm leading-relaxed">Adjust exposure based on market conditions&mdash;not dependent on entry P/E</p>
+            </div>
+            <!-- Neutralizer 2 -->
+            <div class="rounded-xl bg-[#0d1520] border border-[#1e293b] p-5">
+              <div class="flex items-center gap-2 mb-3">
+                <i class="fas fa-bullseye text-emerald-400"></i>
+                <h4 class="font-bold text-white text-sm">Tactical Entries</h4>
+              </div>
+              <p class="text-epig-textMuted text-sm leading-relaxed">Enter only high-probability setups&mdash;uncorrelated to broad market moves</p>
+            </div>
+            <!-- Neutralizer 3 -->
+            <div class="rounded-xl bg-[#0d1520] border border-[#1e293b] p-5">
+              <div class="flex items-center gap-2 mb-3">
+                <i class="fas fa-sliders text-emerald-400"></i>
+                <h4 class="font-bold text-white text-sm">Liquidity + Control</h4>
+              </div>
+              <p class="text-epig-textMuted text-sm leading-relaxed">Stay 50&ndash;90% in cash/SPY&mdash;full liquidity to leverage opportunities</p>
+            </div>
+            <!-- Neutralizer 4 -->
+            <div class="rounded-xl bg-[#0d1520] border border-[#1e293b] p-5">
+              <div class="flex items-center gap-2 mb-3">
+                <i class="fas fa-arrows-left-right text-emerald-400"></i>
+                <h4 class="font-bold text-white text-sm">Market Neutral</h4>
+              </div>
+              <p class="text-epig-textMuted text-sm leading-relaxed">Generate returns in up, down, and sideways markets&mdash;no lost decades</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Result statement -->
+        <div class="text-center">
+          <p class="text-epig-textMuted text-sm">
+            <i class="fas fa-check-circle text-emerald-400 mr-1"></i>
+            <strong class="text-emerald-400">Result:</strong>
+            Consistent ~20% CAGR target regardless of structural market challenges
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
   <!-- ════ SECTION 3: THE EPIG ADVANTAGE ════ -->
   <section class="section-divider">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">

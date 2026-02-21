@@ -184,6 +184,57 @@ export function layout(title: string, content: string, social?: SocialMeta): str
     ${content}
   </main>
 
+  <!-- Floating Share Sidebar (Desktop) -->
+  <div id="share-sidebar" class="fixed left-0 top-1/2 -translate-y-1/2 z-40 hidden lg:flex flex-col items-center gap-1 py-3 px-1.5 rounded-r-xl" style="background:rgba(17,24,39,0.92);border:1px solid #1e293b;border-left:none;backdrop-filter:blur(12px);">
+    <span class="text-[9px] font-bold uppercase tracking-[0.15em] text-epig-textDim mb-2">Share</span>
+    <a id="share-linkedin" href="#" target="_blank" rel="noopener" title="Share on LinkedIn"
+       class="w-10 h-10 rounded-lg flex items-center justify-center text-[#0A66C2] hover:bg-[#0A66C2]/15 transition-colors">
+      <i class="fab fa-linkedin-in text-lg"></i>
+    </a>
+    <a id="share-facebook" href="#" target="_blank" rel="noopener" title="Share on Facebook"
+       class="w-10 h-10 rounded-lg flex items-center justify-center text-[#1877F2] hover:bg-[#1877F2]/15 transition-colors">
+      <i class="fab fa-facebook-f text-lg"></i>
+    </a>
+    <a id="share-twitter" href="#" target="_blank" rel="noopener" title="Share on Twitter/X"
+       class="w-10 h-10 rounded-lg flex items-center justify-center text-white hover:bg-white/10 transition-colors">
+      <i class="fab fa-x-twitter text-lg"></i>
+    </a>
+    <a id="share-whatsapp" href="#" target="_blank" rel="noopener" title="Share on WhatsApp"
+       class="w-10 h-10 rounded-lg flex items-center justify-center text-[#25D366] hover:bg-[#25D366]/15 transition-colors">
+      <i class="fab fa-whatsapp text-lg"></i>
+    </a>
+    <a id="share-telegram" href="#" target="_blank" rel="noopener" title="Share on Telegram"
+       class="w-10 h-10 rounded-lg flex items-center justify-center text-[#26A5E4] hover:bg-[#26A5E4]/15 transition-colors">
+      <i class="fab fa-telegram-plane text-lg"></i>
+    </a>
+    <a id="share-email" href="#" title="Share via Email"
+       class="w-10 h-10 rounded-lg flex items-center justify-center text-epig-textMuted hover:bg-white/10 transition-colors">
+      <i class="fas fa-envelope text-base"></i>
+    </a>
+    <button id="share-copy" title="Copy link"
+       class="w-10 h-10 rounded-lg flex items-center justify-center text-amber-400 hover:bg-amber-400/15 transition-colors cursor-pointer border-0 bg-transparent">
+      <i class="fas fa-link text-base"></i>
+    </button>
+  </div>
+
+  <!-- Mobile Share FAB -->
+  <button id="share-fab" class="lg:hidden fixed bottom-6 right-6 z-40 w-14 h-14 rounded-full bg-blue-600 text-white shadow-lg shadow-blue-600/30 flex items-center justify-center hover:bg-blue-500 transition-all cursor-pointer border-0" aria-label="Share">
+    <i class="fas fa-share-nodes text-xl"></i>
+  </button>
+  <!-- Mobile Share Popup -->
+  <div id="share-mobile" class="lg:hidden fixed bottom-24 right-6 z-40 hidden rounded-2xl p-4 w-56" style="background:rgba(17,24,39,0.97);border:1px solid #1e293b;backdrop-filter:blur(12px);">
+    <span class="text-xs font-bold uppercase tracking-widest text-epig-textDim block mb-3">Share this page</span>
+    <div class="grid grid-cols-4 gap-2">
+      <a id="m-share-linkedin" href="#" target="_blank" rel="noopener" class="w-11 h-11 rounded-lg flex items-center justify-center text-[#0A66C2] bg-[#0A66C2]/10"><i class="fab fa-linkedin-in"></i></a>
+      <a id="m-share-facebook" href="#" target="_blank" rel="noopener" class="w-11 h-11 rounded-lg flex items-center justify-center text-[#1877F2] bg-[#1877F2]/10"><i class="fab fa-facebook-f"></i></a>
+      <a id="m-share-twitter" href="#" target="_blank" rel="noopener" class="w-11 h-11 rounded-lg flex items-center justify-center text-white bg-white/10"><i class="fab fa-x-twitter"></i></a>
+      <a id="m-share-whatsapp" href="#" target="_blank" rel="noopener" class="w-11 h-11 rounded-lg flex items-center justify-center text-[#25D366] bg-[#25D366]/10"><i class="fab fa-whatsapp"></i></a>
+      <a id="m-share-telegram" href="#" target="_blank" rel="noopener" class="w-11 h-11 rounded-lg flex items-center justify-center text-[#26A5E4] bg-[#26A5E4]/10"><i class="fab fa-telegram-plane"></i></a>
+      <a id="m-share-email" href="#" class="w-11 h-11 rounded-lg flex items-center justify-center text-epig-textMuted bg-white/5"><i class="fas fa-envelope"></i></a>
+      <button id="m-share-copy" class="w-11 h-11 rounded-lg flex items-center justify-center text-amber-400 bg-amber-400/10 cursor-pointer border-0"><i class="fas fa-link"></i></button>
+    </div>
+  </div>
+
   <!-- Footer -->
   <footer class="border-t border-epig-border mt-20">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -249,6 +300,67 @@ export function layout(title: string, content: string, social?: SocialMeta): str
     document.querySelectorAll('.nav-link').forEach(link => {
       if (link.getAttribute('href') === window.location.pathname) link.classList.add('active');
     });
+
+    // ══════════════════════════════════════
+    // SHARE WIDGET — populate share URLs
+    // ══════════════════════════════════════
+    (function initShareWidget() {
+      const url = encodeURIComponent(window.location.href);
+      const title = encodeURIComponent(document.title);
+      const text = encodeURIComponent(
+        'Check out EPIG Investment Design — verified trade performance from a live IB account. 3 strategies, full transparency, real-time Discord alerts.'
+      );
+
+      // Desktop sidebar links
+      const setHref = (id, href) => { const el = document.getElementById(id); if (el) el.href = href; };
+      setHref('share-linkedin',  'https://www.linkedin.com/sharing/share-offsite/?url=' + url);
+      setHref('share-facebook',  'https://www.facebook.com/sharer/sharer.php?u=' + url);
+      setHref('share-twitter',   'https://twitter.com/intent/tweet?url=' + url + '&text=' + text);
+      setHref('share-whatsapp',  'https://wa.me/?text=' + text + '%20' + url);
+      setHref('share-telegram',  'https://t.me/share/url?url=' + url + '&text=' + text);
+      setHref('share-email',     'mailto:?subject=' + title + '&body=' + text + '%0A%0A' + url);
+
+      // Mobile links (same URLs, prefixed m-)
+      setHref('m-share-linkedin',  'https://www.linkedin.com/sharing/share-offsite/?url=' + url);
+      setHref('m-share-facebook',  'https://www.facebook.com/sharer/sharer.php?u=' + url);
+      setHref('m-share-twitter',   'https://twitter.com/intent/tweet?url=' + url + '&text=' + text);
+      setHref('m-share-whatsapp',  'https://wa.me/?text=' + text + '%20' + url);
+      setHref('m-share-telegram',  'https://t.me/share/url?url=' + url + '&text=' + text);
+      setHref('m-share-email',     'mailto:?subject=' + title + '&body=' + text + '%0A%0A' + url);
+
+      // Copy link button
+      function copyLink(btn) {
+        navigator.clipboard.writeText(window.location.href).then(() => {
+          const icon = btn.querySelector('i');
+          icon.className = 'fas fa-check text-base';
+          btn.title = 'Copied!';
+          setTimeout(() => { icon.className = 'fas fa-link text-base'; btn.title = 'Copy link'; }, 2000);
+        });
+      }
+      document.getElementById('share-copy')?.addEventListener('click', function() { copyLink(this); });
+      document.getElementById('m-share-copy')?.addEventListener('click', function() { copyLink(this); });
+
+      // Mobile FAB toggle
+      const fab = document.getElementById('share-fab');
+      const mobile = document.getElementById('share-mobile');
+      fab?.addEventListener('click', () => {
+        mobile?.classList.toggle('hidden');
+        const icon = fab.querySelector('i');
+        if (mobile?.classList.contains('hidden')) {
+          icon.className = 'fas fa-share-nodes text-xl';
+        } else {
+          icon.className = 'fas fa-times text-xl';
+        }
+      });
+      // Close mobile popup when clicking outside
+      document.addEventListener('click', (e) => {
+        if (!fab?.contains(e.target) && !mobile?.contains(e.target)) {
+          mobile?.classList.add('hidden');
+          const icon = fab?.querySelector('i');
+          if (icon) icon.className = 'fas fa-share-nodes text-xl';
+        }
+      });
+    })();
   </script>
 </body>
 </html>`
