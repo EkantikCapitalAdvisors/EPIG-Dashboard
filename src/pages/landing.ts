@@ -21,8 +21,8 @@ export function landingPage(): string {
           <a href="/dashboard" class="btn-primary text-base no-underline px-8 py-3.5">
             <i class="fas fa-chart-line mr-2"></i>View Live Dashboard
           </a>
-          <a href="/calculator" class="btn-outline text-base no-underline px-8 py-3.5">
-            <i class="fas fa-calculator mr-2"></i>Try the Calculator
+          <a href="/projector" class="btn-outline text-base no-underline px-8 py-3.5">
+            <i class="fas fa-chart-line mr-2"></i>Performance Projector
           </a>
         </div>
       </div>
@@ -701,23 +701,33 @@ export function landingPage(): string {
     </div>
   </section>
 
-  <!-- ════ SECTION 6: CALCULATOR PREVIEW ════ -->
+  <!-- ════ SECTION 6: PERFORMANCE PROJECTOR PREVIEW (LIVE) ════ -->
   <section class="section-divider">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
       <div class="glass-card p-10 md:p-14">
-        <div class="flex flex-col md:flex-row items-center gap-10">
+        <div class="flex flex-col md:flex-row items-start gap-10">
           <div class="flex-1">
-            <h2 class="text-3xl sm:text-4xl font-bold mb-4">Model Your Own Portfolio</h2>
-            <p class="text-epig-textMuted text-lg leading-relaxed mb-6">
-              Use the 3-strategy calculator to see how EPIG&rsquo;s design could work with your portfolio size.
-              Adjust allocation, win rates, and trade frequency with interactive sliders.
+            <div class="flex items-center gap-3 mb-5">
+              <h2 class="text-3xl sm:text-4xl font-bold">Project Your Year-End Returns</h2>
+              <span id="projector-live-badge" class="hidden inline-flex items-center gap-1.5 bg-emerald-500/15 border border-emerald-500/30 rounded-full px-3 py-1 flex-shrink-0">
+                <span class="relative flex h-2 w-2">
+                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                  <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                </span>
+                <span class="text-emerald-400 text-xs font-bold uppercase tracking-wider">Live</span>
+              </span>
+            </div>
+            <p class="text-epig-textMuted text-lg leading-relaxed mb-4">
+              See how YTD performance across all three strategies could compound through year-end.
+              Powered by <strong class="text-white">real 2026 trade data</strong> from verified IB fills &mdash;
+              adjust portfolio size and explore per-strategy breakdowns.
             </p>
-            <p class="text-xs text-epig-textDim mb-6">
-              <i class="fas fa-info-circle mr-1"></i>
-              The calculator is for illustrative purposes only and does not use actual EPIG performance data.
+            <p id="projector-data-summary" class="text-xs text-epig-textDim mb-6">
+              <i class="fas fa-database text-emerald-400 mr-1"></i>
+              <span id="projector-summary-text">Loading live trade data...</span>
             </p>
-            <a href="/calculator" class="btn-primary no-underline inline-block">
-              <i class="fas fa-calculator mr-2"></i>Open Calculator
+            <a href="/projector" class="btn-primary no-underline inline-block">
+              <i class="fas fa-chart-line mr-2"></i>Open Performance Projector
             </a>
           </div>
           <div class="flex-1 w-full">
@@ -725,33 +735,33 @@ export function landingPage(): string {
               <div class="space-y-4">
                 <div class="flex justify-between items-center">
                   <span class="text-sm text-epig-textDim">Portfolio Size</span>
-                  <span class="font-mono font-bold text-blue-400">$1,000,000</span>
+                  <span class="font-mono font-bold text-blue-400">$100,000</span>
                 </div>
                 <div class="h-px bg-epig-border"></div>
                 <div class="flex justify-between items-center">
-                  <span class="text-sm text-epig-textDim">Strategy A (Allocation)</span>
-                  <span class="font-mono text-emerald-400">+8.2%</span>
+                  <span class="text-sm text-epig-textDim">Strategy A &mdash; Core Allocation</span>
+                  <span class="font-mono" id="lp-strat-a-pct"><span class="text-epig-textDim">--</span></span>
                 </div>
                 <div class="flex justify-between items-center">
-                  <span class="text-sm text-epig-textDim">Strategy B (Futures)</span>
-                  <span class="font-mono text-emerald-400">+14.6%</span>
+                  <span class="text-sm text-epig-textDim">Strategy B &mdash; Tactical Futures</span>
+                  <span class="font-mono" id="lp-strat-b-pct"><span class="text-epig-textDim">--</span></span>
                 </div>
                 <div class="flex justify-between items-center">
-                  <span class="text-sm text-epig-textDim">Strategy C (Pivots)</span>
-                  <span class="font-mono text-emerald-400">+9.1%</span>
+                  <span class="text-sm text-epig-textDim">Strategy C &mdash; Episodic Pivots</span>
+                  <span class="font-mono" id="lp-strat-c-pct"><span class="text-epig-textDim">--</span></span>
                 </div>
                 <div class="h-px bg-epig-border"></div>
                 <div class="flex justify-between items-center">
-                  <span class="font-semibold">Combined Expected Return</span>
-                  <span class="font-mono font-bold text-lg text-emerald-400">+31.9%</span>
+                  <span class="font-semibold">Projected Annual Return</span>
+                  <span class="font-mono font-bold text-lg" id="lp-total-pct"><span class="text-epig-textDim">--</span></span>
                 </div>
                 <div class="flex justify-between items-center">
-                  <span class="font-semibold">Expected Dollar Return</span>
-                  <span class="font-mono font-bold text-lg text-emerald-400">$319,000</span>
+                  <span class="font-semibold">Projected Dollar Return</span>
+                  <span class="font-mono font-bold text-lg" id="lp-total-dollar"><span class="text-epig-textDim">--</span></span>
                 </div>
               </div>
               <p class="text-[10px] text-epig-textDim mt-4 italic">
-                *Illustrative only. Not a projection of actual EPIG performance.
+                *Based on YTD performance extrapolated to full year. Past performance is not indicative of future results.
               </p>
             </div>
           </div>
@@ -853,7 +863,7 @@ export function landingPage(): string {
           </div>
           <h3 class="font-semibold mb-2">EPIG Public Launch</h3>
           <p class="text-sm text-epig-textDim leading-relaxed">
-            Full performance dashboard, 3-strategy calculator, and subscription system live.
+            Full performance dashboard, performance projector, and subscription system live.
             Phase 1 with manual IB uploads active.
           </p>
         </div>
@@ -903,6 +913,90 @@ export function landingPage(): string {
       } catch(err) { console.error(err); }
       return false;
     }
+
+    // ══════════════════════════════════════════════════
+    // PERFORMANCE PROJECTOR — LIVE DATA WIDGET
+    // Fetches real YTD stats and projects annual returns
+    // based on a $100K portfolio.
+    // ══════════════════════════════════════════════════
+    (async function loadProjectorPreview() {
+      const PORTFOLIO = 100000;
+
+      function pctColor(val) {
+        return val >= 0 ? 'text-emerald-400' : 'text-red-400';
+      }
+      function fmtPct(val) {
+        return (val >= 0 ? '+' : '') + val.toFixed(1) + '%';
+      }
+      function fmtDollar(val) {
+        const sign = val >= 0 ? '+' : '-';
+        return sign + '$' + Math.abs(Math.round(val)).toLocaleString();
+      }
+
+      try {
+        const res = await fetch('/api/projector/stats');
+        const data = await res.json();
+
+        if (!data.strategies) return; // no data yet
+
+        const stratMap = { A: 'a', B: 'b', C: 'c' };
+        let totalAnnualDollar = 0;
+        let totalTrades = 0;
+        let earliestDate = '9999-99-99';
+        let latestDate = '0000-00-00';
+
+        for (const [strat, prefix] of Object.entries(stratMap)) {
+          const s = data.strategies[strat];
+          if (!s) {
+            document.getElementById('lp-strat-' + prefix + '-pct').innerHTML = '<span class="text-epig-textDim">No data</span>';
+            continue;
+          }
+
+          totalTrades += s.closedTrades;
+          if (s.firstDate < earliestDate) earliestDate = s.firstDate;
+          if (s.lastDate > latestDate) latestDate = s.lastDate;
+
+          // Calculate annualized return on $100K portfolio
+          // annualPnl from the API = totalPnl / yearFraction
+          const annualPct = (s.annualPnl / PORTFOLIO) * 100;
+          totalAnnualDollar += s.annualPnl;
+
+          const el = document.getElementById('lp-strat-' + prefix + '-pct');
+          if (el) {
+            el.className = 'font-mono ' + pctColor(annualPct);
+            el.textContent = fmtPct(annualPct);
+          }
+        }
+
+        const totalPct = (totalAnnualDollar / PORTFOLIO) * 100;
+
+        // Projected Annual Return
+        const totalPctEl = document.getElementById('lp-total-pct');
+        if (totalPctEl) {
+          totalPctEl.className = 'font-mono font-bold text-lg ' + pctColor(totalPct);
+          totalPctEl.textContent = fmtPct(totalPct);
+        }
+
+        // Projected Dollar Return
+        const totalDollarEl = document.getElementById('lp-total-dollar');
+        if (totalDollarEl) {
+          totalDollarEl.className = 'font-mono font-bold text-lg ' + pctColor(totalAnnualDollar);
+          totalDollarEl.textContent = fmtDollar(totalAnnualDollar);
+        }
+
+        // Show LIVE badge
+        document.getElementById('projector-live-badge').classList.remove('hidden');
+
+        // Update summary text
+        const summaryEl = document.getElementById('projector-summary-text');
+        if (summaryEl) {
+          summaryEl.textContent = 'Based on ' + totalTrades + ' closed trades from ' + earliestDate + ' to ' + latestDate + '. Auto-refreshes on each upload.';
+        }
+      } catch(e) {
+        // Silently fail — widget stays in loading state
+        console.error('Projector preview:', e);
+      }
+    })();
   </script>
   `
 }

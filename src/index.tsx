@@ -4,7 +4,7 @@ import { landingPage } from './pages/landing'
 import { dashboardPage } from './pages/dashboard'
 import { pricingPage } from './pages/pricing'
 import { howItWorksPage } from './pages/how-it-works'
-import { calculatorPage } from './pages/calculator'
+import { projectorPage } from './pages/projector'
 import { disclosuresPage } from './pages/disclosures'
 import { termsPage } from './pages/terms'
 import { privacyPage } from './pages/privacy'
@@ -24,7 +24,8 @@ app.get('/', (c) => c.html(layout('EPIG Investment Design', landingPage())))
 app.get('/dashboard', (c) => c.html(layout('Dashboard | EPIG', dashboardPage())))
 app.get('/pricing', (c) => c.html(layout('Pricing | EPIG', pricingPage())))
 app.get('/how-it-works', (c) => c.html(layout('How It Works | EPIG', howItWorksPage())))
-app.get('/calculator', (c) => c.html(layout('Strategy Calculator | EPIG', calculatorPage())))
+app.get('/projector', (c) => c.html(layout('Performance Projector | EPIG', projectorPage())))
+app.get('/calculator', (c) => c.redirect('/projector'))
 app.get('/updates', (c) => c.html(layout('Updates | EPIG', updatesPage())))
 app.get('/disclosures', (c) => c.html(layout('Disclosures | EPIG', disclosuresPage())))
 app.get('/terms', (c) => c.html(layout('Terms of Service | EPIG', termsPage())))
@@ -41,7 +42,7 @@ app.get('/api/dashboard/summary', async (c) => {
   if (!db) return c.json(buildFallbackSummary())
 
   try {
-    // Fetch ALL 2026 fills for all strategies (same query approach as calculator)
+    // Fetch ALL 2026 fills for all strategies (same query approach as projector)
     const allTrades = await db.prepare(
       "SELECT id, strategy, side, instrument, entry_price, exit_price, realized_pnl, quantity, trade_date, asset_class, strike, expiry, put_call, result FROM trades WHERE trade_date >= '2026-01-01' ORDER BY trade_date ASC, id ASC"
     ).all()
@@ -62,7 +63,7 @@ app.get('/api/dashboard/summary', async (c) => {
         continue
       }
 
-      // Build round-trip trades (same engine as calculator)
+      // Build round-trip trades (same engine as projector)
       const roundTrips = buildRoundTrips(fills, strat)
       const closed = roundTrips.filter((rt: any) => rt.closed && rt.pnl !== 0)
       const wins = closed.filter((rt: any) => rt.pnl > 0)
@@ -636,11 +637,11 @@ app.post('/api/admin/snapshot', async (c) => {
 })
 
 // ══════════════════════════════════════════════════════════
-// API: CALCULATOR STATS (live EV from real trades → projections)
+// API: PROJECTOR STATS (live EV from real trades → projections)
 // ══════════════════════════════════════════════════════════
 // Reconstructs round-trip trades from individual IB fills,
 // computes per-trade P&L, then derives EV / win-rate / risk stats.
-app.get('/api/calculator/stats', async (c) => {
+app.get('/api/projector/stats', async (c) => {
   const db = c.env.DB
   if (!db) return c.json({ error: 'No database', strategies: null })
 

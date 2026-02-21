@@ -50,7 +50,7 @@ export function updatesPage(): string {
         </div>
         <h3 class="font-semibold mb-2">EPIG Investment Design Launch</h3>
         <p class="text-sm text-epig-textDim leading-relaxed">
-          Public launch of the EPIG platform with full performance dashboard, 3-strategy calculator,
+          Public launch of the EPIG platform with full performance dashboard, performance projector,
           and subscription system. Phase 1 with manual IB uploads active.
         </p>
       </div>

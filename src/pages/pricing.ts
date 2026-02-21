@@ -27,7 +27,7 @@ export function pricingPage(): string {
           <i class="fas fa-check text-emerald-400"></i> Trade-by-trade history
         </div>
         <div class="flex items-center gap-2 text-sm text-epig-textMuted">
-          <i class="fas fa-check text-emerald-400"></i> 3-Strategy Calculator
+          <i class="fas fa-check text-emerald-400"></i> Performance Projector
         </div>
         <div class="flex items-center gap-2 text-sm text-epig-textMuted">
           <i class="fas fa-check text-emerald-400"></i> Weekly email digest

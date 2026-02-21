@@ -48,7 +48,7 @@ export function disclosuresPage(): string {
       <div class="kpi-card">
         <h2 class="text-lg font-semibold text-white mb-3">Hypothetical Performance</h2>
         <p>
-          The 3-Strategy Calculator on this website produces hypothetical, illustrative results based on
+          The Performance Projector on this website produces hypothetical, illustrative results based on
           user-defined inputs. These projections do not represent actual trading performance and should not
           be interpreted as predictions of future returns. Hypothetical performance has many inherent
           limitations, including the benefit of hindsight.

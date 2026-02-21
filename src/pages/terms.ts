@@ -11,7 +11,7 @@ export function termsPage(): string {
       </div>
       <div class="kpi-card">
         <h2 class="text-lg font-semibold text-white mb-3">2. Description of Service</h2>
-        <p>EPIG provides a public performance dashboard, educational content, an illustrative calculator, and a subscription-based notification service delivered via Discord. The platform is for informational and educational purposes only.</p>
+        <p>EPIG provides a public performance dashboard, educational content, a performance projector, and a subscription-based notification service delivered via Discord. The platform is for informational and educational purposes only.</p>
       </div>
       <div class="kpi-card">
         <h2 class="text-lg font-semibold text-white mb-3">3. Subscription Terms</h2>
