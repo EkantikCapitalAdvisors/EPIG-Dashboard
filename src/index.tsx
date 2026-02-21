@@ -205,6 +205,112 @@ app.get('/api/dashboard/summary', async (c) => {
       }
     }
 
+    // ── Build Combined Portfolio from all strategies ──
+    const allClosed: any[] = []
+    const allFills: any[] = []
+    for (const strat of ['A', 'B', 'C']) {
+      const fills = rows.filter((r: any) => r.strategy === strat)
+      allFills.push(...fills)
+      const rts = buildRoundTrips(fills, strat)
+      const closed = rts.filter((rt: any) => rt.closed && rt.pnl !== 0)
+      // Tag each RT with its strategy
+      for (const rt of closed) rt._strat = strat
+      allClosed.push(...closed)
+    }
+    // Sort all combined round trips by date
+    allClosed.sort((a: any, b: any) => (a.lastDate || a.firstDate || '').localeCompare(b.lastDate || b.firstDate || ''))
+
+    const startingCapital = 100000
+    const combTotalPnl = allClosed.reduce((s: number, rt: any) => s + rt.pnl, 0)
+    const combWins = allClosed.filter((rt: any) => rt.pnl > 0)
+    const combLosses = allClosed.filter((rt: any) => rt.pnl < 0)
+    const combWinRate = allClosed.length > 0 ? combWins.length / allClosed.length : 0
+    const combCumReturn = round((combTotalPnl / startingCapital) * 100, 2)
+
+    // Combined max drawdown
+    let combPeak = 0, combMaxDD = 0, combCum = 0
+    for (const rt of allClosed) {
+      combCum += rt.pnl
+      if (combCum > combPeak) combPeak = combCum
+      const dd = combPeak - combCum
+      if (dd > combMaxDD) combMaxDD = dd
+    }
+
+    // Combined date range
+    const allDates = allFills.map((f: any) => f.trade_date).filter(Boolean).sort()
+    const combFirstDate = allDates[0] || ''
+    const combLastDate = allDates[allDates.length - 1] || ''
+    const combDaySpan = Math.max((new Date(combLastDate).getTime() - new Date(combFirstDate).getTime()) / (1000 * 60 * 60 * 24), 1)
+    const combYearFraction = combDaySpan / 365.25
+
+    // Combined Sharpe/Sortino
+    const combReturns = allClosed.map((rt: any) => rt.pnl / startingCapital)
+    const combMean = combReturns.length > 0 ? combReturns.reduce((a: number, b: number) => a + b, 0) / combReturns.length : 0
+    const combVar = combReturns.length > 0 ? combReturns.reduce((s: number, r: number) => s + (r - combMean) ** 2, 0) / combReturns.length : 0
+    const combStd = Math.sqrt(combVar)
+    const combTPY = combYearFraction > 0 ? allClosed.length / combYearFraction : allClosed.length
+    const combAnnRet = combMean * combTPY
+    const combAnnVol = combStd * Math.sqrt(combTPY)
+    const combSharpe = combAnnVol > 0 ? round(combAnnRet / combAnnVol, 2) : 0
+    const combDownRet = combReturns.filter((r: number) => r < 0)
+    const combDownVar = combDownRet.length > 0 ? combDownRet.reduce((s: number, r: number) => s + r ** 2, 0) / combDownRet.length : 0
+    const combDownDev = Math.sqrt(combDownVar) * Math.sqrt(combTPY)
+    const combSortino = combDownDev > 0 ? round(combAnnRet / combDownDev, 2) : 0
+
+    // Combined profit factor
+    const combGrossWin = combWins.reduce((s: number, rt: any) => s + rt.pnl, 0)
+    const combGrossLoss = combLosses.reduce((s: number, rt: any) => s + Math.abs(rt.pnl), 0)
+    const combPF = combGrossLoss > 0 ? round(combGrossWin / combGrossLoss, 2) : combGrossWin > 0 ? 999 : 0
+
+    // Per-strategy contribution
+    const stratContrib: Record<string, number> = {}
+    for (const strat of ['A', 'B', 'C']) {
+      stratContrib[strat] = round(allClosed.filter((rt: any) => rt._strat === strat).reduce((s: number, rt: any) => s + rt.pnl, 0), 2)
+    }
+
+    // Combined equity curve, drawdown, monthly, weekly returns
+    const combEquity = buildRoundTripEquityCurve(allClosed, startingCapital)
+    const combDrawdown = buildDrawdownCurve(combEquity)
+    const combMonthly = buildRoundTripMonthlyReturns(allClosed, startingCapital)
+    const combWeekly = buildRoundTripWeeklyReturns(allClosed, startingCapital)
+    const combRolling30 = computeRollingRTMetrics(allClosed, 30)
+    const combRolling90 = computeRollingRTMetrics(allClosed, 90)
+
+    // Also compute weekly returns per individual strategy
+    for (const strat of ['A', 'B', 'C']) {
+      if (result[strat] && result[strat].totalFills > 0) {
+        const sFills = rows.filter((r: any) => r.strategy === strat)
+        const sRTs = buildRoundTrips(sFills, strat)
+        const sClosed = sRTs.filter((rt: any) => rt.closed && rt.pnl !== 0)
+          .sort((a: any, b: any) => (a.lastDate || a.firstDate || '').localeCompare(b.lastDate || b.firstDate || ''))
+        result[strat].weeklyReturns = buildRoundTripWeeklyReturns(sClosed, startingCapital)
+      }
+    }
+
+    result['Combined'] = {
+      name: 'Combined Portfolio',
+      cumulativeReturn: round(combCumReturn, 1),
+      cagr: combYearFraction > 0 ? round(((1 + combCumReturn / 100) ** (1 / combYearFraction) - 1) * 100, 1) : 0,
+      maxDrawdown: round(-(combMaxDD / startingCapital) * 100, 2),
+      sharpeRatio: combSharpe,
+      sortinoRatio: combSortino,
+      winRate: round(combWinRate * 100, 1),
+      profitFactor: combPF,
+      totalTrades: allClosed.length,
+      totalFills: allFills.length,
+      openTrades: 0,
+      totalPnl: round(combTotalPnl, 2),
+      annualPnl: round(combYearFraction > 0 ? combTotalPnl / combYearFraction : combTotalPnl, 2),
+      dataRange: { firstDate: combFirstDate, lastDate: combLastDate, daySpan: Math.round(combDaySpan) },
+      lastUpdated: combLastDate ? combLastDate + 'T16:00:00Z' : '2026-02-20T16:00:00Z',
+      strategyContribution: stratContrib,
+      equityCurve: combEquity,
+      drawdownCurve: combDrawdown,
+      monthlyReturns: combMonthly,
+      weeklyReturns: combWeekly,
+      rollingMetrics: { '30d': combRolling30, '90d': combRolling90 },
+    }
+
     return c.json({ strategies: result })
   } catch (e: any) {
     console.error('Dashboard error:', e.message)
@@ -1133,6 +1239,50 @@ function buildRoundTripMonthlyReturns(closedRTs: any[], startingCapital: number)
     data.push({ year, month: months[monthIdx], return: round((pnl / startingCapital) * 100, 2) })
   }
   return data.sort((a, b) => a.year === b.year ? months.indexOf(a.month) - months.indexOf(b.month) : a.year - b.year)
+}
+
+/**
+ * Build weekly returns from round-trip data.
+ * Groups round trips by ISO week (Mon-Sun) and returns weekly P&L as % of starting capital.
+ */
+function buildRoundTripWeeklyReturns(closedRTs: any[], startingCapital: number): any[] {
+  const grouped: Record<string, { pnl: number; weekStart: string; weekEnd: string }> = {}
+
+  for (const rt of closedRTs) {
+    const dateStr = rt.lastDate || rt.firstDate
+    if (!dateStr) continue
+    const d = new Date(dateStr)
+    if (isNaN(d.getTime())) continue
+
+    // Get ISO week start (Monday)
+    const day = d.getDay()
+    const diff = d.getDate() - day + (day === 0 ? -6 : 1) // Monday
+    const monday = new Date(d)
+    monday.setDate(diff)
+    const sunday = new Date(monday)
+    sunday.setDate(monday.getDate() + 6)
+
+    const key = monday.toISOString().split('T')[0]
+    if (!grouped[key]) {
+      grouped[key] = {
+        pnl: 0,
+        weekStart: monday.toISOString().split('T')[0],
+        weekEnd: sunday.toISOString().split('T')[0],
+      }
+    }
+    grouped[key].pnl += rt.pnl
+  }
+
+  const data: any[] = []
+  for (const [key, val] of Object.entries(grouped)) {
+    data.push({
+      weekStart: val.weekStart,
+      weekEnd: val.weekEnd,
+      return: round((val.pnl / startingCapital) * 100, 2),
+      pnl: round(val.pnl, 2),
+    })
+  }
+  return data.sort((a, b) => a.weekStart.localeCompare(b.weekStart))
 }
 
 function computeRollingRTMetrics(closedRTs: any[], days: number): { winRate: number; expectancy: number; trades: number; expectancyR: number } {

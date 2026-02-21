@@ -23,14 +23,17 @@ export function dashboardPage(): string {
 
     <!-- Strategy Tabs -->
     <div class="flex flex-wrap gap-2 mb-6">
+      <button class="strategy-tab" data-strategy="Combined" onclick="switchStrategy('Combined')">
+        <span class="inline-block w-3 h-3 rounded-full bg-purple-500 mr-2"></span>Combined Portfolio
+      </button>
       <button class="strategy-tab active" data-strategy="A" onclick="switchStrategy('A')">
-        <span class="inline-block w-3 h-3 rounded-full bg-blue-500 mr-2"></span>Strategy A &mdash; Allocation
+        <span class="inline-block w-3 h-3 rounded-full bg-blue-500 mr-2"></span>Strategy A
       </button>
       <button class="strategy-tab" data-strategy="B" onclick="switchStrategy('B')">
-        <span class="inline-block w-3 h-3 rounded-full bg-emerald-500 mr-2"></span>Strategy B &mdash; Futures
+        <span class="inline-block w-3 h-3 rounded-full bg-emerald-500 mr-2"></span>Strategy B
       </button>
       <button class="strategy-tab" data-strategy="C" onclick="switchStrategy('C')">
-        <span class="inline-block w-3 h-3 rounded-full bg-amber-500 mr-2"></span>Strategy C &mdash; Pivots
+        <span class="inline-block w-3 h-3 rounded-full bg-amber-500 mr-2"></span>Strategy C
       </button>
     </div>
 
@@ -41,7 +44,75 @@ export function dashboardPage(): string {
       <button class="text-xs px-3 py-1.5 rounded-md bg-blue-500/20 border border-blue-500/50 text-blue-400 font-semibold transition-all date-btn active" data-range="ytd">YTD</button>
     </div>
 
-    <!-- KPI Grid: Strategy A -->
+    <!-- ═══════════════════ KPI Grid: Combined Portfolio ═══════════════════ -->
+    <div id="kpi-grid-Combined" class="kpi-grid-panel hidden">
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-7 gap-4 mb-8">
+        <div class="kpi-card">
+          <div class="kpi-label">Cumulative Return</div>
+          <div class="kpi-value" id="kpi-comb-cumreturn">—</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Max Drawdown</div>
+          <div class="kpi-value" id="kpi-comb-maxdd">—</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Win Rate</div>
+          <div class="kpi-value" id="kpi-comb-winrate">—</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Profit Factor</div>
+          <div class="kpi-value text-white" id="kpi-comb-pf">—</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Total Trades</div>
+          <div class="kpi-value text-white" id="kpi-comb-trades">—</div>
+          <div class="text-xs text-epig-textDim mt-1" id="kpi-comb-fills"></div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Total P&L</div>
+          <div class="kpi-value" id="kpi-comb-pnl">—</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Annualized P&L</div>
+          <div class="kpi-value" id="kpi-comb-annual">—</div>
+        </div>
+      </div>
+      <!-- Sharpe/Sortino row -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+        <div class="kpi-card">
+          <div class="kpi-label">Sharpe / Sortino</div>
+          <div class="kpi-value text-white" id="kpi-comb-sharpe">—</div>
+        </div>
+        <div class="kpi-card col-span-1 md:col-span-3">
+          <div class="kpi-label mb-3">Strategy Contribution (P&L)</div>
+          <div class="flex items-center gap-3">
+            <div id="contrib-bar" class="flex h-6 rounded-md overflow-hidden flex-1 bg-epig-border"></div>
+          </div>
+          <div class="flex items-center gap-4 mt-2 text-xs" id="contrib-legend"></div>
+        </div>
+      </div>
+      <!-- Rolling Metrics Combined -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+        <div class="kpi-card">
+          <div class="text-xs text-epig-textDim uppercase tracking-wider mb-3 font-semibold">Rolling 30-Day</div>
+          <div class="grid grid-cols-3 gap-4">
+            <div><div class="kpi-label">Win Rate</div><div class="font-mono text-lg font-bold" id="comb-r30-wr">—</div></div>
+            <div><div class="kpi-label">Expectancy ($)</div><div class="font-mono text-lg font-bold" id="comb-r30-ev">—</div></div>
+            <div><div class="kpi-label">Trades</div><div class="font-mono text-white text-lg font-bold" id="comb-r30-t">—</div></div>
+          </div>
+        </div>
+        <div class="kpi-card">
+          <div class="text-xs text-epig-textDim uppercase tracking-wider mb-3 font-semibold">Rolling 90-Day</div>
+          <div class="grid grid-cols-3 gap-4">
+            <div><div class="kpi-label">Win Rate</div><div class="font-mono text-lg font-bold" id="comb-r90-wr">—</div></div>
+            <div><div class="kpi-label">Expectancy ($)</div><div class="font-mono text-lg font-bold" id="comb-r90-ev">—</div></div>
+            <div><div class="kpi-label">Trades</div><div class="font-mono text-white text-lg font-bold" id="comb-r90-t">—</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════ KPI Grid: Strategy A ═══════════════════ -->
     <div id="kpi-grid-A" class="kpi-grid-panel">
       <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-8">
         <div class="kpi-card">
@@ -67,183 +138,69 @@ export function dashboardPage(): string {
         </div>
         <div class="kpi-card">
           <div class="kpi-label">Current Allocation</div>
-          <div class="text-sm mt-2" id="kpi-a-alloc">
+          <div class="text-sm mt-2">
             <div class="flex justify-between"><span class="text-epig-textDim">SPY</span><span class="font-mono text-blue-400" id="alloc-spy">—</span></div>
             <div class="flex justify-between"><span class="text-epig-textDim">Stocks</span><span class="font-mono text-blue-400" id="alloc-stocks">—</span></div>
             <div class="flex justify-between"><span class="text-epig-textDim">Cash</span><span class="font-mono text-blue-400" id="alloc-cash">—</span></div>
           </div>
         </div>
       </div>
-      <!-- Strategy A extra stats -->
       <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-        <div class="kpi-card">
-          <div class="kpi-label">Total P&L</div>
-          <div class="kpi-value" id="kpi-a-pnl">—</div>
-        </div>
-        <div class="kpi-card">
-          <div class="kpi-label">EV per Trade (R)</div>
-          <div class="kpi-value" id="kpi-a-evr">—</div>
-        </div>
-        <div class="kpi-card">
-          <div class="kpi-label">Avg Win / Avg Loss</div>
-          <div class="kpi-value text-white" id="kpi-a-wl">—</div>
-        </div>
-        <div class="kpi-card">
-          <div class="kpi-label">Risk per Trade</div>
-          <div class="kpi-value text-white" id="kpi-a-risk">—</div>
-        </div>
+        <div class="kpi-card"><div class="kpi-label">Total P&L</div><div class="kpi-value" id="kpi-a-pnl">—</div></div>
+        <div class="kpi-card"><div class="kpi-label">EV per Trade (R)</div><div class="kpi-value" id="kpi-a-evr">—</div></div>
+        <div class="kpi-card"><div class="kpi-label">Avg Win / Avg Loss</div><div class="kpi-value text-white" id="kpi-a-wl">—</div></div>
+        <div class="kpi-card"><div class="kpi-label">Risk per Trade</div><div class="kpi-value text-white" id="kpi-a-risk">—</div></div>
       </div>
     </div>
 
-    <!-- KPI Grid: Strategy B -->
+    <!-- ═══════════════════ KPI Grid: Strategy B ═══════════════════ -->
     <div id="kpi-grid-B" class="kpi-grid-panel hidden">
       <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-7 gap-4 mb-8">
-        <div class="kpi-card">
-          <div class="kpi-label">Cumulative Return</div>
-          <div class="kpi-value" id="kpi-b-cumreturn">—</div>
-        </div>
-        <div class="kpi-card">
-          <div class="kpi-label">Max Drawdown</div>
-          <div class="kpi-value" id="kpi-b-maxdd">—</div>
-        </div>
-        <div class="kpi-card">
-          <div class="kpi-label">Win Rate</div>
-          <div class="kpi-value" id="kpi-b-winrate">—</div>
-        </div>
-        <div class="kpi-card">
-          <div class="kpi-label">EV per Trade (R)</div>
-          <div class="kpi-value" id="kpi-b-evr">—</div>
-        </div>
-        <div class="kpi-card">
-          <div class="kpi-label">Profit Factor</div>
-          <div class="kpi-value text-white" id="kpi-b-pf">—</div>
-        </div>
-        <div class="kpi-card">
-          <div class="kpi-label">Total Trades</div>
-          <div class="kpi-value text-white" id="kpi-b-trades">—</div>
-          <div class="text-xs text-epig-textDim mt-1" id="kpi-b-fills"></div>
-        </div>
-        <div class="kpi-card">
-          <div class="kpi-label">Total P&L</div>
-          <div class="kpi-value" id="kpi-b-pnl">—</div>
-        </div>
+        <div class="kpi-card"><div class="kpi-label">Cumulative Return</div><div class="kpi-value" id="kpi-b-cumreturn">—</div></div>
+        <div class="kpi-card"><div class="kpi-label">Max Drawdown</div><div class="kpi-value" id="kpi-b-maxdd">—</div></div>
+        <div class="kpi-card"><div class="kpi-label">Win Rate</div><div class="kpi-value" id="kpi-b-winrate">—</div></div>
+        <div class="kpi-card"><div class="kpi-label">EV per Trade (R)</div><div class="kpi-value" id="kpi-b-evr">—</div></div>
+        <div class="kpi-card"><div class="kpi-label">Profit Factor</div><div class="kpi-value text-white" id="kpi-b-pf">—</div></div>
+        <div class="kpi-card"><div class="kpi-label">Total Trades</div><div class="kpi-value text-white" id="kpi-b-trades">—</div><div class="text-xs text-epig-textDim mt-1" id="kpi-b-fills"></div></div>
+        <div class="kpi-card"><div class="kpi-label">Total P&L</div><div class="kpi-value" id="kpi-b-pnl">—</div></div>
       </div>
-      <!-- B extra row -->
       <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-        <div class="kpi-card">
-          <div class="kpi-label">Avg Win / Avg Loss</div>
-          <div class="kpi-value text-white" id="kpi-b-wl">—</div>
-        </div>
-        <div class="kpi-card">
-          <div class="kpi-label">Risk per Trade</div>
-          <div class="kpi-value text-white" id="kpi-b-risk">—</div>
-        </div>
-        <div class="kpi-card">
-          <div class="kpi-label">Sharpe / Sortino</div>
-          <div class="kpi-value text-white" id="kpi-b-sharpe">—</div>
-        </div>
-        <div class="kpi-card">
-          <div class="kpi-label">Annualized P&L</div>
-          <div class="kpi-value" id="kpi-b-annual">—</div>
-        </div>
+        <div class="kpi-card"><div class="kpi-label">Avg Win / Avg Loss</div><div class="kpi-value text-white" id="kpi-b-wl">—</div></div>
+        <div class="kpi-card"><div class="kpi-label">Risk per Trade</div><div class="kpi-value text-white" id="kpi-b-risk">—</div></div>
+        <div class="kpi-card"><div class="kpi-label">Sharpe / Sortino</div><div class="kpi-value text-white" id="kpi-b-sharpe">—</div></div>
+        <div class="kpi-card"><div class="kpi-label">Annualized P&L</div><div class="kpi-value" id="kpi-b-annual">—</div></div>
       </div>
-      <!-- Rolling Metrics B -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-        <div class="kpi-card">
-          <div class="text-xs text-epig-textDim uppercase tracking-wider mb-3 font-semibold">Rolling 30-Day</div>
-          <div class="grid grid-cols-3 gap-4">
-            <div><div class="kpi-label">Win Rate</div><div class="font-mono text-lg font-bold" id="b-r30-wr">—</div></div>
-            <div><div class="kpi-label">Expectancy (R)</div><div class="font-mono text-lg font-bold" id="b-r30-ev">—</div></div>
-            <div><div class="kpi-label">Trades</div><div class="font-mono text-white text-lg font-bold" id="b-r30-t">—</div></div>
-          </div>
-        </div>
-        <div class="kpi-card">
-          <div class="text-xs text-epig-textDim uppercase tracking-wider mb-3 font-semibold">Rolling 90-Day</div>
-          <div class="grid grid-cols-3 gap-4">
-            <div><div class="kpi-label">Win Rate</div><div class="font-mono text-lg font-bold" id="b-r90-wr">—</div></div>
-            <div><div class="kpi-label">Expectancy (R)</div><div class="font-mono text-lg font-bold" id="b-r90-ev">—</div></div>
-            <div><div class="kpi-label">Trades</div><div class="font-mono text-white text-lg font-bold" id="b-r90-t">—</div></div>
-          </div>
-        </div>
+        <div class="kpi-card"><div class="text-xs text-epig-textDim uppercase tracking-wider mb-3 font-semibold">Rolling 30-Day</div><div class="grid grid-cols-3 gap-4"><div><div class="kpi-label">Win Rate</div><div class="font-mono text-lg font-bold" id="b-r30-wr">—</div></div><div><div class="kpi-label">Expectancy (R)</div><div class="font-mono text-lg font-bold" id="b-r30-ev">—</div></div><div><div class="kpi-label">Trades</div><div class="font-mono text-white text-lg font-bold" id="b-r30-t">—</div></div></div></div>
+        <div class="kpi-card"><div class="text-xs text-epig-textDim uppercase tracking-wider mb-3 font-semibold">Rolling 90-Day</div><div class="grid grid-cols-3 gap-4"><div><div class="kpi-label">Win Rate</div><div class="font-mono text-lg font-bold" id="b-r90-wr">—</div></div><div><div class="kpi-label">Expectancy (R)</div><div class="font-mono text-lg font-bold" id="b-r90-ev">—</div></div><div><div class="kpi-label">Trades</div><div class="font-mono text-white text-lg font-bold" id="b-r90-t">—</div></div></div></div>
       </div>
     </div>
 
-    <!-- KPI Grid: Strategy C -->
+    <!-- ═══════════════════ KPI Grid: Strategy C ═══════════════════ -->
     <div id="kpi-grid-C" class="kpi-grid-panel hidden">
       <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-7 gap-4 mb-8">
-        <div class="kpi-card">
-          <div class="kpi-label">Cumulative Return</div>
-          <div class="kpi-value" id="kpi-c-cumreturn">—</div>
-        </div>
-        <div class="kpi-card">
-          <div class="kpi-label">Max Drawdown</div>
-          <div class="kpi-value" id="kpi-c-maxdd">—</div>
-        </div>
-        <div class="kpi-card">
-          <div class="kpi-label">Win Rate</div>
-          <div class="kpi-value" id="kpi-c-winrate">—</div>
-        </div>
-        <div class="kpi-card">
-          <div class="kpi-label">EV per Trade (R)</div>
-          <div class="kpi-value" id="kpi-c-evr">—</div>
-        </div>
-        <div class="kpi-card">
-          <div class="kpi-label">Profit Factor</div>
-          <div class="kpi-value text-white" id="kpi-c-pf">—</div>
-        </div>
-        <div class="kpi-card">
-          <div class="kpi-label">Total Trades</div>
-          <div class="kpi-value text-white" id="kpi-c-trades">—</div>
-          <div class="text-xs text-epig-textDim mt-1" id="kpi-c-fills"></div>
-        </div>
-        <div class="kpi-card">
-          <div class="kpi-label">Total P&L</div>
-          <div class="kpi-value" id="kpi-c-pnl">—</div>
-        </div>
+        <div class="kpi-card"><div class="kpi-label">Cumulative Return</div><div class="kpi-value" id="kpi-c-cumreturn">—</div></div>
+        <div class="kpi-card"><div class="kpi-label">Max Drawdown</div><div class="kpi-value" id="kpi-c-maxdd">—</div></div>
+        <div class="kpi-card"><div class="kpi-label">Win Rate</div><div class="kpi-value" id="kpi-c-winrate">—</div></div>
+        <div class="kpi-card"><div class="kpi-label">EV per Trade (R)</div><div class="kpi-value" id="kpi-c-evr">—</div></div>
+        <div class="kpi-card"><div class="kpi-label">Profit Factor</div><div class="kpi-value text-white" id="kpi-c-pf">—</div></div>
+        <div class="kpi-card"><div class="kpi-label">Total Trades</div><div class="kpi-value text-white" id="kpi-c-trades">—</div><div class="text-xs text-epig-textDim mt-1" id="kpi-c-fills"></div></div>
+        <div class="kpi-card"><div class="kpi-label">Total P&L</div><div class="kpi-value" id="kpi-c-pnl">—</div></div>
       </div>
-      <!-- C extra row -->
       <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-        <div class="kpi-card">
-          <div class="kpi-label">Avg Win / Avg Loss</div>
-          <div class="kpi-value text-white" id="kpi-c-wl">—</div>
-        </div>
-        <div class="kpi-card">
-          <div class="kpi-label">Risk per Trade</div>
-          <div class="kpi-value text-white" id="kpi-c-risk">—</div>
-        </div>
-        <div class="kpi-card">
-          <div class="kpi-label">Sharpe / Sortino</div>
-          <div class="kpi-value text-white" id="kpi-c-sharpe">—</div>
-        </div>
-        <div class="kpi-card">
-          <div class="kpi-label">Annualized P&L</div>
-          <div class="kpi-value" id="kpi-c-annual">—</div>
-        </div>
+        <div class="kpi-card"><div class="kpi-label">Avg Win / Avg Loss</div><div class="kpi-value text-white" id="kpi-c-wl">—</div></div>
+        <div class="kpi-card"><div class="kpi-label">Risk per Trade</div><div class="kpi-value text-white" id="kpi-c-risk">—</div></div>
+        <div class="kpi-card"><div class="kpi-label">Sharpe / Sortino</div><div class="kpi-value text-white" id="kpi-c-sharpe">—</div></div>
+        <div class="kpi-card"><div class="kpi-label">Annualized P&L</div><div class="kpi-value" id="kpi-c-annual">—</div></div>
       </div>
-      <!-- Rolling Metrics C -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-        <div class="kpi-card">
-          <div class="text-xs text-epig-textDim uppercase tracking-wider mb-3 font-semibold">Rolling 30-Day</div>
-          <div class="grid grid-cols-3 gap-4">
-            <div><div class="kpi-label">Win Rate</div><div class="font-mono text-lg font-bold" id="c-r30-wr">—</div></div>
-            <div><div class="kpi-label">Expectancy (R)</div><div class="font-mono text-lg font-bold" id="c-r30-ev">—</div></div>
-            <div><div class="kpi-label">Trades</div><div class="font-mono text-white text-lg font-bold" id="c-r30-t">—</div></div>
-          </div>
-        </div>
-        <div class="kpi-card">
-          <div class="text-xs text-epig-textDim uppercase tracking-wider mb-3 font-semibold">Rolling 90-Day</div>
-          <div class="grid grid-cols-3 gap-4">
-            <div><div class="kpi-label">Win Rate</div><div class="font-mono text-lg font-bold" id="c-r90-wr">—</div></div>
-            <div><div class="kpi-label">Expectancy (R)</div><div class="font-mono text-lg font-bold" id="c-r90-ev">—</div></div>
-            <div><div class="kpi-label">Trades</div><div class="font-mono text-white text-lg font-bold" id="c-r90-t">—</div></div>
-          </div>
-        </div>
+        <div class="kpi-card"><div class="text-xs text-epig-textDim uppercase tracking-wider mb-3 font-semibold">Rolling 30-Day</div><div class="grid grid-cols-3 gap-4"><div><div class="kpi-label">Win Rate</div><div class="font-mono text-lg font-bold" id="c-r30-wr">—</div></div><div><div class="kpi-label">Expectancy (R)</div><div class="font-mono text-lg font-bold" id="c-r30-ev">—</div></div><div><div class="kpi-label">Trades</div><div class="font-mono text-white text-lg font-bold" id="c-r30-t">—</div></div></div></div>
+        <div class="kpi-card"><div class="text-xs text-epig-textDim uppercase tracking-wider mb-3 font-semibold">Rolling 90-Day</div><div class="grid grid-cols-3 gap-4"><div><div class="kpi-label">Win Rate</div><div class="font-mono text-lg font-bold" id="c-r90-wr">—</div></div><div><div class="kpi-label">Expectancy (R)</div><div class="font-mono text-lg font-bold" id="c-r90-ev">—</div></div><div><div class="kpi-label">Trades</div><div class="font-mono text-white text-lg font-bold" id="c-r90-t">—</div></div></div></div>
       </div>
     </div>
 
-    <!-- Charts Row -->
+    <!-- ═══════════════════ Charts Row ═══════════════════ -->
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-      <!-- Equity Curve -->
       <div class="chart-container">
         <div class="flex items-center justify-between mb-4">
           <h3 class="font-semibold text-sm">Equity Curve (indexed to 100)</h3>
@@ -254,17 +211,24 @@ export function dashboardPage(): string {
         </div>
         <div style="height:300px;"><canvas id="equity-chart"></canvas></div>
       </div>
-      <!-- Drawdown Curve -->
       <div class="chart-container">
         <h3 class="font-semibold text-sm mb-4">Drawdown</h3>
         <div style="height:300px;"><canvas id="drawdown-chart"></canvas></div>
       </div>
     </div>
 
-    <!-- Monthly Returns Heatmap -->
+    <!-- ═══════════════════ Returns Section with Weekly/Monthly Toggle ═══════════════════ -->
     <div class="chart-container mb-8">
-      <h3 class="font-semibold text-sm mb-4">Monthly Returns</h3>
-      <div class="overflow-x-auto">
+      <div class="flex items-center justify-between mb-4">
+        <h3 class="font-semibold text-sm">Returns</h3>
+        <div class="flex gap-1">
+          <button class="text-xs px-3 py-1 rounded-md transition-all returns-view-btn active" data-view="monthly" onclick="switchReturnsView('monthly')">Monthly</button>
+          <button class="text-xs px-3 py-1 rounded-md transition-all returns-view-btn" data-view="weekly" onclick="switchReturnsView('weekly')">Weekly</button>
+        </div>
+      </div>
+
+      <!-- Monthly Returns Heatmap -->
+      <div id="monthly-view" class="overflow-x-auto">
         <table class="w-full text-sm" id="monthly-returns-table">
           <thead>
             <tr>
@@ -287,9 +251,24 @@ export function dashboardPage(): string {
           <tbody id="heatmap-body"></tbody>
         </table>
       </div>
+
+      <!-- Weekly Returns Table -->
+      <div id="weekly-view" class="overflow-x-auto hidden">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-epig-border">
+              <th class="text-left text-epig-textDim font-medium px-3 py-2">Week</th>
+              <th class="text-right text-epig-textDim font-medium px-3 py-2">Return (%)</th>
+              <th class="text-right text-epig-textDim font-medium px-3 py-2">P&L ($)</th>
+              <th class="text-left text-epig-textDim font-medium px-3 py-2" style="width:50%">Visual</th>
+            </tr>
+          </thead>
+          <tbody id="weekly-body"></tbody>
+        </table>
+      </div>
     </div>
 
-    <!-- Trade Table (B & C only) -->
+    <!-- Trade Table (B, C, Combined) -->
     <div id="trade-table-section" class="chart-container mb-8 hidden">
       <div class="flex items-center justify-between mb-4">
         <h3 class="font-semibold text-sm">Recent Trades (Round Trips)</h3>
@@ -324,13 +303,22 @@ export function dashboardPage(): string {
     </div>
   </div>
 
+  <style>
+    .returns-view-btn { background: rgba(30,41,59,0.5); border: 1px solid rgba(51,65,85,0.5); color: #64748b; }
+    .returns-view-btn.active { background: rgba(59,130,246,0.2); border-color: rgba(59,130,246,0.5); color: #60a5fa; font-weight: 600; }
+    .returns-view-btn:hover:not(.active) { color: #cbd5e1; border-color: rgba(100,116,139,0.6); }
+    .weekly-bar-pos { background: linear-gradient(90deg, rgba(16,185,129,0.3), rgba(16,185,129,0.15)); border-left: 3px solid #10b981; }
+    .weekly-bar-neg { background: linear-gradient(90deg, rgba(239,68,68,0.3), rgba(239,68,68,0.15)); border-left: 3px solid #ef4444; }
+  </style>
+
   <script>
     let dashData = null;
     let currentStrategy = 'A';
+    let currentReturnsView = 'monthly';
     let equityChart = null;
     let drawdownChart = null;
 
-    const strategyColors = { A: '#3b82f6', B: '#10b981', C: '#f59e0b' };
+    const strategyColors = { A: '#3b82f6', B: '#10b981', C: '#f59e0b', Combined: '#a855f7' };
 
     async function loadDashboard() {
       try {
@@ -347,17 +335,38 @@ export function dashboardPage(): string {
       document.querySelectorAll('.strategy-tab').forEach(t => t.classList.remove('active'));
       document.querySelector('[data-strategy="'+s+'"]').classList.add('active');
       document.querySelectorAll('.kpi-grid-panel').forEach(p => p.classList.add('hidden'));
-      document.getElementById('kpi-grid-'+s).classList.remove('hidden');
-      if (s === 'A') {
+      const grid = document.getElementById('kpi-grid-'+s);
+      if (grid) grid.classList.remove('hidden');
+      // Show trade table for B, C (not A, not Combined)
+      if (s === 'A' || s === 'Combined') {
         document.getElementById('trade-table-section').classList.add('hidden');
       } else {
         document.getElementById('trade-table-section').classList.remove('hidden');
       }
       updateKPIs();
       updateCharts();
-      updateHeatmap();
+      updateReturnsView();
       updateTradeTable();
       updateBanner();
+    }
+
+    function switchReturnsView(view) {
+      currentReturnsView = view;
+      document.querySelectorAll('.returns-view-btn').forEach(b => b.classList.remove('active'));
+      document.querySelector('[data-view="'+view+'"]').classList.add('active');
+      updateReturnsView();
+    }
+
+    function updateReturnsView() {
+      if (currentReturnsView === 'monthly') {
+        document.getElementById('monthly-view').classList.remove('hidden');
+        document.getElementById('weekly-view').classList.add('hidden');
+        updateHeatmap();
+      } else {
+        document.getElementById('monthly-view').classList.add('hidden');
+        document.getElementById('weekly-view').classList.remove('hidden');
+        updateWeeklyTable();
+      }
     }
 
     function fmtPnl(v) {
@@ -380,7 +389,7 @@ export function dashboardPage(): string {
       if (!dashData || !dashData.strategies) return;
       updateKPIs();
       updateCharts();
-      updateHeatmap();
+      updateReturnsView();
       updateTradeTable();
       updateBanner();
     }
@@ -390,7 +399,7 @@ export function dashboardPage(): string {
       const d = dashData.strategies[currentStrategy];
       const banner = document.getElementById('data-banner');
       const text = document.getElementById('data-banner-text');
-      if (d && d.totalFills > 0) {
+      if (d && (d.totalFills > 0 || d.totalTrades > 0)) {
         banner.classList.remove('hidden');
         const range = d.dataRange || {};
         text.textContent = '2026 YTD data: ' + (d.totalFills || 0) + ' IB fills → ' + (d.totalTrades || 0) + ' closed round-trips' +
@@ -407,19 +416,52 @@ export function dashboardPage(): string {
       const d = dashData.strategies[s];
       if (!d) return;
 
-      // Update last-updated
       if (d.lastUpdated) {
         document.getElementById('last-updated').textContent = new Date(d.lastUpdated).toLocaleDateString('en-US', { weekday:'short', year:'numeric', month:'short', day:'numeric' });
       }
 
-      // Helper to set element text and color
       function setKpi(id, text, colorVal) {
         const el = document.getElementById(id);
         if (!el) return;
         el.textContent = text;
-        if (colorVal !== undefined) {
-          el.className = 'kpi-value ' + pnlColor(colorVal);
+        if (colorVal !== undefined) el.className = 'kpi-value ' + pnlColor(colorVal);
+      }
+
+      if (s === 'Combined') {
+        setKpi('kpi-comb-cumreturn', fmtPct(d.cumulativeReturn), d.cumulativeReturn);
+        setKpi('kpi-comb-maxdd', fmtPct(d.maxDrawdown), d.maxDrawdown);
+        setKpi('kpi-comb-winrate', (d.winRate || 0).toFixed(1) + '%', d.winRate >= 50 ? 1 : -1);
+        setKpi('kpi-comb-pf', (d.profitFactor || 0).toFixed(2));
+        setKpi('kpi-comb-trades', d.totalTrades || 0);
+        const fillsEl = document.getElementById('kpi-comb-fills');
+        if (fillsEl) fillsEl.textContent = (d.totalFills || 0) + ' fills';
+        setKpi('kpi-comb-pnl', fmtPnl(d.totalPnl), d.totalPnl);
+        setKpi('kpi-comb-annual', fmtPnl(d.annualPnl), d.annualPnl);
+        setKpi('kpi-comb-sharpe', (d.sharpeRatio||0).toFixed(2) + ' / ' + (d.sortinoRatio||0).toFixed(2));
+
+        // Contribution bar
+        const contrib = d.strategyContribution || {};
+        const bar = document.getElementById('contrib-bar');
+        const legend = document.getElementById('contrib-legend');
+        const total = Math.abs(contrib.A || 0) + Math.abs(contrib.B || 0) + Math.abs(contrib.C || 0);
+        if (bar && legend && total > 0) {
+          const pctA = Math.abs(contrib.A || 0) / total * 100;
+          const pctB = Math.abs(contrib.B || 0) / total * 100;
+          const pctC = Math.abs(contrib.C || 0) / total * 100;
+          bar.innerHTML = '' +
+            '<div style="width:'+pctA+'%;background:#3b82f6;opacity:'+(contrib.A>=0?'1':'0.4')+'" class="h-full" title="A: '+fmtPnl(contrib.A)+'"></div>' +
+            '<div style="width:'+pctB+'%;background:#10b981;opacity:'+(contrib.B>=0?'1':'0.4')+'" class="h-full" title="B: '+fmtPnl(contrib.B)+'"></div>' +
+            '<div style="width:'+pctC+'%;background:#f59e0b;opacity:'+(contrib.C>=0?'1':'0.4')+'" class="h-full" title="C: '+fmtPnl(contrib.C)+'"></div>';
+          legend.innerHTML = '' +
+            '<span><span class="inline-block w-2.5 h-2.5 rounded-sm mr-1" style="background:#3b82f6"></span>A: '+fmtPnl(contrib.A)+'</span>' +
+            '<span><span class="inline-block w-2.5 h-2.5 rounded-sm mr-1" style="background:#10b981"></span>B: '+fmtPnl(contrib.B)+'</span>' +
+            '<span><span class="inline-block w-2.5 h-2.5 rounded-sm mr-1" style="background:#f59e0b"></span>C: '+fmtPnl(contrib.C)+'</span>';
         }
+
+        // Rolling for Combined
+        const r30 = d.rollingMetrics && d.rollingMetrics['30d'] ? d.rollingMetrics['30d'] : {};
+        const r90 = d.rollingMetrics && d.rollingMetrics['90d'] ? d.rollingMetrics['90d'] : {};
+        setCombRolling(r30, r90);
       }
 
       if (s === 'A') {
@@ -428,19 +470,19 @@ export function dashboardPage(): string {
         setKpi('kpi-a-maxdd', fmtPct(d.maxDrawdown), d.maxDrawdown);
         setKpi('kpi-a-sharpe', (d.sharpeRatio || 0).toFixed(2));
         setKpi('kpi-a-trades', d.totalTrades || 0);
-        const fillsEl = document.getElementById('kpi-a-fills');
-        if (fillsEl) fillsEl.textContent = (d.totalFills || 0) + ' fills';
+        const fillsA = document.getElementById('kpi-a-fills');
+        if (fillsA) fillsA.textContent = (d.totalFills || 0) + ' fills';
         setKpi('kpi-a-pnl', fmtPnl(d.totalPnl), d.totalPnl);
         setKpi('kpi-a-evr', (d.evPerTradeR >= 0 ? '+' : '') + (d.evPerTradeR || 0).toFixed(2) + 'R', d.evPerTradeR);
         setKpi('kpi-a-wl', '$' + (d.avgWinDollar||0).toFixed(0) + ' / $' + (d.avgLossDollar||0).toFixed(0));
         setKpi('kpi-a-risk', '$' + (d.riskPerTrade||0).toFixed(0));
         if (d.currentAllocation) {
-          const as = document.getElementById('alloc-spy');
-          const ast = document.getElementById('alloc-stocks');
-          const ac = document.getElementById('alloc-cash');
-          if (as) as.textContent = (d.currentAllocation.spy || 0) + '%';
-          if (ast) ast.textContent = (d.currentAllocation.stocks || 0) + '%';
-          if (ac) ac.textContent = (d.currentAllocation.cash || 0) + '%';
+          const s1 = document.getElementById('alloc-spy');
+          const s2 = document.getElementById('alloc-stocks');
+          const s3 = document.getElementById('alloc-cash');
+          if (s1) s1.textContent = (d.currentAllocation.spy || 0) + '%';
+          if (s2) s2.textContent = (d.currentAllocation.stocks || 0) + '%';
+          if (s3) s3.textContent = (d.currentAllocation.cash || 0) + '%';
         }
       }
 
@@ -458,8 +500,6 @@ export function dashboardPage(): string {
         setKpi('kpi-b-risk', '$' + (d.riskPerTrade||0).toFixed(0));
         setKpi('kpi-b-sharpe', (d.sharpeRatio||0).toFixed(2) + ' / ' + (d.sortinoRatio||0).toFixed(2));
         setKpi('kpi-b-annual', fmtPnl(d.annualPnl), d.annualPnl);
-
-        // Rolling
         const r30 = d.rollingMetrics && d.rollingMetrics['30d'] ? d.rollingMetrics['30d'] : {};
         const r90 = d.rollingMetrics && d.rollingMetrics['90d'] ? d.rollingMetrics['90d'] : {};
         setRolling('b', r30, r90);
@@ -479,7 +519,6 @@ export function dashboardPage(): string {
         setKpi('kpi-c-risk', '$' + (d.riskPerTrade||0).toFixed(0));
         setKpi('kpi-c-sharpe', (d.sharpeRatio||0).toFixed(2) + ' / ' + (d.sortinoRatio||0).toFixed(2));
         setKpi('kpi-c-annual', fmtPnl(d.annualPnl), d.annualPnl);
-
         const r30 = d.rollingMetrics && d.rollingMetrics['30d'] ? d.rollingMetrics['30d'] : {};
         const r90 = d.rollingMetrics && d.rollingMetrics['90d'] ? d.rollingMetrics['90d'] : {};
         setRolling('c', r30, r90);
@@ -491,9 +530,7 @@ export function dashboardPage(): string {
         const el = document.getElementById(id);
         if (!el) return;
         el.textContent = text;
-        if (colorVal !== undefined) {
-          el.className = 'font-mono text-lg font-bold ' + pnlColor(colorVal);
-        }
+        if (colorVal !== undefined) el.className = 'font-mono text-lg font-bold ' + pnlColor(colorVal);
       }
       setEl(prefix + '-r30-wr', (r30.winRate || 0).toFixed(1) + '%', r30.winRate >= 50 ? 1 : -1);
       setEl(prefix + '-r30-ev', (r30.expectancyR >= 0 ? '+' : '') + (r30.expectancyR || 0).toFixed(2) + 'R', r30.expectancyR);
@@ -503,13 +540,27 @@ export function dashboardPage(): string {
       setEl(prefix + '-r90-t', r90.trades || 0);
     }
 
+    function setCombRolling(r30, r90) {
+      function setEl(id, text, colorVal) {
+        const el = document.getElementById(id);
+        if (!el) return;
+        el.textContent = text;
+        if (colorVal !== undefined) el.className = 'font-mono text-lg font-bold ' + pnlColor(colorVal);
+      }
+      setEl('comb-r30-wr', (r30.winRate || 0).toFixed(1) + '%', r30.winRate >= 50 ? 1 : -1);
+      setEl('comb-r30-ev', fmtPnl(r30.expectancy), r30.expectancy);
+      setEl('comb-r30-t', r30.trades || 0);
+      setEl('comb-r90-wr', (r90.winRate || 0).toFixed(1) + '%', r90.winRate >= 50 ? 1 : -1);
+      setEl('comb-r90-ev', fmtPnl(r90.expectancy), r90.expectancy);
+      setEl('comb-r90-t', r90.trades || 0);
+    }
+
     function updateCharts() {
       if (!dashData || !dashData.strategies) return;
       const d = dashData.strategies[currentStrategy];
       if (!d) return;
-      const color = strategyColors[currentStrategy];
+      const color = strategyColors[currentStrategy] || '#a855f7';
 
-      // Equity chart
       if (equityChart) equityChart.destroy();
       const eqCtx = document.getElementById('equity-chart').getContext('2d');
       const eqData = d.equityCurve || [];
@@ -517,30 +568,18 @@ export function dashboardPage(): string {
         equityChart = new Chart(eqCtx, { type: 'line', data: { datasets: [] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } } });
       } else {
         const datasets = [{
-          label: 'Strategy ' + currentStrategy,
+          label: currentStrategy === 'Combined' ? 'Combined' : 'Strategy ' + currentStrategy,
           data: eqData.map(p => ({ x: p.date, y: p.value })),
-          borderColor: color,
-          backgroundColor: color + '15',
-          fill: true,
-          tension: 0.3,
-          pointRadius: 0,
-          borderWidth: 2,
+          borderColor: color, backgroundColor: color + '15', fill: true, tension: 0.3, pointRadius: 0, borderWidth: 2,
         }];
         if (document.getElementById('spy-toggle').checked) {
           datasets.push({
-            label: 'SPY',
-            data: eqData.map(p => ({ x: p.date, y: p.spy })),
-            borderColor: '#64748b',
-            borderDash: [5,5],
-            fill: false,
-            tension: 0.3,
-            pointRadius: 0,
-            borderWidth: 1.5,
+            label: 'SPY', data: eqData.map(p => ({ x: p.date, y: p.spy })),
+            borderColor: '#64748b', borderDash: [5,5], fill: false, tension: 0.3, pointRadius: 0, borderWidth: 1.5,
           });
         }
         equityChart = new Chart(eqCtx, {
-          type: 'line',
-          data: { datasets },
+          type: 'line', data: { datasets },
           options: {
             responsive: true, maintainAspectRatio: false,
             plugins: { legend: { labels: { color: '#94a3b8', font: { size: 11 } } } },
@@ -552,7 +591,6 @@ export function dashboardPage(): string {
         });
       }
 
-      // Drawdown chart
       if (drawdownChart) drawdownChart.destroy();
       const ddCtx = document.getElementById('drawdown-chart').getContext('2d');
       const ddData = d.drawdownCurve || [];
@@ -561,21 +599,9 @@ export function dashboardPage(): string {
       } else {
         drawdownChart = new Chart(ddCtx, {
           type: 'line',
-          data: {
-            datasets: [{
-              label: 'Drawdown',
-              data: ddData.map(p => ({ x: p.date, y: p.value })),
-              borderColor: '#ef4444',
-              backgroundColor: 'rgba(239,68,68,0.08)',
-              fill: true,
-              tension: 0.3,
-              pointRadius: 0,
-              borderWidth: 1.5,
-            }]
-          },
+          data: { datasets: [{ label: 'Drawdown', data: ddData.map(p => ({ x: p.date, y: p.value })), borderColor: '#ef4444', backgroundColor: 'rgba(239,68,68,0.08)', fill: true, tension: 0.3, pointRadius: 0, borderWidth: 1.5 }] },
           options: {
-            responsive: true, maintainAspectRatio: false,
-            plugins: { legend: { display: false } },
+            responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } },
             scales: {
               x: { type: 'category', ticks: { color: '#64748b', maxTicksLimit: 8, font: { size: 10 } }, grid: { color: '#1e293b' } },
               y: { ticks: { color: '#64748b', font: { size: 10 }, callback: v => v.toFixed(1) + '%' }, grid: { color: '#1e293b' } }
@@ -608,9 +634,7 @@ export function dashboardPage(): string {
           const val = mData[m];
           if (val !== undefined) {
             ytd += val;
-            const bg = val >= 0
-              ? 'rgba(16,185,129,' + Math.min(Math.abs(val)/10, 0.5) + ')'
-              : 'rgba(239,68,68,' + Math.min(Math.abs(val)/10, 0.5) + ')';
+            const bg = val >= 0 ? 'rgba(16,185,129,' + Math.min(Math.abs(val)/10, 0.5) + ')' : 'rgba(239,68,68,' + Math.min(Math.abs(val)/10, 0.5) + ')';
             const color = val >= 0 ? '#10b981' : '#ef4444';
             row += '<td class="px-1 py-1"><div class="heatmap-cell" style="background:'+bg+';color:'+color+'">'+(val>=0?'+':'')+val.toFixed(1)+'%</div></td>';
           } else {
@@ -623,6 +647,37 @@ export function dashboardPage(): string {
         row += '</tr>';
         body.innerHTML += row;
       }
+    }
+
+    function updateWeeklyTable() {
+      if (!dashData || !dashData.strategies) return;
+      const d = dashData.strategies[currentStrategy];
+      if (!d) return;
+      const body = document.getElementById('weekly-body');
+      body.innerHTML = '';
+      const weeks = d.weeklyReturns || [];
+      if (weeks.length === 0) {
+        body.innerHTML = '<tr><td colspan="4" class="px-4 py-8 text-center text-epig-textDim">No weekly return data available yet</td></tr>';
+        return;
+      }
+      // Find max absolute return for bar scaling
+      const maxAbs = Math.max(...weeks.map(w => Math.abs(w.return)), 0.01);
+      // Show most recent first
+      const sorted = [...weeks].reverse();
+      let cumPnl = weeks.reduce((s, w) => s + w.pnl, 0);
+
+      sorted.forEach(w => {
+        const color = w.return >= 0 ? 'text-emerald-400' : 'text-red-400';
+        const barClass = w.return >= 0 ? 'weekly-bar-pos' : 'weekly-bar-neg';
+        const barWidth = Math.max(Math.abs(w.return) / maxAbs * 100, 2);
+        const weekLabel = w.weekStart.slice(5) + ' → ' + w.weekEnd.slice(5);
+        body.innerHTML += '<tr class="border-b border-epig-border/30">' +
+          '<td class="px-3 py-2 font-mono text-sm text-epig-textDim">' + weekLabel + '</td>' +
+          '<td class="px-3 py-2 text-right font-mono text-sm ' + color + '">' + (w.return >= 0 ? '+' : '') + w.return.toFixed(2) + '%</td>' +
+          '<td class="px-3 py-2 text-right font-mono text-sm ' + color + '">' + fmtPnl(w.pnl) + '</td>' +
+          '<td class="px-3 py-2"><div class="'+barClass+' rounded-sm h-4" style="width:'+barWidth+'%"></div></td>' +
+          '</tr>';
+      });
     }
 
     function updateTradeTable() {
