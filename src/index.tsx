@@ -71,7 +71,7 @@ app.get('/api/og-image', async (c) => {
     const db = c.env.DB
     if (db) {
       const allTrades = await db.prepare(
-        "SELECT strategy, side, instrument, realized_pnl, quantity, trade_date, asset_class, strike, expiry, put_call, result FROM trades WHERE trade_date >= '2026-01-01' ORDER BY trade_date ASC, id ASC"
+        "SELECT strategy, side, instrument, realized_pnl, quantity, trade_date, asset_class, strike, expiry, put_call, result FROM trades ORDER BY trade_date ASC, id ASC"
       ).all()
       const rows: any[] = allTrades.results || []
       if (rows.length > 0) {
@@ -226,9 +226,9 @@ app.get('/api/dashboard/summary', async (c) => {
   if (!db) return c.json(buildFallbackSummary())
 
   try {
-    // Fetch ALL 2026 fills for all strategies (same query approach as projector)
+    // Fetch ALL fills for all strategies (includes 2025 historical data)
     const allTrades = await db.prepare(
-      "SELECT id, strategy, side, instrument, entry_price, exit_price, realized_pnl, quantity, trade_date, asset_class, strike, expiry, put_call, result FROM trades WHERE trade_date >= '2026-01-01' ORDER BY trade_date ASC, id ASC"
+      "SELECT id, strategy, side, instrument, entry_price, exit_price, realized_pnl, quantity, trade_date, asset_class, strike, expiry, put_call, result FROM trades ORDER BY trade_date ASC, id ASC"
     ).all()
     const rows: any[] = allTrades.results || []
 

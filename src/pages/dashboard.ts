@@ -39,9 +39,9 @@ export function dashboardPage(): string {
 
     <!-- Date Range -->
     <div class="flex flex-wrap gap-2 mb-8">
-      <button class="text-xs px-3 py-1.5 rounded-md bg-epig-card border border-epig-border text-epig-textDim hover:text-white hover:border-blue-500 transition-all date-btn" data-range="30d">30D</button>
-      <button class="text-xs px-3 py-1.5 rounded-md bg-epig-card border border-epig-border text-epig-textDim hover:text-white hover:border-blue-500 transition-all date-btn" data-range="90d">90D</button>
-      <button class="text-xs px-3 py-1.5 rounded-md bg-blue-500/20 border border-blue-500/50 text-blue-400 font-semibold transition-all date-btn active" data-range="ytd">YTD</button>
+      <button class="text-xs px-3 py-1.5 rounded-md bg-epig-card border border-epig-border text-epig-textDim hover:text-white hover:border-blue-500 transition-all date-btn" data-range="30d" onclick="switchDateRange('30d')">30D</button>
+      <button class="text-xs px-3 py-1.5 rounded-md bg-epig-card border border-epig-border text-epig-textDim hover:text-white hover:border-blue-500 transition-all date-btn" data-range="90d" onclick="switchDateRange('90d')">90D</button>
+      <button class="text-xs px-3 py-1.5 rounded-md bg-blue-500/20 border border-blue-500/50 text-blue-400 font-semibold transition-all date-btn active" data-range="all" onclick="switchDateRange('all')">All</button>
     </div>
 
     <!-- ═══════════════════ KPI Grid: Combined Portfolio ═══════════════════ -->
@@ -315,6 +315,7 @@ export function dashboardPage(): string {
     let dashData = null;
     let currentStrategy = 'A';
     let currentReturnsView = 'monthly';
+    let currentDateRange = 'all';
     let equityChart = null;
     let drawdownChart = null;
 
@@ -347,6 +348,22 @@ export function dashboardPage(): string {
       updateCharts();
       updateReturnsView();
       updateTradeTable();
+      updateBanner();
+    }
+
+    function switchDateRange(range) {
+      currentDateRange = range;
+      document.querySelectorAll('.date-btn').forEach(b => {
+        b.classList.remove('active');
+        b.classList.remove('bg-blue-500/20', 'border-blue-500/50', 'text-blue-400', 'font-semibold');
+        b.classList.add('bg-epig-card', 'border-epig-border', 'text-epig-textDim');
+      });
+      const activeBtn = document.querySelector('[data-range="'+range+'"]');
+      if (activeBtn) {
+        activeBtn.classList.add('active', 'bg-blue-500/20', 'border-blue-500/50', 'text-blue-400', 'font-semibold');
+        activeBtn.classList.remove('bg-epig-card', 'border-epig-border', 'text-epig-textDim');
+      }
+      updateKPIs();
       updateBanner();
     }
 
@@ -402,9 +419,14 @@ export function dashboardPage(): string {
       if (d && (d.totalFills > 0 || d.totalTrades > 0)) {
         banner.classList.remove('hidden');
         const range = d.dataRange || {};
-        text.textContent = '2026 YTD data: ' + (d.totalFills || 0) + ' IB fills → ' + (d.totalTrades || 0) + ' closed round-trips' +
-          (d.openTrades ? ' (' + d.openTrades + ' open)' : '') +
-          (range.firstDate ? ' | ' + range.firstDate + ' to ' + range.lastDate + ' (' + range.daySpan + ' days)' : '');
+        const rangeLabel = currentDateRange === '30d' ? 'Last 30 days' : currentDateRange === '90d' ? 'Last 90 days' : 'All data';
+          const rolling = d.rollingMetrics || {};
+          const r = currentDateRange === '30d' ? rolling['30d'] : currentDateRange === '90d' ? rolling['90d'] : null;
+          const shownTrades = r ? (r.trades || 0) : (d.totalTrades || 0);
+          const shownFills = r ? '' : (d.totalFills || 0) + ' IB fills → ';
+          text.textContent = rangeLabel + ': ' + shownFills + shownTrades + ' closed round-trips' +
+          (!r && d.openTrades ? ' (' + d.openTrades + ' open)' : '') +
+          (!r && range.firstDate ? ' | ' + range.firstDate + ' to ' + range.lastDate + ' (' + range.daySpan + ' days)' : '');
       } else {
         banner.classList.add('hidden');
       }
@@ -415,6 +437,10 @@ export function dashboardPage(): string {
       const s = currentStrategy;
       const d = dashData.strategies[s];
       if (!d) return;
+
+      // Get rolling metrics if date range is active
+      const rolling = d.rollingMetrics || {};
+      const r = currentDateRange === '30d' ? rolling['30d'] : currentDateRange === '90d' ? rolling['90d'] : null;
 
       if (d.lastUpdated) {
         document.getElementById('last-updated').textContent = new Date(d.lastUpdated).toLocaleDateString('en-US', { weekday:'short', year:'numeric', month:'short', day:'numeric' });
@@ -427,17 +453,23 @@ export function dashboardPage(): string {
         if (colorVal !== undefined) el.className = 'kpi-value ' + pnlColor(colorVal);
       }
 
+      // Helper: use rolling value if in 30d/90d mode, otherwise use all-time value
+      const wr = r ? (r.winRate || 0) : (d.winRate || 0);
+      const evR = r ? (r.expectancyR || 0) : (d.evPerTradeR || 0);
+      const trades = r ? (r.trades || 0) : (d.totalTrades || 0);
+      const evDollar = r ? (r.expectancy || 0) : (d.expectancyDollar || 0);
+
       if (s === 'Combined') {
-        setKpi('kpi-comb-cumreturn', fmtPct(d.cumulativeReturn), d.cumulativeReturn);
-        setKpi('kpi-comb-maxdd', fmtPct(d.maxDrawdown), d.maxDrawdown);
-        setKpi('kpi-comb-winrate', (d.winRate || 0).toFixed(1) + '%', d.winRate >= 50 ? 1 : -1);
-        setKpi('kpi-comb-pf', (d.profitFactor || 0).toFixed(2));
-        setKpi('kpi-comb-trades', d.totalTrades || 0);
+        setKpi('kpi-comb-cumreturn', r ? '—' : fmtPct(d.cumulativeReturn), r ? 0 : d.cumulativeReturn);
+        setKpi('kpi-comb-maxdd', r ? '—' : fmtPct(d.maxDrawdown), r ? 0 : d.maxDrawdown);
+        setKpi('kpi-comb-winrate', wr.toFixed(1) + '%', wr >= 50 ? 1 : -1);
+        setKpi('kpi-comb-pf', r ? '—' : (d.profitFactor || 0).toFixed(2));
+        setKpi('kpi-comb-trades', trades);
         const fillsEl = document.getElementById('kpi-comb-fills');
-        if (fillsEl) fillsEl.textContent = (d.totalFills || 0) + ' fills';
-        setKpi('kpi-comb-pnl', fmtPnl(d.totalPnl), d.totalPnl);
-        setKpi('kpi-comb-annual', fmtPnl(d.annualPnl), d.annualPnl);
-        setKpi('kpi-comb-sharpe', (d.sharpeRatio||0).toFixed(2) + ' / ' + (d.sortinoRatio||0).toFixed(2));
+        if (fillsEl) fillsEl.textContent = r ? '' : (d.totalFills || 0) + ' fills';
+        setKpi('kpi-comb-pnl', r ? fmtPnl(evDollar) + '/trade' : fmtPnl(d.totalPnl), r ? evDollar : d.totalPnl);
+        setKpi('kpi-comb-annual', r ? '—' : fmtPnl(d.annualPnl), r ? 0 : d.annualPnl);
+        setKpi('kpi-comb-sharpe', r ? '—' : (d.sharpeRatio||0).toFixed(2) + ' / ' + (d.sortinoRatio||0).toFixed(2));
 
         // Contribution bar
         const contrib = d.strategyContribution || {};
@@ -465,18 +497,18 @@ export function dashboardPage(): string {
       }
 
       if (s === 'A') {
-        setKpi('kpi-a-cumreturn', fmtPct(d.cumulativeReturn), d.cumulativeReturn);
-        setKpi('kpi-a-winrate', (d.winRate || 0).toFixed(1) + '%', d.winRate >= 50 ? 1 : -1);
-        setKpi('kpi-a-maxdd', fmtPct(d.maxDrawdown), d.maxDrawdown);
-        setKpi('kpi-a-sharpe', (d.sharpeRatio || 0).toFixed(2));
-        setKpi('kpi-a-trades', d.totalTrades || 0);
+        setKpi('kpi-a-cumreturn', r ? '—' : fmtPct(d.cumulativeReturn), r ? 0 : d.cumulativeReturn);
+        setKpi('kpi-a-winrate', wr.toFixed(1) + '%', wr >= 50 ? 1 : -1);
+        setKpi('kpi-a-maxdd', r ? '—' : fmtPct(d.maxDrawdown), r ? 0 : d.maxDrawdown);
+        setKpi('kpi-a-sharpe', r ? '—' : (d.sharpeRatio || 0).toFixed(2));
+        setKpi('kpi-a-trades', trades);
         const fillsA = document.getElementById('kpi-a-fills');
-        if (fillsA) fillsA.textContent = (d.totalFills || 0) + ' fills';
-        setKpi('kpi-a-pnl', fmtPnl(d.totalPnl), d.totalPnl);
-        setKpi('kpi-a-evr', (d.evPerTradeR >= 0 ? '+' : '') + (d.evPerTradeR || 0).toFixed(2) + 'R', d.evPerTradeR);
-        setKpi('kpi-a-wl', '$' + (d.avgWinDollar||0).toFixed(0) + ' / $' + (d.avgLossDollar||0).toFixed(0));
-        setKpi('kpi-a-risk', '$' + (d.riskPerTrade||0).toFixed(0));
-        if (d.currentAllocation) {
+        if (fillsA) fillsA.textContent = r ? '' : (d.totalFills || 0) + ' fills';
+        setKpi('kpi-a-pnl', r ? fmtPnl(evDollar) + '/trade' : fmtPnl(d.totalPnl), r ? evDollar : d.totalPnl);
+        setKpi('kpi-a-evr', (evR >= 0 ? '+' : '') + evR.toFixed(2) + 'R', evR);
+        setKpi('kpi-a-wl', r ? '—' : '$' + (d.avgWinDollar||0).toFixed(0) + ' / $' + (d.avgLossDollar||0).toFixed(0));
+        setKpi('kpi-a-risk', r ? '—' : '$' + (d.riskPerTrade||0).toFixed(0));
+        if (!r && d.currentAllocation) {
           const s1 = document.getElementById('alloc-spy');
           const s2 = document.getElementById('alloc-stocks');
           const s3 = document.getElementById('alloc-cash');
@@ -487,38 +519,38 @@ export function dashboardPage(): string {
       }
 
       if (s === 'B') {
-        setKpi('kpi-b-cumreturn', fmtPct(d.cumulativeReturn), d.cumulativeReturn);
-        setKpi('kpi-b-maxdd', fmtPct(d.maxDrawdown), d.maxDrawdown);
-        setKpi('kpi-b-winrate', (d.winRate || 0).toFixed(1) + '%', d.winRate >= 50 ? 1 : -1);
-        setKpi('kpi-b-evr', (d.evPerTradeR >= 0 ? '+' : '') + (d.evPerTradeR || 0).toFixed(2) + 'R', d.evPerTradeR);
-        setKpi('kpi-b-pf', (d.profitFactor || 0).toFixed(2));
-        setKpi('kpi-b-trades', d.totalTrades || 0);
+        setKpi('kpi-b-cumreturn', r ? '—' : fmtPct(d.cumulativeReturn), r ? 0 : d.cumulativeReturn);
+        setKpi('kpi-b-maxdd', r ? '—' : fmtPct(d.maxDrawdown), r ? 0 : d.maxDrawdown);
+        setKpi('kpi-b-winrate', wr.toFixed(1) + '%', wr >= 50 ? 1 : -1);
+        setKpi('kpi-b-evr', (evR >= 0 ? '+' : '') + evR.toFixed(2) + 'R', evR);
+        setKpi('kpi-b-pf', r ? '—' : (d.profitFactor || 0).toFixed(2));
+        setKpi('kpi-b-trades', trades);
         const fillsB = document.getElementById('kpi-b-fills');
-        if (fillsB) fillsB.textContent = (d.totalFills || 0) + ' fills';
-        setKpi('kpi-b-pnl', fmtPnl(d.totalPnl), d.totalPnl);
-        setKpi('kpi-b-wl', '$' + (d.avgWinDollar||0).toFixed(0) + ' / $' + (d.avgLossDollar||0).toFixed(0));
-        setKpi('kpi-b-risk', '$' + (d.riskPerTrade||0).toFixed(0));
-        setKpi('kpi-b-sharpe', (d.sharpeRatio||0).toFixed(2) + ' / ' + (d.sortinoRatio||0).toFixed(2));
-        setKpi('kpi-b-annual', fmtPnl(d.annualPnl), d.annualPnl);
+        if (fillsB) fillsB.textContent = r ? '' : (d.totalFills || 0) + ' fills';
+        setKpi('kpi-b-pnl', r ? fmtPnl(evDollar) + '/trade' : fmtPnl(d.totalPnl), r ? evDollar : d.totalPnl);
+        setKpi('kpi-b-wl', r ? '—' : '$' + (d.avgWinDollar||0).toFixed(0) + ' / $' + (d.avgLossDollar||0).toFixed(0));
+        setKpi('kpi-b-risk', r ? '—' : '$' + (d.riskPerTrade||0).toFixed(0));
+        setKpi('kpi-b-sharpe', r ? '—' : (d.sharpeRatio||0).toFixed(2) + ' / ' + (d.sortinoRatio||0).toFixed(2));
+        setKpi('kpi-b-annual', r ? '—' : fmtPnl(d.annualPnl), r ? 0 : d.annualPnl);
         const r30 = d.rollingMetrics && d.rollingMetrics['30d'] ? d.rollingMetrics['30d'] : {};
         const r90 = d.rollingMetrics && d.rollingMetrics['90d'] ? d.rollingMetrics['90d'] : {};
         setRolling('b', r30, r90);
       }
 
       if (s === 'C') {
-        setKpi('kpi-c-cumreturn', fmtPct(d.cumulativeReturn), d.cumulativeReturn);
-        setKpi('kpi-c-maxdd', fmtPct(d.maxDrawdown), d.maxDrawdown);
-        setKpi('kpi-c-winrate', (d.winRate || 0).toFixed(1) + '%', d.winRate >= 50 ? 1 : -1);
-        setKpi('kpi-c-evr', (d.evPerTradeR >= 0 ? '+' : '') + (d.evPerTradeR || 0).toFixed(2) + 'R', d.evPerTradeR);
-        setKpi('kpi-c-pf', (d.profitFactor || 0).toFixed(2));
-        setKpi('kpi-c-trades', d.totalTrades || 0);
+        setKpi('kpi-c-cumreturn', r ? '—' : fmtPct(d.cumulativeReturn), r ? 0 : d.cumulativeReturn);
+        setKpi('kpi-c-maxdd', r ? '—' : fmtPct(d.maxDrawdown), r ? 0 : d.maxDrawdown);
+        setKpi('kpi-c-winrate', wr.toFixed(1) + '%', wr >= 50 ? 1 : -1);
+        setKpi('kpi-c-evr', (evR >= 0 ? '+' : '') + evR.toFixed(2) + 'R', evR);
+        setKpi('kpi-c-pf', r ? '—' : (d.profitFactor || 0).toFixed(2));
+        setKpi('kpi-c-trades', trades);
         const fillsC = document.getElementById('kpi-c-fills');
-        if (fillsC) fillsC.textContent = (d.totalFills || 0) + ' fills';
-        setKpi('kpi-c-pnl', fmtPnl(d.totalPnl), d.totalPnl);
-        setKpi('kpi-c-wl', '$' + (d.avgWinDollar||0).toFixed(0) + ' / $' + (d.avgLossDollar||0).toFixed(0));
-        setKpi('kpi-c-risk', '$' + (d.riskPerTrade||0).toFixed(0));
-        setKpi('kpi-c-sharpe', (d.sharpeRatio||0).toFixed(2) + ' / ' + (d.sortinoRatio||0).toFixed(2));
-        setKpi('kpi-c-annual', fmtPnl(d.annualPnl), d.annualPnl);
+        if (fillsC) fillsC.textContent = r ? '' : (d.totalFills || 0) + ' fills';
+        setKpi('kpi-c-pnl', r ? fmtPnl(evDollar) + '/trade' : fmtPnl(d.totalPnl), r ? evDollar : d.totalPnl);
+        setKpi('kpi-c-wl', r ? '—' : '$' + (d.avgWinDollar||0).toFixed(0) + ' / $' + (d.avgLossDollar||0).toFixed(0));
+        setKpi('kpi-c-risk', r ? '—' : '$' + (d.riskPerTrade||0).toFixed(0));
+        setKpi('kpi-c-sharpe', r ? '—' : (d.sharpeRatio||0).toFixed(2) + ' / ' + (d.sortinoRatio||0).toFixed(2));
+        setKpi('kpi-c-annual', r ? '—' : fmtPnl(d.annualPnl), r ? 0 : d.annualPnl);
         const r30 = d.rollingMetrics && d.rollingMetrics['30d'] ? d.rollingMetrics['30d'] : {};
         const r90 = d.rollingMetrics && d.rollingMetrics['90d'] ? d.rollingMetrics['90d'] : {};
         setRolling('c', r30, r90);
