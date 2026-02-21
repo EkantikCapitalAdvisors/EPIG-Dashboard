@@ -460,6 +460,112 @@ app.post('/api/admin/snapshot', async (c) => {
 })
 
 // ══════════════════════════════════════════════════════════
+// API: CALCULATOR STATS (live EV from real trades → projections)
+// ══════════════════════════════════════════════════════════
+// Reconstructs round-trip trades from individual IB fills,
+// computes per-trade P&L, then derives EV / win-rate / risk stats.
+app.get('/api/calculator/stats', async (c) => {
+  const db = c.env.DB
+  if (!db) return c.json({ error: 'No database', strategies: null })
+
+  try {
+    const allTrades = await db.prepare(
+      "SELECT id, strategy, side, instrument, entry_price, exit_price, realized_pnl, quantity, trade_date, asset_class, strike, expiry, put_call, result FROM trades ORDER BY trade_date ASC, id ASC"
+    ).all()
+    const rows: any[] = allTrades.results || []
+    if (rows.length === 0) return c.json({ strategies: null, message: 'No trades in database' })
+
+    const result: Record<string, any> = {}
+
+    for (const strat of ['A', 'B', 'C']) {
+      const fills = rows.filter((r: any) => r.strategy === strat)
+      if (fills.length === 0) { result[strat] = null; continue }
+
+      // ── Build round-trip trades from fills ──
+      // realized_pnl stores the IB NetCash column:
+      //   BUY fill  → negative (cash out)
+      //   SELL fill → positive (cash in)
+      // A "round trip" = group of fills for the same instrument where
+      // net position returns to zero. The P&L = sum of NetCash values.
+
+      const roundTrips = buildRoundTrips(fills, strat)
+
+      // Date range from all fills
+      const dates = fills.map((t: any) => t.trade_date).filter(Boolean).sort()
+      const firstDate = dates[0]
+      const lastDate = dates[dates.length - 1]
+      const daySpan = Math.max(
+        (new Date(lastDate).getTime() - new Date(firstDate).getTime()) / (1000 * 60 * 60 * 24), 1
+      )
+      const yearFraction = daySpan / 365.25
+
+      // Filter to closed round trips with non-zero P&L
+      const closed = roundTrips.filter((rt: any) => rt.closed && rt.pnl !== 0)
+      const wins = closed.filter((rt: any) => rt.pnl > 0)
+      const losses = closed.filter((rt: any) => rt.pnl < 0)
+      const scratches = roundTrips.filter((rt: any) => rt.closed && rt.pnl === 0)
+
+      const totalClosed = closed.length
+      const winCount = wins.length
+      const lossCount = losses.length
+      const winRate = totalClosed > 0 ? winCount / totalClosed : 0
+
+      // Avg win and avg loss in dollars
+      const avgWinDollar = winCount > 0
+        ? wins.reduce((s: number, rt: any) => s + rt.pnl, 0) / winCount : 0
+      const avgLossDollar = lossCount > 0
+        ? losses.reduce((s: number, rt: any) => s + Math.abs(rt.pnl), 0) / lossCount : 0
+
+      // Risk per trade = avg loss dollar (this is 1R by definition)
+      const riskPerTradeDollar = avgLossDollar > 0 ? avgLossDollar : (avgWinDollar > 0 ? avgWinDollar : 0)
+
+      // Convert to R-multiples
+      const avgWinR = riskPerTradeDollar > 0 ? avgWinDollar / riskPerTradeDollar : 0
+      const avgLossR = 1.0 // By definition
+
+      // EV per trade (in R)
+      const evPerTradeR = winRate * avgWinR - (1 - winRate) * avgLossR
+
+      // Annualized trade count
+      const tradesPerYear = yearFraction > 0 ? Math.round(totalClosed / yearFraction) : totalClosed
+
+      // Dollar EV and total P&L
+      const evPerTradeDollar = riskPerTradeDollar > 0 ? evPerTradeR * riskPerTradeDollar : 0
+      const totalPnl = closed.reduce((s: number, rt: any) => s + rt.pnl, 0)
+      const annualPnl = yearFraction > 0 ? totalPnl / yearFraction : totalPnl
+
+      result[strat] = {
+        totalFills: fills.length,
+        roundTrips: roundTrips.length,
+        closedTrades: totalClosed,
+        openTrades: roundTrips.filter((rt: any) => !rt.closed).length,
+        scratchTrades: scratches.length,
+        winCount,
+        lossCount,
+        winRate: round(winRate * 100, 1),
+        avgWinDollar: round(avgWinDollar, 2),
+        avgLossDollar: round(avgLossDollar, 2),
+        avgWinR: round(avgWinR, 2),
+        avgLossR: round(avgLossR, 2),
+        evPerTradeR: round(evPerTradeR, 2),
+        evPerTradeDollar: round(evPerTradeDollar, 2),
+        riskPerTradeDollar: round(riskPerTradeDollar, 2),
+        tradesPerYear,
+        totalPnl: round(totalPnl, 2),
+        annualPnl: round(annualPnl, 2),
+        firstDate,
+        lastDate,
+        daySpan: Math.round(daySpan),
+      }
+    }
+
+    return c.json({ strategies: result })
+  } catch (e: any) {
+    return c.json({ error: e.message, strategies: null })
+  }
+})
+
+// ══════════════════════════════════════════════════════════
 // API: STRATEGY COUNTS
 // ══════════════════════════════════════════════════════════
 app.get('/api/admin/strategy-counts', async (c) => {
@@ -539,6 +645,233 @@ app.get('/api/health', async (c) => {
 })
 
 export default app
+
+// ══════════════════════════════════════════════════════════
+// ROUND-TRIP TRADE BUILDER (converts IB fills → logical trades)
+// ══════════════════════════════════════════════════════════
+
+/**
+ * Builds round-trip trades from individual IB fill records.
+ *
+ * For each strategy:
+ * - **Strategy A (STK)**: Groups fills by instrument (SPY, MSFT, TSLA).
+ *   Uses FIFO matching: buys build a position, sells close it.
+ *   When net position returns to zero → one completed round trip.
+ *   P&L = sum of all NetCash values in the round trip.
+ *
+ * - **Strategy B (FUT)**: Groups fills by instrument (MESH6, MES).
+ *   Same FIFO matching. Each flat position = one round trip.
+ *
+ * - **Strategy C (OPT/FOP)**: Groups fills by spread (same date+expiry+putCall).
+ *   Each vertical spread = 2 legs opened then 2 legs closed = 1 round trip.
+ *   P&L = sum of all 4 legs' NetCash.
+ *   If not a spread, falls back to instrument-level FIFO like A/B.
+ */
+function buildRoundTrips(fills: any[], strategy: string): { pnl: number; closed: boolean; fillCount: number; firstDate: string; lastDate: string; riskDollar: number }[] {
+  if (strategy === 'C') {
+    return buildSpreadRoundTrips(fills)
+  }
+  return buildFifoRoundTrips(fills)
+}
+
+/**
+ * FIFO round-trip builder for STK and FUT.
+ * Groups by instrument, accumulates position, and when net qty == 0 → round trip.
+ * Also handles legacy single-fill trades that already have result (WIN/LOSS) set.
+ */
+function buildFifoRoundTrips(fills: any[]): any[] {
+  // First, separate legacy trades (single-fill with result already set) from IB fills
+  const legacyTrades: any[] = []
+  const ibFills: any[] = []
+  for (const f of fills) {
+    const hasResult = f.result && f.result !== 'OPEN' && (f.result === 'WIN' || f.result === 'LOSS' || f.result === 'SCRATCH')
+    const hasExit = f.exit_price !== null && f.exit_price !== undefined && f.exit_price !== 'null' && f.exit_price !== 0
+    if (hasResult && hasExit) {
+      legacyTrades.push(f)
+    } else {
+      ibFills.push(f)
+    }
+  }
+
+  const roundTrips: any[] = []
+
+  // Legacy trades are already complete round trips
+  for (const t of legacyTrades) {
+    roundTrips.push({
+      pnl: round(t.realized_pnl || 0, 2),
+      closed: true,
+      fillCount: 1,
+      firstDate: t.trade_date,
+      lastDate: t.trade_date,
+      riskDollar: round(Math.abs(t.entry_price * (t.quantity || 1) * 100), 2), // options: premium * 100
+      instrument: t.instrument,
+    })
+  }
+
+  // Group IB fills by instrument
+  const byInstrument: Record<string, any[]> = {}
+  for (const f of ibFills) {
+    const key = (f.instrument || '').trim()
+    if (!byInstrument[key]) byInstrument[key] = []
+    byInstrument[key].push(f)
+  }
+
+  for (const [instrument, instrumentFills] of Object.entries(byInstrument)) {
+    let netQty = 0
+    let currentTripCash = 0
+    let currentTripFills = 0
+    let currentTripRisk = 0 // sum of buy-side cash outflows
+    let firstDate = ''
+    let lastDate = ''
+
+    for (const f of instrumentFills) {
+      const qty = f.quantity || 1
+      const signedQty = f.side === 'BUY' ? qty : -qty
+      const netCash = f.realized_pnl || 0 // This is actually IB NetCash
+
+      if (currentTripFills === 0) firstDate = f.trade_date
+      lastDate = f.trade_date
+
+      netQty += signedQty
+      currentTripCash += netCash
+      currentTripFills++
+
+      // Track risk: sum of absolute value of buy-side cash (money at risk)
+      if (f.side === 'BUY') {
+        currentTripRisk += Math.abs(netCash)
+      }
+
+      // When position is flat → round trip complete
+      if (netQty === 0 && currentTripFills >= 2) {
+        roundTrips.push({
+          pnl: round(currentTripCash, 2),
+          closed: true,
+          fillCount: currentTripFills,
+          firstDate,
+          lastDate,
+          riskDollar: round(currentTripRisk, 2),
+          instrument,
+        })
+        currentTripCash = 0
+        currentTripFills = 0
+        currentTripRisk = 0
+        firstDate = ''
+        lastDate = ''
+      }
+    }
+
+    // If there are remaining fills (open position)
+    if (currentTripFills > 0) {
+      roundTrips.push({
+        pnl: round(currentTripCash, 2),
+        closed: false,
+        fillCount: currentTripFills,
+        firstDate,
+        lastDate,
+        riskDollar: round(currentTripRisk, 2),
+        instrument,
+      })
+    }
+  }
+
+  return roundTrips
+}
+
+/**
+ * Spread round-trip builder for OPT/FOP.
+ * Strategy C trades are vertical spreads: 2 legs open + 2 legs close = 1 trade.
+ *
+ * Grouping logic:
+ * 1. Group by expiry + putCall (all legs of a vertical share these)
+ * 2. Within each group, identify adjacent strike pairs (the 2 strikes of a spread)
+ * 3. Each strike pair is a separate vertical spread trade
+ * 4. P&L = sum of all fills for that strike pair
+ */
+function buildSpreadRoundTrips(fills: any[]): any[] {
+  const isOpt = (f: any) => f.asset_class === 'OPT' || f.asset_class === 'FOP'
+  const optFills = fills.filter(isOpt)
+  const nonOptFills = fills.filter((f: any) => !isOpt(f))
+
+  const roundTrips: any[] = []
+
+  // Step 1: Group by expiry + putCall
+  const expiryGroups: Record<string, any[]> = {}
+  for (const f of optFills) {
+    const key = `${f.expiry || ''}|${f.put_call || ''}`
+    if (!expiryGroups[key]) expiryGroups[key] = []
+    expiryGroups[key].push(f)
+  }
+
+  // Step 2: Within each expiry group, identify strike pairs
+  for (const [groupKey, groupFills] of Object.entries(expiryGroups)) {
+    // Get all unique strikes, sorted
+    const strikes = [...new Set(groupFills.map((f: any) => f.strike))].filter(Boolean).sort((a: number, b: number) => a - b)
+
+    if (strikes.length < 2) {
+      // Single strike — not a spread, use FIFO
+      roundTrips.push(...buildFifoRoundTrips(groupFills))
+      continue
+    }
+
+    // Pair adjacent strikes into spreads
+    const used = new Set<number>()
+    const strikePairs: [number, number][] = []
+
+    // Greedy pair matching: pair consecutive strikes
+    for (let i = 0; i < strikes.length - 1; i += 2) {
+      strikePairs.push([strikes[i], strikes[i + 1]])
+      used.add(strikes[i])
+      used.add(strikes[i + 1])
+    }
+
+    // Handle any unpaired strike
+    const unpaired: number[] = strikes.filter(s => !used.has(s))
+
+    // Create a round trip for each strike pair
+    for (const [lowStrike, highStrike] of strikePairs) {
+      const pairFills = groupFills.filter((f: any) => f.strike === lowStrike || f.strike === highStrike)
+      const totalCash = pairFills.reduce((s: number, f: any) => s + (f.realized_pnl || 0), 0)
+      const buyLegs = pairFills.filter((f: any) => f.side === 'BUY')
+      const riskDollar = buyLegs.reduce((s: number, f: any) => s + Math.abs(f.realized_pnl || 0), 0)
+
+      const dates = pairFills.map((f: any) => f.trade_date).filter(Boolean).sort()
+      const firstDate = dates[0] || ''
+      const lastDate = dates[dates.length - 1] || ''
+
+      // Check if closed: each strike should have equal buys and sells
+      let allClosed = true
+      for (const strike of [lowStrike, highStrike]) {
+        const strikeFills = pairFills.filter((f: any) => f.strike === strike)
+        const b = strikeFills.filter((f: any) => f.side === 'BUY').length
+        const s = strikeFills.filter((f: any) => f.side === 'SELL').length
+        if (b !== s) { allClosed = false; break }
+      }
+
+      roundTrips.push({
+        pnl: round(totalCash, 2),
+        closed: allClosed,
+        fillCount: pairFills.length,
+        firstDate,
+        lastDate,
+        riskDollar: round(riskDollar, 2),
+        spreadKey: `${groupKey}|${lowStrike}-${highStrike}`,
+      })
+    }
+
+    // Handle unpaired strikes with FIFO
+    if (unpaired.length > 0) {
+      const unpairedFills = groupFills.filter((f: any) => unpaired.includes(f.strike))
+      roundTrips.push(...buildFifoRoundTrips(unpairedFills))
+    }
+  }
+
+  // Handle non-option fills in Strategy C with FIFO
+  if (nonOptFills.length > 0) {
+    roundTrips.push(...buildFifoRoundTrips(nonOptFills))
+  }
+
+  return roundTrips
+}
 
 // ══════════════════════════════════════════════════════════
 // METRICS ENGINE
