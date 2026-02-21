@@ -482,22 +482,22 @@ export function howItWorksPage(): string {
           </p>
         </div>
         <div class="p-5 bg-epig-bg rounded-xl border border-epig-border text-center">
-          <div class="text-2xl mb-3"><i class="fas fa-clock text-amber-400"></i></div>
-          <h4 class="font-semibold text-sm text-white mb-2">60-Day Free Trial</h4>
+          <div class="text-2xl mb-3"><i class="fas fa-chart-line text-amber-400"></i></div>
+          <h4 class="font-semibold text-sm text-white mb-2">Free Dashboard</h4>
           <p class="text-xs text-epig-textDim leading-relaxed">
-            Full access for 60 days at zero cost. Watch the trades play out.
-            Verify the data. Then decide if the system is worth following.
+            Full access to the live performance dashboard at zero cost.
+            Verify the data yourself before making any decisions.
           </p>
         </div>
       </div>
 
       <!-- CTA -->
       <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-6 border-t border-epig-border">
-        <a href="/pricing" class="btn-primary text-sm no-underline px-8 py-3">
-          <i class="fas fa-rocket mr-2"></i>Start 60-Day Free Trial
-        </a>
-        <a href="/dashboard" class="btn-outline text-sm no-underline px-8 py-3">
+        <a href="/dashboard" class="btn-primary text-sm no-underline px-8 py-3">
           <i class="fas fa-chart-line mr-2"></i>View Live Dashboard
+        </a>
+        <a href="/how-it-works" class="btn-outline text-sm no-underline px-8 py-3">
+          <i class="fas fa-book-open mr-2"></i>Learn How It Works
         </a>
       </div>
     </div>

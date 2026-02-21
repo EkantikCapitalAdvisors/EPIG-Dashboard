@@ -41,8 +41,8 @@ export function landingPage(): string {
           <div class="kpi-value text-blue-400 text-lg">IB Fills</div>
         </div>
         <div class="kpi-card text-center">
-          <div class="kpi-label">Free Trial</div>
-          <div class="kpi-value text-amber-400">60 days</div>
+          <div class="kpi-label">Dashboard</div>
+          <div class="kpi-value text-amber-400 text-lg">Free</div>
         </div>
       </div>
     </div>

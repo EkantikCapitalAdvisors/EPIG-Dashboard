@@ -30,11 +30,12 @@ app.get('/dashboard', (c) => c.html(layout('Dashboard | EPIG', dashboardPage(), 
   description: 'Real-time strategy performance from a verified Interactive Brokers account. Track win rates, drawdowns, equity curves and per-trade P&L across 3 strategies.',
   path: '/dashboard',
 })))
-app.get('/pricing', (c) => c.html(layout('Pricing | EPIG', pricingPage(), {
-  title: 'Pricing | EPIG Investment Design',
-  description: 'Free dashboard access forever. Subscribe for real-time Discord trade alerts on every Strategy A, B & C entry and exit. Start with a free trial.',
-  path: '/pricing',
-})))
+// Pricing page hidden while compensation model is being finalized
+// app.get('/pricing', (c) => c.html(layout('Pricing | EPIG', pricingPage(), {
+//   title: 'Pricing | EPIG Investment Design',
+//   description: 'Free dashboard access forever. Subscribe for real-time Discord trade alerts on every Strategy A, B & C entry and exit. Start with a free trial.',
+//   path: '/pricing',
+// })))
 app.get('/how-it-works', (c) => c.html(layout('How It Works | EPIG', howItWorksPage(), {
   title: 'How It Works | EPIG Investment Design',
   description: 'See how EPIG verifies every trade using IB Flex Queries, how the 3-strategy system works, and how Discord alerts keep you informed in real time.',
@@ -42,7 +43,7 @@ app.get('/how-it-works', (c) => c.html(layout('How It Works | EPIG', howItWorksP
 })))
 app.get('/faq', (c) => c.html(layout('FAQ | EPIG', faqPage(), {
   title: 'Frequently Asked Questions | EPIG Investment Design',
-  description: 'Common questions about EPIG: how data is verified, what the strategies are, subscription details, and how Discord alerts work.',
+  description: 'Common questions about EPIG: how data is verified, what the strategies are, and how Discord alerts work.',
   path: '/faq',
 })))
 app.get('/projector', (c) => c.html(layout('Performance Projector | EPIG', projectorPage(), {

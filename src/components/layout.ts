@@ -153,11 +153,10 @@ export function layout(title: string, content: string, social?: SocialMeta): str
           <a href="/projector" class="nav-link">Performance Projector</a>
           <a href="/how-it-works" class="nav-link">How It Works</a>
           <a href="/faq" class="nav-link">FAQ</a>
-          <a href="/pricing" class="nav-link">Pricing</a>
           <a href="/admin" class="nav-link">Admin</a>
         </div>
         <div class="flex items-center gap-3">
-          <a href="/pricing" class="btn-primary text-sm no-underline" style="padding:8px 20px;">Start Free Trial</a>
+          <!-- Pricing CTA hidden while compensation model is being finalized -->
           <button id="mobile-menu-btn" class="md:hidden text-epig-textMuted hover:text-white">
             <i class="fas fa-bars text-xl"></i>
           </button>
@@ -172,7 +171,6 @@ export function layout(title: string, content: string, social?: SocialMeta): str
         <a href="/projector" class="nav-link py-2">Performance Projector</a>
         <a href="/how-it-works" class="nav-link py-2">How It Works</a>
         <a href="/faq" class="nav-link py-2">FAQ</a>
-        <a href="/pricing" class="nav-link py-2">Pricing</a>
         <a href="/admin" class="nav-link py-2">Admin</a>
         <a href="/disclosures" class="nav-link py-2">Disclosures</a>
       </div>
@@ -258,7 +256,6 @@ export function layout(title: string, content: string, social?: SocialMeta): str
           <div class="flex flex-col gap-2">
             <a href="/dashboard" class="text-epig-textDim text-sm hover:text-epig-text no-underline">Dashboard</a>
             <a href="/projector" class="text-epig-textDim text-sm hover:text-epig-text no-underline">Performance Projector</a>
-            <a href="/pricing" class="text-epig-textDim text-sm hover:text-epig-text no-underline">Pricing</a>
             <a href="/how-it-works" class="text-epig-textDim text-sm hover:text-epig-text no-underline">How It Works</a>
             <a href="/admin" class="text-epig-textDim text-sm hover:text-epig-text no-underline">Admin Console</a>
           </div>

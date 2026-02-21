@@ -153,55 +153,6 @@ export function faqPage(): string {
       </div>
     </div>
 
-    <!-- ── Subscription & Access ── -->
-    <div class="mb-10">
-      <h2 class="text-lg font-bold mb-5 flex items-center gap-2">
-        <i class="fas fa-key text-purple-400"></i> Subscription & Access
-      </h2>
-      <div class="space-y-1">
-        <details class="group kpi-card !p-0 overflow-hidden">
-          <summary class="flex items-center justify-between p-5 cursor-pointer hover:bg-epig-cardHover transition-colors">
-            <span class="font-semibold text-sm pr-4">What do I get as a subscriber?</span>
-            <i class="fas fa-chevron-down text-epig-textDim text-xs transition-transform group-open:rotate-180"></i>
-          </summary>
-          <div class="px-5 pb-5 text-sm text-epig-textDim leading-relaxed">
-            <strong class="text-white">Real-time Discord alerts</strong> for every Strategy A, B, and C trade (entry and exit),
-            full dashboard access with equity curves and metrics, the performance projector tool,
-            and weekly summary recaps.
-          </div>
-        </details>
-        <details class="group kpi-card !p-0 overflow-hidden">
-          <summary class="flex items-center justify-between p-5 cursor-pointer hover:bg-epig-cardHover transition-colors">
-            <span class="font-semibold text-sm pr-4">How does the 60-day free trial work?</span>
-            <i class="fas fa-chevron-down text-epig-textDim text-xs transition-transform group-open:rotate-180"></i>
-          </summary>
-          <div class="px-5 pb-5 text-sm text-epig-textDim leading-relaxed">
-            You get <strong class="text-white">full access to everything for 60 days</strong> at no cost. No credit card required to start.
-            Watch the trades, check the results, verify the data. After 60 days, choose $149/month or $999/year. Cancel anytime.
-          </div>
-        </details>
-        <details class="group kpi-card !p-0 overflow-hidden">
-          <summary class="flex items-center justify-between p-5 cursor-pointer hover:bg-epig-cardHover transition-colors">
-            <span class="font-semibold text-sm pr-4">Can I cancel at any time?</span>
-            <i class="fas fa-chevron-down text-epig-textDim text-xs transition-transform group-open:rotate-180"></i>
-          </summary>
-          <div class="px-5 pb-5 text-sm text-epig-textDim leading-relaxed">
-            Yes. No lock-in periods, no cancellation fees, no questions asked. Your subscription simply stops at the end of the current billing cycle.
-          </div>
-        </details>
-        <details class="group kpi-card !p-0 overflow-hidden">
-          <summary class="flex items-center justify-between p-5 cursor-pointer hover:bg-epig-cardHover transition-colors">
-            <span class="font-semibold text-sm pr-4">Do I need an Interactive Brokers account?</span>
-            <i class="fas fa-chevron-down text-epig-textDim text-xs transition-transform group-open:rotate-180"></i>
-          </summary>
-          <div class="px-5 pb-5 text-sm text-epig-textDim leading-relaxed">
-            Not required, but recommended for the best experience. The alerts include enough detail (instrument, direction, entry, stop, target)
-            that you can execute in any futures- and options-capable brokerage. IB offers the lowest commissions for the instruments we trade.
-          </div>
-        </details>
-      </div>
-    </div>
-
     <!-- Still have questions -->
     <div class="text-center py-6">
       <p class="text-epig-textMuted text-sm mb-4">Still have questions?</p>
@@ -209,8 +160,8 @@ export function faqPage(): string {
         <a href="mailto:info@ekantikcapital.com" class="btn-outline text-sm no-underline px-6 py-2.5">
           <i class="fas fa-envelope mr-2"></i>Email Us
         </a>
-        <a href="/pricing" class="btn-primary text-sm no-underline px-6 py-2.5">
-          Start Free Trial
+        <a href="/dashboard" class="btn-primary text-sm no-underline px-6 py-2.5">
+          <i class="fas fa-chart-line mr-2"></i>View Dashboard
         </a>
       </div>
     </div>

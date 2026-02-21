@@ -11,11 +11,11 @@ export function termsPage(): string {
       </div>
       <div class="kpi-card">
         <h2 class="text-lg font-semibold text-white mb-3">2. Description of Service</h2>
-        <p>EPIG provides a public performance dashboard, educational content, a performance projector, and a subscription-based notification service delivered via Discord. The platform is for informational and educational purposes only.</p>
+        <p>EPIG provides a public performance dashboard, educational content, a performance projector, and trade notifications delivered via Discord. The platform is for informational and educational purposes only.</p>
       </div>
       <div class="kpi-card">
-        <h2 class="text-lg font-semibold text-white mb-3">3. Subscription Terms</h2>
-        <p>Subscriptions include a 60-day free trial. After the trial, you will be charged at the rate of your selected plan ($149/month or $999/year) unless you cancel before the trial ends. You may cancel at any time from your account page. Access continues until the end of the current billing period.</p>
+        <h2 class="text-lg font-semibold text-white mb-3">3. Service Terms</h2>
+        <p>Access to the EPIG dashboard is currently free. Compensation model and subscription terms are subject to change. Any future paid features will be clearly communicated in advance. You may discontinue use at any time.</p>
       </div>
       <div class="kpi-card">
         <h2 class="text-lg font-semibold text-white mb-3">4. Not Investment Advice</h2>
