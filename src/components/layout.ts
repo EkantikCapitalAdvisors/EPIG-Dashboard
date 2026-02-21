@@ -100,6 +100,7 @@ export function layout(title: string, content: string): string {
           <a href="/dashboard" class="nav-link">Dashboard</a>
           <a href="/projector" class="nav-link">Performance Projector</a>
           <a href="/how-it-works" class="nav-link">How It Works</a>
+          <a href="/faq" class="nav-link">FAQ</a>
           <a href="/pricing" class="nav-link">Pricing</a>
           <a href="/admin" class="nav-link">Admin</a>
         </div>
@@ -118,6 +119,7 @@ export function layout(title: string, content: string): string {
         <a href="/dashboard" class="nav-link py-2">Dashboard</a>
         <a href="/projector" class="nav-link py-2">Performance Projector</a>
         <a href="/how-it-works" class="nav-link py-2">How It Works</a>
+        <a href="/faq" class="nav-link py-2">FAQ</a>
         <a href="/pricing" class="nav-link py-2">Pricing</a>
         <a href="/admin" class="nav-link py-2">Admin</a>
         <a href="/disclosures" class="nav-link py-2">Disclosures</a>

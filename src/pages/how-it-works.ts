@@ -1,517 +1,525 @@
 export function howItWorksPage(): string {
   return `
   <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-    <div class="text-center mb-14">
-      <h1 class="text-3xl sm:text-4xl font-bold mb-4">How It Works</h1>
-      <p class="text-epig-textMuted text-lg max-w-2xl mx-auto">
-        How data flows from Interactive Brokers into the EPIG dashboard &mdash; step by step.
+
+    <!-- ════════════════════════════════════════════════════════ -->
+    <!-- HERO: THE PROMISE                                       -->
+    <!-- ════════════════════════════════════════════════════════ -->
+    <div class="text-center mb-16">
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-semibold mb-6">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        LIVE VERIFIED PERFORMANCE
+      </div>
+      <h1 class="text-3xl sm:text-4xl font-bold mb-5 leading-tight">
+        Real Trades. Real Money.<br>
+        <span class="gradient-text">Zero Black Boxes.</span>
+      </h1>
+      <p class="text-epig-textMuted text-lg max-w-2xl mx-auto leading-relaxed">
+        Every number on this platform comes from <strong class="text-white">actual executions in a live Interactive Brokers account</strong>.
+        No backtests. No paper trades. No cherry-picked results.
       </p>
     </div>
 
-    <!-- ============================================ -->
-    <!-- QUICK OVERVIEW: 3-Step Pipeline              -->
-    <!-- ============================================ -->
-    <div class="kpi-card mb-10">
-      <h2 class="font-bold text-xl mb-6 flex items-center gap-2">
-        <i class="fas fa-route text-blue-400"></i> Data Pipeline Overview
-      </h2>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <!-- Step 1 -->
-        <div class="relative p-5 bg-epig-bg rounded-xl border border-blue-500/20">
-          <div class="absolute -top-3 left-4">
-            <span class="bg-blue-500 text-white text-xs font-bold px-3 py-1 rounded-full">STEP 1</span>
-          </div>
-          <div class="mt-3">
-            <div class="w-12 h-12 rounded-lg bg-blue-500/10 flex items-center justify-center mb-3">
-              <i class="fas fa-file-export text-blue-400 text-xl"></i>
-            </div>
-            <h3 class="font-semibold mb-2">Export from IB</h3>
-            <p class="text-sm text-epig-textDim leading-relaxed">
-              Generate a <strong class="text-white">Flex Query</strong> in Interactive Brokers that exports your trade executions as CSV.
-            </p>
-          </div>
+    <!-- ════════════════════════════════════════════════════════ -->
+    <!-- SECTION 1: WHY YOU SHOULD TRUST THIS DATA               -->
+    <!-- ════════════════════════════════════════════════════════ -->
+    <div class="kpi-card mb-8">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-10 h-10 rounded-lg bg-emerald-500/15 flex items-center justify-center flex-shrink-0">
+          <i class="fas fa-shield-halved text-emerald-400 text-lg"></i>
         </div>
-        <!-- Arrow -->
-        <div class="hidden md:flex items-center justify-center absolute-arrow">
+        <h2 class="font-bold text-xl">Why You Can Trust This Data</h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-6">
+        <div class="p-5 bg-epig-bg rounded-xl border border-emerald-500/20">
+          <div class="text-3xl font-bold text-emerald-400 font-mono mb-2">IB</div>
+          <h3 class="font-semibold text-sm text-white mb-2">Interactive Brokers Verified</h3>
+          <p class="text-xs text-epig-textDim leading-relaxed">
+            All data is exported via IB Flex Queries &mdash; standardized reports generated <em>directly by your broker</em>.
+            Each fill carries a unique execution ID that cannot be fabricated.
+          </p>
         </div>
-        <!-- Step 2 -->
-        <div class="relative p-5 bg-epig-bg rounded-xl border border-emerald-500/20">
-          <div class="absolute -top-3 left-4">
-            <span class="bg-emerald-500 text-white text-xs font-bold px-3 py-1 rounded-full">STEP 2</span>
-          </div>
-          <div class="mt-3">
-            <div class="w-12 h-12 rounded-lg bg-emerald-500/10 flex items-center justify-center mb-3">
-              <i class="fas fa-cloud-upload-alt text-emerald-400 text-xl"></i>
-            </div>
-            <h3 class="font-semibold mb-2">Upload to EPIG</h3>
-            <p class="text-sm text-epig-textDim leading-relaxed">
-              Upload the CSV at the <a href="/admin" class="text-blue-400 font-semibold no-underline hover:text-blue-300">Admin Console</a>. Trades are auto-classified by asset class.
-            </p>
-          </div>
+        <div class="p-5 bg-epig-bg rounded-xl border border-emerald-500/20">
+          <div class="text-3xl font-bold text-emerald-400 font-mono mb-2">0%</div>
+          <h3 class="font-semibold text-sm text-white mb-2">Zero Manual Edits</h3>
+          <p class="text-xs text-epig-textDim leading-relaxed">
+            CSVs are uploaded directly from IB to the platform. No transformations, no adjustments, no selective omissions.
+            What IB reports is what you see &mdash; commissions and fees included.
+          </p>
         </div>
-        <!-- Step 3 -->
-        <div class="relative p-5 bg-epig-bg rounded-xl border border-amber-500/20">
-          <div class="absolute -top-3 left-4">
-            <span class="bg-amber-500 text-white text-xs font-bold px-3 py-1 rounded-full">STEP 3</span>
+        <div class="p-5 bg-epig-bg rounded-xl border border-emerald-500/20">
+          <div class="text-3xl font-bold text-emerald-400 font-mono mb-2">
+            <i class="fas fa-paper-plane text-2xl"></i>
           </div>
-          <div class="mt-3">
-            <div class="w-12 h-12 rounded-lg bg-amber-500/10 flex items-center justify-center mb-3">
-              <i class="fas fa-chart-line text-amber-400 text-xl"></i>
+          <h3 class="font-semibold text-sm text-white mb-2">Direct Data Delivery</h3>
+          <p class="text-xs text-epig-textDim leading-relaxed">
+            Want maximum confidence? We will <strong class="text-white">send the raw IB Flex Query CSV directly to you</strong> &mdash;
+            or configure IB's third-party reporting to deliver statements from Interactive Brokers to your email. Zero middlemen.
+          </p>
+        </div>
+      </div>
+
+      <!-- Verification methods -->
+      <div class="rounded-xl bg-emerald-500/[0.04] border border-emerald-500/20 p-5">
+        <h4 class="font-semibold text-emerald-400 text-sm mb-4"><i class="fas fa-check-double mr-2"></i>5 Ways to Verify Our Track Record</h4>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div class="flex items-start gap-2">
+            <div class="w-5 h-5 rounded-full bg-emerald-500/20 flex items-center justify-center flex-shrink-0 mt-0.5">
+              <span class="text-emerald-400 text-[10px] font-bold">1</span>
             </div>
-            <h3 class="font-semibold mb-2">Dashboard Updates</h3>
-            <p class="text-sm text-epig-textDim leading-relaxed">
-              Round trips are built, metrics computed, and the <a href="/dashboard" class="text-blue-400 font-semibold no-underline hover:text-blue-300">Dashboard</a> shows real 2026 performance.
-            </p>
+            <span class="text-xs text-epig-textDim">Request the <strong class="text-white">raw IB CSV</strong> &mdash; verify every fill against market data</span>
+          </div>
+          <div class="flex items-start gap-2">
+            <div class="w-5 h-5 rounded-full bg-emerald-500/20 flex items-center justify-center flex-shrink-0 mt-0.5">
+              <span class="text-emerald-400 text-[10px] font-bold">2</span>
+            </div>
+            <span class="text-xs text-epig-textDim">Set up <strong class="text-white">IB third-party delivery</strong> &mdash; statements come straight from the broker</span>
+          </div>
+          <div class="flex items-start gap-2">
+            <div class="w-5 h-5 rounded-full bg-emerald-500/20 flex items-center justify-center flex-shrink-0 mt-0.5">
+              <span class="text-emerald-400 text-[10px] font-bold">3</span>
+            </div>
+            <span class="text-xs text-epig-textDim">Cross-reference <strong class="text-white">TradeIDs and timestamps</strong> against exchange records</span>
+          </div>
+          <div class="flex items-start gap-2">
+            <div class="w-5 h-5 rounded-full bg-emerald-500/20 flex items-center justify-center flex-shrink-0 mt-0.5">
+              <span class="text-emerald-400 text-[10px] font-bold">4</span>
+            </div>
+            <span class="text-xs text-epig-textDim">Check the <strong class="text-white">audit trail</strong> &mdash; every upload is timestamped and logged</span>
+          </div>
+          <div class="flex items-start gap-2 sm:col-span-2">
+            <div class="w-5 h-5 rounded-full bg-emerald-500/20 flex items-center justify-center flex-shrink-0 mt-0.5">
+              <span class="text-emerald-400 text-[10px] font-bold">5</span>
+            </div>
+            <span class="text-xs text-epig-textDim">Follow <strong class="text-white">real-time Discord alerts</strong> and compare our calls vs. dashboard results after market close</span>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- ============================================ -->
-    <!-- STEP 1 DETAIL: IB Flex Query Setup           -->
-    <!-- ============================================ -->
-    <div class="kpi-card mb-8" id="flex-query-setup">
-      <h2 class="font-bold text-xl mb-6 flex items-center gap-2">
-        <i class="fas fa-cog text-blue-400"></i> Step 1 &mdash; Setting Up Your IB Flex Query
-      </h2>
-      <p class="text-sm text-epig-textDim mb-6 leading-relaxed">
-        A Flex Query is a custom report you configure once in IB Account Management. After that, you run it weekly to export your latest fills.
+    <!-- ════════════════════════════════════════════════════════ -->
+    <!-- SECTION 2: WHAT IS AN IB FLEX QUERY?                    -->
+    <!-- ════════════════════════════════════════════════════════ -->
+    <div class="kpi-card mb-8">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-10 h-10 rounded-lg bg-blue-500/15 flex items-center justify-center flex-shrink-0">
+          <i class="fas fa-file-export text-blue-400 text-lg"></i>
+        </div>
+        <h2 class="font-bold text-xl">What Is an IB Flex Query?</h2>
+      </div>
+
+      <p class="text-sm text-epig-textMuted leading-relaxed mb-6">
+        A Flex Query is <strong class="text-white">Interactive Brokers' official trade reporting system</strong> &mdash; used by
+        hedge funds, auditors, and regulators worldwide. It is the gold standard for verifiable brokerage data.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-6">
+        <div class="space-y-4">
+          <div class="flex items-start gap-3">
+            <i class="fas fa-fingerprint text-blue-400 mt-1 text-sm"></i>
+            <div>
+              <h4 class="font-semibold text-sm text-white mb-1">Tamper-Proof Execution IDs</h4>
+              <p class="text-xs text-epig-textDim leading-relaxed">
+                Every single trade fill gets a unique IB-assigned <strong class="text-white">TradeID</strong>. This cannot be created, duplicated, or backdated.
+                It is the brokerage's proof that the trade happened.
+              </p>
+            </div>
+          </div>
+          <div class="flex items-start gap-3">
+            <i class="fas fa-coins text-blue-400 mt-1 text-sm"></i>
+            <div>
+              <h4 class="font-semibold text-sm text-white mb-1">Net of All Costs</h4>
+              <p class="text-xs text-epig-textDim leading-relaxed">
+                The NetCash column includes commissions, exchange fees, and regulatory fees.
+                <strong class="text-white">What you see is the actual money in/out of the account.</strong> No hidden costs.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="space-y-4">
+          <div class="flex items-start gap-3">
+            <i class="fas fa-clock text-blue-400 mt-1 text-sm"></i>
+            <div>
+              <h4 class="font-semibold text-sm text-white mb-1">Exact Timestamps</h4>
+              <p class="text-xs text-epig-textDim leading-relaxed">
+                Every fill is timestamped to the second. Cross-reference against exchange time & sales data
+                to confirm execution during actual market hours.
+              </p>
+            </div>
+          </div>
+          <div class="flex items-start gap-3">
+            <i class="fas fa-table text-blue-400 mt-1 text-sm"></i>
+            <div>
+              <h4 class="font-semibold text-sm text-white mb-1">Complete Data Fields</h4>
+              <p class="text-xs text-epig-textDim leading-relaxed">
+                Symbol, asset class, side, quantity, price, strike, expiry, put/call &mdash;
+                every field needed to reconstruct the exact trade and verify P&L independently.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Visual: IB → Platform pipeline -->
+      <div class="rounded-xl bg-blue-500/[0.04] border border-blue-500/20 p-5">
+        <h4 class="font-semibold text-blue-400 text-sm mb-4"><i class="fas fa-route mr-2"></i>From IB Account to Your Screen &mdash; 3 Steps, No Gaps</h4>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="flex items-center gap-3">
+            <div class="w-8 h-8 rounded-lg bg-blue-500 flex items-center justify-center flex-shrink-0">
+              <span class="text-white text-xs font-bold">1</span>
+            </div>
+            <div>
+              <span class="text-xs text-white font-semibold block">IB Flex Query Export</span>
+              <span class="text-[11px] text-epig-textDim">CSV generated by Interactive Brokers</span>
+            </div>
+          </div>
+          <div class="flex items-center gap-3">
+            <div class="w-8 h-8 rounded-lg bg-emerald-500 flex items-center justify-center flex-shrink-0">
+              <span class="text-white text-xs font-bold">2</span>
+            </div>
+            <div>
+              <span class="text-xs text-white font-semibold block">Upload & Auto-Classify</span>
+              <span class="text-[11px] text-epig-textDim">STK → A, FUT → B, OPT → C &mdash; duplicates rejected</span>
+            </div>
+          </div>
+          <div class="flex items-center gap-3">
+            <div class="w-8 h-8 rounded-lg bg-amber-500 flex items-center justify-center flex-shrink-0">
+              <span class="text-white text-xs font-bold">3</span>
+            </div>
+            <div>
+              <span class="text-xs text-white font-semibold block">Dashboard Updates Live</span>
+              <span class="text-[11px] text-epig-textDim">Metrics, equity curves, projector refresh instantly</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════════════════════════════ -->
+    <!-- SECTION 3: THE THREE STRATEGIES                         -->
+    <!-- ════════════════════════════════════════════════════════ -->
+    <div class="kpi-card mb-8">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-10 h-10 rounded-lg bg-purple-500/15 flex items-center justify-center flex-shrink-0">
+          <i class="fas fa-layer-group text-purple-400 text-lg"></i>
+        </div>
+        <h2 class="font-bold text-xl">Three Layers. One System.</h2>
+      </div>
+      <p class="text-sm text-epig-textMuted leading-relaxed mb-6">
+        EPIG runs three distinct strategies simultaneously &mdash; each designed for a different return profile.
+        Together, they create a portfolio that protects capital, generates income, and captures asymmetric upside.
       </p>
 
       <div class="space-y-4">
-        <!-- 1a -->
-        <div class="flex gap-4 items-start p-4 bg-epig-bg rounded-lg border border-epig-border">
-          <div class="flex-shrink-0 w-8 h-8 rounded-full bg-blue-500/20 flex items-center justify-center">
-            <span class="text-blue-400 font-bold text-sm">1</span>
-          </div>
-          <div>
-            <h4 class="font-semibold text-sm mb-1">Log in to IB Account Management</h4>
-            <p class="text-sm text-epig-textDim leading-relaxed">
-              Go to <code class="bg-epig-bg border border-epig-border rounded px-1.5 py-0.5 text-blue-400 text-xs">portal.interactivebrokers.com</code>
-              &rarr; <strong class="text-white">Performance &amp; Reports</strong> &rarr; <strong class="text-white">Flex Queries</strong>.
-            </p>
-          </div>
-        </div>
-
-        <!-- 1b -->
-        <div class="flex gap-4 items-start p-4 bg-epig-bg rounded-lg border border-epig-border">
-          <div class="flex-shrink-0 w-8 h-8 rounded-full bg-blue-500/20 flex items-center justify-center">
-            <span class="text-blue-400 font-bold text-sm">2</span>
-          </div>
-          <div>
-            <h4 class="font-semibold text-sm mb-1">Create a New Activity Flex Query</h4>
-            <p class="text-sm text-epig-textDim leading-relaxed">
-              Click the <strong class="text-white">+</strong> button next to "Activity Flex Queries". Name it something like
-              <code class="bg-epig-bg border border-epig-border rounded px-1.5 py-0.5 text-emerald-400 text-xs">EPIG Export</code>.
-            </p>
-          </div>
-        </div>
-
-        <!-- 1c -->
-        <div class="flex gap-4 items-start p-4 bg-epig-bg rounded-lg border border-epig-border">
-          <div class="flex-shrink-0 w-8 h-8 rounded-full bg-blue-500/20 flex items-center justify-center">
-            <span class="text-blue-400 font-bold text-sm">3</span>
-          </div>
-          <div>
-            <h4 class="font-semibold text-sm mb-1">Select the "Trades" Section</h4>
-            <p class="text-sm text-epig-textDim leading-relaxed mb-3">
-              In the query editor, expand <strong class="text-white">Trades</strong> and select <strong class="text-white">Executions</strong>. Include these fields:
-            </p>
-            <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
-              ${['TradeID', 'Symbol', 'AssetClass', 'Buy/Sell', 'Quantity', 'Price', 'Amount', 'NetCash', 'Commission', 'TradeDate', 'Date/Time', 'Strike', 'Expiry', 'Put/Call'].map(f =>
-                `<div class="flex items-center gap-2 text-xs">
-                  <i class="fas fa-check text-emerald-400 text-[10px]"></i>
-                  <code class="text-blue-300 font-mono">${f}</code>
-                </div>`
-              ).join('')}
+        <!-- Strategy A -->
+        <div class="rounded-xl border border-orange-500/20 bg-orange-500/[0.03] p-5">
+          <div class="flex items-center gap-3 mb-3">
+            <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg text-xs font-bold uppercase bg-orange-500/15 text-orange-400 border border-orange-500/30">A</span>
+            <div>
+              <h3 class="font-bold text-white text-sm">Core Allocation</h3>
+              <span class="text-[11px] text-orange-400/70 font-mono">~80% of capital &bull; SPY + equities + cash</span>
             </div>
-            <p class="text-xs text-epig-textDim mt-3 italic">
-              <i class="fas fa-lightbulb text-amber-400 mr-1"></i>
-              The most important field is <strong class="text-white">TradeID</strong> &mdash; this is the unique IB execution ID used for deduplication.
-            </p>
           </div>
+          <p class="text-xs text-epig-textDim leading-relaxed">
+            The structural base. Keeps the majority of capital in market-tracking assets with active downside management.
+            This is not a &ldquo;buy and hold&rdquo; &mdash; allocation shifts based on risk environment.
+          </p>
         </div>
 
-        <!-- 1d -->
-        <div class="flex gap-4 items-start p-4 bg-epig-bg rounded-lg border border-epig-border">
-          <div class="flex-shrink-0 w-8 h-8 rounded-full bg-blue-500/20 flex items-center justify-center">
-            <span class="text-blue-400 font-bold text-sm">4</span>
+        <!-- Strategy B -->
+        <div class="rounded-xl border border-emerald-500/20 bg-emerald-500/[0.03] p-5">
+          <div class="flex items-center gap-3 mb-3">
+            <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg text-xs font-bold uppercase bg-emerald-500/15 text-emerald-400 border border-emerald-500/30">B</span>
+            <div>
+              <h3 class="font-bold text-white text-sm">Tactical Futures</h3>
+              <span class="text-[11px] text-emerald-400/70 font-mono">3&ndash;5% VaR &bull; MES/ES &bull; ~150&ndash;200 trades/yr</span>
+            </div>
+            <span class="ml-auto flex items-center gap-1.5 text-[11px] font-semibold" style="color:#5865F2;">
+              <i class="fab fa-discord"></i> Real-Time Alerts
+            </span>
           </div>
-          <div>
-            <h4 class="font-semibold text-sm mb-1">Configure Output Format</h4>
-            <p class="text-sm text-epig-textDim leading-relaxed">
-              Set <strong class="text-white">Format: CSV</strong>, <strong class="text-white">Period: Last 7 Calendar Days</strong> (or custom range).
-              Leave "Include header" checked.
-            </p>
-          </div>
+          <p class="text-xs text-epig-textDim leading-relaxed">
+            The income engine. Defined-risk futures trades with 20-point stops on Micro and E-mini S&P 500 contracts.
+            High frequency, small risk per trade, systematic edge.
+            <strong class="text-white">Every entry and exit is sent as a Discord alert in real time.</strong>
+          </p>
         </div>
 
-        <!-- 1e -->
-        <div class="flex gap-4 items-start p-4 bg-epig-bg rounded-lg border border-epig-border">
-          <div class="flex-shrink-0 w-8 h-8 rounded-full bg-blue-500/20 flex items-center justify-center">
-            <span class="text-blue-400 font-bold text-sm">5</span>
+        <!-- Strategy C -->
+        <div class="rounded-xl border border-purple-500/20 bg-purple-500/[0.03] p-5">
+          <div class="flex items-center gap-3 mb-3">
+            <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg text-xs font-bold uppercase bg-purple-500/15 text-purple-400 border border-purple-500/30">C</span>
+            <div>
+              <h3 class="font-bold text-white text-sm">Episodic Pivots</h3>
+              <span class="text-[11px] text-purple-400/70 font-mono">3&ndash;5% position sizing &bull; options &bull; ~60&ndash;100 trades/yr</span>
+            </div>
+            <span class="ml-auto flex items-center gap-1.5 text-[11px] font-semibold" style="color:#5865F2;">
+              <i class="fab fa-discord"></i> Real-Time Alerts
+            </span>
           </div>
-          <div>
-            <h4 class="font-semibold text-sm mb-1">Run &amp; Download</h4>
-            <p class="text-sm text-epig-textDim leading-relaxed">
-              Save the query, then click the <strong class="text-white">Run</strong> (arrow) icon next to it.
-              IB generates a downloadable CSV file. Save it to your computer.
-            </p>
+          <p class="text-xs text-epig-textDim leading-relaxed">
+            The asymmetry layer. Options verticals and directional plays targeting outsized moves during market dislocations.
+            Defined risk on every trade. Small bets, large potential payoffs.
+            <strong class="text-white">Every entry and exit is sent as a Discord alert in real time.</strong>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════════════════════════════ -->
+    <!-- SECTION 4: HOW TO READ THE NUMBERS                      -->
+    <!-- ════════════════════════════════════════════════════════ -->
+    <div class="kpi-card mb-8">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-10 h-10 rounded-lg bg-blue-500/15 flex items-center justify-center flex-shrink-0">
+          <i class="fas fa-magnifying-glass-chart text-blue-400 text-lg"></i>
+        </div>
+        <h2 class="font-bold text-xl">How to Read the Numbers</h2>
+      </div>
+      <p class="text-sm text-epig-textMuted leading-relaxed mb-6">
+        The dashboard presents real performance metrics for each strategy. Here&rsquo;s what matters most when evaluating the results.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+        <div class="p-4 bg-epig-bg rounded-lg border border-blue-500/15">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="text-amber-400 text-lg"><i class="fas fa-star"></i></span>
+            <span class="text-blue-400 font-bold font-mono text-sm">EV per Trade (R)</span>
           </div>
+          <p class="text-xs text-epig-textDim leading-relaxed">
+            <strong class="text-white">The #1 metric.</strong> Expected value per trade in risk units.
+            Positive EV = the strategy makes money over time.
+            +0.46R means for every $1 risked, you expect $0.46 profit on average.
+          </p>
+        </div>
+        <div class="p-4 bg-epig-bg rounded-lg border border-epig-border">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="text-blue-400 font-bold font-mono text-sm">Win Rate</span>
+          </div>
+          <p class="text-xs text-epig-textDim leading-relaxed">
+            Percentage of closed trades that were profitable.
+            60% with good risk/reward is excellent. Don't chase 90%+ rates &mdash;
+            those usually mean tiny gains vs. rare catastrophic losses.
+          </p>
+        </div>
+        <div class="p-4 bg-epig-bg rounded-lg border border-epig-border">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="text-blue-400 font-bold font-mono text-sm">Profit Factor</span>
+          </div>
+          <p class="text-xs text-epig-textDim leading-relaxed">
+            Gross wins &divide; gross losses. Above 1.0 = profitable.
+            Above 1.5 = strong. Above 2.0 = exceptional.
+            This shows how much winners outpace losers in absolute dollars.
+          </p>
+        </div>
+        <div class="p-4 bg-epig-bg rounded-lg border border-epig-border">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="text-blue-400 font-bold font-mono text-sm">Max Drawdown</span>
+          </div>
+          <p class="text-xs text-epig-textDim leading-relaxed">
+            Largest peak-to-trough decline. This is the worst it got.
+            EPIG targets <strong class="text-white">&lt;10% max drawdown</strong> across the combined portfolio.
+            Capital preservation is the foundation.
+          </p>
         </div>
       </div>
 
-      <div class="mt-6 p-4 bg-blue-500/5 border border-blue-500/20 rounded-lg">
-        <div class="flex items-center gap-2 mb-2">
-          <i class="fas fa-calendar-check text-blue-400"></i>
-          <h4 class="font-semibold text-sm text-blue-400">Recommended Schedule</h4>
-        </div>
-        <p class="text-sm text-epig-textDim leading-relaxed">
-          Run and upload every <strong class="text-white">Monday morning</strong> covering the prior week. EPIG automatically deduplicates
-          &mdash; overlapping date ranges are safe; previously uploaded trades are skipped.
+      <div class="rounded-xl bg-blue-500/[0.04] border border-blue-500/20 p-4">
+        <p class="text-xs text-epig-textDim leading-relaxed mb-0">
+          <i class="fas fa-lightbulb text-amber-400 mr-1.5"></i>
+          <strong class="text-white">Key insight:</strong> Individual trade results don't matter &mdash; what matters is
+          the <em>expected value over hundreds of trades</em>. A positive EV strategy with enough trade count
+          converges to its theoretical edge. That's the mathematical basis of this approach.
         </p>
       </div>
     </div>
 
-    <!-- ============================================ -->
-    <!-- STEP 2 DETAIL: Upload to Admin Console       -->
-    <!-- ============================================ -->
-    <div class="kpi-card mb-8" id="upload-guide">
-      <h2 class="font-bold text-xl mb-6 flex items-center gap-2">
-        <i class="fas fa-cloud-upload-alt text-emerald-400"></i> Step 2 &mdash; Upload the CSV
-      </h2>
-
-      <div class="space-y-6">
-        <div class="flex gap-4 items-start">
-          <div class="flex-shrink-0">
-            <div class="w-10 h-10 rounded-lg bg-emerald-500/10 flex items-center justify-center">
-              <i class="fas fa-arrow-right text-emerald-400"></i>
-            </div>
-          </div>
-          <div>
-            <h4 class="font-semibold mb-1">Go to the Admin Console</h4>
-            <p class="text-sm text-epig-textDim leading-relaxed mb-3">
-              Navigate to <a href="/admin" class="text-blue-400 font-semibold no-underline hover:text-blue-300">/admin</a>
-              &mdash; this is where all data ingestion happens.
-            </p>
-            <a href="/admin" class="inline-flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 font-semibold text-sm px-4 py-2.5 rounded-lg no-underline hover:bg-emerald-500/20 transition-colors">
-              <i class="fas fa-external-link-alt"></i> Open Admin Console
-            </a>
-          </div>
-        </div>
-
-        <div class="section-divider"></div>
-
-        <div class="flex gap-4 items-start">
-          <div class="flex-shrink-0">
-            <div class="w-10 h-10 rounded-lg bg-emerald-500/10 flex items-center justify-center">
-              <i class="fas fa-file-csv text-emerald-400"></i>
-            </div>
-          </div>
-          <div>
-            <h4 class="font-semibold mb-1">Drag &amp; Drop or Browse</h4>
-            <p class="text-sm text-epig-textDim leading-relaxed">
-              In the "Step 1: Upload IB Flex Query" card, drag your CSV file onto the drop zone or click "Browse Files".
-              Then click <strong class="text-white">Parse &amp; Auto-Classify</strong>.
-            </p>
-          </div>
-        </div>
-
-        <div class="section-divider"></div>
-
-        <div class="flex gap-4 items-start">
-          <div class="flex-shrink-0">
-            <div class="w-10 h-10 rounded-lg bg-emerald-500/10 flex items-center justify-center">
-              <i class="fas fa-tags text-emerald-400"></i>
-            </div>
-          </div>
-          <div>
-            <h4 class="font-semibold mb-1">Auto-Classification</h4>
-            <p class="text-sm text-epig-textDim leading-relaxed">
-              EPIG reads the <code class="bg-epig-bg border border-epig-border rounded px-1.5 py-0.5 text-xs text-blue-400">AssetClass</code> field and maps each fill:
-            </p>
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-3">
-              <div class="p-3 bg-blue-500/5 border border-blue-500/20 rounded-lg text-center">
-                <div class="font-bold text-blue-400 mb-1">STK &rarr; Strategy A</div>
-                <div class="text-xs text-epig-textDim">Core Allocation (stocks, ETFs)</div>
-              </div>
-              <div class="p-3 bg-emerald-500/5 border border-emerald-500/20 rounded-lg text-center">
-                <div class="font-bold text-emerald-400 mb-1">FUT &rarr; Strategy B</div>
-                <div class="text-xs text-epig-textDim">Futures Alerts (MES, ES)</div>
-              </div>
-              <div class="p-3 bg-amber-500/5 border border-amber-500/20 rounded-lg text-center">
-                <div class="font-bold text-amber-400 mb-1">OPT &rarr; Strategy C</div>
-                <div class="text-xs text-epig-textDim">Episodic Pivots (options)</div>
-              </div>
-            </div>
-            <p class="text-xs text-epig-textDim mt-3">
-              <i class="fas fa-info-circle text-blue-400 mr-1"></i>
-              Vertical spreads (same expiry, different strikes, opposite sides) are automatically detected and grouped.
-              You can override any assignment before confirming.
-            </p>
-          </div>
-        </div>
-
-        <div class="section-divider"></div>
-
-        <div class="flex gap-4 items-start">
-          <div class="flex-shrink-0">
-            <div class="w-10 h-10 rounded-lg bg-emerald-500/10 flex items-center justify-center">
-              <i class="fas fa-check-double text-emerald-400"></i>
-            </div>
-          </div>
-          <div>
-            <h4 class="font-semibold mb-1">Review &amp; Confirm</h4>
-            <p class="text-sm text-epig-textDim leading-relaxed">
-              The review table shows every parsed fill with its strategy assignment, asset class, symbol, price, and P&L.
-              Change any strategy via the dropdown. When satisfied, click <strong class="text-white">Confirm &amp; Ingest</strong>.
-              Duplicates (same TradeID) are automatically skipped.
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ============================================ -->
-    <!-- STEP 3 DETAIL: How Metrics Are Computed      -->
-    <!-- ============================================ -->
-    <div class="kpi-card mb-8" id="metrics-engine">
-      <h2 class="font-bold text-xl mb-6 flex items-center gap-2">
-        <i class="fas fa-calculator text-amber-400"></i> Step 3 &mdash; How Data Becomes Metrics
-      </h2>
-
-      <div class="space-y-6">
-        <!-- Round-trip builder -->
-        <div>
-          <h3 class="font-semibold text-base mb-3 flex items-center gap-2">
-            <i class="fas fa-exchange-alt text-blue-400"></i> Round-Trip Trade Builder
-          </h3>
-          <p class="text-sm text-epig-textDim leading-relaxed mb-4">
-            Individual IB fills (BUY/SELL) are grouped into <strong class="text-white">round-trip trades</strong>. A round trip
-            is complete when net position returns to zero. This is how we get closed trade P&L.
-          </p>
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div class="p-4 bg-epig-bg rounded-lg border border-blue-500/20">
-              <h4 class="text-xs font-bold text-blue-400 mb-2 uppercase tracking-wide">Strategy A &amp; B (STK / FUT)</h4>
-              <p class="text-xs text-epig-textDim leading-relaxed">
-                FIFO matching by instrument. Buys build position, sells close it. When qty = 0 &rarr; one closed trade.
-                P&L = sum of IB NetCash values.
-              </p>
-            </div>
-            <div class="p-4 bg-epig-bg rounded-lg border border-amber-500/20">
-              <h4 class="text-xs font-bold text-amber-400 mb-2 uppercase tracking-wide">Strategy C (OPT / FOP)</h4>
-              <p class="text-xs text-epig-textDim leading-relaxed">
-                Fills grouped by expiry + put/call. Adjacent strikes paired into vertical spreads.
-                Open + close of both legs = 1 round trip. P&L = sum of all 4 legs' NetCash.
-              </p>
-            </div>
-            <div class="p-4 bg-epig-bg rounded-lg border border-epig-border">
-              <h4 class="text-xs font-bold text-epig-textMuted mb-2 uppercase tracking-wide">Deduplication</h4>
-              <p class="text-xs text-epig-textDim leading-relaxed">
-                Every fill carries an IB TradeID. Re-uploading the same period produces zero new trades.
-                Only genuinely new fills are ingested.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div class="section-divider"></div>
-
-        <!-- Metrics -->
-        <div>
-          <h3 class="font-semibold text-base mb-3 flex items-center gap-2">
-            <i class="fas fa-square-root-variable text-blue-400"></i> Metric Definitions
-          </h3>
-          <div class="overflow-x-auto">
-            <table class="w-full text-sm">
-              <thead>
-                <tr class="border-b border-epig-border">
-                  <th class="text-left px-4 py-3 text-epig-textDim font-semibold">Metric</th>
-                  <th class="text-left px-4 py-3 text-epig-textDim font-semibold">What It Measures</th>
-                  <th class="text-left px-4 py-3 text-epig-textDim font-semibold">Formula</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr class="border-b border-epig-border/50">
-                  <td class="px-4 py-3 font-semibold">Cumulative Return</td>
-                  <td class="px-4 py-3 text-epig-textDim">Total P&L as % of $100K portfolio</td>
-                  <td class="px-4 py-3 font-mono text-xs text-blue-400">total_pnl / 100,000 * 100</td>
-                </tr>
-                <tr class="border-b border-epig-border/50">
-                  <td class="px-4 py-3 font-semibold">Win Rate</td>
-                  <td class="px-4 py-3 text-epig-textDim">% of round trips with positive P&L</td>
-                  <td class="px-4 py-3 font-mono text-xs text-blue-400">wins / closed_trades</td>
-                </tr>
-                <tr class="border-b border-epig-border/50">
-                  <td class="px-4 py-3 font-semibold">EV per Trade (R)</td>
-                  <td class="px-4 py-3 text-epig-textDim">Expected value in risk units</td>
-                  <td class="px-4 py-3 font-mono text-xs text-blue-400">WR * avg_win_R - (1 - WR) * 1.0</td>
-                </tr>
-                <tr class="border-b border-epig-border/50">
-                  <td class="px-4 py-3 font-semibold">Profit Factor</td>
-                  <td class="px-4 py-3 text-epig-textDim">Gross wins vs gross losses</td>
-                  <td class="px-4 py-3 font-mono text-xs text-blue-400">sum(wins) / sum(|losses|)</td>
-                </tr>
-                <tr class="border-b border-epig-border/50">
-                  <td class="px-4 py-3 font-semibold">Sharpe Ratio</td>
-                  <td class="px-4 py-3 text-epig-textDim">Annualized risk-adjusted return</td>
-                  <td class="px-4 py-3 font-mono text-xs text-blue-400">ann_return / ann_volatility</td>
-                </tr>
-                <tr class="border-b border-epig-border/50">
-                  <td class="px-4 py-3 font-semibold">Sortino Ratio</td>
-                  <td class="px-4 py-3 text-epig-textDim">Return vs downside deviation only</td>
-                  <td class="px-4 py-3 font-mono text-xs text-blue-400">ann_return / ann_downside_dev</td>
-                </tr>
-                <tr class="border-b border-epig-border/50">
-                  <td class="px-4 py-3 font-semibold">Max Drawdown</td>
-                  <td class="px-4 py-3 text-epig-textDim">Largest peak-to-trough P&L decline</td>
-                  <td class="px-4 py-3 font-mono text-xs text-blue-400">max(peak - trough) / capital</td>
-                </tr>
-                <tr>
-                  <td class="px-4 py-3 font-semibold">R-Multiple</td>
-                  <td class="px-4 py-3 text-epig-textDim">P&L expressed as units of risk (1R = avg loss)</td>
-                  <td class="px-4 py-3 font-mono text-xs text-blue-400">trade_pnl / avg_loss_dollar</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ============================================ -->
-    <!-- Strategy Definitions                         -->
-    <!-- ============================================ -->
+    <!-- ════════════════════════════════════════════════════════ -->
+    <!-- SECTION 5: HOW YOU TAKE ADVANTAGE (DISCORD)             -->
+    <!-- ════════════════════════════════════════════════════════ -->
     <div class="kpi-card mb-8">
-      <h2 class="font-bold text-xl mb-6 flex items-center gap-2">
-        <i class="fas fa-layer-group text-blue-400"></i> Strategy Definitions
-      </h2>
-      <div class="space-y-4">
-        <div class="p-4 bg-epig-bg rounded-lg border border-blue-500/20">
-          <h3 class="font-semibold text-blue-400 mb-2">Strategy A &mdash; Core Allocation</h3>
-          <p class="text-sm text-epig-textDim leading-relaxed mb-2">
-            70&ndash;100% SPY, 5&ndash;25% optional stock sleeve, remainder in cash/treasuries.
-            Performance is computed from chained allocation snapshots.
-          </p>
-          <div class="text-xs text-epig-textDim">
-            <strong>Asset classes:</strong> STK &bull;
-            <strong>Instruments:</strong> SPY, individual equities &bull;
-            <strong>Upload:</strong> IB Flex Query (stock executions)
-          </div>
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0" style="background:rgba(88,101,242,0.15);">
+          <i class="fab fa-discord text-lg" style="color:#5865F2;"></i>
         </div>
-        <div class="p-4 bg-epig-bg rounded-lg border border-emerald-500/20">
-          <h3 class="font-semibold text-emerald-400 mb-2">Strategy B &mdash; Futures Alerts</h3>
-          <p class="text-sm text-epig-textDim leading-relaxed mb-2">
-            Defined-risk futures trades (MES/ES). Default 20-point stop loss and profit target.
-          </p>
-          <div class="text-xs text-epig-textDim">
-            <strong>Asset classes:</strong> FUT &bull;
-            <strong>Instruments:</strong> MES, ES &bull;
-            <strong>Upload:</strong> IB Flex Query (futures executions)
+        <h2 class="font-bold text-xl">How You Take Advantage</h2>
+      </div>
+
+      <p class="text-sm text-epig-textMuted leading-relaxed mb-6">
+        As a subscriber, you join our <strong class="text-white">private Discord server</strong> and receive instant notifications
+        every time a Strategy B or C trade is placed.
+      </p>
+
+      <!-- Discord alert mockup -->
+      <div class="rounded-xl border border-epig-borderLight bg-[#2b2d31] p-5 mb-6">
+        <div class="flex items-center gap-2 mb-4">
+          <div class="w-8 h-8 rounded-full flex items-center justify-center" style="background:#E5A418;">
+            <span class="text-white text-[10px] font-bold" style="font-family:'Montserrat',sans-serif;">ECA</span>
           </div>
+          <div>
+            <span class="text-sm font-semibold text-white">EPIG Trade Bot</span>
+            <span class="text-[10px] ml-2 px-1.5 py-0.5 rounded text-white" style="background:#5865F2;">BOT</span>
+          </div>
+          <span class="ml-auto text-[10px] text-[#949ba4]">Today at 10:32 AM</span>
         </div>
-        <div class="p-4 bg-epig-bg rounded-lg border border-amber-500/20">
-          <h3 class="font-semibold text-amber-400 mb-2">Strategy C &mdash; Episodic Pivots</h3>
-          <p class="text-sm text-epig-textDim leading-relaxed mb-2">
-            Asymmetric options trades targeting outsized moves. Tracked by net R-multiple or dollar P&L.
-            Vertical spreads are auto-detected.
-          </p>
-          <div class="text-xs text-epig-textDim">
-            <strong>Asset classes:</strong> OPT, FOP &bull;
-            <strong>Instruments:</strong> SPY, QQQ, equity options &bull;
-            <strong>Upload:</strong> IB Flex Query (options executions)
+        <div class="bg-[#1e1f22] rounded-lg p-4 border-l-4 border-emerald-500">
+          <div class="text-xs font-bold text-emerald-400 mb-2">🟢 STRATEGY B &mdash; TRADE ENTRY</div>
+          <div class="grid grid-cols-2 gap-y-1.5 text-xs">
+            <span class="text-[#949ba4]">Instrument</span><span class="text-white font-mono">MES (Micro E-mini)</span>
+            <span class="text-[#949ba4]">Direction</span><span class="text-white font-mono">LONG</span>
+            <span class="text-[#949ba4]">Entry</span><span class="text-white font-mono">5,892.50</span>
+            <span class="text-[#949ba4]">Stop Loss</span><span class="text-red-400 font-mono">5,872.50 (-20 pts)</span>
+            <span class="text-[#949ba4]">Risk</span><span class="text-white font-mono">$100 (1 contract &times; $5/pt)</span>
           </div>
         </div>
       </div>
+
+      <!-- What you do with alerts -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-6">
+        <div class="space-y-3">
+          <h3 class="font-semibold text-white text-sm mb-1">Each Alert Includes</h3>
+          <div class="flex items-start gap-2">
+            <i class="fas fa-check text-emerald-400 mt-0.5 text-xs"></i>
+            <span class="text-xs text-epig-textDim">Instrument, direction, and exact entry price</span>
+          </div>
+          <div class="flex items-start gap-2">
+            <i class="fas fa-check text-emerald-400 mt-0.5 text-xs"></i>
+            <span class="text-xs text-epig-textDim">Stop loss level and dollar risk per contract</span>
+          </div>
+          <div class="flex items-start gap-2">
+            <i class="fas fa-check text-emerald-400 mt-0.5 text-xs"></i>
+            <span class="text-xs text-epig-textDim">Exit alert with P&L in dollars and R-multiple</span>
+          </div>
+          <div class="flex items-start gap-2">
+            <i class="fas fa-check text-emerald-400 mt-0.5 text-xs"></i>
+            <span class="text-xs text-epig-textDim">Weekly performance recap and strategy health check</span>
+          </div>
+        </div>
+        <div class="space-y-3">
+          <h3 class="font-semibold text-white text-sm mb-1">What You Can Do</h3>
+          <div class="flex items-start gap-2">
+            <i class="fas fa-arrow-right text-amber-400 mt-0.5 text-xs"></i>
+            <span class="text-xs text-epig-textDim"><strong class="text-white">Mirror the trades</strong> in your own brokerage account at your own size</span>
+          </div>
+          <div class="flex items-start gap-2">
+            <i class="fas fa-arrow-right text-amber-400 mt-0.5 text-xs"></i>
+            <span class="text-xs text-epig-textDim"><strong class="text-white">Study the methodology</strong> &mdash; learn timing, risk management, and execution</span>
+          </div>
+          <div class="flex items-start gap-2">
+            <i class="fas fa-arrow-right text-amber-400 mt-0.5 text-xs"></i>
+            <span class="text-xs text-epig-textDim"><strong class="text-white">Track verified results</strong> on the dashboard as IB data updates weekly</span>
+          </div>
+          <div class="flex items-start gap-2">
+            <i class="fas fa-arrow-right text-amber-400 mt-0.5 text-xs"></i>
+            <span class="text-xs text-epig-textDim"><strong class="text-white">Start with 1 MES contract</strong> (~$30 risk/trade) and scale at your own pace</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="rounded-xl bg-amber-500/[0.06] border border-amber-500/30 p-4">
+        <p class="text-xs text-epig-textDim leading-relaxed mb-0">
+          <i class="fas fa-triangle-exclamation text-amber-400 mr-1"></i>
+          <strong class="text-amber-400">Important:</strong> Alerts are shared for educational and informational purposes.
+          They are not investment advice. You decide whether, when, and how to act. See <a href="/disclosures" class="text-blue-400 no-underline">Disclosures</a>.
+        </p>
+      </div>
     </div>
 
-    <!-- ============================================ -->
-    <!-- Data Verification & Integrity                -->
-    <!-- ============================================ -->
+    <!-- ════════════════════════════════════════════════════════ -->
+    <!-- SECTION 6: WHY TRY THIS APPROACH                        -->
+    <!-- ════════════════════════════════════════════════════════ -->
     <div class="kpi-card mb-8">
-      <h2 class="font-bold text-xl mb-6 flex items-center gap-2">
-        <i class="fas fa-shield-halved text-blue-400"></i> Data Integrity
-      </h2>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div class="p-4 bg-epig-bg rounded-lg border border-epig-border text-center">
-          <i class="fas fa-fingerprint text-blue-400 text-2xl mb-3"></i>
-          <h4 class="font-semibold text-sm mb-1">IB Execution IDs</h4>
-          <p class="text-xs text-epig-textDim">Every fill carries a unique IB TradeID &mdash; the source of truth</p>
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-10 h-10 rounded-lg bg-amber-500/15 flex items-center justify-center flex-shrink-0">
+          <i class="fas fa-rocket text-amber-400 text-lg"></i>
         </div>
-        <div class="p-4 bg-epig-bg rounded-lg border border-epig-border text-center">
-          <i class="fas fa-copy text-blue-400 text-2xl mb-3"></i>
-          <h4 class="font-semibold text-sm mb-1">Idempotent Ingestion</h4>
-          <p class="text-xs text-epig-textDim">Re-uploading the same file has zero effect. No double counting ever.</p>
-        </div>
-        <div class="p-4 bg-epig-bg rounded-lg border border-epig-border text-center">
-          <i class="fas fa-scroll text-blue-400 text-2xl mb-3"></i>
-          <h4 class="font-semibold text-sm mb-1">Full Audit Trail</h4>
-          <p class="text-xs text-epig-textDim">Every upload, ingest, and allocation change is logged with timestamp.</p>
-        </div>
+        <h2 class="font-bold text-xl">Why Try This Approach</h2>
       </div>
-    </div>
 
-    <!-- ============================================ -->
-    <!-- FAQ                                          -->
-    <!-- ============================================ -->
-    <div class="kpi-card mb-8">
-      <h2 class="font-bold text-xl mb-6 flex items-center gap-2">
-        <i class="fas fa-circle-question text-blue-400"></i> FAQ
-      </h2>
-      <div class="space-y-4">
-        <div>
-          <h4 class="font-semibold mb-1">Where do I upload the Flex Query file?</h4>
-          <p class="text-sm text-epig-textDim leading-relaxed">
-            At the <a href="/admin" class="text-blue-400 font-semibold no-underline">Admin Console</a> (/admin). Drag &amp; drop your CSV,
-            click Parse, review the auto-classified trades, then Confirm.
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+        <div class="p-5 bg-epig-bg rounded-xl border border-epig-border text-center">
+          <div class="text-2xl mb-3"><i class="fas fa-eye text-emerald-400"></i></div>
+          <h4 class="font-semibold text-sm text-white mb-2">100% Transparency</h4>
+          <p class="text-xs text-epig-textDim leading-relaxed">
+            Every trade, every fill, every P&L number is IB-sourced and visible.
+            No hidden losses. No selective reporting. Request the raw data anytime.
           </p>
         </div>
-        <div class="border-t border-epig-border pt-4">
-          <h4 class="font-semibold mb-1">What if I upload the same file twice?</h4>
-          <p class="text-sm text-epig-textDim leading-relaxed">
-            Nothing bad happens. EPIG checks each TradeID against the database and silently skips duplicates.
-            You'll see "X duplicates skipped" in the confirmation.
+        <div class="p-5 bg-epig-bg rounded-xl border border-epig-border text-center">
+          <div class="text-2xl mb-3"><i class="fas fa-shield-halved text-emerald-400"></i></div>
+          <h4 class="font-semibold text-sm text-white mb-2">Defined Risk Always</h4>
+          <p class="text-xs text-epig-textDim leading-relaxed">
+            No open-ended losses. Futures: 20-point stops. Options: defined-risk spreads.
+            You always know your max downside before entering.
           </p>
         </div>
-        <div class="border-t border-epig-border pt-4">
-          <h4 class="font-semibold mb-1">Can I upload multiple weeks at once?</h4>
-          <p class="text-sm text-epig-textDim leading-relaxed">
-            Yes. Set the Flex Query date range to cover a longer period. EPIG processes all fills and deduplicates
-            against what's already in the database.
-          </p>
-        </div>
-        <div class="border-t border-epig-border pt-4">
-          <h4 class="font-semibold mb-1">What if a trade is classified wrong?</h4>
-          <p class="text-sm text-epig-textDim leading-relaxed">
-            In the review table (Step 2), use the strategy dropdown on any row to change A/B/C before confirming.
-            You can also use the "All &rarr; A/B/C" buttons for bulk changes.
-          </p>
-        </div>
-        <div class="border-t border-epig-border pt-4">
-          <h4 class="font-semibold mb-1">Is this investment advice?</h4>
-          <p class="text-sm text-epig-textDim leading-relaxed">
-            No. EPIG is for informational and educational purposes only. We share our trades transparently
-            but do not advise others to replicate them. See <a href="/disclosures" class="text-blue-400 no-underline">Disclosures</a>.
-          </p>
-        </div>
-        <div class="border-t border-epig-border pt-4">
-          <h4 class="font-semibold mb-1">What instruments are traded?</h4>
-          <p class="text-sm text-epig-textDim leading-relaxed">
-            Strategy A: SPY ETF, select individual stocks, cash/treasuries.<br>
-            Strategy B: Micro E-mini S&P 500 (MES) and E-mini S&P 500 (ES) futures.<br>
-            Strategy C: Options on SPY, QQQ, and select equities.
+        <div class="p-5 bg-epig-bg rounded-xl border border-epig-border text-center">
+          <div class="text-2xl mb-3"><i class="fas fa-scale-balanced text-emerald-400"></i></div>
+          <h4 class="font-semibold text-sm text-white mb-2">Skin in the Game</h4>
+          <p class="text-xs text-epig-textDim leading-relaxed">
+            This is not a signal service run on paper money. We trade our own capital.
+            Our P&L is your P&L. The incentives are aligned.
           </p>
         </div>
       </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+        <div class="p-5 bg-epig-bg rounded-xl border border-epig-border text-center">
+          <div class="text-2xl mb-3"><i class="fas fa-chart-line text-amber-400"></i></div>
+          <h4 class="font-semibold text-sm text-white mb-2">Live Track Record</h4>
+          <p class="text-xs text-epig-textDim leading-relaxed">
+            Not a backtest. Not paper trading. Real money, real fills, updated weekly.
+            The dashboard shows 2026 YTD results from actual market executions.
+          </p>
+        </div>
+        <div class="p-5 bg-epig-bg rounded-xl border border-epig-border text-center">
+          <div class="text-2xl mb-3"><i class="fas fa-money-bill-wave text-amber-400"></i></div>
+          <h4 class="font-semibold text-sm text-white mb-2">Start Small</h4>
+          <p class="text-xs text-epig-textDim leading-relaxed">
+            1 MES contract = ~$30 risk per trade. Start with minimal capital,
+            see real results, and scale up only when you're confident.
+          </p>
+        </div>
+        <div class="p-5 bg-epig-bg rounded-xl border border-epig-border text-center">
+          <div class="text-2xl mb-3"><i class="fas fa-clock text-amber-400"></i></div>
+          <h4 class="font-semibold text-sm text-white mb-2">60-Day Free Trial</h4>
+          <p class="text-xs text-epig-textDim leading-relaxed">
+            Full access for 60 days at zero cost. Watch the trades play out.
+            Verify the data. Then decide if the system is worth following.
+          </p>
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-6 border-t border-epig-border">
+        <a href="/pricing" class="btn-primary text-sm no-underline px-8 py-3">
+          <i class="fas fa-rocket mr-2"></i>Start 60-Day Free Trial
+        </a>
+        <a href="/dashboard" class="btn-outline text-sm no-underline px-8 py-3">
+          <i class="fas fa-chart-line mr-2"></i>View Live Dashboard
+        </a>
+      </div>
     </div>
 
-    <!-- CTA -->
-    <div class="text-center py-8">
-      <a href="/admin" class="btn-primary text-base no-underline inline-flex items-center gap-2" style="padding: 14px 32px;">
-        <i class="fas fa-upload"></i> Go to Admin Console &amp; Upload
+    <!-- ════════════════════════════════════════════════════════ -->
+    <!-- LINK TO FAQ                                              -->
+    <!-- ════════════════════════════════════════════════════════ -->
+    <div class="text-center py-6">
+      <p class="text-epig-textMuted text-sm mb-3">Have more questions?</p>
+      <a href="/faq" class="inline-flex items-center gap-2 text-blue-400 font-semibold text-sm no-underline hover:text-blue-300 transition-colors">
+        <i class="fas fa-circle-question"></i>
+        Read the Full FAQ
+        <i class="fas fa-arrow-right text-xs"></i>
       </a>
-      <p class="text-xs text-epig-textDim mt-3">
-        Or view the <a href="/dashboard" class="text-blue-400 no-underline">Dashboard</a> to see current performance metrics.
+    </div>
+
+    <!-- Disclosure -->
+    <div class="text-center py-2">
+      <p class="text-xs text-epig-textDim max-w-2xl mx-auto leading-relaxed">
+        EPIG Investment Design is for informational and educational purposes only.
+        Nothing herein constitutes investment advice. Past performance is not indicative of future results.
+        See <a href="/disclosures" class="text-blue-400 no-underline">full disclosures</a>.
       </p>
     </div>
   </div>
