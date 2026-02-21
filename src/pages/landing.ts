@@ -481,9 +481,9 @@ export function landingPage(): string {
                 <span class="text-sm text-[#8892a6] w-16 flex-shrink-0">EPIG:</span>
                 <div class="flex-1 relative flex items-center gap-3">
                   <div class="h-8 rounded-lg bg-gradient-to-r from-emerald-600 to-emerald-500 flex items-center px-3" style="width: 70%">
-                    <span class="text-white text-xs font-bold whitespace-nowrap">&asymp; 0% default</span>
+                    <span class="text-white text-xs font-bold whitespace-nowrap">&lt;5% of principal at risk</span>
                   </div>
-                  <span class="text-xs text-[#8892a6] whitespace-nowrap">&rarr; brief, capped spikes</span>
+                  <span class="text-xs text-[#8892a6] whitespace-nowrap">&rarr; brief, capped exposure windows</span>
                 </div>
               </div>
             </div>
@@ -594,8 +594,9 @@ export function landingPage(): string {
           <div class="text-[11px] text-[#8892a6] mt-1">Compounding goal over 2&ndash;3+ years</div>
         </div>
         <div class="rounded-2xl border border-[#2a2a3e] bg-[#12121e] p-6 text-center">
-          <div class="text-[#8892a6] text-xs uppercase tracking-wider font-semibold mb-2">Total Capital at Risk</div>
+          <div class="text-[#8892a6] text-xs uppercase tracking-wider font-semibold mb-2">Original Principal at Risk</div>
           <div class="text-4xl font-extrabold text-emerald-400 font-mono">&lt;5<span class="text-2xl text-[#8892a6]">%</span></div>
+          <div class="text-[11px] text-[#8892a6] mt-1">Drawdowns may exceed 5% as gains compound</div>
         </div>
         <div class="rounded-2xl border border-[#2a2a3e] bg-[#12121e] p-6 text-center">
           <div class="text-[#8892a6] text-xs uppercase tracking-wider font-semibold mb-2">Total Bets / Year</div>
