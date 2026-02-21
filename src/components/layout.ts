@@ -96,6 +96,7 @@ export function layout(title: string, content: string): string {
           </a>
         </div>
         <div class="hidden md:flex items-center gap-6">
+          <a href="/" class="nav-link">Home</a>
           <a href="/dashboard" class="nav-link">Dashboard</a>
           <a href="/projector" class="nav-link">Performance Projector</a>
           <a href="/how-it-works" class="nav-link">How It Works</a>
@@ -113,6 +114,7 @@ export function layout(title: string, content: string): string {
     <!-- Mobile menu -->
     <div id="mobile-menu" class="hidden md:hidden border-t border-epig-border bg-epig-bg px-4 py-3">
       <div class="flex flex-col gap-3">
+        <a href="/" class="nav-link py-2">Home</a>
         <a href="/dashboard" class="nav-link py-2">Dashboard</a>
         <a href="/projector" class="nav-link py-2">Performance Projector</a>
         <a href="/how-it-works" class="nav-link py-2">How It Works</a>
