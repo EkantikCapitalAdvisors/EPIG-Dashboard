@@ -138,7 +138,7 @@ export function landingPage(): string {
 
       <!-- Hero Image -->
       <div class="rounded-2xl overflow-hidden border border-epig-border mb-12">
-        <img src="https://www.genspark.ai/api/files/s/FRN8xl6Y" alt="SPY vs EPIG — The Coffee Shop vs The Amazon Network" class="w-full h-auto" loading="lazy">
+        <img src="/static/spy-vs-epig.png" alt="SPY vs EPIG — The Coffee Shop vs The Amazon Network" class="w-full h-auto" loading="lazy">
       </div>
 
       <!-- Two-Column Comparison -->
