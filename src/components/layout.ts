@@ -95,9 +95,10 @@ export function layout(title: string, content: string): string {
         <div class="hidden md:flex items-center gap-6">
           <a href="/dashboard" class="nav-link">Dashboard</a>
           <a href="/calculator" class="nav-link">Calculator</a>
-          <a href="/how-it-works" class="nav-link">Methodology</a>
+          <a href="/how-it-works" class="nav-link">How It Works</a>
           <a href="/pricing" class="nav-link">Pricing</a>
           <a href="/updates" class="nav-link">Updates</a>
+          <a href="/admin" class="nav-link">Admin</a>
         </div>
         <div class="flex items-center gap-3">
           <a href="/pricing" class="btn-primary text-sm no-underline" style="padding:8px 20px;">Start Free Trial</a>
@@ -112,9 +113,10 @@ export function layout(title: string, content: string): string {
       <div class="flex flex-col gap-3">
         <a href="/dashboard" class="nav-link py-2">Dashboard</a>
         <a href="/calculator" class="nav-link py-2">Calculator</a>
-        <a href="/how-it-works" class="nav-link py-2">Methodology</a>
+        <a href="/how-it-works" class="nav-link py-2">How It Works</a>
         <a href="/pricing" class="nav-link py-2">Pricing</a>
         <a href="/updates" class="nav-link py-2">Updates</a>
+        <a href="/admin" class="nav-link py-2">Admin</a>
         <a href="/disclosures" class="nav-link py-2">Disclosures</a>
       </div>
     </div>
@@ -155,7 +157,8 @@ export function layout(title: string, content: string): string {
             <a href="/dashboard" class="text-epig-textDim text-sm hover:text-epig-text no-underline">Dashboard</a>
             <a href="/calculator" class="text-epig-textDim text-sm hover:text-epig-text no-underline">Calculator</a>
             <a href="/pricing" class="text-epig-textDim text-sm hover:text-epig-text no-underline">Pricing</a>
-            <a href="/how-it-works" class="text-epig-textDim text-sm hover:text-epig-text no-underline">Methodology</a>
+            <a href="/how-it-works" class="text-epig-textDim text-sm hover:text-epig-text no-underline">How It Works</a>
+            <a href="/admin" class="text-epig-textDim text-sm hover:text-epig-text no-underline">Admin Console</a>
           </div>
         </div>
         <div>
