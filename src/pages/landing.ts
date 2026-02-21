@@ -141,131 +141,235 @@ export function landingPage(): string {
         <img src="/static/spy-vs-epig.png" alt="SPY vs EPIG — The Coffee Shop vs The Amazon Network" class="w-full h-auto" loading="lazy">
       </div>
 
-      <!-- Two-Column Comparison -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
-        <!-- SPY Column -->
-        <div class="kpi-card border-red-500/20 relative overflow-hidden">
+      <!-- Architecture Description -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10">
+
+        <!-- LEFT: SPY — The Coffee Shop -->
+        <div class="rounded-2xl border border-red-500/20 bg-[#12121e] p-8 relative overflow-hidden">
           <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-red-500 to-red-400"></div>
-          <div class="flex items-center gap-3 mb-5 mt-2">
-            <div class="w-12 h-12 rounded-xl bg-red-500/10 flex items-center justify-center">
-              <i class="fas fa-store text-red-400 text-xl"></i>
+          <div class="flex items-center gap-3 mb-6 mt-2">
+            <div class="w-14 h-14 rounded-xl bg-red-500/10 flex items-center justify-center">
+              <i class="fas fa-store text-red-400 text-2xl"></i>
             </div>
             <div>
-              <h3 class="text-xl font-bold">SPY: The Coffee Shop</h3>
-              <span class="text-xs text-red-400 uppercase tracking-wide font-semibold">Passive Index</span>
+              <h3 class="text-2xl font-bold text-white">SPY: The Coffee Shop</h3>
+              <span class="text-xs text-red-400 uppercase tracking-wider font-bold">Single Location &bull; No Escape Route</span>
             </div>
           </div>
 
-          <div class="space-y-4 mb-6">
-            <div class="flex items-start gap-3">
-              <div class="w-6 h-6 rounded-full bg-red-500/15 flex items-center justify-center flex-shrink-0 mt-0.5">
-                <i class="fas fa-cloud-rain text-red-400 text-xs"></i>
+          <p class="text-[#8892a6] text-sm leading-relaxed mb-6">
+            Owning SPY is like owning a single coffee shop on one street corner. When the economy is booming, foot traffic is great.
+            But when the storm hits, there&rsquo;s nowhere to go.
+          </p>
+
+          <div class="space-y-5 mb-8">
+            <div class="flex items-start gap-4">
+              <div class="w-10 h-10 rounded-lg bg-red-500/10 flex items-center justify-center flex-shrink-0">
+                <i class="fas fa-cloud-showers-heavy text-red-400"></i>
               </div>
               <div>
-                <h4 class="font-semibold text-sm mb-0.5">Open in Every Storm</h4>
-                <p class="text-xs text-epig-textDim leading-relaxed">Must stay open no matter what. When the market crashes, you ride it all the way down. No exit, no shelter.</p>
+                <h4 class="font-bold text-white mb-1">Open in Every Storm</h4>
+                <p class="text-sm text-[#8892a6] leading-relaxed">
+                  Must stay open no matter what &mdash; recessions, crashes, bear markets. There is no mechanism to reduce exposure.
+                  When the S&P drops 40%, you ride every percent of it down.
+                </p>
               </div>
             </div>
-            <div class="flex items-start gap-3">
-              <div class="w-6 h-6 rounded-full bg-red-500/15 flex items-center justify-center flex-shrink-0 mt-0.5">
-                <i class="fas fa-arrow-trend-down text-red-400 text-xs"></i>
+            <div class="flex items-start gap-4">
+              <div class="w-10 h-10 rounded-lg bg-red-500/10 flex items-center justify-center flex-shrink-0">
+                <i class="fas fa-arrow-trend-down text-red-400"></i>
               </div>
               <div>
-                <h4 class="font-semibold text-sm mb-0.5">Foot Traffic Collapses</h4>
-                <p class="text-xs text-epig-textDim leading-relaxed">In a bear market, volume dries up and valuations compress. Your single location has no diversification.</p>
+                <h4 class="font-bold text-white mb-1">Foot Traffic Collapses</h4>
+                <p class="text-sm text-[#8892a6] leading-relaxed">
+                  In a downturn, valuations compress and volume dries up. A single-location business has zero diversification.
+                  Your revenue stream is entirely dependent on one variable: market direction.
+                </p>
               </div>
             </div>
-            <div class="flex items-start gap-3">
-              <div class="w-6 h-6 rounded-full bg-red-500/15 flex items-center justify-center flex-shrink-0 mt-0.5">
-                <i class="fas fa-ban text-red-400 text-xs"></i>
+            <div class="flex items-start gap-4">
+              <div class="w-10 h-10 rounded-lg bg-red-500/10 flex items-center justify-center flex-shrink-0">
+                <i class="fas fa-hand-holding-dollar text-red-400"></i>
               </div>
               <div>
-                <h4 class="font-semibold text-sm mb-0.5">Absorb the Losses</h4>
-                <p class="text-xs text-epig-textDim leading-relaxed">Can&rsquo;t escape the storm. A 50% drawdown requires a 100% recovery just to break even. Time is the only hope.</p>
+                <h4 class="font-bold text-white mb-1">Absorb the Losses</h4>
+                <p class="text-sm text-[#8892a6] leading-relaxed">
+                  Can&rsquo;t escape the storm. A 50% drawdown requires a 100% gain just to break even. The math of loss is brutally asymmetric &mdash;
+                  and passive investing offers no tools to manage it.
+                </p>
               </div>
             </div>
           </div>
 
-          <div class="p-4 bg-red-500/5 border border-red-500/15 rounded-lg">
-            <div class="flex items-center gap-2 mb-1">
-              <i class="fas fa-exclamation-triangle text-red-400 text-xs"></i>
-              <span class="text-xs font-bold text-red-400 uppercase tracking-wide">The Problem</span>
+          <div class="p-5 bg-red-500/5 border border-red-500/20 rounded-xl">
+            <div class="flex items-center gap-2 mb-2">
+              <i class="fas fa-exclamation-triangle text-red-400"></i>
+              <span class="text-sm font-bold text-red-400 uppercase tracking-wide">The Problem</span>
             </div>
-            <p class="text-xs text-epig-textDim leading-relaxed">
-              S&P 500 returned <strong class="text-white">0% from 2000&ndash;2010</strong>. It took 13 years to recover from the 2000 peak.
-              Passive investing assumes you have unlimited time and unlimited pain tolerance.
+            <p class="text-sm text-[#8892a6] leading-relaxed mb-0">
+              The S&P 500 returned <strong class="text-white">0% from 2000&ndash;2010</strong>. It took <strong class="text-white">13 years</strong>
+              to recover from the 2000 peak. Passive investing assumes you have unlimited time and unlimited pain tolerance.
+              Most investors have neither.
             </p>
           </div>
         </div>
 
-        <!-- EPIG Column -->
-        <div class="kpi-card border-emerald-500/20 relative overflow-hidden" style="background: linear-gradient(135deg, rgba(16,185,129,0.03), rgba(59,130,246,0.03));">
+        <!-- RIGHT: EPIG — The Adaptive Network -->
+        <div class="rounded-2xl border border-emerald-500/20 bg-[#12121e] p-8 relative overflow-hidden" style="background: linear-gradient(135deg, rgba(16,185,129,0.02), rgba(59,130,246,0.02));">
           <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-emerald-500 to-blue-400"></div>
-          <div class="flex items-center gap-3 mb-5 mt-2">
-            <div class="w-12 h-12 rounded-xl bg-emerald-500/10 flex items-center justify-center">
-              <i class="fas fa-network-wired text-emerald-400 text-xl"></i>
+          <div class="flex items-center gap-3 mb-6 mt-2">
+            <div class="w-14 h-14 rounded-xl bg-emerald-500/10 flex items-center justify-center">
+              <i class="fas fa-network-wired text-emerald-400 text-2xl"></i>
             </div>
             <div>
-              <h3 class="text-xl font-bold">EPIG: The Adaptive Network</h3>
-              <span class="text-xs text-emerald-400 uppercase tracking-wide font-semibold">Multi-Layer Design</span>
+              <h3 class="text-2xl font-bold text-white">EPIG: The Adaptive Network</h3>
+              <span class="text-xs text-emerald-400 uppercase tracking-wider font-bold">Multiple Routes &bull; Built-In Defense</span>
             </div>
           </div>
 
-          <div class="space-y-4 mb-6">
-            <div class="flex items-start gap-3">
-              <div class="w-6 h-6 rounded-full bg-emerald-500/15 flex items-center justify-center flex-shrink-0 mt-0.5">
-                <i class="fas fa-route text-emerald-400 text-xs"></i>
+          <p class="text-[#8892a6] text-sm leading-relaxed mb-6">
+            EPIG operates like a logistics network &mdash; multiple delivery routes, real-time rerouting, and the ability to pause
+            risky zones. When one route gets blocked, the network adapts and keeps delivering.
+          </p>
+
+          <div class="space-y-5 mb-8">
+            <div class="flex items-start gap-4">
+              <div class="w-10 h-10 rounded-lg bg-emerald-500/10 flex items-center justify-center flex-shrink-0">
+                <i class="fas fa-route text-emerald-400"></i>
               </div>
               <div>
-                <h4 class="font-semibold text-sm mb-0.5">Adapt &amp; Reroute</h4>
-                <p class="text-xs text-epig-textDim leading-relaxed">When one area gets hit, the system reroutes. Tactical futures (B) and asymmetric options (C) generate returns independent of direction.</p>
+                <h4 class="font-bold text-white mb-1">Adapt &amp; Reroute</h4>
+                <p class="text-sm text-[#8892a6] leading-relaxed">
+                  When the market drops, the network doesn&rsquo;t shut down &mdash; it reroutes. Tactical futures <span class="text-emerald-400 font-semibold">(Strategy B)</span> profit
+                  from both directions. Asymmetric options <span class="text-purple-400 font-semibold">(Strategy C)</span> thrive during dislocations. The system has multiple paths to revenue.
+                </p>
               </div>
             </div>
-            <div class="flex items-start gap-3">
-              <div class="w-6 h-6 rounded-full bg-emerald-500/15 flex items-center justify-center flex-shrink-0 mt-0.5">
-                <i class="fas fa-pause-circle text-emerald-400 text-xs"></i>
+            <div class="flex items-start gap-4">
+              <div class="w-10 h-10 rounded-lg bg-emerald-500/10 flex items-center justify-center flex-shrink-0">
+                <i class="fas fa-pause-circle text-emerald-400"></i>
               </div>
               <div>
-                <h4 class="font-semibold text-sm mb-0.5">Pause Risky Zones</h4>
-                <p class="text-xs text-epig-textDim leading-relaxed">Active allocation management means reducing exposure when risk is elevated, not riding the drawdown to the bottom.</p>
+                <h4 class="font-bold text-white mb-1">Pause Risky Zones</h4>
+                <p class="text-sm text-[#8892a6] leading-relaxed">
+                  When a zone becomes dangerous &mdash; elevated VIX, deteriorating breadth, macro risk &mdash; the network pauses that route.
+                  Active allocation management <span class="text-orange-400 font-semibold">(Strategy A)</span> reduces equity exposure instead of riding the drawdown to the bottom.
+                </p>
               </div>
             </div>
-            <div class="flex items-start gap-3">
-              <div class="w-6 h-6 rounded-full bg-emerald-500/15 flex items-center justify-center flex-shrink-0 mt-0.5">
-                <i class="fas fa-shield-halved text-emerald-400 text-xs"></i>
+            <div class="flex items-start gap-4">
+              <div class="w-10 h-10 rounded-lg bg-emerald-500/10 flex items-center justify-center flex-shrink-0">
+                <i class="fas fa-shield-halved text-emerald-400"></i>
               </div>
               <div>
-                <h4 class="font-semibold text-sm mb-0.5">Protect the Network</h4>
-                <p class="text-xs text-epig-textDim leading-relaxed">Three independent revenue streams ensure the system stays profitable overall, even when individual routes are disrupted.</p>
+                <h4 class="font-bold text-white mb-1">Protect the Network</h4>
+                <p class="text-sm text-[#8892a6] leading-relaxed">
+                  Three independent revenue streams ensure the system stays profitable overall. Even when individual zones are disrupted,
+                  the network continues to deliver. The goal is <strong class="text-white">structural resilience</strong>, not blind exposure.
+                </p>
               </div>
             </div>
           </div>
 
-          <div class="p-4 bg-emerald-500/5 border border-emerald-500/15 rounded-lg">
-            <div class="flex items-center gap-2 mb-1">
-              <i class="fas fa-check-circle text-emerald-400 text-xs"></i>
-              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wide">The EPIG Advantage</span>
+          <div class="p-5 bg-emerald-500/5 border border-emerald-500/20 rounded-xl">
+            <div class="flex items-center gap-2 mb-2">
+              <i class="fas fa-check-circle text-emerald-400"></i>
+              <span class="text-sm font-bold text-emerald-400 uppercase tracking-wide">The EPIG Advantage</span>
             </div>
-            <p class="text-xs text-epig-textDim leading-relaxed">
-              Core allocation (A) participates in market growth. Tactical futures (B) generate systematic income with defined risk.
-              Episodic pivots (C) capture outsized moves during dislocations. <strong class="text-white">The whole is greater than the sum of its parts.</strong>
+            <p class="text-sm text-[#8892a6] leading-relaxed mb-0">
+              Core allocation <span class="text-orange-400 font-semibold">(A)</span> participates in market growth.
+              Tactical futures <span class="text-emerald-400 font-semibold">(B)</span> generate systematic income with defined risk.
+              Episodic pivots <span class="text-purple-400 font-semibold">(C)</span> capture outsized moves during dislocations.
+              <strong class="text-white">The whole is greater than the sum of its parts.</strong>
             </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- How the Three Layers Map to the Network -->
+      <div class="rounded-2xl border border-[#2a2a3e] bg-[#12121e] p-8 mb-10">
+        <h3 class="text-xl font-bold text-white mb-2 text-center">How the Three Layers Map to the Network</h3>
+        <p class="text-[#8892a6] text-sm text-center mb-8 max-w-2xl mx-auto">
+          Each EPIG layer serves as a distinct delivery channel within the network. If one gets disrupted, the others keep operating.
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <!-- Layer A -->
+          <div class="rounded-xl border border-orange-500/20 bg-orange-500/5 p-5">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-10 h-10 rounded-lg bg-orange-500/15 flex items-center justify-center">
+                <i class="fas fa-road text-orange-400"></i>
+              </div>
+              <div>
+                <span class="text-xs text-orange-400 uppercase tracking-wider font-bold">Layer A</span>
+                <h4 class="font-bold text-white text-sm">The Main Highway</h4>
+              </div>
+            </div>
+            <p class="text-sm text-[#8892a6] leading-relaxed mb-3">
+              Core equity allocation (SPY + stock sleeve). Carries ~80% of all traffic. In good weather, it delivers the bulk of returns.
+              When storms hit, active management can throttle the flow &mdash; reduce SPY, raise cash, add treasuries.
+            </p>
+            <div class="flex items-center justify-between text-xs border-t border-orange-500/15 pt-3 mt-3">
+              <span class="text-[#8892a6]">Capital Deployed</span>
+              <span class="text-orange-400 font-mono font-bold">85&ndash;99%</span>
+            </div>
+          </div>
+          <!-- Layer B -->
+          <div class="rounded-xl border border-emerald-500/20 bg-emerald-500/5 p-5">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-10 h-10 rounded-lg bg-emerald-500/15 flex items-center justify-center">
+                <i class="fas fa-truck-fast text-emerald-400"></i>
+              </div>
+              <div>
+                <span class="text-xs text-emerald-400 uppercase tracking-wider font-bold">Layer B</span>
+                <h4 class="font-bold text-white text-sm">Express Delivery Fleet</h4>
+              </div>
+            </div>
+            <p class="text-sm text-[#8892a6] leading-relaxed mb-3">
+              Systematic MES/ES futures with defined 20-point stops. Fast, repeatable, direction-agnostic. This fleet runs in any weather &mdash;
+              long or short &mdash; generating income independent of whether the highway is open.
+            </p>
+            <div class="flex items-center justify-between text-xs border-t border-emerald-500/15 pt-3 mt-3">
+              <span class="text-[#8892a6]">VaR Overlay</span>
+              <span class="text-emerald-400 font-mono font-bold">1&ndash;5%</span>
+            </div>
+          </div>
+          <!-- Layer C -->
+          <div class="rounded-xl border border-purple-500/20 bg-purple-500/5 p-5">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-10 h-10 rounded-lg bg-purple-500/15 flex items-center justify-center">
+                <i class="fas fa-helicopter text-purple-400"></i>
+              </div>
+              <div>
+                <span class="text-xs text-purple-400 uppercase tracking-wider font-bold">Layer C</span>
+                <h4 class="font-bold text-white text-sm">Drone Airdrops</h4>
+              </div>
+            </div>
+            <p class="text-sm text-[#8892a6] leading-relaxed mb-3">
+              Asymmetric SPY/QQQ options deployed during market dislocations. Like drones that can reach places ground vehicles can&rsquo;t &mdash;
+              limited risk, outsized payoff when volatility spikes and everyone else is grounded.
+            </p>
+            <div class="flex items-center justify-between text-xs border-t border-purple-500/15 pt-3 mt-3">
+              <span class="text-[#8892a6]">Position Size</span>
+              <span class="text-purple-400 font-mono font-bold">5&ndash;25%</span>
+            </div>
           </div>
         </div>
       </div>
 
       <!-- Bottom Insight -->
       <div class="rounded-2xl border border-blue-500/30 bg-gradient-to-r from-blue-500/5 to-emerald-500/5 p-6 flex items-start gap-4">
-        <div class="w-10 h-10 rounded-lg bg-blue-500/15 flex items-center justify-center flex-shrink-0 mt-0.5">
-          <i class="fas fa-lightbulb text-blue-400"></i>
+        <div class="w-12 h-12 rounded-lg bg-blue-500/15 flex items-center justify-center flex-shrink-0 mt-0.5">
+          <i class="fas fa-lightbulb text-blue-400 text-lg"></i>
         </div>
         <div>
-          <div class="text-white font-bold text-sm mb-1">Think Networks, Not Storefronts</div>
+          <div class="text-white font-bold mb-1">Think Networks, Not Storefronts</div>
           <p class="text-[#8892a6] text-sm leading-relaxed mb-0">
             A single coffee shop (SPY) has one revenue stream and zero defense against bad weather.
-            A logistics network (EPIG) has multiple delivery channels, can reroute around disruption,
-            and keeps the system profitable even when individual zones shut down. That&rsquo;s the structural difference
-            between passively holding an index and actively managing a multi-layer investment design.
+            A logistics network (EPIG) has the main highway <span class="text-orange-400 font-semibold">(A)</span>,
+            an express fleet <span class="text-emerald-400 font-semibold">(B)</span>,
+            and drone airdrops <span class="text-purple-400 font-semibold">(C)</span> &mdash;
+            multiple delivery channels that can reroute around disruption and keep the system profitable even when individual zones shut down.
+            That&rsquo;s the structural difference between passively holding an index and actively managing a multi-layer investment design.
           </p>
         </div>
       </div>
