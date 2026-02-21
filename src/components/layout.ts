@@ -171,9 +171,9 @@ export function layout(title: string, content: string): string {
         <div>
           <h4 class="font-semibold text-epig-text mb-4 text-sm uppercase tracking-wider">Connect</h4>
           <div class="flex flex-col gap-2">
-            <a href="#" class="text-epig-textDim text-sm hover:text-epig-text no-underline"><i class="fab fa-discord mr-2"></i>Discord Community</a>
+            <a href="https://discord.gg/agB69tFFmy" target="_blank" rel="noopener" class="text-epig-textDim text-sm hover:text-epig-text no-underline"><i class="fab fa-discord mr-2"></i>Discord Community</a>
             <a href="#" class="text-epig-textDim text-sm hover:text-epig-text no-underline"><i class="fab fa-twitter mr-2"></i>Twitter</a>
-            <a href="mailto:support@ekantikcapital.com" class="text-epig-textDim text-sm hover:text-epig-text no-underline"><i class="fas fa-envelope mr-2"></i>Contact</a>
+            <a href="mailto:info@ekantikcapital.com" class="text-epig-textDim text-sm hover:text-epig-text no-underline"><i class="fas fa-envelope mr-2"></i>Contact</a>
           </div>
         </div>
       </div>

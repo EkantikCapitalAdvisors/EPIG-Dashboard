@@ -206,7 +206,7 @@ export function faqPage(): string {
     <div class="text-center py-6">
       <p class="text-epig-textMuted text-sm mb-4">Still have questions?</p>
       <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
-        <a href="mailto:support@ekantikcapital.com" class="btn-outline text-sm no-underline px-6 py-2.5">
+        <a href="mailto:info@ekantikcapital.com" class="btn-outline text-sm no-underline px-6 py-2.5">
           <i class="fas fa-envelope mr-2"></i>Email Us
         </a>
         <a href="/pricing" class="btn-primary text-sm no-underline px-6 py-2.5">

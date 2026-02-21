@@ -29,11 +29,11 @@ export function privacyPage(): string {
       </div>
       <div class="kpi-card">
         <h2 class="text-lg font-semibold text-white mb-3">Your Rights</h2>
-        <p>You may request access to, correction of, or deletion of your personal data at any time by contacting us at support@ekantikcapital.com. You may unsubscribe from emails using the link provided in each message.</p>
+        <p>You may request access to, correction of, or deletion of your personal data at any time by contacting us at info@ekantikcapital.com. You may unsubscribe from emails using the link provided in each message.</p>
       </div>
       <div class="kpi-card">
         <h2 class="text-lg font-semibold text-white mb-3">Contact</h2>
-        <p>For privacy-related inquiries, contact us at <a href="mailto:support@ekantikcapital.com" class="text-blue-400 no-underline">support@ekantikcapital.com</a>.</p>
+        <p>For privacy-related inquiries, contact us at <a href="mailto:info@ekantikcapital.com" class="text-blue-400 no-underline">info@ekantikcapital.com</a>.</p>
       </div>
     </div>
   </div>
