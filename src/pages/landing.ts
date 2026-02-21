@@ -165,31 +165,169 @@ export function landingPage(): string {
     </div>
   </section>
 
-  <!-- ════ SECTION 3: AUDIENCE QUALIFICATION ════ -->
+  <!-- ════ SECTION 3: THE EPIG ADVANTAGE ════ -->
   <section class="section-divider">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-      <div class="glass-card p-10 md:p-14 text-center">
-        <h2 class="text-3xl sm:text-4xl font-bold mb-6">Built for Serious Capital</h2>
-        <p class="text-epig-textMuted text-lg max-w-3xl mx-auto mb-8 leading-relaxed">
-          EPIG is designed for investors with <span class="text-white font-semibold">$500K+ portfolios</span> who
-          understand that protecting capital is the foundation of compounding. If you have significant assets
-          and want institutional-grade transparency on how they can be managed, this platform is for you.
+      <div class="text-center mb-14">
+        <span class="inline-block text-xs font-bold uppercase tracking-widest text-amber-400 border border-amber-500/40 rounded-full px-5 py-1.5 mb-6">
+          <i class="fas fa-bolt mr-1"></i>The EPIG Advantage
+        </span>
+        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold mb-5 leading-tight">
+          The Power to Consolidate: <span class="text-emerald-400">Housing 50&ndash;90%</span> of Your Liquid Net Worth
+        </h2>
+        <p class="text-emerald-400/80 text-lg italic">
+          Why EPIG&rsquo;s Architecture Enables What Traditional Approaches Cannot
         </p>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-3xl mx-auto">
-          <div class="text-center">
-            <div class="text-3xl font-bold text-blue-400 font-mono">$500K+</div>
-            <div class="text-epig-textDim text-sm mt-1">Minimum Portfolio</div>
+      </div>
+
+      <!-- The EPIG Consolidation Capability -->
+      <div class="rounded-2xl border border-emerald-500/25 bg-[#0a1a14] p-8 md:p-10 mb-10">
+        <div class="flex items-center justify-center gap-2 mb-8">
+          <i class="fas fa-shield-halved text-amber-400 text-lg"></i>
+          <h3 class="text-xl font-bold text-emerald-400">The EPIG Consolidation Capability</h3>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-8">
+          <!-- Card: <10% Max Drawdown -->
+          <div class="rounded-xl border border-emerald-500/20 bg-emerald-500/[0.04] p-6 text-center">
+            <div class="w-12 h-12 rounded-full border-2 border-emerald-500/40 flex items-center justify-center mx-auto mb-4">
+              <i class="fas fa-chart-line text-emerald-400 text-lg"></i>
+            </div>
+            <h4 class="text-white font-bold mb-2">&lt;10% Max Drawdown</h4>
+            <p class="text-sm text-[#8892a6] leading-relaxed">
+              Engineered by design &mdash; not luck. You&rsquo;re <span class="text-emerald-400 underline">always in control</span> because risk is capped systematically.
+            </p>
           </div>
-          <div class="text-center">
-            <div class="text-3xl font-bold text-emerald-400 font-mono">3&ndash;5yr</div>
-            <div class="text-epig-textDim text-sm mt-1">Investment Horizon</div>
+
+          <!-- Card: Daily Liquidity -->
+          <div class="rounded-xl border border-emerald-500/20 bg-emerald-500/[0.04] p-6 text-center">
+            <div class="w-12 h-12 rounded-full border-2 border-emerald-500/40 flex items-center justify-center mx-auto mb-4">
+              <i class="fas fa-money-bill-wave text-emerald-400 text-lg"></i>
+            </div>
+            <h4 class="text-white font-bold mb-2">Daily Liquidity</h4>
+            <p class="text-sm text-[#8892a6] leading-relaxed">
+              Access your capital <span class="text-emerald-400 underline">whenever needed</span>. No lockup periods, no penalties &mdash; full flexibility.
+            </p>
           </div>
-          <div class="text-center">
-            <div class="text-3xl font-bold text-amber-400 font-mono">Active</div>
-            <div class="text-epig-textDim text-sm mt-1">Management Approach</div>
+
+          <!-- Card: 100% Transparency -->
+          <div class="rounded-xl border border-emerald-500/20 bg-emerald-500/[0.04] p-6 text-center">
+            <div class="w-12 h-12 rounded-full border-2 border-emerald-500/40 flex items-center justify-center mx-auto mb-4">
+              <i class="fas fa-eye text-emerald-400 text-lg"></i>
+            </div>
+            <h4 class="text-white font-bold mb-2">100% Transparency</h4>
+            <p class="text-sm text-[#8892a6] leading-relaxed">
+              No black box. Every trade, every position, every decision is <span class="text-emerald-400 underline">visible and explainable</span>.
+            </p>
+          </div>
+
+          <!-- Card: Systematic Edge -->
+          <div class="rounded-xl border border-emerald-500/20 bg-emerald-500/[0.04] p-6 text-center">
+            <div class="w-12 h-12 rounded-full border-2 border-emerald-500/40 flex items-center justify-center mx-auto mb-4">
+              <i class="fas fa-gears text-emerald-400 text-lg"></i>
+            </div>
+            <h4 class="text-white font-bold mb-2">Systematic Edge</h4>
+            <p class="text-sm text-[#8892a6] leading-relaxed">
+              Not discretionary gambling &mdash; <span class="text-emerald-400 underline">repeatable, rules-based</span> strategy with defined risk parameters.
+            </p>
           </div>
         </div>
+
+        <!-- The Result callout -->
+        <div class="border-l-4 border-amber-400 bg-amber-500/[0.05] rounded-r-xl p-5">
+          <p class="text-sm text-[#c0c8d8] leading-relaxed mb-0">
+            <i class="fas fa-lightbulb text-amber-400 mr-1"></i>
+            <strong class="text-amber-400">The Result:</strong> Unlike traditional strategies that force you to spread assets across multiple &ldquo;buckets,&rdquo;
+            EPIG&rsquo;s architecture lets you <strong class="text-white">consolidate 50&ndash;90% of your liquid net worth</strong> into a single unified strategy &mdash;
+            because you&rsquo;re in control at all times.
+          </p>
+        </div>
       </div>
+
+      <!-- Antifragile by Design (Taleb) -->
+      <div class="rounded-2xl border border-purple-500/25 bg-[#12101e] p-8 md:p-10">
+        <div class="flex items-center justify-center gap-3 mb-4">
+          <i class="fas fa-chart-line text-purple-400 text-xl"></i>
+          <h3 class="text-xl font-bold text-white">Antifragile by Design (Taleb): Convexity in Volatility</h3>
+        </div>
+        <p class="text-center text-[#8892a6] italic text-sm mb-8 max-w-3xl mx-auto">
+          EPIG is inspired by a barbell logic: a defensive base plus small convex bets designed to benefit from volatility.
+        </p>
+
+        <!-- Fragile / Robust / Anti-fragile Labels -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+          <div class="rounded-xl border border-red-500/30 bg-red-500/[0.06] p-4 text-center">
+            <span class="text-red-400 font-bold text-base">Fragile</span>
+            <p class="text-xs text-[#8892a6] mt-1">Worse when volatility rises.</p>
+          </div>
+          <div class="rounded-xl border border-[#3a3a4e] bg-[#1a1a2e] p-4 text-center">
+            <span class="text-white font-bold text-base">Robust</span>
+            <p class="text-xs text-[#8892a6] mt-1">Resists shocks; doesn&rsquo;t improve.</p>
+          </div>
+          <div class="rounded-xl border border-emerald-500/30 bg-emerald-500/[0.06] p-4 text-center">
+            <span class="text-emerald-400 font-bold text-base">Anti-fragile</span>
+            <p class="text-xs text-[#8892a6] mt-1">Can improve as volatility rises (convexity).</p>
+          </div>
+        </div>
+
+        <!-- Convexity Chart (SVG) -->
+        <div class="rounded-xl bg-[#0d0d18] border border-[#2a2a3e] p-6 mb-8">
+          <svg viewBox="0 0 500 280" class="w-full max-w-lg mx-auto" style="font-family: system-ui, sans-serif;">
+            <!-- Axes -->
+            <line x1="60" y1="240" x2="480" y2="240" stroke="#3a3a4e" stroke-width="1.5"/>
+            <line x1="60" y1="20" x2="60" y2="240" stroke="#3a3a4e" stroke-width="1.5"/>
+            <!-- Arrow heads -->
+            <polygon points="480,240 472,236 472,244" fill="#3a3a4e"/>
+            <polygon points="60,20 56,28 64,28" fill="#3a3a4e"/>
+
+            <!-- Y-axis label -->
+            <text x="22" y="130" fill="#8892a6" font-size="11" text-anchor="middle" transform="rotate(-90, 22, 130)">Outcome Sensitivity &rarr;</text>
+            <!-- X-axis label -->
+            <text x="280" y="270" fill="#8892a6" font-size="11" text-anchor="middle">Volatility / Disorder &rarr;</text>
+
+            <!-- Robust line (straight, gray) -->
+            <line x1="80" y1="130" x2="460" y2="130" stroke="#8892a6" stroke-width="2"/>
+            <text x="462" y="125" fill="#8892a6" font-size="11" font-weight="bold">Robust</text>
+
+            <!-- Fragile curve (red, dashed, curving down) -->
+            <path d="M80,110 Q200,125 300,140 Q380,160 460,210" fill="none" stroke="#ef4444" stroke-width="2.5" stroke-dasharray="8,5"/>
+            <text x="440" y="225" fill="#ef4444" font-size="11" font-weight="bold">Fragile</text>
+
+            <!-- Anti-fragile curve (green, curving up) -->
+            <path d="M80,150 Q200,135 300,115 Q380,85 460,40" fill="none" stroke="#10b981" stroke-width="2.5"/>
+            <text x="420" y="35" fill="#10b981" font-size="11" font-weight="bold">Anti-fragile</text>
+          </svg>
+        </div>
+
+        <!-- Bullet points -->
+        <div class="rounded-xl border-l-4 border-purple-500 bg-purple-500/[0.04] p-5 mb-6 space-y-3">
+          <div class="flex items-start gap-3">
+            <i class="fas fa-shield-halved text-purple-400 mt-0.5"></i>
+            <p class="text-sm text-[#c0c8d8]">Defensive base reduces fragility (selective exposure).</p>
+          </div>
+          <div class="flex items-start gap-3">
+            <i class="fas fa-chart-line text-purple-400 mt-0.5"></i>
+            <p class="text-sm text-[#c0c8d8]">Convex sleeves seek asymmetry in turbulence.</p>
+          </div>
+          <div class="flex items-start gap-3">
+            <i class="fas fa-circle-stop text-purple-400 mt-0.5"></i>
+            <p class="text-sm text-[#c0c8d8]">Circuit breakers cap downside; optionality preserves upside.</p>
+          </div>
+        </div>
+
+        <!-- Warning callout -->
+        <div class="rounded-xl bg-amber-500/[0.06] border border-amber-500/30 p-4 mb-4">
+          <p class="text-sm text-[#c0c8d8] mb-0">
+            <i class="fas fa-triangle-exclamation text-amber-400 mr-1"></i>
+            <strong class="text-amber-400">What this is NOT:</strong> This does not mean risk-free or always profitable &mdash; convexity can have carry costs.
+          </p>
+        </div>
+
+        <p class="text-center text-xs text-[#8892a6] italic">
+          Educational concept only. Results vary; losses can occur.
+        </p>
+      </div>
+
     </div>
   </section>
 
