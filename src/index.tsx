@@ -469,8 +469,9 @@ app.get('/api/calculator/stats', async (c) => {
   if (!db) return c.json({ error: 'No database', strategies: null })
 
   try {
+    // Only consider 2026 trades for forward projections
     const allTrades = await db.prepare(
-      "SELECT id, strategy, side, instrument, entry_price, exit_price, realized_pnl, quantity, trade_date, asset_class, strike, expiry, put_call, result FROM trades ORDER BY trade_date ASC, id ASC"
+      "SELECT id, strategy, side, instrument, entry_price, exit_price, realized_pnl, quantity, trade_date, asset_class, strike, expiry, put_call, result FROM trades WHERE trade_date >= '2026-01-01' ORDER BY trade_date ASC, id ASC"
     ).all()
     const rows: any[] = allTrades.results || []
     if (rows.length === 0) return c.json({ strategies: null, message: 'No trades in database' })
