@@ -143,16 +143,12 @@ app.get('/api/dashboard/summary', async (c) => {
 })
 
 // ══════════════════════════════════════════════════════════
-// API: UPLOAD TRADES (IB CSV → D1)
+// API: STEP 1 — PREVIEW UPLOAD (parse CSV, auto-classify, return preview)
 // ══════════════════════════════════════════════════════════
-app.post('/api/admin/upload', async (c) => {
-  const db = c.env.DB
-  if (!db) return c.json({ error: 'Database not available' }, 500)
-
+app.post('/api/admin/upload/preview', async (c) => {
   try {
     const body = await c.req.parseBody()
     const file = body['file']
-    const strategy = (body['strategy'] as string) || 'B'
 
     if (!file || typeof file === 'string') {
       return c.json({ error: 'No file uploaded. Send as multipart/form-data with field name "file".' }, 400)
@@ -161,99 +157,186 @@ app.post('/api/admin/upload', async (c) => {
     const csvText = await (file as File).text()
     const filename = (file as File).name || 'upload.csv'
 
-    // Parse CSV
-    const lines = csvText.trim().split('\n')
-    if (lines.length < 2) {
-      return c.json({ error: 'CSV must have at least a header and one data row.' }, 400)
+    // Parse CSV with proper quote handling
+    const parsedRows = parseIBCsv(csvText)
+    if (parsedRows.length === 0) {
+      return c.json({ error: 'No data rows found in CSV.' }, 400)
     }
 
-    const header = lines[0].split(',').map((h: string) => h.trim())
-    const rows = lines.slice(1).map((line: string) => {
-      const vals = line.split(',').map((v: string) => v.trim())
-      const obj: any = {}
-      header.forEach((h: string, i: number) => (obj[h] = vals[i]))
-      return obj
+    // Filter: only keep execution rows (rows with a TradeID)
+    // IB exports have 3 levels: MULTI summary → date subtotal → execution fill
+    const executionRows = parsedRows.filter((r: any) => {
+      const tradeId = (r['TradeID'] || '').trim()
+      return tradeId !== '' && tradeId !== 'TradeID'
     })
+
+    if (executionRows.length === 0) {
+      return c.json({ error: 'No execution rows found (rows with TradeID). This file may only contain summaries.' }, 400)
+    }
+
+    // Auto-classify each execution row
+    const trades = executionRows.map((row: any, idx: number) => {
+      const assetClass = stripQuotes(row['AssetClass'] || '')
+      const symbol = stripQuotes(row['Symbol'] || '')
+      const tradeId = stripQuotes(row['TradeID'] || '')
+      const tradeDate = stripQuotes(row['TradeDate'] || row['ReportDate'] || '')
+      const dateTime = stripQuotes(row['Date/Time'] || '')
+      const side = stripQuotes(row['Buy/Sell'] || '').replace('-', '').toUpperCase() === 'SELL' ? 'SELL' : 'BUY'
+      const qty = Math.abs(parseInt(stripQuotes(row['Quantity'] || '0')))
+      const price = parseFloat(stripQuotes(row['Price'] || '0'))
+      const amount = parseFloat(stripQuotes(row['Amount'] || '0'))
+      const netCash = parseFloat(stripQuotes(row['NetCash'] || '0'))
+      const commission = parseFloat(stripQuotes(row['Commission'] || '0'))
+      const strike = stripQuotes(row['Strike'] || '') || null
+      const expiry = stripQuotes(row['Expiry'] || '') || null
+      const putCall = stripQuotes(row['Put/Call'] || '') || null
+
+      // Auto-classify strategy
+      let strategy: string
+      if (assetClass === 'FUT' || assetClass === 'FOP') {
+        strategy = 'B'
+      } else if (assetClass === 'OPT') {
+        strategy = 'C'
+      } else {
+        strategy = 'A' // STK, CASH, or unknown
+      }
+
+      // Clean symbol (remove CUSIP padding for options)
+      const cleanSymbol = symbol.trim().split(/\s+/)[0]
+
+      return {
+        rowIndex: idx,
+        strategy,
+        assetClass,
+        tradeId,
+        tradeDate: formatIBDate(tradeDate),
+        dateTime,
+        side,
+        symbol: cleanSymbol,
+        fullSymbol: symbol.trim(),
+        quantity: qty,
+        price,
+        amount,
+        netCash,
+        commission,
+        strike: strike ? parseFloat(strike) : null,
+        expiry: expiry ? formatIBDate(expiry) : null,
+        putCall,
+      }
+    })
+
+    // Summary stats
+    const summary = {
+      filename,
+      totalRows: parsedRows.length,
+      executionRows: executionRows.length,
+      skippedRows: parsedRows.length - executionRows.length,
+      byStrategy: {
+        A: trades.filter((t: any) => t.strategy === 'A').length,
+        B: trades.filter((t: any) => t.strategy === 'B').length,
+        C: trades.filter((t: any) => t.strategy === 'C').length,
+      },
+      byAssetClass: {
+        STK: trades.filter((t: any) => t.assetClass === 'STK').length,
+        FUT: trades.filter((t: any) => t.assetClass === 'FUT').length,
+        OPT: trades.filter((t: any) => t.assetClass === 'OPT').length,
+      },
+      dateRange: {
+        from: trades.reduce((min: string, t: any) => t.tradeDate && t.tradeDate < min ? t.tradeDate : min, '9999-99-99'),
+        to: trades.reduce((max: string, t: any) => t.tradeDate && t.tradeDate > max ? t.tradeDate : max, '0000-00-00'),
+      },
+    }
+
+    return c.json({ success: true, summary, trades })
+  } catch (e: any) {
+    return c.json({ error: 'Parse failed: ' + e.message }, 500)
+  }
+})
+
+// ══════════════════════════════════════════════════════════
+// API: STEP 2 — CONFIRM & INGEST (user sends reviewed trades)
+// ══════════════════════════════════════════════════════════
+app.post('/api/admin/upload/confirm', async (c) => {
+  const db = c.env.DB
+  if (!db) return c.json({ error: 'Database not available' }, 500)
+
+  try {
+    const { filename, trades } = await c.req.json()
+
+    if (!trades || !Array.isArray(trades) || trades.length === 0) {
+      return c.json({ error: 'No trades to ingest.' }, 400)
+    }
 
     // Create upload batch
     await db.prepare(
-      "INSERT INTO upload_batches (filename, strategy, file_type, trades_parsed, status) VALUES (?, ?, 'csv', ?, 'processing')"
-    ).bind(filename, strategy, rows.length).run()
+      "INSERT INTO upload_batches (filename, strategy, file_type, trades_parsed, status) VALUES (?, 'MULTI', 'csv', ?, 'processing')"
+    ).bind(filename || 'upload.csv', trades.length).run()
 
     let newCount = 0
     let dupCount = 0
     const errors: string[] = []
+    const strategyCounts: Record<string, number> = { A: 0, B: 0, C: 0 }
 
-    for (const row of rows) {
-      const execId = row['ExecutionId'] || row['ib_execution_id'] || row['execution_id'] || null
-      const tradeDate = row['TradeDate'] || row['trade_date'] || row['Date'] || ''
-      const side = (row['Side'] || row['side'] || row['B/S'] || 'BUY').toUpperCase()
-      const instrument = row['Symbol'] || row['symbol'] || row['Instrument'] || 'MES'
-      const entryPrice = parseFloat(row['Price'] || row['Entry'] || row['entry_price'] || '0')
-      const stopPrice = parseFloat(row['StopPrice'] || row['Stop'] || row['stop_price'] || '0') || null
-      const exitPrice = entryPrice // Will be updated when exit fill arrives
-      const netAmount = parseFloat(row['NetAmount'] || row['Net$'] || row['P&L'] || row['realized_pnl'] || '0')
-      const tradeNum = parseInt(row['TradeNumber'] || row['Trade#'] || row['trade_number'] || '0') || null
-
-      // Determine exit price and net points
-      const defaultRisk = strategy === 'B' ? 20 : 10
-      let netPoints = 0
-      let finalExit = exitPrice
-
-      if (netAmount !== 0) {
-        const pointValue = instrument.includes('ES') || instrument.includes('MES') ? 5 : 100
-        netPoints = netAmount / pointValue
-        finalExit = side === 'BUY' ? entryPrice + netPoints : entryPrice - netPoints
-      }
-
-      const netR = round(netPoints / defaultRisk, 2)
-      const result = netPoints > 0 ? 'WIN' : netPoints < 0 ? 'LOSS' : 'SCRATCH'
+    for (const trade of trades) {
+      const tradeId = trade.tradeId || null
 
       // Idempotency check
-      if (execId) {
-        const existing = await db.prepare("SELECT id FROM trades WHERE ib_execution_id = ?").bind(execId).first()
+      if (tradeId) {
+        const existing = await db.prepare("SELECT id FROM trades WHERE ib_execution_id = ?").bind(tradeId).first()
         if (existing) { dupCount++; continue }
       }
 
+      const strategy = trade.strategy || 'A'
+      const assetClass = trade.assetClass || 'STK'
+      const side = trade.side === 'SELL' ? 'SELL' : 'BUY'
+
       try {
         await db.prepare(`
-          INSERT INTO trades (strategy, source, ib_execution_id, trade_date, trade_number, side, instrument,
-            entry_price, stop_price, exit_price, net_points, planned_risk_points, net_r, realized_pnl, result)
-          VALUES (?, 'IB', ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+          INSERT INTO trades (strategy, source, ib_execution_id, asset_class, trade_date, side, instrument, quantity,
+            strike, expiry, put_call, entry_price, realized_pnl, result)
+          VALUES (?, 'IB', ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'OPEN')
         `).bind(
-          strategy, execId, tradeDate, tradeNum, side, instrument,
-          entryPrice, stopPrice, finalExit, round(netPoints, 2), defaultRisk, netR, netAmount, result
+          strategy, tradeId, assetClass,
+          trade.tradeDate || '', side, trade.fullSymbol || trade.symbol || '',
+          trade.quantity || 1,
+          trade.strike || null, trade.expiry || null, trade.putCall || null,
+          trade.price || 0, trade.netCash || 0
         ).run()
         newCount++
+        strategyCounts[strategy] = (strategyCounts[strategy] || 0) + 1
       } catch (insertErr: any) {
-        errors.push(`Row ${execId || tradeDate}: ${insertErr.message}`)
+        errors.push(`Trade ${tradeId || trade.tradeDate}: ${insertErr.message}`)
       }
     }
 
     // Update batch status
     await db.prepare(
-      "UPDATE upload_batches SET trades_new = ?, trades_duplicate = ?, status = 'complete' WHERE filename = ? ORDER BY id DESC LIMIT 1"
-    ).bind(newCount, dupCount, filename).run()
+      "UPDATE upload_batches SET trades_new = ?, trades_duplicate = ?, status = 'complete' WHERE filename = ? AND status = 'processing' ORDER BY id DESC LIMIT 1"
+    ).bind(newCount, dupCount, filename || 'upload.csv').run()
 
-    // Audit log
+    // Audit log with per-strategy breakdown
+    const breakdown = Object.entries(strategyCounts)
+      .filter(([, v]) => v > 0)
+      .map(([k, v]) => `${k}: ${v}`)
+      .join(', ')
+
     await db.prepare(
-      "INSERT INTO audit_log (admin_id, action, entity, details) VALUES ('admin', 'UPLOAD', ?, ?)"
+      "INSERT INTO audit_log (admin_id, action, entity, details) VALUES ('admin', 'UPLOAD', 'Multi-Strategy', ?)"
     ).bind(
-      'Strategy ' + strategy,
-      `${newCount} new trades ingested, ${dupCount} duplicates skipped from ${filename}`
+      `${newCount} new trades ingested (${breakdown}), ${dupCount} duplicates skipped from ${filename}`
     ).run()
 
     return c.json({
       success: true,
       filename,
-      strategy,
-      parsed: rows.length,
+      total: trades.length,
       new: newCount,
       duplicates: dupCount,
+      byStrategy: strategyCounts,
       errors: errors.length > 0 ? errors : undefined,
     })
   } catch (e: any) {
-    return c.json({ error: 'Upload failed: ' + e.message }, 500)
+    return c.json({ error: 'Ingest failed: ' + e.message }, 500)
   }
 })
 
@@ -286,6 +369,25 @@ app.post('/api/admin/snapshot', async (c) => {
     return c.json({ success: true, version: nextVersion })
   } catch (e: any) {
     return c.json({ error: e.message }, 500)
+  }
+})
+
+// ══════════════════════════════════════════════════════════
+// API: STRATEGY COUNTS
+// ══════════════════════════════════════════════════════════
+app.get('/api/admin/strategy-counts', async (c) => {
+  const db = c.env.DB
+  if (!db) return c.json({ A: 0, B: 0, C: 0 })
+
+  try {
+    const result = await db.prepare("SELECT strategy, COUNT(*) as count FROM trades GROUP BY strategy").all()
+    const counts: Record<string, number> = { A: 0, B: 0, C: 0 }
+    for (const row of (result.results || []) as any[]) {
+      counts[row.strategy] = row.count
+    }
+    return c.json(counts)
+  } catch (e: any) {
+    return c.json({ A: 0, B: 0, C: 0 })
   }
 })
 
@@ -606,4 +708,67 @@ function generateSyntheticTrades(type: string, count: number) {
     })
   }
   return trades
+}
+
+// ══════════════════════════════════════════════════════════
+// CSV PARSER (handles quoted fields with commas properly)
+// ══════════════════════════════════════════════════════════
+
+function parseIBCsv(csvText: string): any[] {
+  const lines = csvText.trim().split('\n')
+  if (lines.length < 2) return []
+
+  const header = parseCsvLine(lines[0])
+  const rows: any[] = []
+
+  for (let i = 1; i < lines.length; i++) {
+    const line = lines[i].trim()
+    if (!line) continue
+    const vals = parseCsvLine(line)
+    const obj: any = {}
+    header.forEach((h: string, idx: number) => {
+      obj[h] = vals[idx] || ''
+    })
+    rows.push(obj)
+  }
+  return rows
+}
+
+function parseCsvLine(line: string): string[] {
+  const result: string[] = []
+  let current = ''
+  let inQuotes = false
+
+  for (let i = 0; i < line.length; i++) {
+    const ch = line[i]
+    if (ch === '"') {
+      if (inQuotes && line[i + 1] === '"') {
+        current += '"'
+        i++
+      } else {
+        inQuotes = !inQuotes
+      }
+    } else if (ch === ',' && !inQuotes) {
+      result.push(current.trim())
+      current = ''
+    } else {
+      current += ch
+    }
+  }
+  result.push(current.trim())
+  return result
+}
+
+function stripQuotes(val: string): string {
+  if (!val) return ''
+  return val.replace(/^"|"$/g, '').trim()
+}
+
+function formatIBDate(raw: string): string {
+  // Convert "20260205" → "2026-02-05"
+  const clean = raw.replace(/"/g, '').trim()
+  if (clean.length === 8 && /^\d{8}$/.test(clean)) {
+    return `${clean.slice(0, 4)}-${clean.slice(4, 6)}-${clean.slice(6, 8)}`
+  }
+  return clean
 }
