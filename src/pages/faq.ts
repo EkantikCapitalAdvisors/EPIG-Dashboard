@@ -167,7 +167,7 @@ export function faqPage(): string {
           <div class="px-5 pb-5 text-sm text-epig-textDim leading-relaxed">
             <strong class="text-white">Real-time Discord alerts</strong> for every Strategy A, B, and C trade (entry and exit),
             full dashboard access with equity curves and metrics, the performance projector tool,
-            weekly summary recaps, and access to the private Discord community for Q&amp;A and discussion.
+            and weekly summary recaps.
           </div>
         </details>
         <details class="group kpi-card !p-0 overflow-hidden">

@@ -347,8 +347,8 @@ export function howItWorksPage(): string {
       </div>
 
       <p class="text-sm text-epig-textMuted leading-relaxed mb-6">
-        As a subscriber, you join our <strong class="text-white">private Discord server</strong> and receive instant notifications
-        every time a Strategy B or C trade is placed.
+        As a subscriber, you receive <strong class="text-white">real-time Discord alerts</strong>
+        every time a Strategy A, B, or C trade is placed.
       </p>
 
       <!-- Discord alert mockup -->

@@ -274,8 +274,7 @@ export function layout(title: string, content: string, social?: SocialMeta): str
         <div>
           <h4 class="font-semibold text-epig-text mb-4 text-sm uppercase tracking-wider">Connect</h4>
           <div class="flex flex-col gap-2">
-            <a href="https://discord.gg/agB69tFFmy" target="_blank" rel="noopener" class="text-epig-textDim text-sm hover:text-epig-text no-underline"><i class="fab fa-discord mr-2"></i>Discord Community</a>
-            <a href="#" class="text-epig-textDim text-sm hover:text-epig-text no-underline"><i class="fab fa-twitter mr-2"></i>Twitter</a>
+            <a href="https://x.com/ekantikcapital" target="_blank" rel="noopener" class="text-epig-textDim text-sm hover:text-epig-text no-underline"><i class="fab fa-x-twitter mr-2"></i>X (formerly Twitter)</a>
             <a href="mailto:info@ekantikcapital.com" class="text-epig-textDim text-sm hover:text-epig-text no-underline"><i class="fas fa-envelope mr-2"></i>Contact</a>
           </div>
         </div>
@@ -315,7 +314,7 @@ export function layout(title: string, content: string, social?: SocialMeta): str
       const setHref = (id, href) => { const el = document.getElementById(id); if (el) el.href = href; };
       setHref('share-linkedin',  'https://www.linkedin.com/sharing/share-offsite/?url=' + url);
       setHref('share-facebook',  'https://www.facebook.com/sharer/sharer.php?u=' + url);
-      setHref('share-twitter',   'https://twitter.com/intent/tweet?url=' + url + '&text=' + text);
+      setHref('share-twitter',   'https://x.com/intent/tweet?url=' + url + '&text=' + text);
       setHref('share-whatsapp',  'https://wa.me/?text=' + text + '%20' + url);
       setHref('share-telegram',  'https://t.me/share/url?url=' + url + '&text=' + text);
       setHref('share-email',     'mailto:?subject=' + title + '&body=' + text + '%0A%0A' + url);
@@ -323,7 +322,7 @@ export function layout(title: string, content: string, social?: SocialMeta): str
       // Mobile links (same URLs, prefixed m-)
       setHref('m-share-linkedin',  'https://www.linkedin.com/sharing/share-offsite/?url=' + url);
       setHref('m-share-facebook',  'https://www.facebook.com/sharer/sharer.php?u=' + url);
-      setHref('m-share-twitter',   'https://twitter.com/intent/tweet?url=' + url + '&text=' + text);
+      setHref('m-share-twitter',   'https://x.com/intent/tweet?url=' + url + '&text=' + text);
       setHref('m-share-whatsapp',  'https://wa.me/?text=' + text + '%20' + url);
       setHref('m-share-telegram',  'https://t.me/share/url?url=' + url + '&text=' + text);
       setHref('m-share-email',     'mailto:?subject=' + title + '&body=' + text + '%0A%0A' + url);
