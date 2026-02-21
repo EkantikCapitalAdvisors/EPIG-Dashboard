@@ -32,7 +32,7 @@ app.get('/dashboard', (c) => c.html(layout('Dashboard | EPIG', dashboardPage(), 
 })))
 app.get('/pricing', (c) => c.html(layout('Pricing | EPIG', pricingPage(), {
   title: 'Pricing | EPIG Investment Design',
-  description: 'Free dashboard access forever. Subscribe for real-time Discord trade alerts on every Strategy B & C entry and exit. Start with a free trial.',
+  description: 'Free dashboard access forever. Subscribe for real-time Discord trade alerts on every Strategy A, B & C entry and exit. Start with a free trial.',
   path: '/pricing',
 })))
 app.get('/how-it-works', (c) => c.html(layout('How It Works | EPIG', howItWorksPage(), {

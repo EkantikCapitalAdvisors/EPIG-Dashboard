@@ -20,7 +20,7 @@ export function faqPage(): string {
             <i class="fas fa-chevron-down text-epig-textDim text-xs transition-transform group-open:rotate-180"></i>
           </summary>
           <div class="px-5 pb-5 text-sm text-epig-textDim leading-relaxed">
-            EPIG (Ekantik Portfolio Investment & Growth) is a three-layer investment design that combines structural capital protection (Strategy A),
+            EPIG (Ekantik Principal Protection Income &amp; Growth) is a three-layer investment design that combines structural capital protection (Strategy A),
             systematic futures income (Strategy B), and asymmetric options plays (Strategy C). All trades are executed in a real Interactive Brokers account
             and shared with full transparency.
           </div>
@@ -165,7 +165,7 @@ export function faqPage(): string {
             <i class="fas fa-chevron-down text-epig-textDim text-xs transition-transform group-open:rotate-180"></i>
           </summary>
           <div class="px-5 pb-5 text-sm text-epig-textDim leading-relaxed">
-            <strong class="text-white">Real-time Discord alerts</strong> for every Strategy B and C trade (entry and exit),
+            <strong class="text-white">Real-time Discord alerts</strong> for every Strategy A, B, and C trade (entry and exit),
             full dashboard access with equity curves and metrics, the performance projector tool,
             weekly summary recaps, and access to the private Discord community for Q&amp;A and discussion.
           </div>
