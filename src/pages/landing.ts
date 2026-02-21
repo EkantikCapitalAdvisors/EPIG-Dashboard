@@ -126,69 +126,147 @@ export function landingPage(): string {
     </div>
   </section>
 
-  <!-- ════ SECTION 4: COFFEE CART ANALOGY ════ -->
+  <!-- ════ SECTION 4: SPY vs EPIG ════ -->
   <section class="section-divider">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
       <div class="text-center mb-14">
-        <h2 class="text-3xl sm:text-4xl font-bold mb-4">Three Ways to Own a Coffee Business</h2>
+        <h2 class="text-3xl sm:text-4xl font-bold mb-4">SPY vs. <span class="gradient-text">EPIG</span></h2>
         <p class="text-epig-textMuted text-lg max-w-2xl mx-auto">
-          A simple analogy that explains the EPIG structural advantage.
+          Passive index investing locks you into every storm. EPIG adapts, reroutes, and protects the network.
         </p>
       </div>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div class="kpi-card border-epig-borderLight">
-          <div class="flex items-center gap-3 mb-4">
-            <div class="w-10 h-10 rounded-lg bg-gray-500/20 flex items-center justify-center">
-              <i class="fas fa-building text-gray-400"></i>
+
+      <!-- Hero Image -->
+      <div class="rounded-2xl overflow-hidden border border-epig-border mb-12">
+        <img src="https://www.genspark.ai/api/files/s/FRN8xl6Y" alt="SPY vs EPIG — The Coffee Shop vs The Amazon Network" class="w-full h-auto" loading="lazy">
+      </div>
+
+      <!-- Two-Column Comparison -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+        <!-- SPY Column -->
+        <div class="kpi-card border-red-500/20 relative overflow-hidden">
+          <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-red-500 to-red-400"></div>
+          <div class="flex items-center gap-3 mb-5 mt-2">
+            <div class="w-12 h-12 rounded-xl bg-red-500/10 flex items-center justify-center">
+              <i class="fas fa-store text-red-400 text-xl"></i>
             </div>
             <div>
-              <h3 class="font-semibold">Lease the Cart</h3>
-              <span class="text-xs text-epig-textDim uppercase tracking-wide">Passive / Index</span>
+              <h3 class="text-xl font-bold">SPY: The Coffee Shop</h3>
+              <span class="text-xs text-red-400 uppercase tracking-wide font-semibold">Passive Index</span>
             </div>
           </div>
-          <p class="text-epig-textDim text-sm leading-relaxed">
-            You own the lease. Someone else operates. Returns depend entirely on foot traffic (the market).
-            In a downturn, you still pay rent &mdash; drawdowns hit fully.
-          </p>
-          <div class="mt-4 pt-4 border-t border-epig-border">
-            <span class="text-xs text-red-400"><i class="fas fa-exclamation-triangle mr-1"></i>No protection in downturns</span>
+
+          <div class="space-y-4 mb-6">
+            <div class="flex items-start gap-3">
+              <div class="w-6 h-6 rounded-full bg-red-500/15 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <i class="fas fa-cloud-rain text-red-400 text-xs"></i>
+              </div>
+              <div>
+                <h4 class="font-semibold text-sm mb-0.5">Open in Every Storm</h4>
+                <p class="text-xs text-epig-textDim leading-relaxed">Must stay open no matter what. When the market crashes, you ride it all the way down. No exit, no shelter.</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3">
+              <div class="w-6 h-6 rounded-full bg-red-500/15 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <i class="fas fa-arrow-trend-down text-red-400 text-xs"></i>
+              </div>
+              <div>
+                <h4 class="font-semibold text-sm mb-0.5">Foot Traffic Collapses</h4>
+                <p class="text-xs text-epig-textDim leading-relaxed">In a bear market, volume dries up and valuations compress. Your single location has no diversification.</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3">
+              <div class="w-6 h-6 rounded-full bg-red-500/15 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <i class="fas fa-ban text-red-400 text-xs"></i>
+              </div>
+              <div>
+                <h4 class="font-semibold text-sm mb-0.5">Absorb the Losses</h4>
+                <p class="text-xs text-epig-textDim leading-relaxed">Can&rsquo;t escape the storm. A 50% drawdown requires a 100% recovery just to break even. Time is the only hope.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="p-4 bg-red-500/5 border border-red-500/15 rounded-lg">
+            <div class="flex items-center gap-2 mb-1">
+              <i class="fas fa-exclamation-triangle text-red-400 text-xs"></i>
+              <span class="text-xs font-bold text-red-400 uppercase tracking-wide">The Problem</span>
+            </div>
+            <p class="text-xs text-epig-textDim leading-relaxed">
+              S&P 500 returned <strong class="text-white">0% from 2000&ndash;2010</strong>. It took 13 years to recover from the 2000 peak.
+              Passive investing assumes you have unlimited time and unlimited pain tolerance.
+            </p>
           </div>
         </div>
-        <div class="kpi-card border-epig-borderLight">
-          <div class="flex items-center gap-3 mb-4">
-            <div class="w-10 h-10 rounded-lg bg-amber-500/20 flex items-center justify-center">
-              <i class="fas fa-mug-hot text-amber-400"></i>
+
+        <!-- EPIG Column -->
+        <div class="kpi-card border-emerald-500/20 relative overflow-hidden" style="background: linear-gradient(135deg, rgba(16,185,129,0.03), rgba(59,130,246,0.03));">
+          <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-emerald-500 to-blue-400"></div>
+          <div class="flex items-center gap-3 mb-5 mt-2">
+            <div class="w-12 h-12 rounded-xl bg-emerald-500/10 flex items-center justify-center">
+              <i class="fas fa-network-wired text-emerald-400 text-xl"></i>
             </div>
             <div>
-              <h3 class="font-semibold">Operate the Cart</h3>
-              <span class="text-xs text-epig-textDim uppercase tracking-wide">Active / Stock Picking</span>
+              <h3 class="text-xl font-bold">EPIG: The Adaptive Network</h3>
+              <span class="text-xs text-emerald-400 uppercase tracking-wide font-semibold">Multi-Layer Design</span>
             </div>
           </div>
-          <p class="text-epig-textDim text-sm leading-relaxed">
-            You make every decision yourself. Better returns possible, but success depends entirely on
-            your skill and time. Inconsistent, exhausting, hard to scale.
-          </p>
-          <div class="mt-4 pt-4 border-t border-epig-border">
-            <span class="text-xs text-amber-400"><i class="fas fa-exclamation-triangle mr-1"></i>Skill-dependent, not systematic</span>
+
+          <div class="space-y-4 mb-6">
+            <div class="flex items-start gap-3">
+              <div class="w-6 h-6 rounded-full bg-emerald-500/15 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <i class="fas fa-route text-emerald-400 text-xs"></i>
+              </div>
+              <div>
+                <h4 class="font-semibold text-sm mb-0.5">Adapt &amp; Reroute</h4>
+                <p class="text-xs text-epig-textDim leading-relaxed">When one area gets hit, the system reroutes. Tactical futures (B) and asymmetric options (C) generate returns independent of direction.</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3">
+              <div class="w-6 h-6 rounded-full bg-emerald-500/15 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <i class="fas fa-pause-circle text-emerald-400 text-xs"></i>
+              </div>
+              <div>
+                <h4 class="font-semibold text-sm mb-0.5">Pause Risky Zones</h4>
+                <p class="text-xs text-epig-textDim leading-relaxed">Active allocation management means reducing exposure when risk is elevated, not riding the drawdown to the bottom.</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3">
+              <div class="w-6 h-6 rounded-full bg-emerald-500/15 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <i class="fas fa-shield-halved text-emerald-400 text-xs"></i>
+              </div>
+              <div>
+                <h4 class="font-semibold text-sm mb-0.5">Protect the Network</h4>
+                <p class="text-xs text-epig-textDim leading-relaxed">Three independent revenue streams ensure the system stays profitable overall, even when individual routes are disrupted.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="p-4 bg-emerald-500/5 border border-emerald-500/15 rounded-lg">
+            <div class="flex items-center gap-2 mb-1">
+              <i class="fas fa-check-circle text-emerald-400 text-xs"></i>
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wide">The EPIG Advantage</span>
+            </div>
+            <p class="text-xs text-epig-textDim leading-relaxed">
+              Core allocation (A) participates in market growth. Tactical futures (B) generate systematic income with defined risk.
+              Episodic pivots (C) capture outsized moves during dislocations. <strong class="text-white">The whole is greater than the sum of its parts.</strong>
+            </p>
           </div>
         </div>
-        <div class="kpi-card border-blue-500/30" style="background: linear-gradient(135deg, rgba(59,130,246,0.05), rgba(16,185,129,0.05));">
-          <div class="flex items-center gap-3 mb-4">
-            <div class="w-10 h-10 rounded-lg bg-blue-500/20 flex items-center justify-center">
-              <i class="fas fa-cogs text-blue-400"></i>
-            </div>
-            <div>
-              <h3 class="font-semibold">Own the System</h3>
-              <span class="text-xs text-blue-400 uppercase tracking-wide">EPIG Approach</span>
-            </div>
-          </div>
-          <p class="text-epig-textDim text-sm leading-relaxed">
-            You own the building, operate multiple revenue streams, and have insurance against fire.
-            Structural protection + systematic income + asymmetric upside &mdash; all in one design.
+      </div>
+
+      <!-- Bottom Insight -->
+      <div class="rounded-2xl border border-blue-500/30 bg-gradient-to-r from-blue-500/5 to-emerald-500/5 p-6 flex items-start gap-4">
+        <div class="w-10 h-10 rounded-lg bg-blue-500/15 flex items-center justify-center flex-shrink-0 mt-0.5">
+          <i class="fas fa-lightbulb text-blue-400"></i>
+        </div>
+        <div>
+          <div class="text-white font-bold text-sm mb-1">Think Networks, Not Storefronts</div>
+          <p class="text-[#8892a6] text-sm leading-relaxed mb-0">
+            A single coffee shop (SPY) has one revenue stream and zero defense against bad weather.
+            A logistics network (EPIG) has multiple delivery channels, can reroute around disruption,
+            and keeps the system profitable even when individual zones shut down. That&rsquo;s the structural difference
+            between passively holding an index and actively managing a multi-layer investment design.
           </p>
-          <div class="mt-4 pt-4 border-t border-blue-500/20">
-            <span class="text-xs text-emerald-400"><i class="fas fa-shield-halved mr-1"></i>Protected, systematic, and scalable</span>
-          </div>
         </div>
       </div>
     </div>
