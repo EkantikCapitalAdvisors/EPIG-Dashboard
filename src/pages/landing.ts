@@ -821,61 +821,6 @@ export function landingPage(): string {
     </div>
   </section>
 
-  <!-- ════ SECTION 8b: LATEST UPDATES ════ -->
-  <section class="section-divider">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-      <div class="flex items-center justify-between mb-10">
-        <div>
-          <h2 class="text-3xl sm:text-4xl font-bold mb-2">Latest Updates</h2>
-          <p class="text-epig-textMuted text-lg">Weekly data uploads, platform changes, and notable events.</p>
-        </div>
-        <a href="/updates" class="btn-outline text-sm no-underline hidden sm:inline-flex items-center gap-2" style="padding: 10px 20px;">
-          View All <i class="fas fa-arrow-right text-xs"></i>
-        </a>
-      </div>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-        <div class="kpi-card">
-          <div class="flex items-center gap-3 mb-3">
-            <span class="text-xs bg-blue-500/15 text-blue-400 px-2.5 py-1 rounded-full font-semibold">DATA</span>
-            <span class="text-sm text-epig-textDim font-mono">2026-02-17</span>
-          </div>
-          <h3 class="font-semibold mb-2">Weekly Upload &mdash; Feb 17</h3>
-          <p class="text-sm text-epig-textDim leading-relaxed">
-            IB Flex Query uploaded for all three strategies. 12 new trades for B, 3 for C.
-            Strategy A allocation unchanged at 80/15/5.
-          </p>
-        </div>
-        <div class="kpi-card">
-          <div class="flex items-center gap-3 mb-3">
-            <span class="text-xs bg-emerald-500/15 text-emerald-400 px-2.5 py-1 rounded-full font-semibold">FEATURE</span>
-            <span class="text-sm text-epig-textDim font-mono">2026-02-14</span>
-          </div>
-          <h3 class="font-semibold mb-2">Combined Portfolio Tab</h3>
-          <p class="text-sm text-epig-textDim leading-relaxed">
-            Dashboard now includes a Combined Portfolio view aggregating all three strategies,
-            with weekly/monthly returns toggle.
-          </p>
-        </div>
-        <div class="kpi-card">
-          <div class="flex items-center gap-3 mb-3">
-            <span class="text-xs bg-amber-500/15 text-amber-400 px-2.5 py-1 rounded-full font-semibold">PLATFORM</span>
-            <span class="text-sm text-epig-textDim font-mono">2026-02-01</span>
-          </div>
-          <h3 class="font-semibold mb-2">EPIG Public Launch</h3>
-          <p class="text-sm text-epig-textDim leading-relaxed">
-            Full performance dashboard, performance projector, and subscription system live.
-            Phase 1 with manual IB uploads active.
-          </p>
-        </div>
-      </div>
-      <div class="text-center sm:hidden">
-        <a href="/updates" class="btn-outline text-sm no-underline inline-flex items-center gap-2" style="padding: 10px 20px;">
-          View All Updates <i class="fas fa-arrow-right text-xs"></i>
-        </a>
-      </div>
-    </div>
-  </section>
-
   <!-- ════ SECTION 9: PRICING CTA ════ -->
   <section class="section-divider">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">

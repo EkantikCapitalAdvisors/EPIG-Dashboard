@@ -40,7 +40,7 @@ export function layout(title: string, content: string): string {
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
   <style>
@@ -86,10 +86,13 @@ export function layout(title: string, content: string): string {
       <div class="flex items-center justify-between h-16">
         <div class="flex items-center gap-2">
           <a href="/" class="flex items-center gap-3 text-white no-underline">
-            <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-emerald-500 flex items-center justify-center">
-              <span class="font-bold text-sm">E</span>
+            <div class="w-9 h-9 rounded-lg flex items-center justify-center" style="background:#E5A418;">
+              <span class="font-bold text-xs text-white" style="font-family:'Montserrat',sans-serif;letter-spacing:0.5px;">ECA</span>
             </div>
-            <span class="font-bold text-lg tracking-tight">EPIG</span>
+            <div class="hidden sm:flex flex-col leading-none">
+              <span class="font-bold text-[15px] text-white tracking-tight" style="font-family:'Montserrat',sans-serif;">Ekantik Capital</span>
+              <span class="text-[9px] font-semibold uppercase tracking-[0.2em]" style="color:#E5A418;">Advisors LLC</span>
+            </div>
           </a>
         </div>
         <div class="hidden md:flex items-center gap-6">
@@ -97,7 +100,6 @@ export function layout(title: string, content: string): string {
           <a href="/projector" class="nav-link">Performance Projector</a>
           <a href="/how-it-works" class="nav-link">How It Works</a>
           <a href="/pricing" class="nav-link">Pricing</a>
-          <a href="/updates" class="nav-link flex items-center gap-1.5">Updates <span class="bg-emerald-500 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full leading-none">NEW</span></a>
           <a href="/admin" class="nav-link">Admin</a>
         </div>
         <div class="flex items-center gap-3">
@@ -115,22 +117,11 @@ export function layout(title: string, content: string): string {
         <a href="/projector" class="nav-link py-2">Performance Projector</a>
         <a href="/how-it-works" class="nav-link py-2">How It Works</a>
         <a href="/pricing" class="nav-link py-2">Pricing</a>
-        <a href="/updates" class="nav-link py-2">Updates</a>
         <a href="/admin" class="nav-link py-2">Admin</a>
         <a href="/disclosures" class="nav-link py-2">Disclosures</a>
       </div>
     </div>
   </nav>
-
-  <!-- Latest update banner -->
-  <div class="bg-gradient-to-r from-emerald-600/15 via-blue-600/10 to-purple-600/15 border-b border-emerald-500/20">
-    <div class="max-w-7xl mx-auto px-4 py-2.5 flex items-center justify-center gap-3 text-sm">
-      <div class="pulse-dot"></div>
-      <span class="text-emerald-400 font-semibold">Latest Update</span>
-      <span class="text-epig-textMuted">Feb 17 &mdash; Weekly data uploaded: 12 new Strategy B trades, 3 Strategy C trades</span>
-      <a href="/updates" class="text-blue-400 font-semibold hover:text-blue-300 no-underline">View all updates &rarr;</a>
-    </div>
-  </div>
 
   <!-- Main content -->
   <main>
@@ -143,13 +134,16 @@ export function layout(title: string, content: string): string {
       <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
         <div>
           <div class="flex items-center gap-3 mb-4">
-            <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-emerald-500 flex items-center justify-center">
-              <span class="font-bold text-sm text-white">E</span>
+            <div class="w-10 h-10 rounded-lg flex items-center justify-center" style="background:#E5A418;">
+              <span class="font-bold text-xs text-white" style="font-family:'Montserrat',sans-serif;letter-spacing:0.5px;">ECA</span>
             </div>
-            <span class="font-bold text-lg text-white">EPIG Investment Design</span>
+            <div class="flex flex-col leading-none">
+              <span class="font-bold text-[15px] text-white" style="font-family:'Montserrat',sans-serif;">Ekantik Capital</span>
+              <span class="text-[9px] font-semibold uppercase tracking-[0.2em]" style="color:#E5A418;">Advisors LLC</span>
+            </div>
           </div>
           <p class="text-epig-textDim text-sm leading-relaxed">
-            Structural protection, systematic income, and disciplined compounding&mdash;with full transparency.
+            EPIG Investment Design&mdash;structural protection, systematic income, and disciplined compounding with full transparency.
           </p>
         </div>
         <div>
@@ -181,7 +175,7 @@ export function layout(title: string, content: string): string {
       </div>
       <div class="section-divider pt-6 flex flex-col md:flex-row items-center justify-between gap-4">
         <p class="text-epig-textDim text-xs">
-          &copy; 2026 Ekantik Capital. All rights reserved. EPIG Investment Design is for informational and educational purposes only. Nothing herein constitutes investment advice.
+          &copy; 2026 Ekantik Capital Advisors LLC. All rights reserved. EPIG Investment Design is for informational and educational purposes only. Nothing herein constitutes investment advice.
         </p>
         <p class="text-epig-textDim text-xs">
           Past performance is not indicative of future results.

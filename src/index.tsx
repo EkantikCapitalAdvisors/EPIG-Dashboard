@@ -9,7 +9,6 @@ import { disclosuresPage } from './pages/disclosures'
 import { termsPage } from './pages/terms'
 import { privacyPage } from './pages/privacy'
 import { adminPage } from './pages/admin'
-import { updatesPage } from './pages/updates'
 import { layout } from './components/layout'
 
 type Bindings = { DB: D1Database }
@@ -26,7 +25,6 @@ app.get('/pricing', (c) => c.html(layout('Pricing | EPIG', pricingPage())))
 app.get('/how-it-works', (c) => c.html(layout('How It Works | EPIG', howItWorksPage())))
 app.get('/projector', (c) => c.html(layout('Performance Projector | EPIG', projectorPage())))
 app.get('/calculator', (c) => c.redirect('/projector'))
-app.get('/updates', (c) => c.html(layout('Updates | EPIG', updatesPage())))
 app.get('/disclosures', (c) => c.html(layout('Disclosures | EPIG', disclosuresPage())))
 app.get('/terms', (c) => c.html(layout('Terms of Service | EPIG', termsPage())))
 app.get('/privacy', (c) => c.html(layout('Privacy Policy | EPIG', privacyPage())))
