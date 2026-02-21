@@ -457,8 +457,8 @@ export function landingPage(): string {
               </div>
               <p class="text-sm text-[#c0c8d8] leading-relaxed mb-0">
                 <strong class="text-white">Key Insight:</strong> By harvesting only <strong class="text-white">high-EV windows</strong>
-                (and otherwise sitting in bills), the design aims to <strong class="text-white">out-compound</strong> a constant S&amp;P allocation
-                across cycles while <em class="text-white">avoiding major drawdowns</em>.
+                (and otherwise sitting in bills), the design aims to <strong class="text-white">compound at ~20% CAGR</strong> over a 2&ndash;3+ year horizon
+                while <em class="text-white">avoiding major drawdowns</em>. The edge is not in any single trade &mdash; it&rsquo;s in the system-level compounding over hundreds of trades.
               </p>
             </div>
           </div>
@@ -525,7 +525,7 @@ export function landingPage(): string {
             <div class="h-px bg-[#2a2a3e]"></div>
             <div class="flex justify-between items-center">
               <span class="text-[#8892a6] text-sm">Target Return</span>
-              <span class="text-orange-400 font-mono font-bold text-sm">~6&ndash;8%</span>
+              <span class="text-orange-400 font-mono font-bold text-sm">~4&ndash;6%</span>
             </div>
           </div>
           <a href="/dashboard" class="flex items-center justify-center gap-2 text-sm text-orange-400 font-semibold hover:text-orange-300 transition-colors no-underline">
@@ -551,7 +551,7 @@ export function landingPage(): string {
             <div class="h-px bg-[#2a2a3e]"></div>
             <div class="flex justify-between items-center">
               <span class="text-[#8892a6] text-sm">Target Return</span>
-              <span class="text-emerald-400 font-mono font-bold text-sm">~12&ndash;16%</span>
+              <span class="text-emerald-400 font-mono font-bold text-sm">~8&ndash;12%</span>
             </div>
           </div>
           <a href="/dashboard" class="flex items-center justify-center gap-2 text-sm text-emerald-400 font-semibold hover:text-emerald-300 transition-colors no-underline">
@@ -577,7 +577,7 @@ export function landingPage(): string {
             <div class="h-px bg-[#2a2a3e]"></div>
             <div class="flex justify-between items-center">
               <span class="text-[#8892a6] text-sm">Target Return</span>
-              <span class="text-purple-400 font-mono font-bold text-sm">~6&ndash;10%</span>
+              <span class="text-purple-400 font-mono font-bold text-sm">~4&ndash;8%</span>
             </div>
           </div>
           <a href="/dashboard" class="flex items-center justify-center gap-2 text-sm text-purple-400 font-semibold hover:text-purple-300 transition-colors no-underline">
@@ -589,8 +589,9 @@ export function landingPage(): string {
       <!-- ── KPI Summary Row ── -->
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
         <div class="rounded-2xl border border-[#2a2a3e] bg-[#12121e] p-6 text-center">
-          <div class="text-[#8892a6] text-xs uppercase tracking-wider font-semibold mb-2">Target Modeled CAGR</div>
-          <div class="text-4xl font-extrabold text-white font-mono">26<span class="text-2xl text-[#8892a6]">%</span></div>
+          <div class="text-[#8892a6] text-xs uppercase tracking-wider font-semibold mb-2">Target CAGR (Long-Term)</div>
+          <div class="text-4xl font-extrabold text-white font-mono">20<span class="text-2xl text-[#8892a6]">%</span></div>
+          <div class="text-[11px] text-[#8892a6] mt-1">Compounding goal over 2&ndash;3+ years</div>
         </div>
         <div class="rounded-2xl border border-[#2a2a3e] bg-[#12121e] p-6 text-center">
           <div class="text-[#8892a6] text-xs uppercase tracking-wider font-semibold mb-2">Total Capital at Risk</div>
@@ -605,18 +606,18 @@ export function landingPage(): string {
       <!-- ── Return Contribution Chart ── -->
       <div class="rounded-2xl border border-[#2a2a3e] bg-[#12121e] p-6 mb-10">
         <h3 class="text-lg font-bold text-white mb-1">Return Contribution by Strategy</h3>
-        <p class="text-[#8892a6] text-sm mb-6">Expected annual return breakdown across the three layers</p>
+        <p class="text-[#8892a6] text-sm mb-6">Target annual return breakdown across the three layers &mdash; compounding goal: ~20% CAGR over 2&ndash;3+ years</p>
         <!-- Stacked Bar -->
         <div class="relative">
           <div class="flex rounded-xl overflow-hidden h-14 mb-4">
-            <div class="bg-gradient-to-r from-orange-500 to-amber-400 flex items-center justify-center" style="width: 26%;">
-              <span class="text-white font-bold text-sm drop-shadow">A: 6&ndash;8%</span>
+            <div class="bg-gradient-to-r from-orange-500 to-amber-400 flex items-center justify-center" style="width: 25%;">
+              <span class="text-white font-bold text-sm drop-shadow">A: 4&ndash;6%</span>
             </div>
-            <div class="bg-gradient-to-r from-emerald-500 to-green-400 flex items-center justify-center" style="width: 48%;">
-              <span class="text-white font-bold text-sm drop-shadow">B: 12&ndash;16%</span>
+            <div class="bg-gradient-to-r from-emerald-500 to-green-400 flex items-center justify-center" style="width: 50%;">
+              <span class="text-white font-bold text-sm drop-shadow">B: 8&ndash;12%</span>
             </div>
-            <div class="bg-gradient-to-r from-purple-500 to-violet-400 flex items-center justify-center" style="width: 26%;">
-              <span class="text-white font-bold text-sm drop-shadow">C: 6&ndash;10%</span>
+            <div class="bg-gradient-to-r from-purple-500 to-violet-400 flex items-center justify-center" style="width: 25%;">
+              <span class="text-white font-bold text-sm drop-shadow">C: 4&ndash;8%</span>
             </div>
           </div>
           <!-- Legend -->
@@ -693,7 +694,8 @@ export function landingPage(): string {
           <p class="text-[#8892a6] text-sm leading-relaxed mb-0">
             ~80% of capital remains protected in broad market exposure (Strategy A), while a small 3&ndash;5% tactical overlay
             (Strategy B) generates outsized returns through systematic, defined-risk futures trades. Strategy C adds asymmetric
-            upside from episodic opportunities &mdash; creating a compounding engine with structurally limited downside.
+            upside from episodic opportunities. The goal: <strong class="text-white">~20% CAGR sustained over 2&ndash;3+ years</strong>
+            through disciplined compounding with structurally limited downside.
           </p>
         </div>
       </div>

@@ -127,40 +127,14 @@ export function pricingPage(): string {
       </div>
     </div>
 
-    <!-- FAQ -->
-    <div class="max-w-2xl mx-auto">
-      <h3 class="font-bold text-xl mb-6 text-center">Frequently Asked Questions</h3>
-      <div class="space-y-4">
-        <div class="kpi-card">
-          <h4 class="font-semibold mb-2">What happens during the 60-day trial?</h4>
-          <p class="text-sm text-epig-textDim leading-relaxed">
-            You get full access to all subscriber features including real-time Discord notifications.
-            A payment method is collected upfront but you will not be charged until day 61.
-            Cancel anytime before then with zero obligation.
-          </p>
-        </div>
-        <div class="kpi-card">
-          <h4 class="font-semibold mb-2">Can I follow the trades?</h4>
-          <p class="text-sm text-epig-textDim leading-relaxed">
-            EPIG is for informational and educational purposes only. We do not provide investment advice.
-            The notifications show you our trades in real time for transparency and education.
-          </p>
-        </div>
-        <div class="kpi-card">
-          <h4 class="font-semibold mb-2">How do I access Discord?</h4>
-          <p class="text-sm text-epig-textDim leading-relaxed">
-            After subscribing, connect your Discord account from your account page.
-            You'll automatically receive the EPIG-Subscriber role granting access to private notification channels.
-          </p>
-        </div>
-        <div class="kpi-card">
-          <h4 class="font-semibold mb-2">Can I cancel anytime?</h4>
-          <p class="text-sm text-epig-textDim leading-relaxed">
-            Yes. Cancel from your account page at any time. Your access continues until the end of your billing period.
-            No questions asked.
-          </p>
-        </div>
-      </div>
+    <!-- FAQ Link -->
+    <div class="text-center max-w-2xl mx-auto">
+      <p class="text-epig-textMuted text-sm mb-3">Have questions about trials, billing, or what&rsquo;s included?</p>
+      <a href="/faq" class="inline-flex items-center gap-2 text-blue-400 font-semibold text-sm no-underline hover:text-blue-300 transition-colors">
+        <i class="fas fa-circle-question"></i>
+        Read the Full FAQ
+        <i class="fas fa-arrow-right text-xs"></i>
+      </a>
     </div>
 
     <!-- Compliance -->
