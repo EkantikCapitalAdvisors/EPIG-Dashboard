@@ -141,50 +141,124 @@ export function adminPage(): string {
       </div>
     </div>
 
-    <!-- Stats -->
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+    <!-- Stats (live from API) -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4" id="admin-stats">
       <div class="kpi-card text-center">
         <div class="kpi-label">Total Trades</div>
-        <div class="kpi-value text-white">281</div>
+        <div class="kpi-value text-white" id="stat-trades">...</div>
       </div>
       <div class="kpi-card text-center">
-        <div class="kpi-label">Last Upload</div>
-        <div class="kpi-value text-blue-400 text-lg">Feb 17</div>
+        <div class="kpi-label">DB Status</div>
+        <div class="kpi-value text-blue-400 text-lg" id="stat-db">...</div>
       </div>
       <div class="kpi-card text-center">
         <div class="kpi-label">Snapshots</div>
-        <div class="kpi-value text-emerald-400">14</div>
+        <div class="kpi-value text-emerald-400" id="stat-snapshots">...</div>
       </div>
       <div class="kpi-card text-center">
         <div class="kpi-label">Audit Entries</div>
-        <div class="kpi-value text-amber-400">47</div>
+        <div class="kpi-value text-amber-400" id="stat-audits">...</div>
       </div>
+    </div>
+
+    <!-- Upload History -->
+    <div class="kpi-card mt-6 mb-6">
+      <h2 class="font-bold text-lg mb-4 flex items-center gap-2">
+        <i class="fas fa-history text-blue-400"></i>
+        Upload History
+      </h2>
+      <div id="upload-history" class="text-sm text-epig-textDim">Loading...</div>
+    </div>
+
+    <!-- Sample CSV Download -->
+    <div class="text-center mb-8">
+      <p class="text-sm text-epig-textDim mb-2">Need a template? Download a sample IB CSV:</p>
+      <a href="/static/sample-ib-futures.csv" download class="btn-outline text-sm inline-block no-underline" style="padding: 8px 20px;">
+        <i class="fas fa-download mr-1"></i> Download Sample CSV
+      </a>
     </div>
   </div>
 
   <script>
     let selectedFile = null;
 
+    // ── Load stats and history on page load ──
+    async function loadAdminData() {
+      try {
+        const healthRes = await fetch('/api/health');
+        const health = await healthRes.json();
+        document.getElementById('stat-trades').textContent = health.trades || '0';
+        document.getElementById('stat-db').textContent = health.status === 'ok' ? 'Connected' : health.status;
+        document.getElementById('stat-snapshots').textContent = health.snapshots || '0';
+        document.getElementById('stat-audits').textContent = health.auditEntries || '0';
+      } catch(e) {
+        document.getElementById('stat-db').textContent = 'Offline';
+      }
+
+      try {
+        const uploadsRes = await fetch('/api/admin/uploads');
+        const uploads = await uploadsRes.json();
+        const el = document.getElementById('upload-history');
+        if (uploads.batches && uploads.batches.length > 0) {
+          el.innerHTML = uploads.batches.map(b =>
+            '<div class="flex items-center justify-between py-2 border-b border-epig-border/30">' +
+            '<div><span class="font-mono text-xs">' + b.uploaded_at + '</span> ' +
+            '<span class="ml-2 font-semibold text-white">' + b.filename + '</span></div>' +
+            '<div class="flex gap-3">' +
+            '<span class="text-emerald-400 text-xs">' + b.trades_new + ' new</span>' +
+            '<span class="text-amber-400 text-xs">' + b.trades_duplicate + ' dup</span>' +
+            '<span class="text-xs bg-' + (b.status==='complete'?'emerald':'blue') + '-500/15 text-' + (b.status==='complete'?'emerald':'blue') + '-400 px-2 py-0.5 rounded">' + b.status + '</span>' +
+            '</div></div>'
+          ).join('');
+        } else {
+          el.textContent = 'No uploads yet. Upload your first IB CSV above.';
+        }
+      } catch(e) {}
+    }
+
+    loadAdminData();
+
+    // ── File handling ──
     function handleFileDrop(e) {
       e.preventDefault();
       e.target.classList.remove('border-blue-500');
       const file = e.dataTransfer.files[0];
-      if (file) { selectedFile = file; showUploadStatus('File selected: ' + file.name, 'info'); }
+      if (file) { selectedFile = file; showUploadStatus('File selected: ' + file.name + ' (' + (file.size/1024).toFixed(1) + ' KB)', 'info'); }
     }
 
     function handleFileSelect(e) {
       const file = e.target.files[0];
-      if (file) { selectedFile = file; showUploadStatus('File selected: ' + file.name, 'info'); }
+      if (file) { selectedFile = file; showUploadStatus('File selected: ' + file.name + ' (' + (file.size/1024).toFixed(1) + ' KB)', 'info'); }
     }
 
-    function processUpload() {
+    // ── REAL upload to API ──
+    async function processUpload() {
       if (!selectedFile) { showUploadStatus('Please select a file first.', 'error'); return; }
       const strategy = document.getElementById('upload-strategy').value;
-      showUploadStatus('Processing ' + selectedFile.name + ' for Strategy ' + strategy + '...', 'info');
-      setTimeout(() => {
-        showUploadStatus('Upload complete. Trades ingested successfully.', 'success');
-        selectedFile = null;
-      }, 1500);
+      showUploadStatus('Uploading ' + selectedFile.name + ' for Strategy ' + strategy + '...', 'info');
+
+      const formData = new FormData();
+      formData.append('file', selectedFile);
+      formData.append('strategy', strategy);
+
+      try {
+        const res = await fetch('/api/admin/upload', { method: 'POST', body: formData });
+        const data = await res.json();
+
+        if (data.success) {
+          showUploadStatus(
+            'Upload complete! ' + data.new + ' new trades ingested, ' +
+            data.duplicates + ' duplicates skipped from ' + data.filename,
+            'success'
+          );
+          selectedFile = null;
+          loadAdminData(); // Refresh stats
+        } else {
+          showUploadStatus('Upload error: ' + (data.error || 'Unknown error'), 'error');
+        }
+      } catch(err) {
+        showUploadStatus('Upload failed: ' + err.message, 'error');
+      }
     }
 
     function showUploadStatus(msg, type) {
@@ -197,13 +271,36 @@ export function adminPage(): string {
       el.innerHTML = '<i class="fas fa-' + (type==='success'?'check-circle':type==='error'?'exclamation-circle':'info-circle') + ' mr-2"></i>' + msg;
     }
 
-    function saveSnapshot() {
+    // ── REAL snapshot save to API ──
+    async function saveSnapshot() {
       const spy = parseInt(document.getElementById('alloc-spy').value);
       const stock = parseInt(document.getElementById('alloc-stock').value);
       const cash = 100 - spy - stock;
       document.getElementById('alloc-cash').value = cash;
+
       if (spy + stock > 100) { alert('SPY + Stock cannot exceed 100%'); return; }
-      showUploadStatus('Allocation snapshot saved: SPY ' + spy + '%, Stock ' + stock + '%, Cash ' + cash + '%', 'success');
+      if (spy < 70 || spy > 100) { alert('SPY must be 70-100%'); return; }
+      if (stock > 25) { alert('Stock sleeve max 25%'); return; }
+
+      const notes = document.getElementById('alloc-notes').value;
+
+      try {
+        const res = await fetch('/api/admin/snapshot', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ spy_pct: spy, stock_pct: stock, cash_pct: cash, notes })
+        });
+        const data = await res.json();
+
+        if (data.success) {
+          showUploadStatus('Allocation snapshot v' + data.version + ' saved: SPY ' + spy + '%, Stock ' + stock + '%, Cash ' + cash + '%', 'success');
+          loadAdminData();
+        } else {
+          showUploadStatus('Snapshot error: ' + (data.error || 'Unknown'), 'error');
+        }
+      } catch(err) {
+        showUploadStatus('Snapshot failed: ' + err.message, 'error');
+      }
     }
   </script>
   `
