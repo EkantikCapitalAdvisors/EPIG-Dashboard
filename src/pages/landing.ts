@@ -204,110 +204,200 @@ export function landingPage(): string {
           that protects, generates income, and compounds.
         </p>
       </div>
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <!-- Strategy A -->
-        <div class="kpi-card relative overflow-hidden">
-          <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 to-blue-400"></div>
-          <div class="flex items-center gap-3 mb-6 mt-2">
-            <div class="w-12 h-12 rounded-xl bg-blue-500/15 flex items-center justify-center">
-              <span class="text-blue-400 font-bold text-lg">A</span>
-            </div>
-            <div>
-              <h3 class="font-bold text-lg">Core Allocation</h3>
-              <span class="text-xs text-epig-textDim">Foundation &amp; Protection</span>
-            </div>
+
+      <!-- ── Three Strategy Cards ── -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-10">
+        <!-- Layer A -->
+        <div class="rounded-2xl border border-[#2a2a3e] bg-[#12121e] p-6 relative overflow-hidden">
+          <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-orange-500 to-amber-400"></div>
+          <div class="flex items-center gap-3 mb-4 mt-2">
+            <span class="inline-flex items-center justify-center px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-orange-500/15 text-orange-400 border border-orange-500/30">Layer A</span>
           </div>
-          <p class="text-epig-textDim text-sm leading-relaxed mb-4">
-            70&ndash;100% SPY exposure with an optional 5&ndash;25% stock sleeve.
-            Remaining capital in cash or treasuries. Managed via allocation snapshots.
+          <h3 class="text-xl font-bold text-white mb-1">Core Allocation</h3>
+          <p class="text-[#8892a6] text-sm leading-relaxed mb-5">
+            Structural equity base providing market participation with downside awareness. SPY-anchored with an optional stock sleeve.
           </p>
-          <div class="space-y-3">
-            <div class="flex justify-between items-center text-sm">
-              <span class="text-epig-textDim">SPY Allocation</span>
-              <span class="text-blue-400 font-mono font-semibold">70&ndash;100%</span>
+          <div class="space-y-3 mb-5">
+            <div class="flex justify-between items-center">
+              <span class="text-[#8892a6] text-sm">Capital Deployed</span>
+              <span class="text-orange-400 font-mono font-bold text-sm">85&ndash;99%</span>
             </div>
-            <div class="flex justify-between items-center text-sm">
-              <span class="text-epig-textDim">Stock Sleeve</span>
-              <span class="text-blue-400 font-mono font-semibold">0&ndash;25%</span>
-            </div>
-            <div class="flex justify-between items-center text-sm">
-              <span class="text-epig-textDim">Cash / Treasuries</span>
-              <span class="text-blue-400 font-mono font-semibold">Remainder</span>
+            <div class="h-px bg-[#2a2a3e]"></div>
+            <div class="flex justify-between items-center">
+              <span class="text-[#8892a6] text-sm">Target Return</span>
+              <span class="text-orange-400 font-mono font-bold text-sm">~6&ndash;8%</span>
             </div>
           </div>
-          <a href="/dashboard" class="block mt-6 text-center text-sm text-blue-400 font-semibold hover:text-blue-300 no-underline">
-            View Strategy A Performance &rarr;
+          <a href="/dashboard" class="flex items-center justify-center gap-2 text-sm text-orange-400 font-semibold hover:text-orange-300 transition-colors no-underline">
+            View Strategy A Performance <i class="fas fa-arrow-right text-xs"></i>
           </a>
         </div>
-        <!-- Strategy B -->
-        <div class="kpi-card relative overflow-hidden">
-          <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-emerald-500 to-emerald-400"></div>
-          <div class="flex items-center gap-3 mb-6 mt-2">
-            <div class="w-12 h-12 rounded-xl bg-emerald-500/15 flex items-center justify-center">
-              <span class="text-emerald-400 font-bold text-lg">B</span>
-            </div>
-            <div>
-              <h3 class="font-bold text-lg">Futures Alerts</h3>
-              <span class="text-xs text-epig-textDim">Systematic Income</span>
-            </div>
+
+        <!-- Layer B -->
+        <div class="rounded-2xl border border-[#2a2a3e] bg-[#12121e] p-6 relative overflow-hidden">
+          <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-emerald-500 to-green-400"></div>
+          <div class="flex items-center gap-3 mb-4 mt-2">
+            <span class="inline-flex items-center justify-center px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-emerald-500/15 text-emerald-400 border border-emerald-500/30">Layer B</span>
           </div>
-          <p class="text-epig-textDim text-sm leading-relaxed mb-4">
-            Defined-risk futures trades with 20-point default stop loss and profit target.
-            Every trade has predefined risk boundaries.
+          <h3 class="text-xl font-bold text-white mb-1">Tactical</h3>
+          <p class="text-[#8892a6] text-sm leading-relaxed mb-5">
+            Defined-risk futures trades overlaid on the core. Systematic entries with 20-point stops generating repeatable income.
           </p>
-          <div class="space-y-3">
-            <div class="flex justify-between items-center text-sm">
-              <span class="text-epig-textDim">Default Stop</span>
-              <span class="text-emerald-400 font-mono font-semibold">20 pts</span>
+          <div class="space-y-3 mb-5">
+            <div class="flex justify-between items-center">
+              <span class="text-[#8892a6] text-sm">VaR Overlay</span>
+              <span class="text-emerald-400 font-mono font-bold text-sm">1&ndash;5%</span>
             </div>
-            <div class="flex justify-between items-center text-sm">
-              <span class="text-epig-textDim">Risk Type</span>
-              <span class="text-emerald-400 font-mono font-semibold">Defined</span>
-            </div>
-            <div class="flex justify-between items-center text-sm">
-              <span class="text-epig-textDim">Tracking</span>
-              <span class="text-emerald-400 font-mono font-semibold">Net Pts / R</span>
+            <div class="h-px bg-[#2a2a3e]"></div>
+            <div class="flex justify-between items-center">
+              <span class="text-[#8892a6] text-sm">Target Return</span>
+              <span class="text-emerald-400 font-mono font-bold text-sm">~12&ndash;16%</span>
             </div>
           </div>
-          <a href="/dashboard" class="block mt-6 text-center text-sm text-emerald-400 font-semibold hover:text-emerald-300 no-underline">
-            View Strategy B Performance &rarr;
+          <a href="/dashboard" class="flex items-center justify-center gap-2 text-sm text-emerald-400 font-semibold hover:text-emerald-300 transition-colors no-underline">
+            View Strategy B Performance <i class="fas fa-arrow-right text-xs"></i>
           </a>
         </div>
-        <!-- Strategy C -->
-        <div class="kpi-card relative overflow-hidden">
-          <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-amber-500 to-amber-400"></div>
-          <div class="flex items-center gap-3 mb-6 mt-2">
-            <div class="w-12 h-12 rounded-xl bg-amber-500/15 flex items-center justify-center">
-              <span class="text-amber-400 font-bold text-lg">C</span>
-            </div>
-            <div>
-              <h3 class="font-bold text-lg">Episodic Pivots</h3>
-              <span class="text-xs text-epig-textDim">Asymmetric Upside</span>
-            </div>
+
+        <!-- Layer C -->
+        <div class="rounded-2xl border border-[#2a2a3e] bg-[#12121e] p-6 relative overflow-hidden">
+          <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-purple-500 to-violet-400"></div>
+          <div class="flex items-center gap-3 mb-4 mt-2">
+            <span class="inline-flex items-center justify-center px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-purple-500/15 text-purple-400 border border-purple-500/30">Layer C</span>
           </div>
-          <p class="text-epig-textDim text-sm leading-relaxed mb-4">
-            Asymmetric options trades capturing outsized moves during market dislocations.
-            No default stops &mdash; tracked by net R-multiple or net dollars.
+          <h3 class="text-xl font-bold text-white mb-1">Episodic Pivot</h3>
+          <p class="text-[#8892a6] text-sm leading-relaxed mb-5">
+            Asymmetric options capturing outsized moves during market dislocations. Limited risk, unlimited upside potential.
           </p>
-          <div class="space-y-3">
-            <div class="flex justify-between items-center text-sm">
-              <span class="text-epig-textDim">Stop Policy</span>
-              <span class="text-amber-400 font-mono font-semibold">None</span>
+          <div class="space-y-3 mb-5">
+            <div class="flex justify-between items-center">
+              <span class="text-[#8892a6] text-sm">Position Size</span>
+              <span class="text-purple-400 font-mono font-bold text-sm">5&ndash;25%</span>
             </div>
-            <div class="flex justify-between items-center text-sm">
-              <span class="text-epig-textDim">Risk Profile</span>
-              <span class="text-amber-400 font-mono font-semibold">Asymmetric</span>
-            </div>
-            <div class="flex justify-between items-center text-sm">
-              <span class="text-epig-textDim">Tracking</span>
-              <span class="text-amber-400 font-mono font-semibold">Net R / $</span>
+            <div class="h-px bg-[#2a2a3e]"></div>
+            <div class="flex justify-between items-center">
+              <span class="text-[#8892a6] text-sm">Target Return</span>
+              <span class="text-purple-400 font-mono font-bold text-sm">~6&ndash;10%</span>
             </div>
           </div>
-          <a href="/dashboard" class="block mt-6 text-center text-sm text-amber-400 font-semibold hover:text-amber-300 no-underline">
-            View Strategy C Performance &rarr;
+          <a href="/dashboard" class="flex items-center justify-center gap-2 text-sm text-purple-400 font-semibold hover:text-purple-300 transition-colors no-underline">
+            View Strategy C Performance <i class="fas fa-arrow-right text-xs"></i>
           </a>
         </div>
       </div>
+
+      <!-- ── KPI Summary Row ── -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+        <div class="rounded-2xl border border-[#2a2a3e] bg-[#12121e] p-6 text-center">
+          <div class="text-[#8892a6] text-xs uppercase tracking-wider font-semibold mb-2">Target Modeled CAGR</div>
+          <div class="text-4xl font-extrabold text-white font-mono">26<span class="text-2xl text-[#8892a6]">%</span></div>
+        </div>
+        <div class="rounded-2xl border border-[#2a2a3e] bg-[#12121e] p-6 text-center">
+          <div class="text-[#8892a6] text-xs uppercase tracking-wider font-semibold mb-2">Total Capital at Risk</div>
+          <div class="text-4xl font-extrabold text-emerald-400 font-mono">&lt;5<span class="text-2xl text-[#8892a6]">%</span></div>
+        </div>
+        <div class="rounded-2xl border border-[#2a2a3e] bg-[#12121e] p-6 text-center">
+          <div class="text-[#8892a6] text-xs uppercase tracking-wider font-semibold mb-2">Total Bets / Year</div>
+          <div class="text-4xl font-extrabold text-white font-mono">150<span class="text-2xl text-[#8892a6]">&ndash;200</span></div>
+        </div>
+      </div>
+
+      <!-- ── Return Contribution Chart ── -->
+      <div class="rounded-2xl border border-[#2a2a3e] bg-[#12121e] p-6 mb-10">
+        <h3 class="text-lg font-bold text-white mb-1">Return Contribution by Strategy</h3>
+        <p class="text-[#8892a6] text-sm mb-6">Expected annual return breakdown across the three layers</p>
+        <!-- Stacked Bar -->
+        <div class="relative">
+          <div class="flex rounded-xl overflow-hidden h-14 mb-4">
+            <div class="bg-gradient-to-r from-orange-500 to-amber-400 flex items-center justify-center" style="width: 26%;">
+              <span class="text-white font-bold text-sm drop-shadow">A: 6&ndash;8%</span>
+            </div>
+            <div class="bg-gradient-to-r from-emerald-500 to-green-400 flex items-center justify-center" style="width: 48%;">
+              <span class="text-white font-bold text-sm drop-shadow">B: 12&ndash;16%</span>
+            </div>
+            <div class="bg-gradient-to-r from-purple-500 to-violet-400 flex items-center justify-center" style="width: 26%;">
+              <span class="text-white font-bold text-sm drop-shadow">C: 6&ndash;10%</span>
+            </div>
+          </div>
+          <!-- Legend -->
+          <div class="flex flex-wrap items-center justify-center gap-6 text-sm">
+            <div class="flex items-center gap-2">
+              <div class="w-3 h-3 rounded-sm bg-orange-400"></div>
+              <span class="text-[#8892a6]">Strategy A &mdash; Core Allocation</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <div class="w-3 h-3 rounded-sm bg-emerald-400"></div>
+              <span class="text-[#8892a6]">Strategy B &mdash; Tactical</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <div class="w-3 h-3 rounded-sm bg-purple-400"></div>
+              <span class="text-[#8892a6]">Strategy C &mdash; Episodic Pivot</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Portfolio Allocation ── -->
+      <div class="rounded-2xl border border-[#2a2a3e] bg-[#12121e] p-6 mb-10">
+        <h3 class="text-lg font-bold text-white mb-1">Portfolio Allocation</h3>
+        <p class="text-[#8892a6] text-sm mb-6">How capital is distributed across the three layers</p>
+        <!-- Allocation Bar -->
+        <div class="flex rounded-xl overflow-hidden h-10 mb-6">
+          <div class="bg-orange-400/80 flex items-center justify-center" style="width: 80%;">
+            <span class="text-white text-xs font-bold drop-shadow">~80%</span>
+          </div>
+          <div class="bg-emerald-400/80 flex items-center justify-center" style="width: 10%;">
+          </div>
+          <div class="bg-purple-400/80 flex items-center justify-center" style="width: 10%;">
+          </div>
+        </div>
+        <!-- Allocation Legend Items -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="flex items-start gap-3">
+            <div class="w-10 h-10 rounded-lg bg-orange-500/15 flex items-center justify-center flex-shrink-0 mt-0.5">
+              <span class="text-orange-400 font-bold text-sm">A</span>
+            </div>
+            <div>
+              <div class="text-white font-semibold text-sm">Strategy A &mdash; ~80%</div>
+              <div class="text-[#8892a6] text-xs">Capital preservation &amp; market participation</div>
+            </div>
+          </div>
+          <div class="flex items-start gap-3">
+            <div class="w-10 h-10 rounded-lg bg-emerald-500/15 flex items-center justify-center flex-shrink-0 mt-0.5">
+              <span class="text-emerald-400 font-bold text-sm">B</span>
+            </div>
+            <div>
+              <div class="text-white font-semibold text-sm">Strategy B &mdash; 3&ndash;5%</div>
+              <div class="text-[#8892a6] text-xs">Tactical overlay with defined risk</div>
+            </div>
+          </div>
+          <div class="flex items-start gap-3">
+            <div class="w-10 h-10 rounded-lg bg-purple-500/15 flex items-center justify-center flex-shrink-0 mt-0.5">
+              <span class="text-purple-400 font-bold text-sm">C</span>
+            </div>
+            <div>
+              <div class="text-white font-semibold text-sm">Strategy C &mdash; 3&ndash;5%</div>
+              <div class="text-[#8892a6] text-xs">Asymmetric long-term opportunities</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Key Insight Callout ── -->
+      <div class="rounded-2xl border border-blue-500/30 bg-gradient-to-r from-blue-500/5 to-purple-500/5 p-6 flex items-start gap-4">
+        <div class="w-10 h-10 rounded-lg bg-blue-500/15 flex items-center justify-center flex-shrink-0 mt-0.5">
+          <i class="fas fa-lightbulb text-blue-400"></i>
+        </div>
+        <div>
+          <div class="text-white font-bold text-sm mb-1">Key Insight</div>
+          <p class="text-[#8892a6] text-sm leading-relaxed mb-0">
+            ~80% of capital remains protected in broad market exposure (Strategy A), while a small 3&ndash;5% tactical overlay
+            (Strategy B) generates outsized returns through systematic, defined-risk futures trades. Strategy C adds asymmetric
+            upside from episodic opportunities &mdash; creating a compounding engine with structurally limited downside.
+          </p>
+        </div>
+      </div>
+
     </div>
   </section>
 
