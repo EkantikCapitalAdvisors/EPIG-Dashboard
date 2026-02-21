@@ -12,79 +12,39 @@ export function adminPage(): string {
       </div>
     </div>
 
-    <!-- Upload Section -->
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
-      <!-- Step 1: Upload -->
-      <div class="kpi-card lg:col-span-2">
-        <h2 class="font-bold text-lg mb-4 flex items-center gap-2">
-          <i class="fas fa-upload text-blue-400"></i>
-          Step 1: Upload IB Flex Query
-        </h2>
-        <p class="text-sm text-epig-textDim mb-4">
-          Upload your Interactive Brokers Flex Query CSV. Trades are <strong class="text-white">auto-classified</strong>
-          by asset class: <span class="text-blue-400">STK &rarr; Strategy A</span>,
-          <span class="text-emerald-400">FUT &rarr; Strategy B</span>,
-          <span class="text-amber-400">OPT &rarr; Strategy C</span>.
-          You can change any assignment before confirming.
-        </p>
-        <div class="border-2 border-dashed border-epig-border rounded-xl p-8 text-center mb-4 hover:border-blue-500/50 transition-colors cursor-pointer"
-             id="upload-zone"
-             ondragover="event.preventDefault(); this.classList.add('border-blue-500');"
-             ondragleave="this.classList.remove('border-blue-500');"
-             ondrop="handleFileDrop(event)">
-          <i class="fas fa-cloud-upload-alt text-3xl text-epig-textDim mb-3"></i>
-          <p class="text-sm text-epig-textDim mb-2">Drag &amp; drop IB Flex Query CSV here</p>
-          <p class="text-xs text-epig-textDim">or</p>
-          <label class="btn-outline inline-block mt-3 cursor-pointer text-sm" style="padding: 8px 20px;">
-            <i class="fas fa-folder-open mr-1"></i> Browse Files
-            <input type="file" accept=".csv,.xml" class="hidden" onchange="handleFileSelect(event)">
-          </label>
-        </div>
-        <button class="btn-primary text-sm w-full" onclick="parseUpload()" id="parse-btn">
-          <i class="fas fa-search mr-1"></i> Parse &amp; Auto-Classify
-        </button>
-        <div id="upload-status" class="hidden text-sm p-3 rounded-lg mt-3"></div>
+    <!-- Upload Section (full width — sole focus) -->
+    <div class="kpi-card mb-8">
+      <h2 class="font-bold text-lg mb-4 flex items-center gap-2">
+        <i class="fas fa-upload text-blue-400"></i>
+        Step 1: Upload IB Flex Query
+      </h2>
+      <p class="text-sm text-epig-textDim mb-4">
+        Upload your Interactive Brokers Flex Query CSV. Trades are <strong class="text-white">auto-classified</strong>
+        by asset class: <span class="text-blue-400">STK &rarr; Strategy A</span>,
+        <span class="text-emerald-400">FUT &rarr; Strategy B</span>,
+        <span class="text-amber-400">OPT &rarr; Strategy C</span>.
+        You can change any assignment before confirming.
+        <a href="/how-it-works#flex-query-setup" class="text-blue-400 no-underline hover:text-blue-300 ml-1">
+          <i class="fas fa-question-circle mr-0.5"></i>How to create a Flex Query
+        </a>
+      </p>
+      <div class="border-2 border-dashed border-epig-border rounded-xl p-10 text-center mb-4 hover:border-blue-500/50 transition-colors cursor-pointer"
+           id="upload-zone"
+           ondragover="event.preventDefault(); this.classList.add('border-blue-500');"
+           ondragleave="this.classList.remove('border-blue-500');"
+           ondrop="handleFileDrop(event)">
+        <i class="fas fa-cloud-upload-alt text-4xl text-epig-textDim mb-3"></i>
+        <p class="text-sm text-epig-textDim mb-2">Drag &amp; drop IB Flex Query CSV here</p>
+        <p class="text-xs text-epig-textDim">or</p>
+        <label class="btn-outline inline-block mt-3 cursor-pointer text-sm" style="padding: 8px 20px;">
+          <i class="fas fa-folder-open mr-1"></i> Browse Files
+          <input type="file" accept=".csv,.xml" class="hidden" onchange="handleFileSelect(event)">
+        </label>
       </div>
-
-      <!-- Allocation Snapshot -->
-      <div class="kpi-card">
-        <h2 class="font-bold text-lg mb-4 flex items-center gap-2">
-          <i class="fas fa-chart-pie text-blue-400"></i>
-          Strategy A &mdash; Allocation
-        </h2>
-        <p class="text-sm text-epig-textDim mb-4">
-          Record a new allocation snapshot for Strategy A.
-        </p>
-        <div class="space-y-4">
-          <div>
-            <label class="text-sm text-epig-textDim mb-1 block">SPY %</label>
-            <input type="number" value="80" min="70" max="100"
-              class="w-full bg-epig-bg border border-epig-border rounded px-3 py-2 font-mono text-white focus:outline-none focus:border-blue-500"
-              id="alloc-spy">
-          </div>
-          <div>
-            <label class="text-sm text-epig-textDim mb-1 block">Stock Sleeve %</label>
-            <input type="number" value="15" min="0" max="25"
-              class="w-full bg-epig-bg border border-epig-border rounded px-3 py-2 font-mono text-white focus:outline-none focus:border-blue-500"
-              id="alloc-stock">
-          </div>
-          <div>
-            <label class="text-sm text-epig-textDim mb-1 block">Cash / Treasuries %</label>
-            <input type="number" value="5" readonly
-              class="w-full bg-epig-bg border border-epig-border rounded px-3 py-2 font-mono text-epig-textDim"
-              id="alloc-cash">
-          </div>
-          <div>
-            <label class="text-sm text-epig-textDim mb-1 block">Notes (optional)</label>
-            <textarea rows="2"
-              class="w-full bg-epig-bg border border-epig-border rounded px-3 py-2 text-sm text-white focus:outline-none focus:border-blue-500 resize-none"
-              id="alloc-notes" placeholder="Reason for allocation change..."></textarea>
-          </div>
-          <button class="btn-primary text-sm w-full" onclick="saveSnapshot()">
-            <i class="fas fa-save mr-1"></i> Save Snapshot
-          </button>
-        </div>
-      </div>
+      <button class="btn-primary text-sm w-full" onclick="parseUpload()" id="parse-btn">
+        <i class="fas fa-search mr-1"></i> Parse &amp; Auto-Classify
+      </button>
+      <div id="upload-status" class="hidden text-sm p-3 rounded-lg mt-3"></div>
     </div>
 
     <!-- Step 2: Review & Confirm (hidden until parse completes) -->
@@ -208,6 +168,55 @@ export function adminPage(): string {
         Upload History
       </h2>
       <div id="upload-history" class="text-sm text-epig-textDim">Loading...</div>
+    </div>
+
+    <!-- Strategy A Allocation (collapsible — separate from upload flow) -->
+    <div class="kpi-card mb-6">
+      <button class="w-full flex items-center justify-between" onclick="document.getElementById('alloc-panel').classList.toggle('hidden'); this.querySelector('.alloc-arrow').classList.toggle('rotate-180');">
+        <h2 class="font-bold text-lg flex items-center gap-2">
+          <i class="fas fa-chart-pie text-blue-400"></i>
+          Strategy A &mdash; Allocation Snapshot
+        </h2>
+        <i class="fas fa-chevron-down text-epig-textDim alloc-arrow transition-transform duration-200"></i>
+      </button>
+      <div id="alloc-panel" class="hidden mt-4">
+        <p class="text-sm text-epig-textDim mb-4">
+          Record a new allocation split for Strategy A. This is separate from trade uploads &mdash;
+          it tracks how the portfolio is allocated across SPY, individual stocks, and cash.
+        </p>
+        <div class="grid grid-cols-1 sm:grid-cols-4 gap-4">
+          <div>
+            <label class="text-sm text-epig-textDim mb-1 block">SPY %</label>
+            <input type="number" value="80" min="70" max="100"
+              class="w-full bg-epig-bg border border-epig-border rounded px-3 py-2 font-mono text-white focus:outline-none focus:border-blue-500"
+              id="alloc-spy">
+          </div>
+          <div>
+            <label class="text-sm text-epig-textDim mb-1 block">Stock Sleeve %</label>
+            <input type="number" value="15" min="0" max="25"
+              class="w-full bg-epig-bg border border-epig-border rounded px-3 py-2 font-mono text-white focus:outline-none focus:border-blue-500"
+              id="alloc-stock">
+          </div>
+          <div>
+            <label class="text-sm text-epig-textDim mb-1 block">Cash %</label>
+            <input type="number" value="5" readonly
+              class="w-full bg-epig-bg border border-epig-border rounded px-3 py-2 font-mono text-epig-textDim"
+              id="alloc-cash">
+          </div>
+          <div>
+            <label class="text-sm text-epig-textDim mb-1 block">Notes</label>
+            <input type="text"
+              class="w-full bg-epig-bg border border-epig-border rounded px-3 py-2 text-sm text-white focus:outline-none focus:border-blue-500"
+              id="alloc-notes" placeholder="Optional reason...">
+          </div>
+        </div>
+        <div class="mt-4">
+          <button class="btn-primary text-sm" onclick="saveSnapshot()" style="padding: 10px 24px;">
+            <i class="fas fa-save mr-1"></i> Save Snapshot
+          </button>
+          <div id="snapshot-status" class="hidden text-sm p-3 rounded-lg mt-3"></div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -543,13 +552,13 @@ export function adminPage(): string {
         });
         const data = await res.json();
         if (data.success) {
-          showStatus('upload-status', 'Allocation snapshot v' + data.version + ' saved.', 'success');
+          showStatus('snapshot-status', 'Allocation snapshot v' + data.version + ' saved.', 'success');
           loadAdminData();
         } else {
-          showStatus('upload-status', 'Snapshot error: ' + (data.error || 'Unknown'), 'error');
+          showStatus('snapshot-status', 'Snapshot error: ' + (data.error || 'Unknown'), 'error');
         }
       } catch(err) {
-        showStatus('upload-status', 'Snapshot failed: ' + err.message, 'error');
+        showStatus('snapshot-status', 'Snapshot failed: ' + err.message, 'error');
       }
     }
 
