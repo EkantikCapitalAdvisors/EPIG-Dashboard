@@ -54,6 +54,17 @@ app.get('/api/dashboard/summary', async (c) => {
 
     if (rows.length === 0) return c.json(buildFallbackSummary())
 
+    // ── Compute PORTFOLIO-WIDE date range ──
+    // All strategies must annualize over the same time span so that
+    // per-strategy annualized returns sum correctly to the combined total.
+    const portfolioAllDates = rows.map((r: any) => r.trade_date).filter(Boolean).sort()
+    const portfolioFirstDate = portfolioAllDates[0]
+    const portfolioLastDate = portfolioAllDates[portfolioAllDates.length - 1]
+    const portfolioDaySpan = Math.max(
+      (new Date(portfolioLastDate).getTime() - new Date(portfolioFirstDate).getTime()) / (1000 * 60 * 60 * 24), 1
+    )
+    const portfolioYearFraction = portfolioDaySpan / 365.25
+
     const result: Record<string, any> = {}
 
     for (const strat of ['A', 'B', 'C']) {
@@ -82,18 +93,17 @@ app.get('/api/dashboard/summary', async (c) => {
       const avgWinR = riskPerTrade > 0 ? avgWinDollar / riskPerTrade : 0
       const evPerTradeR = winRate * avgWinR - (1 - winRate) * 1.0
 
-      // Total P&L & date range
+      // Total P&L & strategy-specific date range (informational)
       const totalPnl = closed.reduce((s: number, rt: any) => s + rt.pnl, 0)
       const dates = fills.map((f: any) => f.trade_date).filter(Boolean).sort()
       const firstDate = dates[0]
       const lastDate = dates[dates.length - 1]
       const daySpan = Math.max((new Date(lastDate).getTime() - new Date(firstDate).getTime()) / (1000 * 60 * 60 * 24), 1)
-      const yearFraction = daySpan / 365.25
 
-      // Starting capital reference: $100K portfolio
+      // Use PORTFOLIO-WIDE yearFraction for annualization so strategies sum correctly
       const startingCapital = 100000
       const cumulativeReturn = round((totalPnl / startingCapital) * 100, 2)
-      const cagr = yearFraction > 0 ? round(((1 + cumulativeReturn / 100) ** (1 / yearFraction) - 1) * 100, 1) : 0
+      const cagr = portfolioYearFraction > 0 ? round(((1 + cumulativeReturn / 100) ** (1 / portfolioYearFraction) - 1) * 100, 1) : 0
 
       // Max drawdown from round-trip P&L sequence
       let peak = 0, maxDD = 0, cumPnl = 0
@@ -106,12 +116,12 @@ app.get('/api/dashboard/summary', async (c) => {
       }
       const maxDrawdown = startingCapital > 0 ? round(-(maxDD / startingCapital) * 100, 2) : 0
 
-      // Sharpe & Sortino from per-trade returns
+      // Sharpe & Sortino from per-trade returns — uses PORTFOLIO-WIDE yearFraction
       const tradeReturns = closed.map((rt: any) => rt.pnl / startingCapital)
       const meanReturn = tradeReturns.length > 0 ? tradeReturns.reduce((a: number, b: number) => a + b, 0) / tradeReturns.length : 0
       const variance = tradeReturns.length > 0 ? tradeReturns.reduce((s: number, r: number) => s + (r - meanReturn) ** 2, 0) / tradeReturns.length : 0
       const stdDev = Math.sqrt(variance)
-      const tradesPerYear = yearFraction > 0 ? totalClosed / yearFraction : totalClosed
+      const tradesPerYear = portfolioYearFraction > 0 ? totalClosed / portfolioYearFraction : totalClosed
       const annualReturn = meanReturn * tradesPerYear
       const annualVol = stdDev * Math.sqrt(tradesPerYear)
       const sharpe = annualVol > 0 ? round(annualReturn / annualVol, 2) : 0
@@ -186,7 +196,7 @@ app.get('/api/dashboard/summary', async (c) => {
         riskPerTrade: round(riskPerTrade, 2),
         evPerTradeR: round(evPerTradeR, 2),
         tradesPerYear: Math.round(tradesPerYear),
-        annualPnl: round(yearFraction > 0 ? totalPnl / yearFraction : totalPnl, 2),
+        annualPnl: round(portfolioYearFraction > 0 ? totalPnl / portfolioYearFraction : totalPnl, 2),
         totalPnl: round(totalPnl, 2),
         dataRange: { firstDate, lastDate, daySpan: Math.round(daySpan) },
         lastUpdated: lastDate ? lastDate + 'T16:00:00Z' : '2026-02-20T16:00:00Z',
@@ -653,6 +663,17 @@ app.get('/api/projector/stats', async (c) => {
     const rows: any[] = allTrades.results || []
     if (rows.length === 0) return c.json({ strategies: null, message: 'No trades in database' })
 
+    // ── Compute PORTFOLIO-WIDE date range ──
+    // All strategies must annualize over the same time span so that
+    // per-strategy annualized returns sum correctly to the combined total.
+    const allDates = rows.map((r: any) => r.trade_date).filter(Boolean).sort()
+    const portfolioFirstDate = allDates[0]
+    const portfolioLastDate = allDates[allDates.length - 1]
+    const portfolioDaySpan = Math.max(
+      (new Date(portfolioLastDate).getTime() - new Date(portfolioFirstDate).getTime()) / (1000 * 60 * 60 * 24), 1
+    )
+    const portfolioYearFraction = portfolioDaySpan / 365.25
+
     const result: Record<string, any> = {}
 
     for (const strat of ['A', 'B', 'C']) {
@@ -668,14 +689,13 @@ app.get('/api/projector/stats', async (c) => {
 
       const roundTrips = buildRoundTrips(fills, strat)
 
-      // Date range from all fills
+      // Strategy-specific date range (for informational display only)
       const dates = fills.map((t: any) => t.trade_date).filter(Boolean).sort()
       const firstDate = dates[0]
       const lastDate = dates[dates.length - 1]
-      const daySpan = Math.max(
+      const stratDaySpan = Math.max(
         (new Date(lastDate).getTime() - new Date(firstDate).getTime()) / (1000 * 60 * 60 * 24), 1
       )
-      const yearFraction = daySpan / 365.25
 
       // Filter to closed round trips with non-zero P&L
       const closed = roundTrips.filter((rt: any) => rt.closed && rt.pnl !== 0)
@@ -704,13 +724,13 @@ app.get('/api/projector/stats', async (c) => {
       // EV per trade (in R)
       const evPerTradeR = winRate * avgWinR - (1 - winRate) * avgLossR
 
-      // Annualized trade count
-      const tradesPerYear = yearFraction > 0 ? Math.round(totalClosed / yearFraction) : totalClosed
+      // Annualized trade count — uses PORTFOLIO-WIDE yearFraction
+      const tradesPerYear = portfolioYearFraction > 0 ? Math.round(totalClosed / portfolioYearFraction) : totalClosed
 
-      // Dollar EV and total P&L
+      // Dollar EV and total P&L — annualPnl uses PORTFOLIO-WIDE yearFraction
       const evPerTradeDollar = riskPerTradeDollar > 0 ? evPerTradeR * riskPerTradeDollar : 0
       const totalPnl = closed.reduce((s: number, rt: any) => s + rt.pnl, 0)
-      const annualPnl = yearFraction > 0 ? totalPnl / yearFraction : totalPnl
+      const annualPnl = portfolioYearFraction > 0 ? totalPnl / portfolioYearFraction : totalPnl
 
       result[strat] = {
         totalFills: fills.length,
@@ -733,11 +753,20 @@ app.get('/api/projector/stats', async (c) => {
         annualPnl: round(annualPnl, 2),
         firstDate,
         lastDate,
-        daySpan: Math.round(daySpan),
+        daySpan: Math.round(stratDaySpan),
+        // Include portfolio-wide range for reference
+        portfolioDaySpan: Math.round(portfolioDaySpan),
       }
     }
 
-    return c.json({ strategies: result })
+    return c.json({
+      strategies: result,
+      portfolioRange: {
+        firstDate: portfolioFirstDate,
+        lastDate: portfolioLastDate,
+        daySpan: Math.round(portfolioDaySpan),
+      }
+    })
   } catch (e: any) {
     return c.json({ error: e.message, strategies: null })
   }
