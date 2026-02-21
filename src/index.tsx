@@ -191,7 +191,7 @@ app.post('/api/admin/upload/preview', async (c) => {
       const expiry = stripQuotes(row['Expiry'] || '') || null
       const putCall = stripQuotes(row['Put/Call'] || '') || null
 
-      // Auto-classify strategy
+      // Auto-classify strategy (initial pass)
       let strategy: string
       if (assetClass === 'FUT' || assetClass === 'FOP') {
         strategy = 'B'
@@ -222,8 +222,91 @@ app.post('/api/admin/upload/preview', async (c) => {
         strike: strike ? parseFloat(strike) : null,
         expiry: expiry ? formatIBDate(expiry) : null,
         putCall,
+        spreadGroup: null as string | null,
+        spreadType: null as string | null,
       }
     })
+
+    // ── Vertical Spread Detection ──
+    // A vertical spread = two OPT legs with:
+    //   - Same dateTime (executed simultaneously)
+    //   - Same expiry
+    //   - Same putCall (both puts or both calls)
+    //   - Different strikes
+    //   - Opposite sides (one BUY, one SELL)
+    // Also detect FOP (futures options) spreads the same way.
+    let spreadCount = 0
+    const spreadGroups: Record<string, number[]> = {}
+
+    for (let i = 0; i < trades.length; i++) {
+      const t = trades[i]
+      if (t.assetClass !== 'OPT' && t.assetClass !== 'FOP') continue
+      if (t.spreadGroup) continue // already matched
+
+      // Group key: dateTime + expiry + putCall
+      const groupKey = `${t.dateTime}|${t.expiry}|${t.putCall}`
+
+      if (!spreadGroups[groupKey]) {
+        spreadGroups[groupKey] = []
+      }
+      spreadGroups[groupKey].push(i)
+    }
+
+    // Process each group
+    for (const [key, indices] of Object.entries(spreadGroups)) {
+      if (indices.length < 2) continue
+
+      // Find BUY/SELL pairs within this group
+      const buys = indices.filter(i => trades[i].side === 'BUY')
+      const sells = indices.filter(i => trades[i].side === 'SELL')
+
+      // Match pairs: each buy with a sell at a different strike
+      const paired = new Set<number>()
+      for (const bi of buys) {
+        for (const si of sells) {
+          if (paired.has(bi) || paired.has(si)) continue
+          if (trades[bi].strike !== null && trades[si].strike !== null && trades[bi].strike !== trades[si].strike) {
+            // This is a vertical spread pair
+            spreadCount++
+            const spreadId = `spread-${spreadCount}`
+            const buyStrike = trades[bi].strike!
+            const sellStrike = trades[si].strike!
+            const isDebit = trades[bi].price > trades[si].price
+            const isCredit = trades[si].price > trades[bi].price
+
+            let spreadType: string
+            if (trades[bi].putCall === 'P') {
+              // Put spread
+              if (buyStrike > sellStrike) {
+                spreadType = isDebit ? 'Bear Put Debit' : 'Bear Put Credit'
+              } else {
+                spreadType = isCredit ? 'Bull Put Credit' : 'Bull Put Debit'
+              }
+            } else {
+              // Call spread
+              if (buyStrike < sellStrike) {
+                spreadType = isDebit ? 'Bull Call Debit' : 'Bull Call Credit'
+              } else {
+                spreadType = isCredit ? 'Bear Call Credit' : 'Bear Call Debit'
+              }
+            }
+
+            trades[bi].spreadGroup = spreadId
+            trades[bi].spreadType = spreadType
+            trades[si].spreadGroup = spreadId
+            trades[si].spreadType = spreadType
+
+            // Ensure both legs are Strategy C
+            trades[bi].strategy = 'C'
+            trades[si].strategy = 'C'
+
+            paired.add(bi)
+            paired.add(si)
+            break // move to next buy
+          }
+        }
+      }
+    }
 
     // Summary stats
     const summary = {
@@ -240,6 +323,10 @@ app.post('/api/admin/upload/preview', async (c) => {
         STK: trades.filter((t: any) => t.assetClass === 'STK').length,
         FUT: trades.filter((t: any) => t.assetClass === 'FUT').length,
         OPT: trades.filter((t: any) => t.assetClass === 'OPT').length,
+      },
+      spreads: {
+        detected: spreadCount,
+        legs: trades.filter((t: any) => t.spreadGroup !== null).length,
       },
       dateRange: {
         from: trades.reduce((min: string, t: any) => t.tradeDate && t.tradeDate < min ? t.tradeDate : min, '9999-99-99'),

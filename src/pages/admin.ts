@@ -137,14 +137,14 @@ export function adminPage(): string {
               <tr class="border-b border-epig-border">
                 <th class="text-left px-2 py-2 text-epig-textDim font-medium w-20">Strategy</th>
                 <th class="text-left px-2 py-2 text-epig-textDim font-medium">Class</th>
+                <th class="text-left px-2 py-2 text-epig-textDim font-medium">Spread</th>
                 <th class="text-left px-2 py-2 text-epig-textDim font-medium">Date</th>
                 <th class="text-left px-2 py-2 text-epig-textDim font-medium">Side</th>
                 <th class="text-left px-2 py-2 text-epig-textDim font-medium">Symbol</th>
+                <th class="text-right px-2 py-2 text-epig-textDim font-medium">Strike</th>
                 <th class="text-right px-2 py-2 text-epig-textDim font-medium">Qty</th>
                 <th class="text-right px-2 py-2 text-epig-textDim font-medium">Price</th>
-                <th class="text-right px-2 py-2 text-epig-textDim font-medium">Amount</th>
                 <th class="text-right px-2 py-2 text-epig-textDim font-medium">Net Cash</th>
-                <th class="text-right px-2 py-2 text-epig-textDim font-medium">Comm.</th>
                 <th class="text-left px-2 py-2 text-epig-textDim font-medium">TradeID</th>
               </tr>
             </thead>
@@ -328,10 +328,13 @@ export function adminPage(): string {
           originalStrategies = data.trades.map(t => t.strategy);
           uploadFilename = data.summary.filename;
 
+          const spreadMsg = data.summary.spreads && data.summary.spreads.detected > 0
+            ? ' Detected ' + data.summary.spreads.detected + ' vertical spreads (' + data.summary.spreads.legs + ' legs).'
+            : '';
           showStatus('upload-status',
             'Parsed ' + data.summary.executionRows + ' execution rows (' +
-            data.summary.skippedRows + ' summary rows skipped). Date range: ' +
-            data.summary.dateRange.from + ' to ' + data.summary.dateRange.to, 'success');
+            data.summary.skippedRows + ' summary rows skipped).' + spreadMsg +
+            ' Date range: ' + data.summary.dateRange.from + ' to ' + data.summary.dateRange.to, 'success');
 
           renderReviewSection(data.summary);
           btn.innerHTML = '<i class="fas fa-search mr-1"></i> Parse & Auto-Classify';
@@ -362,7 +365,7 @@ export function adminPage(): string {
         '<div class="bg-blue-500/10 border border-blue-500/20 rounded-lg p-3 text-center"><div class="text-xs text-blue-400">A (Stocks)</div><div class="font-bold font-mono text-blue-400" id="summary-a">' + countStrategy('A') + '</div></div>' +
         '<div class="bg-emerald-500/10 border border-emerald-500/20 rounded-lg p-3 text-center"><div class="text-xs text-emerald-400">B (Futures)</div><div class="font-bold font-mono text-emerald-400" id="summary-b">' + countStrategy('B') + '</div></div>' +
         '<div class="bg-amber-500/10 border border-amber-500/20 rounded-lg p-3 text-center"><div class="text-xs text-amber-400">C (Options)</div><div class="font-bold font-mono text-amber-400" id="summary-c">' + countStrategy('C') + '</div></div>' +
-        '<div class="bg-epig-bg rounded-lg p-3 text-center"><div class="text-xs text-epig-textDim">File</div><div class="font-bold text-xs text-white truncate">' + uploadFilename + '</div></div>';
+        '<div class="bg-purple-500/10 border border-purple-500/20 rounded-lg p-3 text-center"><div class="text-xs text-purple-400">Spreads</div><div class="font-bold font-mono text-purple-400">' + countSpreads() + '</div></div>';
 
       updateCounts();
       renderTradeRows();
@@ -380,8 +383,14 @@ export function adminPage(): string {
         const color = strategyColors[t.strategy] || 'blue';
         const sideColor = t.side === 'BUY' ? 'text-emerald-400' : 'text-red-400';
         const cashColor = t.netCash >= 0 ? 'text-emerald-400' : 'text-red-400';
+        const spreadBg = t.spreadGroup ? ' bg-purple-500/[0.04]' : '';
+        const spreadBadge = t.spreadType
+          ? '<span class="inline-flex items-center gap-1 text-[10px] font-semibold bg-purple-500/15 text-purple-400 border border-purple-500/25 rounded-full px-1.5 py-0.5">' +
+            '<i class="fas fa-layer-group"></i>' + t.spreadType + '</span>'
+          : '<span class="text-epig-textDim text-xs">&mdash;</span>';
+        const strikeDisplay = t.strike ? t.strike.toLocaleString() : '';
 
-        return '<tr class="border-b border-epig-border/30 trade-row hover:bg-white/[0.02]" data-idx="' + idx + '" data-strategy="' + t.strategy + '" ' + hidden + '>' +
+        return '<tr class="border-b border-epig-border/30 trade-row hover:bg-white/[0.02]' + spreadBg + '" data-idx="' + idx + '" data-strategy="' + t.strategy + '" ' + hidden + '>' +
           '<td class="px-2 py-1.5">' +
             '<select class="bg-epig-bg border border-epig-border rounded px-1.5 py-1 text-xs font-bold text-' + color + '-400 focus:outline-none focus:border-blue-500 strategy-select" data-idx="' + idx + '" onchange="changeStrategy(' + idx + ', this.value)">' +
             '<option value="A"' + (t.strategy==='A' ? ' selected' : '') + ' class="text-blue-400">A</option>' +
@@ -389,14 +398,14 @@ export function adminPage(): string {
             '<option value="C"' + (t.strategy==='C' ? ' selected' : '') + ' class="text-amber-400">C</option>' +
             '</select></td>' +
           '<td class="px-2 py-1.5 text-xs font-mono text-epig-textDim">' + t.assetClass + '</td>' +
+          '<td class="px-2 py-1.5">' + spreadBadge + '</td>' +
           '<td class="px-2 py-1.5 text-xs font-mono">' + t.tradeDate + '</td>' +
           '<td class="px-2 py-1.5 text-xs font-semibold ' + sideColor + '">' + t.side + '</td>' +
           '<td class="px-2 py-1.5 text-xs font-mono" title="' + t.fullSymbol + '">' + t.symbol + '</td>' +
+          '<td class="px-2 py-1.5 text-xs font-mono text-right text-epig-textDim">' + strikeDisplay + '</td>' +
           '<td class="px-2 py-1.5 text-xs font-mono text-right">' + t.quantity + '</td>' +
           '<td class="px-2 py-1.5 text-xs font-mono text-right">' + t.price.toFixed(2) + '</td>' +
-          '<td class="px-2 py-1.5 text-xs font-mono text-right">' + t.amount.toLocaleString(undefined, {minimumFractionDigits:2, maximumFractionDigits:2}) + '</td>' +
           '<td class="px-2 py-1.5 text-xs font-mono text-right ' + cashColor + '">' + t.netCash.toLocaleString(undefined, {minimumFractionDigits:2, maximumFractionDigits:2}) + '</td>' +
-          '<td class="px-2 py-1.5 text-xs font-mono text-right text-epig-textDim">' + t.commission.toFixed(2) + '</td>' +
           '<td class="px-2 py-1.5 text-xs font-mono text-epig-textDim">' + (t.tradeId || '-') + '</td>' +
         '</tr>';
       }).join('');
@@ -445,6 +454,7 @@ export function adminPage(): string {
     }
 
     function countStrategy(s) { return parsedTrades.filter(t => t.strategy === s).length; }
+    function countSpreads() { const groups = new Set(parsedTrades.filter(t => t.spreadGroup).map(t => t.spreadGroup)); return groups.size; }
 
     function updateCounts() {
       const a = countStrategy('A'), b = countStrategy('B'), c = countStrategy('C');
