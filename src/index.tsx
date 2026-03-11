@@ -18,6 +18,18 @@ const app = new Hono<{ Bindings: Bindings }>()
 app.use('/api/*', cors())
 
 // ══════════════════════════════════════════════════════════
+// EPIG500 REDIRECT — 301 redirect epig500.ekantikcapital.com → epig.ekantikcapital.com
+// ══════════════════════════════════════════════════════════
+app.use('*', async (c, next) => {
+  const host = (c.req.header('host') || '').toLowerCase()
+  if (host.startsWith('epig500')) {
+    const url = new URL(c.req.url)
+    return c.redirect('https://epig.ekantikcapital.com' + url.pathname + url.search, 301)
+  }
+  await next()
+})
+
+// ══════════════════════════════════════════════════════════
 // PUBLIC PAGES
 // ══════════════════════════════════════════════════════════
 app.get('/', (c) => c.html(layout('EPIG Investment Design | Verified Trade Performance', landingPage(), {
@@ -507,7 +519,12 @@ app.get('/api/dashboard/summary', async (c) => {
       rollingMetrics: { '30d': combRolling30, '90d': combRolling90 },
     }
 
-    return c.json({ strategies: result })
+    // Compute track record start from earliest trade date across all strategies
+    const trackRecordStart = portfolioFirstDate
+      ? new Date(portfolioFirstDate).toLocaleDateString('en-US', { month: 'long', year: 'numeric' })
+      : 'March 2025'
+
+    return c.json({ strategies: result, trackRecordStart })
   } catch (e: any) {
     console.error('Dashboard error:', e.message)
     return c.json(buildFallbackSummary())
@@ -1564,6 +1581,7 @@ function formatTrades(trades: any[]) {
 
 function buildFallbackSummary() {
   return {
+    trackRecordStart: 'March 2025',
     strategies: {
       A: {
         name: 'Strategy A — Core Allocation',
