@@ -132,6 +132,13 @@ export function layout(title: string, content: string, social?: SocialMeta): str
   </style>
 </head>
 <body class="min-h-screen">
+  <!-- Founding Member Banner -->
+  <div id="founding-banner" style="background:#C8A951;color:#1B2A4A;font-size:13px;text-align:center;padding:8px 40px 8px 8px;position:relative;">
+    EPIG is a managed strategy within the Ekantik Capital Financial Freedom program. Founding memberships limited to 25.
+    <a href="https://freedom.ekantikcapital.com#membership" style="color:#1B2A4A;font-weight:600;text-decoration:underline;margin-left:4px;">Learn more &rarr;</a>
+    <button id="dismiss-banner" style="position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;color:#1B2A4A;cursor:pointer;font-size:16px;padding:4px 8px;line-height:1;" aria-label="Dismiss banner">&times;</button>
+  </div>
+
   <!-- Navigation -->
   <nav class="sticky top-0 z-50 bg-epig-bg/95 backdrop-blur-md border-b border-epig-border">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -149,14 +156,13 @@ export function layout(title: string, content: string, social?: SocialMeta): str
         </div>
         <div class="hidden md:flex items-center gap-6">
           <a href="/" class="nav-link">Home</a>
-          <a href="/dashboard" class="nav-link">Dashboard</a>
-          <a href="/projector" class="nav-link">Performance Projector</a>
-          <a href="/how-it-works" class="nav-link">How It Works</a>
-          <a href="/faq" class="nav-link">FAQ</a>
-          <a href="/admin" class="nav-link">Admin</a>
+          <a href="/dashboard" class="nav-link">Live Dashboard</a>
+          <a href="/projector" class="nav-link">Projector</a>
+          <a href="/disclosures" class="nav-link">Disclosures</a>
+          <a href="https://freedom.ekantikcapital.com" class="no-underline" style="background:#C8A951;color:#1B2A4A;font-weight:600;border-radius:6px;padding:8px 20px;font-size:0.875rem;">Become a Founding Member</a>
         </div>
         <div class="flex items-center gap-3">
-          <!-- Pricing CTA hidden while compensation model is being finalized -->
+          <a href="https://freedom.ekantikcapital.com" class="md:hidden no-underline text-xs" style="background:#C8A951;color:#1B2A4A;font-weight:600;border-radius:6px;padding:6px 14px;">Founding Member</a>
           <button id="mobile-menu-btn" class="md:hidden text-epig-textMuted hover:text-white">
             <i class="fas fa-bars text-xl"></i>
           </button>
@@ -167,11 +173,8 @@ export function layout(title: string, content: string, social?: SocialMeta): str
     <div id="mobile-menu" class="hidden md:hidden border-t border-epig-border bg-epig-bg px-4 py-3">
       <div class="flex flex-col gap-3">
         <a href="/" class="nav-link py-2">Home</a>
-        <a href="/dashboard" class="nav-link py-2">Dashboard</a>
-        <a href="/projector" class="nav-link py-2">Performance Projector</a>
-        <a href="/how-it-works" class="nav-link py-2">How It Works</a>
-        <a href="/faq" class="nav-link py-2">FAQ</a>
-        <a href="/admin" class="nav-link py-2">Admin</a>
+        <a href="/dashboard" class="nav-link py-2">Live Dashboard</a>
+        <a href="/projector" class="nav-link py-2">Projector</a>
         <a href="/disclosures" class="nav-link py-2">Disclosures</a>
       </div>
     </div>
@@ -236,7 +239,7 @@ export function layout(title: string, content: string, social?: SocialMeta): str
   <!-- Footer -->
   <footer class="border-t border-epig-border mt-20">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+      <div class="grid grid-cols-1 md:grid-cols-5 gap-8 mb-8">
         <div>
           <div class="flex items-center gap-3 mb-4">
             <div class="w-10 h-10 rounded-lg flex items-center justify-center" style="background:#E5A418;">
@@ -248,7 +251,7 @@ export function layout(title: string, content: string, social?: SocialMeta): str
             </div>
           </div>
           <p class="text-epig-textDim text-sm leading-relaxed">
-            EPIG Investment Design&mdash;structural protection, systematic income, and disciplined compounding with full transparency.
+            EPIG is a managed investment strategy within the Ekantik Capital Financial Freedom program.
           </p>
         </div>
         <div>
@@ -256,8 +259,13 @@ export function layout(title: string, content: string, social?: SocialMeta): str
           <div class="flex flex-col gap-2">
             <a href="/dashboard" class="text-epig-textDim text-sm hover:text-epig-text no-underline">Dashboard</a>
             <a href="/projector" class="text-epig-textDim text-sm hover:text-epig-text no-underline">Performance Projector</a>
-            <a href="/how-it-works" class="text-epig-textDim text-sm hover:text-epig-text no-underline">How It Works</a>
-            <a href="/admin" class="text-epig-textDim text-sm hover:text-epig-text no-underline">Admin Console</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="font-semibold text-epig-text mb-4 text-sm uppercase tracking-wider">Program</h4>
+          <div class="flex flex-col gap-2">
+            <a href="https://freedom.ekantikcapital.com" target="_blank" rel="noopener" class="text-epig-textDim text-sm hover:text-epig-text no-underline">Financial Freedom Program</a>
+            <a href="https://dashboard.ekantikcapital.com" target="_blank" rel="noopener" class="text-epig-textDim text-sm hover:text-epig-text no-underline">ECFS Live Performance</a>
           </div>
         </div>
         <div>
@@ -288,6 +296,18 @@ export function layout(title: string, content: string, social?: SocialMeta): str
   </footer>
 
   <script>
+    // Founding member banner dismiss
+    (function() {
+      const banner = document.getElementById('founding-banner');
+      if (banner && sessionStorage.getItem('bannerDismissed')) {
+        banner.style.display = 'none';
+      }
+      document.getElementById('dismiss-banner')?.addEventListener('click', () => {
+        if (banner) banner.style.display = 'none';
+        sessionStorage.setItem('bannerDismissed', '1');
+      });
+    })();
+
     // Mobile menu toggle
     document.getElementById('mobile-menu-btn')?.addEventListener('click', () => {
       document.getElementById('mobile-menu')?.classList.toggle('hidden');
