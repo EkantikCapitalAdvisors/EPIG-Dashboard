@@ -53,11 +53,7 @@ app.get('/how-it-works', (c) => c.html(layout('How It Works | EPIG', howItWorksP
   description: 'See how EPIG verifies every trade using IB Flex Queries, how the 3-strategy system works, and how Discord alerts keep you informed in real time.',
   path: '/how-it-works',
 })))
-app.get('/faq', (c) => c.html(layout('FAQ | EPIG', faqPage(), {
-  title: 'Frequently Asked Questions | EPIG Investment Design',
-  description: 'Common questions about EPIG: how data is verified, what the strategies are, and how Discord alerts work.',
-  path: '/faq',
-})))
+app.get('/faq', (c) => c.redirect('/#faq', 301))
 app.get('/projector', (c) => c.html(layout('Performance Projector | EPIG', projectorPage(), {
   title: 'Performance Projector | EPIG Investment Design',
   description: 'Project year-end returns based on real 2026 YTD trade data. Adjust portfolio size and explore per-strategy breakdowns with live verified data.',
