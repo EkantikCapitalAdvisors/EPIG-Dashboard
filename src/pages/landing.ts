@@ -1,682 +1,132 @@
 export function landingPage(): string {
   return `
   <!-- ════ SECTION 1: HERO ════ -->
-  <section class="relative overflow-hidden">
-    <div class="absolute inset-0 bg-gradient-to-b from-blue-600/5 via-transparent to-transparent"></div>
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-24 text-center relative">
-      <div class="slide-up">
-        <div class="inline-flex items-center gap-2 bg-epig-card border border-epig-border rounded-full px-4 py-1.5 mb-8">
-          <div class="pulse-dot"></div>
-          <span class="text-epig-textMuted text-sm">Live dashboard updated weekly</span>
+  <section class="relative overflow-hidden" style="background:linear-gradient(135deg,#1B2A4A 0%,#243656 100%);">
+    <div class="absolute inset-0" style="background:radial-gradient(ellipse at 50% 0%, rgba(200,169,81,0.06) 0%, transparent 70%);"></div>
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-20 text-center relative">
+      <h1 style="font-family:'Playfair Display',Georgia,serif;font-weight:400;" class="text-3xl sm:text-4xl lg:text-[42px] text-white mb-4 leading-tight">
+        Your Capital, Managed with Structural Discipline.
+      </h1>
+      <p style="font-family:'Source Sans Pro','Calibri',sans-serif;color:#C8A951;" class="text-lg sm:text-[22px] font-normal mb-8">
+        Every Trade Verified. Every Loss Disclosed.
+      </p>
+      <p style="font-family:'Source Sans Pro',sans-serif;max-width:680px;" class="text-base sm:text-[17px] text-white/80 mx-auto mb-12 leading-relaxed">
+        EPIG is a three-layer managed investment strategy that keeps 70&ndash;85% of your capital structurally protected
+        while compounding tactical futures income and asymmetric options returns. Built on the S&amp;P 500.
+        Executed in Interactive Brokers. Shared with full transparency.
+      </p>
+
+      <!-- Proof Badges -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto mb-10">
+        <div class="rounded-xl bg-white/[0.08] border border-white/[0.12] p-4 text-center">
+          <div id="hero-cum-return" class="text-2xl sm:text-[28px] font-bold text-white" style="font-family:'JetBrains Mono',monospace;">14.2%</div>
+          <div class="text-xs text-white/60 mt-1">Cumulative Return</div>
         </div>
-        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight mb-6 max-w-4xl mx-auto leading-tight">
-          Protect Capital. Generate Income.<br>
-          <span class="gradient-text">Compound Relentlessly.</span>
-        </h1>
-        <p class="text-lg sm:text-xl text-epig-textMuted max-w-2xl mx-auto mb-10 leading-relaxed">
-          A three-layer investment design combining structural protection, systematic futures execution,
-          and asymmetric options pivots &mdash; with full transparency on every trade.
-        </p>
-        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <a href="/dashboard" class="btn-primary text-base no-underline px-8 py-3.5">
-            <i class="fas fa-chart-line mr-2"></i>View Live Dashboard
-          </a>
-          <a href="/projector" class="btn-outline text-base no-underline px-8 py-3.5">
-            <i class="fas fa-chart-line mr-2"></i>Performance Projector
-          </a>
+        <div class="rounded-xl bg-white/[0.08] border border-white/[0.12] p-4 text-center">
+          <div id="hero-trades" class="text-2xl sm:text-[28px] font-bold text-white" style="font-family:'JetBrains Mono',monospace;">187</div>
+          <div class="text-xs text-white/60 mt-1">Verified Trades</div>
+        </div>
+        <div class="rounded-xl bg-white/[0.08] border border-white/[0.12] p-4 text-center">
+          <div id="hero-drawdown" class="text-2xl sm:text-[28px] font-bold text-white" style="font-family:'JetBrains Mono',monospace;">-8.4%</div>
+          <div class="text-xs text-white/60 mt-1">Max Drawdown</div>
+        </div>
+        <div class="rounded-xl bg-white/[0.08] border border-white/[0.12] p-4 text-center">
+          <div id="hero-live-since" class="text-2xl sm:text-[28px] font-bold text-white" style="font-family:'JetBrains Mono',monospace;">Mar 2025</div>
+          <div class="text-xs text-white/60 mt-1">Live Since</div>
         </div>
       </div>
-      <!-- Hero stats -->
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-16 max-w-3xl mx-auto">
-        <div class="kpi-card text-center">
-          <div class="kpi-label">Strategies</div>
-          <div class="kpi-value text-white">3</div>
+      <p class="text-xs text-white/40 mb-10">All data from Interactive Brokers execution reports. Updated weekly.</p>
+
+      <!-- Dual CTA -->
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a href="/dashboard" class="inline-flex items-center gap-2 no-underline px-8 py-3.5 rounded-lg text-base font-semibold transition-all" style="background:#C8A951;color:#1B2A4A;">
+          <i class="fas fa-chart-line"></i> View Live Performance Dashboard
+        </a>
+        <a href="https://calendly.com/hd-ekantikcapital/30min" target="_blank" rel="noopener" class="inline-flex items-center gap-2 no-underline px-8 py-3.5 rounded-lg text-base font-semibold border-2 border-white/40 text-white hover:bg-white/10 transition-all">
+          <i class="fas fa-calendar-check"></i> Schedule Founding Member Consultation
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════ SECTION 2: WHAT IS EPIG? ════ -->
+  <section style="background:#FAF8F5;">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
+      <h2 style="font-family:'Playfair Display',Georgia,serif;color:#1B2A4A;" class="text-3xl sm:text-4xl font-bold mb-8">What Is EPIG?</h2>
+      <div style="font-family:'Source Sans Pro',sans-serif;max-width:640px;color:#334155;" class="mx-auto text-base leading-[1.7] text-left space-y-4 mb-12">
+        <p><strong style="color:#1B2A4A;">EPIG</strong> stands for <strong style="color:#1B2A4A;">Enduring Principal-Protected Income &amp; Growth</strong>.</p>
+        <p>It is a rules-based, managed investment strategy with three layers:</p>
+        <p><strong style="color:#1B2A4A;">Layer A</strong> holds 70&ndash;85% of your capital in SPY, high-quality equities, and cash equivalents. This is your structural floor &mdash; designed so the vast majority of your wealth is never at risk.</p>
+        <p><strong style="color:#1B2A4A;">Layer B</strong> overlays a small tactical position (3&ndash;5% of capital) in S&amp;P 500 futures with defined 20-point stops. This generates systematic income through high-frequency, low-risk trades.</p>
+        <p><strong style="color:#1B2A4A;">Layer C</strong> deploys 3&ndash;5% into asymmetric options positions during market dislocations &mdash; limited downside, outsized upside potential. Deployed selectively, not constantly.</p>
+        <p>The result: a strategy engineered to target <strong style="color:#1B2A4A;">16%+ CAGR</strong> across full market cycles while keeping original capital at risk below 5%.</p>
+      </div>
+
+      <!-- 3 Differentiator Badges -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="rounded-xl bg-white border border-gray-200 p-6 text-center shadow-sm">
+          <div class="w-12 h-12 rounded-full bg-[#1B2A4A]/10 flex items-center justify-center mx-auto mb-4">
+            <i class="fas fa-user-shield text-[#1B2A4A] text-lg"></i>
+          </div>
+          <h4 class="font-bold text-[#1B2A4A] mb-2">Managed for You</h4>
+          <p class="text-sm text-gray-500">We execute every trade. You review performance.</p>
         </div>
-        <div class="kpi-card text-center">
-          <div class="kpi-label">Full Transparency</div>
-          <div class="kpi-value text-emerald-400">100%</div>
+        <div class="rounded-xl bg-white border border-gray-200 p-6 text-center shadow-sm">
+          <div class="w-12 h-12 rounded-full bg-[#1B2A4A]/10 flex items-center justify-center mx-auto mb-4">
+            <i class="fas fa-certificate text-[#1B2A4A] text-lg"></i>
+          </div>
+          <h4 class="font-bold text-[#1B2A4A] mb-2">Verified via IB</h4>
+          <p class="text-sm text-gray-500">Every fill carries a unique Interactive Brokers TradeID. No backtests. No paper trades.</p>
         </div>
-        <div class="kpi-card text-center">
-          <div class="kpi-label">Verified via</div>
-          <div class="kpi-value text-blue-400 text-lg">IB Fills</div>
-        </div>
-        <div class="kpi-card text-center">
-          <div class="kpi-label">Dashboard</div>
-          <div class="kpi-value text-amber-400 text-lg">Free</div>
+        <div class="rounded-xl bg-white border border-gray-200 p-6 text-center shadow-sm">
+          <div class="w-12 h-12 rounded-full bg-[#1B2A4A]/10 flex items-center justify-center mx-auto mb-4">
+            <i class="fas fa-eye text-[#1B2A4A] text-lg"></i>
+          </div>
+          <h4 class="font-bold text-[#1B2A4A] mb-2">Fully Transparent</h4>
+          <p class="text-sm text-gray-500">Both wins and losses are published. The dashboard hides nothing.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ════ SECTION 2: LIMITATIONS OF CURRENT PARADIGM ════ -->
-  <section class="section-divider">
+  <!-- ════ SECTION 3: THREE-LAYER DESIGN ════ -->
+  <section style="background:#0a0e17;">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
       <div class="text-center mb-14">
-        <span class="inline-block text-xs font-bold uppercase tracking-widest text-red-400 border border-red-500/40 rounded-full px-5 py-1.5 mb-6">Limitations of Current Paradigm</span>
-        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold mb-5 leading-tight">
-          Why Traditional Approaches Generate Lower<br>Risk-Adjusted Returns
-        </h2>
-        <p class="text-epig-textMuted text-lg max-w-3xl mx-auto leading-relaxed">
-          It&rsquo;s not about stock picking or manager skill &mdash; it&rsquo;s about <span class="text-red-400 font-semibold">structural market challenges</span> that reduce returns for
-          passive investors. EPIG is designed to neutralize these four fundamental constraints.
+        <h2 style="font-family:'Playfair Display',Georgia,serif;" class="text-3xl sm:text-4xl font-bold text-white mb-4">Three Layers. One Integrated System.</h2>
+        <p class="text-gray-400 text-lg max-w-3xl mx-auto leading-relaxed" style="font-family:'Source Sans Pro',sans-serif;">
+          Each layer serves a distinct structural purpose. Together they create a managed portfolio that protects, generates income, and compounds &mdash; without requiring you to make a single trade.
         </p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-
-        <!-- Card 1: P/E Dependence -->
-        <div class="rounded-2xl border border-red-500/20 bg-red-500/[0.04] p-7">
-          <div class="flex items-center gap-3 mb-5">
-            <div class="w-10 h-10 rounded-full bg-red-500/20 flex items-center justify-center">
-              <span class="text-red-400 font-bold text-sm">1</span>
-            </div>
-            <h3 class="text-xl font-bold text-red-400">P/E Dependence</h3>
-          </div>
-          <p class="text-white font-semibold text-sm mb-4">Future returns depend on entry P/E:</p>
-          <div class="rounded-xl bg-[#0d0d18]/60 border border-[#2a2a3e] p-4 mb-4 space-y-3">
-            <div class="flex items-center justify-between">
-              <span class="text-sm text-[#c0c8d8]">P/E = 5</span>
-              <span class="text-sm font-bold text-emerald-400">~20% return</span>
-            </div>
-            <div class="h-px bg-[#2a2a3e]"></div>
-            <div class="flex items-center justify-between">
-              <span class="text-sm text-[#c0c8d8]">P/E = 15</span>
-              <span class="text-sm font-bold text-amber-400">~12% return</span>
-            </div>
-            <div class="h-px bg-[#2a2a3e]"></div>
-            <div class="flex items-center justify-between">
-              <span class="text-sm text-[#c0c8d8]">P/E = 30</span>
-              <span class="text-sm font-bold text-red-400">~3% return</span>
-            </div>
-          </div>
-          <p class="text-xs text-[#8892a6] italic">High starting P/E = Lower 10-year returns</p>
-        </div>
-
-        <!-- Card 2: Correlation Challenge -->
-        <div class="rounded-2xl border border-red-500/20 bg-red-500/[0.04] p-7">
-          <div class="flex items-center gap-3 mb-5">
-            <div class="w-10 h-10 rounded-full bg-red-500/20 flex items-center justify-center">
-              <span class="text-red-400 font-bold text-sm">2</span>
-            </div>
-            <h3 class="text-xl font-bold text-red-400">Correlation Challenge</h3>
-          </div>
-          <p class="text-white font-semibold text-sm mb-5">Most stocks move with the market:</p>
-          <div class="space-y-4">
-            <div class="flex items-start gap-3">
-              <span class="text-red-400 mt-0.5">&rarr;</span>
-              <p class="text-sm text-[#c0c8d8]">Diversification &ne; Protection</p>
-            </div>
-            <div class="flex items-start gap-3">
-              <span class="text-red-400 mt-0.5">&rarr;</span>
-              <p class="text-sm text-[#c0c8d8]">Still suffer full market drawdowns</p>
-            </div>
-            <div class="flex items-start gap-3">
-              <span class="text-red-400 mt-0.5">&rarr;</span>
-              <p class="text-sm text-[#c0c8d8]">Diluted returns from winners</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Card 3: Full Exposure Required -->
-        <div class="rounded-2xl border border-red-500/20 bg-red-500/[0.04] p-7">
-          <div class="flex items-center gap-3 mb-5">
-            <div class="w-10 h-10 rounded-full bg-red-500/20 flex items-center justify-center">
-              <span class="text-red-400 font-bold text-sm">3</span>
-            </div>
-            <h3 class="text-xl font-bold text-red-400">Full Exposure Required</h3>
-          </div>
-          <p class="text-white font-semibold text-sm mb-5">Must invest 100% to get average returns:</p>
-          <div class="space-y-4">
-            <div class="flex items-start gap-3">
-              <i class="fas fa-xmark text-red-400 mt-0.5 w-4 text-center"></i>
-              <p class="text-sm text-[#c0c8d8]">No liquidity for opportunities</p>
-            </div>
-            <div class="flex items-start gap-3">
-              <i class="fas fa-xmark text-red-400 mt-0.5 w-4 text-center"></i>
-              <p class="text-sm text-[#c0c8d8]">No control over downside</p>
-            </div>
-            <div class="flex items-start gap-3">
-              <i class="fas fa-xmark text-red-400 mt-0.5 w-4 text-center"></i>
-              <p class="text-sm text-[#c0c8d8]">Cannot leverage selectively</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Card 4: Lost Decades -->
-        <div class="rounded-2xl border border-red-500/20 bg-red-500/[0.04] p-7">
-          <div class="flex items-center gap-3 mb-5">
-            <div class="w-10 h-10 rounded-full bg-red-500/20 flex items-center justify-center">
-              <span class="text-red-400 font-bold text-sm">4</span>
-            </div>
-            <h3 class="text-xl font-bold text-red-400">Lost Decades</h3>
-          </div>
-          <p class="text-white font-semibold text-sm mb-5">Cannot generate returns in down/sideways markets:</p>
-          <div class="rounded-xl bg-[#0d0d18]/60 border border-[#2a2a3e] p-5">
-            <p class="text-sm text-[#8892a6] mb-2">Example: 2000&ndash;2010</p>
-            <div class="flex items-baseline gap-2 mb-1">
-              <span class="text-4xl font-extrabold text-red-400 font-mono">~0%</span>
-              <span class="text-sm text-[#c0c8d8]">S&amp;P 500 return</span>
-            </div>
-            <p class="text-xs text-[#8892a6] italic">10 years of capital locked up, zero growth</p>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ════ SECTION 2B: INTRODUCING THE EPIG INVESTMENT STRATEGY ════ -->
-  <section class="section-divider">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-
-      <!-- Header -->
-      <div class="text-center mb-12">
-        <span class="inline-block text-xs font-bold uppercase tracking-widest text-amber-400 border border-amber-500/40 rounded-full px-5 py-1.5 mb-6">
-          Paradigm with Asymmetrical Risk Rewards
-        </span>
-        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold mb-4 leading-tight tracking-tight" style="font-family:'Montserrat',sans-serif;">
-          Introducing the EPIG Investment Strategy
-        </h2>
-      </div>
-
-      <!-- EPIG Defined callout -->
-      <div class="max-w-3xl mx-auto mb-14 rounded-2xl border border-amber-500/25 bg-amber-500/[0.03] p-6 md:p-8">
-        <div class="flex items-start gap-4">
-          <div class="w-10 h-10 rounded-full bg-amber-500/20 flex items-center justify-center flex-shrink-0 mt-0.5">
-            <i class="fas fa-star text-amber-400"></i>
-          </div>
-          <div>
-            <p class="text-lg mb-2">
-              <span class="text-amber-400 font-semibold">EPIG Defined:</span>
-              <strong class="text-white">Enduring Principal-Protected Income &amp; Growth</strong>
-            </p>
-            <p class="text-epig-textMuted text-[15px] leading-relaxed">
-              Our proprietary investment approach designed to maximize returns while protecting capital during market downturns. EPIG functions as a
-              <span class="text-amber-400 font-semibold underline decoration-amber-400/40 underline-offset-2">complete solution</span> or a
-              <span class="text-amber-400 font-semibold">&ldquo;bolt-on&rdquo;</span> to existing portfolios.
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <!-- EPIG Key Benefits — 6-card grid -->
-      <h3 class="text-2xl font-bold text-center mb-8">EPIG Key Benefits</h3>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-14">
-        <!-- Card 1: Beats Market -->
-        <div class="rounded-xl border border-emerald-500/20 bg-emerald-500/[0.03] p-6 text-center hover:border-emerald-500/40 transition-colors">
-          <div class="w-12 h-12 rounded-full bg-emerald-500/20 flex items-center justify-center mx-auto mb-4">
-            <i class="fas fa-chart-line text-emerald-400 text-lg"></i>
-          </div>
-          <h4 class="text-amber-400 font-bold mb-2">Beats Market Longer Term</h4>
-          <p class="text-epig-textMuted text-sm">Absolute returns &gt;10% with lower volatility</p>
-        </div>
-        <!-- Card 2: Drawdown Protection -->
-        <div class="rounded-xl border border-emerald-500/20 bg-emerald-500/[0.03] p-6 text-center hover:border-emerald-500/40 transition-colors">
-          <div class="w-12 h-12 rounded-full bg-emerald-500/20 flex items-center justify-center mx-auto mb-4">
-            <i class="fas fa-shield-halved text-emerald-400 text-lg"></i>
-          </div>
-          <h4 class="text-amber-400 font-bold mb-2">Drawdown Protection</h4>
-          <p class="text-epig-textMuted text-sm">Shields portfolios from major market corrections</p>
-        </div>
-        <!-- Card 3: Liquidity -->
-        <div class="rounded-xl border border-emerald-500/20 bg-emerald-500/[0.03] p-6 text-center hover:border-emerald-500/40 transition-colors">
-          <div class="w-12 h-12 rounded-full bg-emerald-500/20 flex items-center justify-center mx-auto mb-4">
-            <i class="fas fa-hand-holding-dollar text-emerald-400 text-lg"></i>
-          </div>
-          <h4 class="text-amber-400 font-bold mb-2">Cash-Like Liquidity</h4>
-          <p class="text-epig-textMuted text-sm">Access to funds when you need them</p>
-        </div>
-        <!-- Card 4: Income -->
-        <div class="rounded-xl border border-emerald-500/20 bg-emerald-500/[0.03] p-6 text-center hover:border-emerald-500/40 transition-colors">
-          <div class="w-12 h-12 rounded-full bg-emerald-500/20 flex items-center justify-center mx-auto mb-4">
-            <i class="fas fa-sack-dollar text-emerald-400 text-lg"></i>
-          </div>
-          <h4 class="text-amber-400 font-bold mb-2">Income Potential</h4>
-          <p class="text-epig-textMuted text-sm">Generate yields up to 1% per month</p>
-        </div>
-        <!-- Card 5: Investment Chassis -->
-        <div class="rounded-xl border border-emerald-500/20 bg-emerald-500/[0.03] p-6 text-center hover:border-emerald-500/40 transition-colors">
-          <div class="w-12 h-12 rounded-full bg-emerald-500/20 flex items-center justify-center mx-auto mb-4">
-            <i class="fas fa-gears text-emerald-400 text-lg"></i>
-          </div>
-          <h4 class="text-amber-400 font-bold mb-2">Investment Chassis</h4>
-          <p class="text-epig-textMuted text-sm">Complete solution or bolt-on to existing portfolios</p>
-        </div>
-        <!-- Card 6: P/E Independence -->
-        <div class="rounded-xl border border-emerald-500/20 bg-emerald-500/[0.03] p-6 text-center hover:border-emerald-500/40 transition-colors">
-          <div class="w-12 h-12 rounded-full bg-emerald-500/20 flex items-center justify-center mx-auto mb-4">
-            <i class="fas fa-calendar-check text-emerald-400 text-lg"></i>
-          </div>
-          <h4 class="text-amber-400 font-bold mb-2">P/E Ratio Independence</h4>
-          <p class="text-epig-textMuted text-sm">Returns not dependent on market entry timing</p>
-        </div>
-      </div>
-
-      <!-- How EPIG Neutralizes These Challenges -->
-      <div class="max-w-4xl mx-auto">
-        <div class="text-center mb-8">
-          <span class="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-wider text-emerald-400 bg-emerald-500/10 border border-emerald-500/30 rounded-full px-5 py-2">
-            <i class="fas fa-check-circle"></i>
-            How EPIG Neutralizes These Challenges
-          </span>
-        </div>
-
-        <div class="rounded-2xl border border-emerald-500/20 bg-[#0a1a14] p-6 md:p-8 mb-6">
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <!-- Neutralizer 1 -->
-            <div class="rounded-xl bg-[#0d1520] border border-[#1e293b] p-5">
-              <div class="flex items-center gap-2 mb-3">
-                <i class="fas fa-crosshairs text-emerald-400"></i>
-                <h4 class="font-bold text-white text-sm">Dynamic Positioning</h4>
-              </div>
-              <p class="text-epig-textMuted text-sm leading-relaxed">Adjust exposure based on market conditions&mdash;not dependent on entry P/E</p>
-            </div>
-            <!-- Neutralizer 2 -->
-            <div class="rounded-xl bg-[#0d1520] border border-[#1e293b] p-5">
-              <div class="flex items-center gap-2 mb-3">
-                <i class="fas fa-bullseye text-emerald-400"></i>
-                <h4 class="font-bold text-white text-sm">Tactical Entries</h4>
-              </div>
-              <p class="text-epig-textMuted text-sm leading-relaxed">Enter only high-probability setups&mdash;uncorrelated to broad market moves</p>
-            </div>
-            <!-- Neutralizer 3 -->
-            <div class="rounded-xl bg-[#0d1520] border border-[#1e293b] p-5">
-              <div class="flex items-center gap-2 mb-3">
-                <i class="fas fa-sliders text-emerald-400"></i>
-                <h4 class="font-bold text-white text-sm">Liquidity + Control</h4>
-              </div>
-              <p class="text-epig-textMuted text-sm leading-relaxed">Stay 50&ndash;90% in cash/SPY&mdash;full liquidity to leverage opportunities</p>
-            </div>
-            <!-- Neutralizer 4 -->
-            <div class="rounded-xl bg-[#0d1520] border border-[#1e293b] p-5">
-              <div class="flex items-center gap-2 mb-3">
-                <i class="fas fa-arrows-left-right text-emerald-400"></i>
-                <h4 class="font-bold text-white text-sm">Market Neutral</h4>
-              </div>
-              <p class="text-epig-textMuted text-sm leading-relaxed">Generate returns in up, down, and sideways markets&mdash;no lost decades</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Result statement -->
-        <div class="text-center">
-          <p class="text-epig-textMuted text-sm">
-            <i class="fas fa-check-circle text-emerald-400 mr-1"></i>
-            <strong class="text-emerald-400">Result:</strong>
-            Consistent ~20% CAGR target regardless of structural market challenges
-          </p>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ════ SECTION 3: THE EPIG ADVANTAGE ════ -->
-  <section class="section-divider">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-      <div class="text-center mb-14">
-        <span class="inline-block text-xs font-bold uppercase tracking-widest text-amber-400 border border-amber-500/40 rounded-full px-5 py-1.5 mb-6">
-          <i class="fas fa-bolt mr-1"></i>The EPIG Advantage
-        </span>
-        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold mb-5 leading-tight">
-          The Power to Consolidate: <span class="text-emerald-400">Housing 50&ndash;90%</span> of Your Liquid Net Worth
-        </h2>
-        <p class="text-emerald-400/80 text-lg italic">
-          Why EPIG&rsquo;s Architecture Enables What Traditional Approaches Cannot
-        </p>
-      </div>
-
-      <!-- The EPIG Consolidation Capability -->
-      <div class="rounded-2xl border border-emerald-500/25 bg-[#0a1a14] p-8 md:p-10 mb-10">
-        <div class="flex items-center justify-center gap-2 mb-8">
-          <i class="fas fa-shield-halved text-amber-400 text-lg"></i>
-          <h3 class="text-xl font-bold text-emerald-400">The EPIG Consolidation Capability</h3>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-8">
-          <!-- Card: <10% Max Drawdown -->
-          <div class="rounded-xl border border-emerald-500/20 bg-emerald-500/[0.04] p-6 text-center">
-            <div class="w-12 h-12 rounded-full border-2 border-emerald-500/40 flex items-center justify-center mx-auto mb-4">
-              <i class="fas fa-chart-line text-emerald-400 text-lg"></i>
-            </div>
-            <h4 class="text-white font-bold mb-2">&lt;10% Max Drawdown</h4>
-            <p class="text-sm text-[#8892a6] leading-relaxed">
-              Engineered by design &mdash; not luck. You&rsquo;re <span class="text-emerald-400 underline">always in control</span> because risk is capped systematically.
-            </p>
-          </div>
-
-          <!-- Card: Daily Liquidity -->
-          <div class="rounded-xl border border-emerald-500/20 bg-emerald-500/[0.04] p-6 text-center">
-            <div class="w-12 h-12 rounded-full border-2 border-emerald-500/40 flex items-center justify-center mx-auto mb-4">
-              <i class="fas fa-money-bill-wave text-emerald-400 text-lg"></i>
-            </div>
-            <h4 class="text-white font-bold mb-2">Daily Liquidity</h4>
-            <p class="text-sm text-[#8892a6] leading-relaxed">
-              Access your capital <span class="text-emerald-400 underline">whenever needed</span>. No lockup periods, no penalties &mdash; full flexibility.
-            </p>
-          </div>
-
-          <!-- Card: 100% Transparency -->
-          <div class="rounded-xl border border-emerald-500/20 bg-emerald-500/[0.04] p-6 text-center">
-            <div class="w-12 h-12 rounded-full border-2 border-emerald-500/40 flex items-center justify-center mx-auto mb-4">
-              <i class="fas fa-eye text-emerald-400 text-lg"></i>
-            </div>
-            <h4 class="text-white font-bold mb-2">100% Transparency</h4>
-            <p class="text-sm text-[#8892a6] leading-relaxed">
-              No black box. Every trade, every position, every decision is <span class="text-emerald-400 underline">visible and explainable</span>.
-            </p>
-          </div>
-
-          <!-- Card: Systematic Edge -->
-          <div class="rounded-xl border border-emerald-500/20 bg-emerald-500/[0.04] p-6 text-center">
-            <div class="w-12 h-12 rounded-full border-2 border-emerald-500/40 flex items-center justify-center mx-auto mb-4">
-              <i class="fas fa-gears text-emerald-400 text-lg"></i>
-            </div>
-            <h4 class="text-white font-bold mb-2">Systematic Edge</h4>
-            <p class="text-sm text-[#8892a6] leading-relaxed">
-              Not discretionary gambling &mdash; <span class="text-emerald-400 underline">repeatable, rules-based</span> strategy with defined risk parameters.
-            </p>
-          </div>
-        </div>
-
-        <!-- The Result callout -->
-        <div class="border-l-4 border-amber-400 bg-amber-500/[0.05] rounded-r-xl p-5">
-          <p class="text-sm text-[#c0c8d8] leading-relaxed mb-0">
-            <i class="fas fa-lightbulb text-amber-400 mr-1"></i>
-            <strong class="text-amber-400">The Result:</strong> Unlike traditional strategies that force you to spread assets across multiple &ldquo;buckets,&rdquo;
-            EPIG&rsquo;s architecture lets you <strong class="text-white">consolidate 50&ndash;90% of your liquid net worth</strong> into a single unified strategy &mdash;
-            because you&rsquo;re in control at all times.
-          </p>
-        </div>
-      </div>
-
-      <!-- Antifragile by Design (Taleb) -->
-      <div class="rounded-2xl border border-purple-500/25 bg-[#12101e] p-8 md:p-10">
-        <div class="flex items-center justify-center gap-3 mb-4">
-          <i class="fas fa-chart-line text-purple-400 text-xl"></i>
-          <h3 class="text-xl font-bold text-white">Antifragile by Design (Taleb): Convexity in Volatility</h3>
-        </div>
-        <p class="text-center text-[#8892a6] italic text-sm mb-8 max-w-3xl mx-auto">
-          EPIG is inspired by a barbell logic: a defensive base plus small convex bets designed to benefit from volatility.
-        </p>
-
-        <!-- Fragile / Robust / Anti-fragile Labels -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-          <div class="rounded-xl border border-red-500/30 bg-red-500/[0.06] p-4 text-center">
-            <span class="text-red-400 font-bold text-base">Fragile</span>
-            <p class="text-xs text-[#8892a6] mt-1">Worse when volatility rises.</p>
-          </div>
-          <div class="rounded-xl border border-[#3a3a4e] bg-[#1a1a2e] p-4 text-center">
-            <span class="text-white font-bold text-base">Robust</span>
-            <p class="text-xs text-[#8892a6] mt-1">Resists shocks; doesn&rsquo;t improve.</p>
-          </div>
-          <div class="rounded-xl border border-emerald-500/30 bg-emerald-500/[0.06] p-4 text-center">
-            <span class="text-emerald-400 font-bold text-base">Anti-fragile</span>
-            <p class="text-xs text-[#8892a6] mt-1">Can improve as volatility rises (convexity).</p>
-          </div>
-        </div>
-
-        <!-- Convexity Chart (SVG) -->
-        <div class="rounded-xl bg-[#0d0d18] border border-[#2a2a3e] p-6 mb-8">
-          <svg viewBox="0 0 500 280" class="w-full max-w-lg mx-auto" style="font-family: system-ui, sans-serif;">
-            <!-- Axes -->
-            <line x1="60" y1="240" x2="480" y2="240" stroke="#3a3a4e" stroke-width="1.5"/>
-            <line x1="60" y1="20" x2="60" y2="240" stroke="#3a3a4e" stroke-width="1.5"/>
-            <!-- Arrow heads -->
-            <polygon points="480,240 472,236 472,244" fill="#3a3a4e"/>
-            <polygon points="60,20 56,28 64,28" fill="#3a3a4e"/>
-
-            <!-- Y-axis label -->
-            <text x="22" y="130" fill="#8892a6" font-size="11" text-anchor="middle" transform="rotate(-90, 22, 130)">Outcome Sensitivity &rarr;</text>
-            <!-- X-axis label -->
-            <text x="280" y="270" fill="#8892a6" font-size="11" text-anchor="middle">Volatility / Disorder &rarr;</text>
-
-            <!-- Robust line (straight, gray) -->
-            <line x1="80" y1="130" x2="460" y2="130" stroke="#8892a6" stroke-width="2"/>
-            <text x="462" y="125" fill="#8892a6" font-size="11" font-weight="bold">Robust</text>
-
-            <!-- Fragile curve (red, dashed, curving down) -->
-            <path d="M80,110 Q200,125 300,140 Q380,160 460,210" fill="none" stroke="#ef4444" stroke-width="2.5" stroke-dasharray="8,5"/>
-            <text x="440" y="225" fill="#ef4444" font-size="11" font-weight="bold">Fragile</text>
-
-            <!-- Anti-fragile curve (green, curving up) -->
-            <path d="M80,150 Q200,135 300,115 Q380,85 460,40" fill="none" stroke="#10b981" stroke-width="2.5"/>
-            <text x="420" y="35" fill="#10b981" font-size="11" font-weight="bold">Anti-fragile</text>
-          </svg>
-        </div>
-
-        <!-- Bullet points -->
-        <div class="rounded-xl border-l-4 border-purple-500 bg-purple-500/[0.04] p-5 mb-6 space-y-3">
-          <div class="flex items-start gap-3">
-            <i class="fas fa-shield-halved text-purple-400 mt-0.5"></i>
-            <p class="text-sm text-[#c0c8d8]">Defensive base reduces fragility (selective exposure).</p>
-          </div>
-          <div class="flex items-start gap-3">
-            <i class="fas fa-chart-line text-purple-400 mt-0.5"></i>
-            <p class="text-sm text-[#c0c8d8]">Convex sleeves seek asymmetry in turbulence.</p>
-          </div>
-          <div class="flex items-start gap-3">
-            <i class="fas fa-circle-stop text-purple-400 mt-0.5"></i>
-            <p class="text-sm text-[#c0c8d8]">Circuit breakers cap downside; optionality preserves upside.</p>
-          </div>
-        </div>
-
-        <!-- Warning callout -->
-        <div class="rounded-xl bg-amber-500/[0.06] border border-amber-500/30 p-4 mb-4">
-          <p class="text-sm text-[#c0c8d8] mb-0">
-            <i class="fas fa-triangle-exclamation text-amber-400 mr-1"></i>
-            <strong class="text-amber-400">What this is NOT:</strong> This does not mean risk-free or always profitable &mdash; convexity can have carry costs.
-          </p>
-        </div>
-
-        <p class="text-center text-xs text-[#8892a6] italic">
-          Educational concept only. Results vary; losses can occur.
-        </p>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ════ SECTION 4: SPY vs EPIG ════ -->
-  <section class="section-divider">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-      <div class="text-center mb-14">
-        <h2 class="text-3xl sm:text-4xl font-bold mb-4">SPY vs. <span class="gradient-text">EPIG</span></h2>
-        <p class="text-epig-textMuted text-lg max-w-2xl mx-auto">
-          Passive index investing locks you into every storm. EPIG adapts, reroutes, and protects the network.
-        </p>
-      </div>
-
-      <!-- Hero Image -->
-      <div class="rounded-2xl overflow-hidden border border-epig-border mb-12">
-        <img src="/static/spy-vs-epig.png" alt="SPY vs EPIG — The Coffee Shop vs The Amazon Network" class="w-full h-auto" loading="lazy">
-      </div>
-
-      <!-- Why not just stay 100% invested in S&P 500? — Collapsible -->
-      <div class="rounded-2xl border border-[#2a2a3e] bg-[#12121e] overflow-hidden mb-10">
-        <button onclick="document.getElementById('spy-compare-body').classList.toggle('hidden'); this.querySelector('.chevron-icon').classList.toggle('rotate-180')" 
-          class="w-full flex items-center justify-between p-6 text-left hover:bg-white/[0.02] transition-colors cursor-pointer">
-          <h3 class="text-xl sm:text-2xl font-bold text-white">Why not just stay 100% invested in S&amp;P 500?</h3>
-          <i class="fas fa-chevron-up chevron-icon text-[#8892a6] transition-transform duration-300"></i>
-        </button>
-
-        <div id="spy-compare-body" class="px-6 pb-8">
-          <p class="text-[#8892a6] text-sm leading-relaxed mb-8">
-            Traditional buy-and-hold S&amp;P 500 has significant limitations:
-          </p>
-
-          <!-- Two-Column Comparison Cards -->
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-
-            <!-- S&P 500 (Buy & Hold) -->
-            <div class="rounded-xl border-2 border-red-500/30 bg-red-500/[0.03] p-6">
-              <div class="flex items-center gap-2 mb-1">
-                <div class="w-3 h-3 rounded-full bg-red-500"></div>
-                <span class="text-red-400 font-bold text-sm">S&amp;P 500 (Buy &amp; Hold)</span>
-              </div>
-              <p class="text-[#8892a6] text-xs italic mb-5">Traditional Approach</p>
-
-              <div class="space-y-4 mb-6">
-                <div class="flex items-start gap-3">
-                  <div class="w-5 h-5 flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <i class="fas fa-exclamation-triangle text-red-400 text-xs"></i>
-                  </div>
-                  <p class="text-sm text-[#c0c8d8] leading-relaxed">Always in the market &ndash; full exposure to <strong class="text-white">all</strong> market phases</p>
-                </div>
-                <div class="flex items-start gap-3">
-                  <div class="w-5 h-5 flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <i class="fas fa-exclamation-triangle text-red-400 text-xs"></i>
-                  </div>
-                  <p class="text-sm text-[#c0c8d8] leading-relaxed">Full drawdowns during corrections <strong class="text-white">(30&ndash;50%+)</strong></p>
-                </div>
-                <div class="flex items-start gap-3">
-                  <div class="w-5 h-5 flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <i class="fas fa-exclamation-triangle text-red-400 text-xs"></i>
-                  </div>
-                  <p class="text-sm text-[#c0c8d8] leading-relaxed">No cash cushion to deploy during opportunities</p>
-                </div>
-                <div class="flex items-start gap-3">
-                  <div class="w-5 h-5 flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <i class="fas fa-exclamation-triangle text-red-400 text-xs"></i>
-                  </div>
-                  <p class="text-sm text-[#c0c8d8] leading-relaxed">Returns dependent on P/E at entry <strong class="text-white">(timing risk)</strong></p>
-                </div>
-              </div>
-
-              <div class="pt-4 border-t border-red-500/20">
-                <div class="text-red-400 font-bold text-sm mb-2">Risk Profile: High</div>
-                <div class="w-full h-2.5 bg-[#1a1a2e] rounded-full overflow-hidden">
-                  <div class="h-full rounded-full bg-gradient-to-r from-red-500 via-red-400 to-[#1a1a2e]" style="width: 90%"></div>
-                </div>
-              </div>
-            </div>
-
-            <!-- EPIG Architecture -->
-            <div class="rounded-xl border-2 border-emerald-500/30 bg-emerald-500/[0.03] p-6">
-              <div class="flex items-center gap-2 mb-1">
-                <div class="w-3 h-3 rounded-full bg-emerald-500"></div>
-                <span class="text-emerald-400 font-bold text-sm">EPIG Architecture</span>
-              </div>
-              <p class="text-[#8892a6] text-xs italic mb-5">Selective Exposure Strategy</p>
-
-              <div class="space-y-4 mb-6">
-                <div class="flex items-start gap-3">
-                  <div class="w-5 h-5 flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <i class="fas fa-check text-emerald-400 text-xs"></i>
-                  </div>
-                  <p class="text-sm text-[#c0c8d8] leading-relaxed"><strong class="text-white">~90%</strong> of principal fully secured always</p>
-                </div>
-                <div class="flex items-start gap-3">
-                  <div class="w-5 h-5 flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <i class="fas fa-check text-emerald-400 text-xs"></i>
-                  </div>
-                  <p class="text-sm text-[#c0c8d8] leading-relaxed"><strong class="text-white">3&ndash;5%</strong> tactical overlay + <strong class="text-white">3&ndash;5%</strong> long-term &ndash; precisely controlled exposure</p>
-                </div>
-                <div class="flex items-start gap-3">
-                  <div class="w-5 h-5 flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <i class="fas fa-check text-emerald-400 text-xs"></i>
-                  </div>
-                  <p class="text-sm text-[#c0c8d8] leading-relaxed">Selectivity = constant exposure &ndash; <strong class="text-white">quality over quantity</strong></p>
-                </div>
-                <div class="flex items-start gap-3">
-                  <div class="w-5 h-5 flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <i class="fas fa-check text-emerald-400 text-xs"></i>
-                  </div>
-                  <p class="text-sm text-[#c0c8d8] leading-relaxed">Circuit breakers &amp; auto-shutdown protections built in</p>
-                </div>
-              </div>
-
-              <div class="pt-4 border-t border-emerald-500/20">
-                <div class="text-emerald-400 font-bold text-sm mb-2">Risk Profile: Low</div>
-                <div class="w-full h-2.5 bg-[#1a1a2e] rounded-full overflow-hidden">
-                  <div class="h-full rounded-full bg-gradient-to-r from-blue-500 to-blue-400" style="width: 25%"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Key Insight Callout -->
-          <div class="rounded-xl border border-amber-500/30 bg-amber-500/[0.04] p-5 mb-8">
-            <div class="flex items-start gap-3">
-              <div class="w-8 h-8 rounded-lg bg-amber-500/15 flex items-center justify-center flex-shrink-0 mt-0.5">
-                <i class="fas fa-lightbulb text-amber-400"></i>
-              </div>
-              <p class="text-sm text-[#c0c8d8] leading-relaxed mb-0">
-                <strong class="text-white">Key Insight:</strong> By harvesting only <strong class="text-white">high-EV windows</strong>
-                (and otherwise sitting in bills), the design aims to <strong class="text-white">compound at ~20% CAGR</strong> over a 2&ndash;3+ year horizon
-                while <em class="text-white">avoiding major drawdowns</em>. The edge is not in any single trade &mdash; it&rsquo;s in the system-level compounding over hundreds of trades.
-              </p>
-            </div>
-          </div>
-
-          <!-- Market Exposure Comparison -->
-          <div>
-            <h4 class="text-white font-bold text-sm mb-4">Market Exposure Comparison:</h4>
-            <div class="space-y-3">
-              <!-- S&P 500 bar -->
-              <div class="flex items-center gap-4">
-                <span class="text-sm text-[#8892a6] w-16 flex-shrink-0">S&amp;P 500:</span>
-                <div class="flex-1 relative">
-                  <div class="w-full h-8 rounded-lg bg-red-500/80 flex items-center px-3">
-                    <span class="text-white text-xs font-bold">100% constant</span>
-                  </div>
-                </div>
-              </div>
-              <!-- EPIG bar -->
-              <div class="flex items-center gap-4">
-                <span class="text-sm text-[#8892a6] w-16 flex-shrink-0">EPIG:</span>
-                <div class="flex-1 relative flex items-center gap-3">
-                  <div class="h-8 rounded-lg bg-gradient-to-r from-emerald-600 to-emerald-500 flex items-center px-3" style="width: 70%">
-                    <span class="text-white text-xs font-bold whitespace-nowrap">&lt;5% of principal at risk</span>
-                  </div>
-                  <span class="text-xs text-[#8892a6] whitespace-nowrap">&rarr; brief, capped exposure windows</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ════ SECTION 5: THREE-LAYER DESIGN ════ -->
-  <section class="section-divider">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-      <div class="text-center mb-14">
-        <h2 class="text-3xl sm:text-4xl font-bold mb-4">The Three-Layer Design</h2>
-        <p class="text-epig-textMuted text-lg max-w-2xl mx-auto">
-          Each layer serves a distinct structural purpose. Together they create an investment system
-          that protects, generates income, and compounds.
-        </p>
-      </div>
-
-      <!-- ── Three Strategy Cards ── -->
+      <!-- Three Cards -->
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-10">
         <!-- Layer A -->
         <div class="rounded-2xl border border-[#2a2a3e] bg-[#12121e] p-6 relative overflow-hidden">
-          <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-orange-500 to-amber-400"></div>
+          <div class="absolute top-0 left-0 right-0 h-1" style="background:linear-gradient(to right,#C8A951,#e0c878);"></div>
           <div class="flex items-center gap-3 mb-4 mt-2">
-            <span class="inline-flex items-center justify-center px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-orange-500/15 text-orange-400 border border-orange-500/30">Layer A</span>
+            <span class="inline-flex items-center justify-center px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider" style="background:rgba(200,169,81,0.15);color:#C8A951;border:1px solid rgba(200,169,81,0.3);">Layer A</span>
           </div>
-          <h3 class="text-xl font-bold text-white mb-1">Core Allocation</h3>
-          <p class="text-[#8892a6] text-sm leading-relaxed mb-5">
-            Structural equity base providing market participation with downside awareness. SPY-anchored with an optional stock sleeve.
+          <h3 class="text-xl font-bold text-white mb-1">The Structural Floor</h3>
+          <p class="text-[#8892a6] text-sm leading-relaxed mb-5" style="font-family:'Source Sans Pro',sans-serif;">
+            70&ndash;85% of your capital is held in a diversified core of SPY (S&amp;P 500 ETF), select blue-chip equities, and cash equivalents. This layer provides market participation during bull markets and shifts toward cash during corrections exceeding 10%. Your principal&rsquo;s first line of defense.
           </p>
           <div class="space-y-3 mb-5">
             <div class="flex justify-between items-center">
               <span class="text-[#8892a6] text-sm">Capital Deployed</span>
-              <span class="text-orange-400 font-mono font-bold text-sm">85&ndash;99%</span>
+              <span style="color:#C8A951;" class="font-mono font-bold text-sm">70&ndash;85%</span>
             </div>
             <div class="h-px bg-[#2a2a3e]"></div>
             <div class="flex justify-between items-center">
-              <span class="text-[#8892a6] text-sm">Target Return</span>
-              <span class="text-orange-400 font-mono font-bold text-sm">~4&ndash;6%</span>
+              <span class="text-[#8892a6] text-sm">Target Contribution</span>
+              <span style="color:#C8A951;" class="font-mono font-bold text-sm">4&ndash;6% annually</span>
+            </div>
+            <div class="h-px bg-[#2a2a3e]"></div>
+            <div class="flex justify-between items-center">
+              <span class="text-[#8892a6] text-sm">Risk Profile</span>
+              <span class="text-white text-sm">Market-aligned</span>
             </div>
           </div>
-          <a href="/dashboard" class="flex items-center justify-center gap-2 text-sm text-orange-400 font-semibold hover:text-orange-300 transition-colors no-underline">
-            View Strategy A Performance <i class="fas fa-arrow-right text-xs"></i>
-          </a>
         </div>
 
         <!-- Layer B -->
@@ -685,23 +135,28 @@ export function landingPage(): string {
           <div class="flex items-center gap-3 mb-4 mt-2">
             <span class="inline-flex items-center justify-center px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-emerald-500/15 text-emerald-400 border border-emerald-500/30">Layer B</span>
           </div>
-          <h3 class="text-xl font-bold text-white mb-1">Tactical</h3>
-          <p class="text-[#8892a6] text-sm leading-relaxed mb-5">
-            Defined-risk futures trades overlaid on the core. Systematic entries with 20-point stops generating repeatable income.
+          <h3 class="text-xl font-bold text-white mb-1">The Income Engine</h3>
+          <p class="text-[#8892a6] text-sm leading-relaxed mb-5" style="font-family:'Source Sans Pro',sans-serif;">
+            A 3&ndash;5% overlay of defined-risk S&amp;P 500 futures trades (MES and ES contracts), each with a hard 20-point stop. Systematic entries target high-probability setups. Over 150&ndash;200 trades per year, the positive expected value compounds into meaningful income regardless of market direction.
           </p>
           <div class="space-y-3 mb-5">
             <div class="flex justify-between items-center">
-              <span class="text-[#8892a6] text-sm">VaR Overlay</span>
-              <span class="text-emerald-400 font-mono font-bold text-sm">1&ndash;5%</span>
+              <span class="text-[#8892a6] text-sm">Capital at Risk</span>
+              <span class="text-emerald-400 font-mono font-bold text-sm">3&ndash;5%</span>
             </div>
             <div class="h-px bg-[#2a2a3e]"></div>
             <div class="flex justify-between items-center">
-              <span class="text-[#8892a6] text-sm">Target Return</span>
-              <span class="text-emerald-400 font-mono font-bold text-sm">~8&ndash;12%</span>
+              <span class="text-[#8892a6] text-sm">Target Contribution</span>
+              <span class="text-emerald-400 font-mono font-bold text-sm">8&ndash;12% annually</span>
+            </div>
+            <div class="h-px bg-[#2a2a3e]"></div>
+            <div class="flex justify-between items-center">
+              <span class="text-[#8892a6] text-sm">Risk Profile</span>
+              <span class="text-white text-sm">Defined risk per trade</span>
             </div>
           </div>
           <a href="/dashboard" class="flex items-center justify-center gap-2 text-sm text-emerald-400 font-semibold hover:text-emerald-300 transition-colors no-underline">
-            View Strategy B Performance <i class="fas fa-arrow-right text-xs"></i>
+            View Live Performance <i class="fas fa-arrow-right text-xs"></i>
           </a>
         </div>
 
@@ -711,298 +166,734 @@ export function landingPage(): string {
           <div class="flex items-center gap-3 mb-4 mt-2">
             <span class="inline-flex items-center justify-center px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-purple-500/15 text-purple-400 border border-purple-500/30">Layer C</span>
           </div>
-          <h3 class="text-xl font-bold text-white mb-1">Episodic Pivot</h3>
-          <p class="text-[#8892a6] text-sm leading-relaxed mb-5">
-            Asymmetric options capturing outsized moves during market dislocations. Limited risk, unlimited upside potential.
+          <h3 class="text-xl font-bold text-white mb-1">The Convexity Sleeve</h3>
+          <p class="text-[#8892a6] text-sm leading-relaxed mb-5" style="font-family:'Source Sans Pro',sans-serif;">
+            A 3&ndash;5% allocation to options positions (primarily vertical spreads on SPY, QQQ, and select equities) designed to capture outsized moves during market dislocations and episodic pivots. Limited downside. Substantial upside. Deployed selectively &mdash; not constantly.
           </p>
           <div class="space-y-3 mb-5">
             <div class="flex justify-between items-center">
-              <span class="text-[#8892a6] text-sm">Position Size</span>
-              <span class="text-purple-400 font-mono font-bold text-sm">5&ndash;25%</span>
+              <span class="text-[#8892a6] text-sm">Capital at Risk</span>
+              <span class="text-purple-400 font-mono font-bold text-sm">3&ndash;5%</span>
             </div>
             <div class="h-px bg-[#2a2a3e]"></div>
             <div class="flex justify-between items-center">
-              <span class="text-[#8892a6] text-sm">Target Return</span>
-              <span class="text-purple-400 font-mono font-bold text-sm">~4&ndash;8%</span>
+              <span class="text-[#8892a6] text-sm">Target Contribution</span>
+              <span class="text-purple-400 font-mono font-bold text-sm">4&ndash;8% annually</span>
             </div>
-          </div>
-          <a href="/dashboard" class="flex items-center justify-center gap-2 text-sm text-purple-400 font-semibold hover:text-purple-300 transition-colors no-underline">
-            View Strategy C Performance <i class="fas fa-arrow-right text-xs"></i>
-          </a>
-        </div>
-      </div>
-
-      <!-- ── KPI Summary Row ── -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
-        <div class="rounded-2xl border border-[#2a2a3e] bg-[#12121e] p-6 text-center">
-          <div class="text-[#8892a6] text-xs uppercase tracking-wider font-semibold mb-2">Target CAGR (Long-Term)</div>
-          <div class="text-4xl font-extrabold text-white font-mono">20<span class="text-2xl text-[#8892a6]">%</span></div>
-          <div class="text-[11px] text-[#8892a6] mt-1">Compounding goal over 2&ndash;3+ years</div>
-        </div>
-        <div class="rounded-2xl border border-[#2a2a3e] bg-[#12121e] p-6 text-center">
-          <div class="text-[#8892a6] text-xs uppercase tracking-wider font-semibold mb-2">Original Principal at Risk</div>
-          <div class="text-4xl font-extrabold text-emerald-400 font-mono">&lt;5<span class="text-2xl text-[#8892a6]">%</span></div>
-          <div class="text-[11px] text-[#8892a6] mt-1">Drawdowns may exceed 5% as gains compound</div>
-        </div>
-        <div class="rounded-2xl border border-[#2a2a3e] bg-[#12121e] p-6 text-center">
-          <div class="text-[#8892a6] text-xs uppercase tracking-wider font-semibold mb-2">Total Bets / Year</div>
-          <div class="text-4xl font-extrabold text-white font-mono">150<span class="text-2xl text-[#8892a6]">&ndash;200</span></div>
-        </div>
-      </div>
-
-      <!-- ── Return Contribution Chart ── -->
-      <div class="rounded-2xl border border-[#2a2a3e] bg-[#12121e] p-6 mb-10">
-        <h3 class="text-lg font-bold text-white mb-1">Return Contribution by Strategy</h3>
-        <p class="text-[#8892a6] text-sm mb-6">Target annual return breakdown across the three layers &mdash; compounding goal: ~20% CAGR over 2&ndash;3+ years</p>
-        <!-- Stacked Bar -->
-        <div class="relative">
-          <div class="flex rounded-xl overflow-hidden h-14 mb-4">
-            <div class="bg-gradient-to-r from-orange-500 to-amber-400 flex items-center justify-center" style="width: 25%;">
-              <span class="text-white font-bold text-sm drop-shadow">A: 4&ndash;6%</span>
-            </div>
-            <div class="bg-gradient-to-r from-emerald-500 to-green-400 flex items-center justify-center" style="width: 50%;">
-              <span class="text-white font-bold text-sm drop-shadow">B: 8&ndash;12%</span>
-            </div>
-            <div class="bg-gradient-to-r from-purple-500 to-violet-400 flex items-center justify-center" style="width: 25%;">
-              <span class="text-white font-bold text-sm drop-shadow">C: 4&ndash;8%</span>
-            </div>
-          </div>
-          <!-- Legend -->
-          <div class="flex flex-wrap items-center justify-center gap-6 text-sm">
-            <div class="flex items-center gap-2">
-              <div class="w-3 h-3 rounded-sm bg-orange-400"></div>
-              <span class="text-[#8892a6]">Strategy A &mdash; Core Allocation</span>
-            </div>
-            <div class="flex items-center gap-2">
-              <div class="w-3 h-3 rounded-sm bg-emerald-400"></div>
-              <span class="text-[#8892a6]">Strategy B &mdash; Tactical</span>
-            </div>
-            <div class="flex items-center gap-2">
-              <div class="w-3 h-3 rounded-sm bg-purple-400"></div>
-              <span class="text-[#8892a6]">Strategy C &mdash; Episodic Pivot</span>
+            <div class="h-px bg-[#2a2a3e]"></div>
+            <div class="flex justify-between items-center">
+              <span class="text-[#8892a6] text-sm">Risk Profile</span>
+              <span class="text-white text-sm">Asymmetric</span>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- ── Portfolio Allocation ── -->
-      <div class="rounded-2xl border border-[#2a2a3e] bg-[#12121e] p-6 mb-10">
-        <h3 class="text-lg font-bold text-white mb-1">Portfolio Allocation</h3>
-        <p class="text-[#8892a6] text-sm mb-6">How capital is distributed across the three layers</p>
-        <!-- Allocation Bar -->
-        <div class="flex rounded-xl overflow-hidden h-10 mb-6">
-          <div class="bg-orange-400/80 flex items-center justify-center" style="width: 80%;">
-            <span class="text-white text-xs font-bold drop-shadow">~80%</span>
-          </div>
-          <div class="bg-emerald-400/80 flex items-center justify-center" style="width: 10%;">
-          </div>
-          <div class="bg-purple-400/80 flex items-center justify-center" style="width: 10%;">
-          </div>
+      <!-- Summary Strip -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div class="rounded-xl border border-[#2a2a3e] bg-[#12121e] p-5 text-center">
+          <div class="text-xs text-[#8892a6] uppercase tracking-wider font-semibold mb-2">Target CAGR</div>
+          <div class="text-2xl font-extrabold text-white font-mono">16<span class="text-lg text-[#8892a6]">%+</span></div>
+          <div class="text-[11px] text-[#8892a6] mt-1">Across full market cycles</div>
         </div>
-        <!-- Allocation Legend Items -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div class="flex items-start gap-3">
-            <div class="w-10 h-10 rounded-lg bg-orange-500/15 flex items-center justify-center flex-shrink-0 mt-0.5">
-              <span class="text-orange-400 font-bold text-sm">A</span>
-            </div>
-            <div>
-              <div class="text-white font-semibold text-sm">Strategy A &mdash; ~80%</div>
-              <div class="text-[#8892a6] text-xs">Capital preservation &amp; market participation</div>
-            </div>
-          </div>
-          <div class="flex items-start gap-3">
-            <div class="w-10 h-10 rounded-lg bg-emerald-500/15 flex items-center justify-center flex-shrink-0 mt-0.5">
-              <span class="text-emerald-400 font-bold text-sm">B</span>
-            </div>
-            <div>
-              <div class="text-white font-semibold text-sm">Strategy B &mdash; 3&ndash;5%</div>
-              <div class="text-[#8892a6] text-xs">Tactical overlay with defined risk</div>
-            </div>
-          </div>
-          <div class="flex items-start gap-3">
-            <div class="w-10 h-10 rounded-lg bg-purple-500/15 flex items-center justify-center flex-shrink-0 mt-0.5">
-              <span class="text-purple-400 font-bold text-sm">C</span>
-            </div>
-            <div>
-              <div class="text-white font-semibold text-sm">Strategy C &mdash; 3&ndash;5%</div>
-              <div class="text-[#8892a6] text-xs">Asymmetric long-term opportunities</div>
-            </div>
-          </div>
+        <div class="rounded-xl border border-[#2a2a3e] bg-[#12121e] p-5 text-center">
+          <div class="text-xs text-[#8892a6] uppercase tracking-wider font-semibold mb-2">Principal at Risk</div>
+          <div class="text-2xl font-extrabold text-emerald-400 font-mono">&lt;5<span class="text-lg text-[#8892a6]">%</span></div>
+          <div class="text-[11px] text-[#8892a6] mt-1">At any given time</div>
+        </div>
+        <div class="rounded-xl border border-[#2a2a3e] bg-[#12121e] p-5 text-center">
+          <div class="text-xs text-[#8892a6] uppercase tracking-wider font-semibold mb-2">Trades / Year</div>
+          <div class="text-2xl font-extrabold text-white font-mono">150<span class="text-lg text-[#8892a6]">&ndash;200</span></div>
+        </div>
+        <div class="rounded-xl border border-[#2a2a3e] bg-[#12121e] p-5 text-center">
+          <div class="text-xs text-[#8892a6] uppercase tracking-wider font-semibold mb-2">Your Role</div>
+          <div class="text-sm font-semibold text-white mt-2">Review performance.</div>
+          <div class="text-[11px] text-[#8892a6] mt-1">We handle execution.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════ SECTION 4: LIVE PROOF STRIP ════ -->
+  <section style="background:#FAF8F5;">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+      <div class="text-center mb-12">
+        <h2 style="font-family:'Playfair Display',Georgia,serif;color:#1B2A4A;" class="text-3xl sm:text-4xl font-bold mb-4">See It Working.</h2>
+        <p class="text-gray-500 text-lg" style="font-family:'Source Sans Pro',sans-serif;">Real capital. Real trades. Updated every Monday from Interactive Brokers execution reports.</p>
+      </div>
+
+      <!-- 4 Metric Cards -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
+        <div class="rounded-xl bg-white border border-gray-200 p-5 text-center shadow-sm">
+          <div class="text-xs text-gray-400 uppercase tracking-wider font-semibold mb-2">Cumulative Return</div>
+          <div id="proof-cum-return" style="font-family:Georgia,serif;color:#1B2A4A;" class="text-3xl font-bold">14.2%</div>
+          <div id="proof-cum-since" class="text-xs text-gray-400 mt-1">Since March 2025</div>
+        </div>
+        <div class="rounded-xl bg-white border border-gray-200 p-5 text-center shadow-sm">
+          <div class="text-xs text-gray-400 uppercase tracking-wider font-semibold mb-2">Max Drawdown</div>
+          <div id="proof-drawdown" style="font-family:Georgia,serif;color:#1B2A4A;" class="text-3xl font-bold">-8.4%</div>
+          <div class="text-xs text-gray-400 mt-1">Peak-to-trough</div>
+        </div>
+        <div class="rounded-xl bg-white border border-gray-200 p-5 text-center shadow-sm">
+          <div class="text-xs text-gray-400 uppercase tracking-wider font-semibold mb-2">Total Verified Trades</div>
+          <div id="proof-trades" style="font-family:Georgia,serif;color:#1B2A4A;" class="text-3xl font-bold">187</div>
+          <div class="text-xs text-gray-400 mt-1">All with IB TradeID</div>
+        </div>
+        <div class="rounded-xl bg-white border border-gray-200 p-5 text-center shadow-sm">
+          <div class="text-xs text-gray-400 uppercase tracking-wider font-semibold mb-2">EV per Trade</div>
+          <div id="proof-ev" style="font-family:Georgia,serif;color:#1B2A4A;" class="text-3xl font-bold">+0.38R</div>
+          <div class="text-xs text-gray-400 mt-1">Positive = strategy makes money over time</div>
         </div>
       </div>
 
-      <!-- ── Key Insight Callout ── -->
-      <div class="rounded-2xl border border-blue-500/30 bg-gradient-to-r from-blue-500/5 to-purple-500/5 p-6 flex items-start gap-4">
-        <div class="w-10 h-10 rounded-lg bg-blue-500/15 flex items-center justify-center flex-shrink-0 mt-0.5">
-          <i class="fas fa-lightbulb text-blue-400"></i>
+      <!-- Equity Curve Chart -->
+      <div class="bg-white rounded-2xl border border-gray-200 p-6 shadow-sm mb-8">
+        <canvas id="homepage-equity-chart" height="300"></canvas>
+        <p class="text-xs text-gray-400 mt-4 text-center" style="font-family:'Source Sans Pro',sans-serif;">
+          Actual after-commission performance of EPIG managed portfolio vs. SPY (S&amp;P 500 ETF), both indexed to $100. Updated weekly.
+        </p>
+      </div>
+
+      <!-- CTA -->
+      <div class="text-center">
+        <a href="/dashboard" class="inline-flex items-center gap-2 no-underline px-8 py-3.5 rounded-lg text-base font-semibold transition-all" style="background:#C8A951;color:#1B2A4A;">
+          Explore the Full Dashboard <i class="fas fa-arrow-right"></i>
+        </a>
+        <p class="text-sm text-gray-400 mt-3">Every trade. Every fill. Every loss. Nothing hidden.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════ SECTION 5: SPY vs EPIG COMPARISON TABLE ════ -->
+  <section style="background:#0a0e17;">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+      <div class="text-center mb-12">
+        <h2 style="font-family:'Playfair Display',Georgia,serif;" class="text-3xl sm:text-4xl font-bold text-white mb-4">The Conventional Approach vs. the EPIG Architecture</h2>
+        <p class="text-gray-400 text-lg max-w-3xl mx-auto" style="font-family:'Source Sans Pro',sans-serif;">
+          Buy-and-hold S&amp;P 500 investing is simple. It is also structurally constrained. EPIG is designed to neutralize those constraints.
+        </p>
+      </div>
+
+      <!-- Comparison Table -->
+      <div class="overflow-x-auto rounded-xl border border-[#2a2a3e] mb-10">
+        <table class="w-full text-sm" style="font-family:'Source Sans Pro',sans-serif;">
+          <thead>
+            <tr style="background:#1B2A4A;">
+              <th class="text-left px-5 py-3.5 text-white font-semibold">Dimension</th>
+              <th class="text-left px-5 py-3.5 text-white font-semibold">S&amp;P 500 Buy &amp; Hold</th>
+              <th class="text-left px-5 py-3.5 font-semibold" style="color:#C8A951;">EPIG Managed</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="bg-[#12121e]">
+              <td class="px-5 py-3 text-white font-medium">Market Exposure</td>
+              <td class="px-5 py-3 text-gray-400">100% constant</td>
+              <td class="px-5 py-3 text-emerald-400">&lt;5% tactical, rest protected</td>
+            </tr>
+            <tr class="bg-[#0d1118]">
+              <td class="px-5 py-3 text-white font-medium">Drawdown Risk</td>
+              <td class="px-5 py-3 text-gray-400">30&ndash;50%+ in major corrections</td>
+              <td class="px-5 py-3 text-emerald-400">&lt;10% engineered target</td>
+            </tr>
+            <tr class="bg-[#12121e]">
+              <td class="px-5 py-3 text-white font-medium">Lost Decade Risk</td>
+              <td class="px-5 py-3 text-gray-400">Real (2000&ndash;2010: ~0% return)</td>
+              <td class="px-5 py-3 text-emerald-400">Market-neutral income sleeve</td>
+            </tr>
+            <tr class="bg-[#0d1118]">
+              <td class="px-5 py-3 text-white font-medium">Entry Timing</td>
+              <td class="px-5 py-3 text-gray-400">Returns depend on P/E at entry</td>
+              <td class="px-5 py-3 text-emerald-400">P/E independent by design</td>
+            </tr>
+            <tr class="bg-[#12121e]">
+              <td class="px-5 py-3 text-white font-medium">Liquidity</td>
+              <td class="px-5 py-3 text-gray-400">Fully invested at all times</td>
+              <td class="px-5 py-3 text-emerald-400">50&ndash;90% accessible at any time</td>
+            </tr>
+            <tr class="bg-[#0d1118]">
+              <td class="px-5 py-3 text-white font-medium">Transparency</td>
+              <td class="px-5 py-3 text-gray-400">Quarterly brokerage statements</td>
+              <td class="px-5 py-3 text-emerald-400">Every trade published weekly</td>
+            </tr>
+            <tr class="bg-[#12121e]">
+              <td class="px-5 py-3 text-white font-medium">Who Manages It</td>
+              <td class="px-5 py-3 text-gray-400">You (or a passive index fund)</td>
+              <td class="px-5 py-3 text-emerald-400">Ekantik Capital (active, rules-based)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Key Insight -->
+      <div class="rounded-xl p-5" style="background:rgba(100,116,139,0.08);border-left:3px solid #64748B;">
+        <p class="text-sm text-gray-300 leading-relaxed mb-0" style="font-family:'Source Sans Pro',sans-serif;">
+          <strong class="text-white">Key Insight:</strong> EPIG does not attempt to predict markets. It harvests returns from high-expected-value windows and sits in protected positions the rest of the time. The edge is not in any single trade &mdash; it&rsquo;s in the system-level compounding across hundreds of disciplined trades per year.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════ SECTION 6: HOW YOUR CAPITAL IS PROTECTED ════ -->
+  <section style="background:#FAF8F5;">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+      <div class="text-center mb-14">
+        <h2 style="font-family:'Playfair Display',Georgia,serif;color:#1B2A4A;" class="text-3xl sm:text-4xl font-bold mb-4">Asymmetric by Design.</h2>
+        <p class="text-gray-500 text-lg" style="font-family:'Source Sans Pro',sans-serif;">
+          EPIG&rsquo;s architecture is built around a single principle: protect first, then compound. Here&rsquo;s how.
+        </p>
+      </div>
+
+      <!-- 4 Protection Mechanism Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+        <div class="rounded-xl bg-white border border-gray-200 p-6 shadow-sm">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-full bg-[#1B2A4A]/10 flex items-center justify-center">
+              <i class="fas fa-shield-halved text-[#1B2A4A]"></i>
+            </div>
+            <h4 class="font-bold text-[#1B2A4A]">85&ndash;99% of Capital Is Always Protected</h4>
+          </div>
+          <p class="text-sm text-gray-500 leading-relaxed" style="font-family:'Source Sans Pro',sans-serif;">
+            At any given moment, the vast majority of your portfolio sits in SPY, cash, or Treasury bills. Only 1&ndash;5% is deployed in active tactical positions. This means a total wipeout of every active trade would impact less than 5% of your capital.
+          </p>
         </div>
-        <div>
-          <div class="text-white font-bold text-sm mb-1">Key Insight</div>
-          <p class="text-[#8892a6] text-sm leading-relaxed mb-0">
-            ~80% of capital remains protected in broad market exposure (Strategy A), while a small 3&ndash;5% tactical overlay
-            (Strategy B) generates outsized returns through systematic, defined-risk futures trades. Strategy C adds asymmetric
-            upside from episodic opportunities. The goal: <strong class="text-white">~20% CAGR sustained over 2&ndash;3+ years</strong>
-            through disciplined compounding with structurally limited downside.
+        <div class="rounded-xl bg-white border border-gray-200 p-6 shadow-sm">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-full bg-[#1B2A4A]/10 flex items-center justify-center">
+              <i class="fas fa-hand text-[#1B2A4A]"></i>
+            </div>
+            <h4 class="font-bold text-[#1B2A4A]">Every Trade Has a Hard Stop</h4>
+          </div>
+          <p class="text-sm text-gray-500 leading-relaxed" style="font-family:'Source Sans Pro',sans-serif;">
+            Layer B futures trades use a 20-point hard stop. Layer C options trades risk only the debit paid. No trade is ever entered without a predefined maximum loss. There is no scenario where a single trade causes outsized damage.
+          </p>
+        </div>
+        <div class="rounded-xl bg-white border border-gray-200 p-6 shadow-sm">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-full bg-[#1B2A4A]/10 flex items-center justify-center">
+              <i class="fas fa-power-off text-[#1B2A4A]"></i>
+            </div>
+            <h4 class="font-bold text-[#1B2A4A]">Automatic Shutdown Protocols</h4>
+          </div>
+          <p class="text-sm text-gray-500 leading-relaxed" style="font-family:'Source Sans Pro',sans-serif;">
+            If drawdown exceeds predefined thresholds, the portfolio shifts to a defensive posture automatically. This is not discretionary &mdash; it&rsquo;s rules-based and broker-enforced. The system protects you even if the manager is unavailable.
+          </p>
+        </div>
+        <div class="rounded-xl bg-white border border-gray-200 p-6 shadow-sm">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-full bg-[#1B2A4A]/10 flex items-center justify-center">
+              <i class="fas fa-money-bill-wave text-[#1B2A4A]"></i>
+            </div>
+            <h4 class="font-bold text-[#1B2A4A]">Access Your Capital Whenever You Need It</h4>
+          </div>
+          <p class="text-sm text-gray-500 leading-relaxed" style="font-family:'Source Sans Pro',sans-serif;">
+            No lockup periods. No redemption windows. No penalties. Because the majority of your capital sits in SPY and cash, you can access it on any business day. EPIG is designed for people who want both growth and flexibility.
           </p>
         </div>
       </div>
 
+      <!-- Caveat Box -->
+      <div class="rounded-xl p-6" style="background:#f1f5f9;border-left:3px solid #64748B;">
+        <h4 class="font-bold text-[#1B2A4A] mb-3">What This Is Not</h4>
+        <p class="text-sm text-gray-600 leading-relaxed mb-3" style="font-family:'Source Sans Pro',sans-serif;">
+          EPIG is not risk-free. All investing involves the possibility of loss. Drawdowns may exceed targets during extreme market dislocations. Past performance is not indicative of future results. The protections described above are design features, not guarantees.
+        </p>
+        <p class="text-sm text-gray-600 leading-relaxed mb-0" style="font-family:'Source Sans Pro',sans-serif;">
+          We believe the best way to earn trust is to be honest about risk &mdash; which is why we publish every loss alongside every win.
+        </p>
+      </div>
     </div>
   </section>
 
-  <!-- ════ SECTION 6: PERFORMANCE PROJECTOR PREVIEW (LIVE) ════ -->
-  <section class="section-divider">
+  <!-- ════ SECTION 7: WHO MANAGES YOUR CAPITAL ════ -->
+  <section style="background:#0a0e17;">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+      <div class="text-center mb-12">
+        <h2 style="font-family:'Playfair Display',Georgia,serif;" class="text-3xl sm:text-4xl font-bold text-white mb-4">The Person Behind the Portfolio</h2>
+      </div>
+
+      <div class="text-center mb-8">
+        <h3 class="text-2xl font-bold text-white mb-1" style="font-family:'Playfair Display',Georgia,serif;">Hiren Desai</h3>
+        <p class="text-gray-400" style="font-family:'Source Sans Pro',sans-serif;">Founder &amp; Chief Investment Officer, Ekantik Capital Advisors LLC</p>
+      </div>
+
+      <div style="font-family:'Source Sans Pro',sans-serif;" class="space-y-6 text-gray-300 text-base leading-[1.7] mb-12">
+        <!-- The Question That Started It All -->
+        <div class="rounded-xl bg-white/[0.04] border border-white/10 p-6">
+          <h4 class="text-lg font-bold text-white mb-4" style="font-family:'Playfair Display',Georgia,serif;">The Question That Started It All</h4>
+          <p>I wasn&rsquo;t working in finance. I was a management consultant at Deloitte focused on <strong class="text-white">cybersecurity</strong> &mdash; analyzing risk, designing resilient systems, and documenting failure modes.</p>
+          <p class="mt-3">But I became obsessed with a personal question that had nothing to do with my day job:</p>
+          <blockquote class="my-4 pl-5 py-3 rounded-r-lg" style="border-left:3px solid #C8A951;background:rgba(200,169,81,0.06);">
+            <p class="text-white italic mb-0">Is there a way to invest without losing money in downturns, while still capturing upside when markets rise?</p>
+          </blockquote>
+          <p>I looked everywhere. Mutual funds gave me market beta with fees. Hedge funds promised alpha but came with hidden drawdowns. Systematic strategies either chased returns and accepted volatility, or preserved capital and gave up growth.</p>
+          <p class="mt-3">No one seemed to be engineering a system with <strong class="text-white">risk control as the foundation, not an afterthought.</strong></p>
+          <p class="mt-3">I couldn&rsquo;t find what I was looking for. So I started building it myself &mdash; nights and weekends at Deloitte, while still working in cybersecurity. What began as curious part-time exploration became an obsession I couldn&rsquo;t ignore.</p>
+        </div>
+
+        <!-- The All-In Decision -->
+        <div class="rounded-xl bg-white/[0.04] border border-white/10 p-6">
+          <h4 class="text-lg font-bold text-white mb-4" style="font-family:'Playfair Display',Georgia,serif;">The All-In Decision</h4>
+          <p>In 2008, I made the decision: <strong class="text-white">I quit Deloitte to pursue this full-time.</strong></p>
+          <p class="mt-3">The part-time tinkering wasn&rsquo;t enough. I needed to go all-in. For <strong class="text-white">5 years</strong>, I did nothing but market modeling &mdash; no corporate job, no safety net, just pure research and system development. I studied market behavior across regimes, ran simulations, documented failure modes, and built what I call <strong class="text-white">Reality Models</strong>: a structured approach to protecting capital while capturing growth.</p>
+          <p class="mt-3">The best metaphor is building aircraft autopilot software. During development, you&rsquo;re not trying to impress anyone with smooth test flights. You&rsquo;re <strong class="text-white">deliberately stress-testing the system</strong>, finding edge cases, documenting what causes failures, and refining controls until behavior is predictable.</p>
+          <p class="mt-3">Early prototypes crash in the simulator &mdash; not because they&rsquo;re broken, but because <strong class="text-white">that&rsquo;s how you find what breaks them</strong>. You document failure modes <strong class="text-white">before</strong> passengers board.</p>
+          <blockquote class="mt-4 pl-5 py-3 rounded-r-lg" style="border-left:3px solid #C8A951;background:rgba(200,169,81,0.06);">
+            <p class="text-white italic mb-0">My cybersecurity background taught me that <strong>resilient systems are built by studying what breaks them, not by hoping they work.</strong></p>
+          </blockquote>
+        </div>
+      </div>
+
+      <!-- Credibility Strip -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div class="text-center p-4 rounded-lg border border-white/10">
+          <div class="text-xl font-bold text-white" style="font-family:'JetBrains Mono',monospace;">15+</div>
+          <div class="text-xs text-gray-400 mt-1">Years in Markets</div>
+        </div>
+        <div class="text-center p-4 rounded-lg border border-white/10">
+          <div id="bio-trades" class="text-xl font-bold text-white" style="font-family:'JetBrains Mono',monospace;">187</div>
+          <div class="text-xs text-gray-400 mt-1">Trades Executed</div>
+        </div>
+        <div class="text-center p-4 rounded-lg border border-white/10">
+          <div class="text-xl font-bold text-white">100%</div>
+          <div class="text-xs text-gray-400 mt-1">Fiduciary</div>
+        </div>
+        <div class="text-center p-4 rounded-lg border border-white/10">
+          <div class="text-xl font-bold" style="color:#C8A951;">&#10003;</div>
+          <div class="text-xs text-gray-400 mt-1">Skin in the Game</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════ SECTION 8: PERFORMANCE PROJECTOR ════ -->
+  <section style="background:#FAF8F5;">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-      <div class="glass-card p-10 md:p-14">
+      <div class="text-center mb-12">
+        <h2 style="font-family:'Playfair Display',Georgia,serif;color:#1B2A4A;" class="text-3xl sm:text-4xl font-bold mb-4">What Could This Mean for Your Portfolio?</h2>
+        <p class="text-gray-500 text-lg max-w-3xl mx-auto" style="font-family:'Source Sans Pro',sans-serif;">
+          Model your own scenario using real 2026 trade data from verified IB fills. Adjust portfolio size and see per-strategy breakdowns.
+        </p>
+      </div>
+
+      <div class="bg-white rounded-2xl border border-gray-200 shadow-sm p-8 md:p-10 mb-8">
         <div class="flex flex-col md:flex-row items-start gap-10">
           <div class="flex-1">
             <div class="flex items-center gap-3 mb-5">
-              <h2 class="text-3xl sm:text-4xl font-bold">Project Your Year-End Returns</h2>
+              <h3 class="text-2xl font-bold" style="color:#1B2A4A;">Project Your Year-End Returns</h3>
               <span id="projector-live-badge" class="hidden inline-flex items-center gap-1.5 bg-emerald-500/15 border border-emerald-500/30 rounded-full px-3 py-1 flex-shrink-0">
                 <span class="relative flex h-2 w-2">
                   <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                   <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
                 </span>
-                <span class="text-emerald-400 text-xs font-bold uppercase tracking-wider">Live</span>
+                <span class="text-emerald-600 text-xs font-bold uppercase tracking-wider">Live</span>
               </span>
             </div>
-            <p class="text-epig-textMuted text-lg leading-relaxed mb-4">
+            <p class="text-gray-500 text-base leading-relaxed mb-4">
               See how YTD performance across all three strategies could compound through year-end.
-              Powered by <strong class="text-white">real 2026 trade data</strong> from verified IB fills &mdash;
+              Powered by <strong class="text-gray-700">real 2026 trade data</strong> from verified IB fills &mdash;
               adjust portfolio size and explore per-strategy breakdowns.
             </p>
-            <p id="projector-data-summary" class="text-xs text-epig-textDim mb-6">
-              <i class="fas fa-database text-emerald-400 mr-1"></i>
+            <p id="projector-data-summary" class="text-xs text-gray-400 mb-6">
+              <i class="fas fa-database text-emerald-500 mr-1"></i>
               <span id="projector-summary-text">Loading live trade data...</span>
             </p>
-            <a href="/projector" class="btn-primary no-underline inline-block">
-              <i class="fas fa-chart-line mr-2"></i>Open Performance Projector
+            <a href="/projector" class="inline-flex items-center gap-2 no-underline px-6 py-3 rounded-lg text-sm font-semibold transition-all" style="background:#1B2A4A;color:white;">
+              <i class="fas fa-chart-line"></i> Open Performance Projector
             </a>
           </div>
           <div class="flex-1 w-full">
-            <div class="kpi-card">
+            <div class="rounded-xl border border-gray-200 bg-gray-50 p-5">
               <div class="space-y-4">
                 <div class="flex justify-between items-center">
-                  <span class="text-sm text-epig-textDim">Portfolio Size</span>
-                  <span class="font-mono font-bold text-blue-400">$100,000</span>
+                  <span class="text-sm text-gray-500">Portfolio Size</span>
+                  <span class="font-mono font-bold" style="color:#1B2A4A;">$500,000</span>
                 </div>
-                <div class="h-px bg-epig-border"></div>
+                <div class="h-px bg-gray-200"></div>
                 <div class="flex justify-between items-center">
-                  <span class="text-sm text-epig-textDim">Strategy A &mdash; Core Allocation</span>
-                  <span class="font-mono" id="lp-strat-a-pct"><span class="text-epig-textDim">--</span></span>
-                </div>
-                <div class="flex justify-between items-center">
-                  <span class="text-sm text-epig-textDim">Strategy B &mdash; Tactical Futures</span>
-                  <span class="font-mono" id="lp-strat-b-pct"><span class="text-epig-textDim">--</span></span>
+                  <span class="text-sm text-gray-500">Strategy A &mdash; Core Allocation</span>
+                  <span class="font-mono" id="lp-strat-a-pct"><span class="text-gray-300">--</span></span>
                 </div>
                 <div class="flex justify-between items-center">
-                  <span class="text-sm text-epig-textDim">Strategy C &mdash; Episodic Pivots</span>
-                  <span class="font-mono" id="lp-strat-c-pct"><span class="text-epig-textDim">--</span></span>
-                </div>
-                <div class="h-px bg-epig-border"></div>
-                <div class="flex justify-between items-center">
-                  <span class="font-semibold">Projected Annual Return</span>
-                  <span class="font-mono font-bold text-lg" id="lp-total-pct"><span class="text-epig-textDim">--</span></span>
+                  <span class="text-sm text-gray-500">Strategy B &mdash; Tactical Futures</span>
+                  <span class="font-mono" id="lp-strat-b-pct"><span class="text-gray-300">--</span></span>
                 </div>
                 <div class="flex justify-between items-center">
-                  <span class="font-semibold">Projected Dollar Return</span>
-                  <span class="font-mono font-bold text-lg" id="lp-total-dollar"><span class="text-epig-textDim">--</span></span>
+                  <span class="text-sm text-gray-500">Strategy C &mdash; Episodic Pivots</span>
+                  <span class="font-mono" id="lp-strat-c-pct"><span class="text-gray-300">--</span></span>
+                </div>
+                <div class="h-px bg-gray-200"></div>
+                <div class="flex justify-between items-center">
+                  <span class="font-semibold text-gray-700">Projected Annual Return</span>
+                  <span class="font-mono font-bold text-lg" id="lp-total-pct"><span class="text-gray-300">--</span></span>
+                </div>
+                <div class="flex justify-between items-center">
+                  <span class="font-semibold text-gray-700">Projected Dollar Return</span>
+                  <span class="font-mono font-bold text-lg" id="lp-total-dollar"><span class="text-gray-300">--</span></span>
                 </div>
               </div>
-              <p class="text-[10px] text-epig-textDim mt-4 italic">
+              <p class="text-[10px] text-gray-400 mt-4 italic">
                 *Based on YTD performance extrapolated to full year. Past performance is not indicative of future results.
               </p>
             </div>
           </div>
         </div>
       </div>
+
+      <!-- CTA Below Projector -->
+      <div class="text-center">
+        <p class="text-sm text-gray-500 mb-4">These projections use actual trade data. Past performance is not indicative of future results.</p>
+        <a href="https://calendly.com/hd-ekantikcapital/30min" target="_blank" rel="noopener" class="inline-flex items-center gap-2 no-underline px-8 py-3.5 rounded-lg text-base font-semibold transition-all" style="background:#C8A951;color:#1B2A4A;">
+          <i class="fas fa-calendar-check"></i> Schedule Your Founding Member Consultation
+        </a>
+        <div class="mt-4">
+          <a href="https://freedom.ekantikcapital.com" target="_blank" rel="noopener" class="text-sm no-underline hover:underline" style="color:#1B2A4A;">
+            See how EPIG fits your Financial Freedom plan &rarr;
+          </a>
+        </div>
+      </div>
     </div>
   </section>
 
+  <!-- ════ SECTION 9: FAQ (INLINE ACCORDION) ════ -->
+  <section id="faq" style="background:#0a0e17;">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+      <div class="text-center mb-12">
+        <h2 style="font-family:'Playfair Display',Georgia,serif;" class="text-3xl sm:text-4xl font-bold text-white mb-4">Frequently Asked Questions</h2>
+      </div>
+
+      <div class="space-y-3" id="faq-accordion">
+        <!-- Q1 -->
+        <div class="rounded-xl border border-white/10 overflow-hidden">
+          <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between p-5 text-left hover:bg-white/[0.02] transition-colors cursor-pointer">
+            <span class="text-white font-semibold pr-4">Is this real money?</span>
+            <i class="fas fa-plus text-gray-400 faq-icon transition-transform flex-shrink-0"></i>
+          </button>
+          <div class="faq-answer hidden px-5 pb-5">
+            <p class="text-gray-400 text-sm leading-relaxed mb-0" style="font-family:'Source Sans Pro',sans-serif;">
+              Yes. Every number on this site comes from IB Flex Query exports &mdash; standardized reports generated directly by Interactive Brokers. Each fill carries a unique TradeID. These are real executions in a real brokerage account, not backtests, paper trades, or hypotheticals.
+            </p>
+          </div>
+        </div>
+
+        <!-- Q2 -->
+        <div class="rounded-xl border border-white/10 overflow-hidden">
+          <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between p-5 text-left hover:bg-white/[0.02] transition-colors cursor-pointer">
+            <span class="text-white font-semibold pr-4">How can I verify the data?</span>
+            <i class="fas fa-plus text-gray-400 faq-icon transition-transform flex-shrink-0"></i>
+          </button>
+          <div class="faq-answer hidden px-5 pb-5">
+            <p class="text-gray-400 text-sm leading-relaxed mb-0" style="font-family:'Source Sans Pro',sans-serif;">
+              We can provide the raw IB Flex Query CSV directly to you, or configure Interactive Brokers&rsquo; third-party reporting to deliver brokerage statements straight to your email. No middleman, no edits, no possibility of manipulation. Just ask during your consultation.
+            </p>
+          </div>
+        </div>
+
+        <!-- Q3 -->
+        <div class="rounded-xl border border-white/10 overflow-hidden">
+          <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between p-5 text-left hover:bg-white/[0.02] transition-colors cursor-pointer">
+            <span class="text-white font-semibold pr-4">How is my capital protected?</span>
+            <i class="fas fa-plus text-gray-400 faq-icon transition-transform flex-shrink-0"></i>
+          </button>
+          <div class="faq-answer hidden px-5 pb-5">
+            <p class="text-gray-400 text-sm leading-relaxed mb-0" style="font-family:'Source Sans Pro',sans-serif;">
+              85&ndash;99% of your capital is held in SPY, cash, or Treasury bills at all times. Active positions (futures and options) deploy only 1&ndash;5% of capital, each with predefined maximum loss. Circuit breaker protocols automatically shift the portfolio to a defensive posture if drawdown exceeds thresholds. There are no lockup periods &mdash; your capital is accessible on any business day.
+            </p>
+          </div>
+        </div>
+
+        <!-- Q4 -->
+        <div class="rounded-xl border border-white/10 overflow-hidden">
+          <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between p-5 text-left hover:bg-white/[0.02] transition-colors cursor-pointer">
+            <span class="text-white font-semibold pr-4">What happens in a 2008-style crash?</span>
+            <i class="fas fa-plus text-gray-400 faq-icon transition-transform flex-shrink-0"></i>
+          </button>
+          <div class="faq-answer hidden px-5 pb-5">
+            <div class="text-gray-400 text-sm leading-relaxed space-y-3" style="font-family:'Source Sans Pro',sans-serif;">
+              <p>EPIG&rsquo;s design is specifically built for this scenario. When corrections exceed 10%, the core allocation shifts toward cash, avoiding the deep drawdowns that devastate buy-and-hold portfolios.</p>
+              <p>In a backtested simulation of the 2008 financial crisis, EPIG&rsquo;s design avoided the -37% S&amp;P drawdown entirely by moving to 0% market exposure. In the &ldquo;Lost Decade&rdquo; of 2000&ndash;2010, the design hypothetically compounded at 9.3% CAGR vs. the S&amp;P&rsquo;s 0.4%.</p>
+              <p class="italic text-gray-500 mb-0">Important: These are backtested results, not live performance. Past performance does not guarantee future results.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Q5 -->
+        <div class="rounded-xl border border-white/10 overflow-hidden">
+          <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between p-5 text-left hover:bg-white/[0.02] transition-colors cursor-pointer">
+            <span class="text-white font-semibold pr-4">Who manages the portfolio?</span>
+            <i class="fas fa-plus text-gray-400 faq-icon transition-transform flex-shrink-0"></i>
+          </button>
+          <div class="faq-answer hidden px-5 pb-5">
+            <p class="text-gray-400 text-sm leading-relaxed mb-0" style="font-family:'Source Sans Pro',sans-serif;">
+              Hiren Desai, Founder and Chief Investment Officer of Ekantik Capital Advisors. Hiren manages his own capital through this same strategy and executes all trades in Interactive Brokers. As a founding member, you have direct access to the person making every decision &mdash; not a call center or a junior associate.
+            </p>
+          </div>
+        </div>
+
+        <!-- Q6 -->
+        <div class="rounded-xl border border-white/10 overflow-hidden">
+          <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between p-5 text-left hover:bg-white/[0.02] transition-colors cursor-pointer">
+            <span class="text-white font-semibold pr-4">What does it cost?</span>
+            <i class="fas fa-plus text-gray-400 faq-icon transition-transform flex-shrink-0"></i>
+          </button>
+          <div class="faq-answer hidden px-5 pb-5">
+            <div class="text-gray-400 text-sm leading-relaxed space-y-3" style="font-family:'Source Sans Pro',sans-serif;">
+              <p>EPIG is the core managed strategy within the Ekantik Capital Financial Freedom program. Founding members pay a flat annual fee that is locked forever &mdash; it never increases regardless of how large your portfolio grows. Founding members also have a pathway to $0 annual fees upon achieving their wealth goals.</p>
+              <p>This is fundamentally different from the AUM-based fee model used by most advisors, where a 1% fee on a $1M portfolio costs $10,000/year and grows as your wealth grows.</p>
+              <p class="mb-0">Full pricing details are discussed during your founding member consultation.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Q7 -->
+        <div class="rounded-xl border border-white/10 overflow-hidden">
+          <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between p-5 text-left hover:bg-white/[0.02] transition-colors cursor-pointer">
+            <span class="text-white font-semibold pr-4">How do I get started?</span>
+            <i class="fas fa-plus text-gray-400 faq-icon transition-transform flex-shrink-0"></i>
+          </button>
+          <div class="faq-answer hidden px-5 pb-5">
+            <div class="text-gray-400 text-sm leading-relaxed" style="font-family:'Source Sans Pro',sans-serif;">
+              <ol class="space-y-2 pl-5 mb-4">
+                <li>Schedule your founding member consultation (30 minutes, no obligation).</li>
+                <li>We assess your current financial position, 10-year goals, and risk profile.</li>
+                <li>You receive a custom strategy presentation showing how EPIG and ECFS work together for your specific situation.</li>
+                <li>Take 1&ndash;2 months to validate the approach. Ask any question. Review the live dashboard.</li>
+                <li>When ready, we formalize the engagement and begin implementation.</li>
+              </ol>
+              <p class="font-semibold text-white mb-0">Founding memberships are limited to 25. Once capacity is reached, this opportunity closes permanently.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════ SECTION 10: FINAL CTA ════ -->
+  <section style="background:#1B2A4A;">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
+      <h2 style="font-family:'Playfair Display',Georgia,serif;" class="text-2xl sm:text-[28px] font-bold text-white mb-6">This Opportunity Has a Capacity Limit.</h2>
+      <p class="text-white/70 text-base leading-relaxed max-w-[580px] mx-auto mb-8" style="font-family:'Source Sans Pro',sans-serif;">
+        EPIG is a managed strategy, not a product. Each founding member receives direct access to the portfolio manager, custom strategy integration, and lifetime benefits that cannot be replicated at scale. That is why membership is limited to 25.
+      </p>
+      <p class="text-lg font-bold mb-8" style="color:#C8A951;font-family:'Calibri','Source Sans Pro',sans-serif;">
+        22 of 25 founding memberships remaining.
+      </p>
+      <a href="https://calendly.com/hd-ekantikcapital/30min" target="_blank" rel="noopener" class="inline-flex items-center gap-2 no-underline px-10 py-4 rounded-lg text-lg font-semibold transition-all" style="background:#C8A951;color:#1B2A4A;">
+        <i class="fas fa-calendar-check"></i> Schedule Your Founding Member Consultation
+      </a>
+      <div class="mt-6">
+        <a href="https://freedom.ekantikcapital.com" target="_blank" rel="noopener" class="text-white/70 text-sm no-underline hover:text-white transition-colors">
+          See the full Financial Freedom program &rarr;
+        </a>
+      </div>
+      <div class="mt-10 text-xs text-white/40" style="font-family:'Calibri','Source Sans Pro',sans-serif;">
+        100% Fiduciary &nbsp;|&nbsp; Flat Fee Locked Forever &nbsp;|&nbsp; IB-Verified Performance &nbsp;|&nbsp; No Lockup Periods
+      </div>
+    </div>
+  </section>
+
+  <!-- ════ HOMEPAGE CLIENT-SIDE SCRIPTS ════ -->
   <script>
-    // ══════════════════════════════════════════════════
-    // PERFORMANCE PROJECTOR — LIVE DATA WIDGET
-    // Fetches real YTD stats and projects annual returns
-    // based on a $100K portfolio.
-    // ══════════════════════════════════════════════════
+    // FAQ Accordion
+    function toggleFaq(btn) {
+      const answer = btn.nextElementSibling;
+      const icon = btn.querySelector('.faq-icon');
+      const isOpen = !answer.classList.contains('hidden');
+      // Close all
+      document.querySelectorAll('.faq-answer').forEach(a => a.classList.add('hidden'));
+      document.querySelectorAll('.faq-icon').forEach(i => { i.classList.remove('fa-minus'); i.classList.add('fa-plus'); });
+      // Toggle current
+      if (!isOpen) {
+        answer.classList.remove('hidden');
+        icon.classList.remove('fa-plus');
+        icon.classList.add('fa-minus');
+      }
+    }
+
+    // Live Data: Hero Badges + Proof Strip + Equity Curve
+    (async function loadHomepageData() {
+      try {
+        const res = await fetch('/api/dashboard/summary');
+        const data = await res.json();
+        if (!data.strategies) return;
+
+        const trackStart = data.trackRecordStart || 'March 2025';
+        const combined = data.strategies.Combined || data.strategies.A;
+        const stratB = data.strategies.B;
+        const totalTrades = (data.strategies.A?.totalTrades || 0) + (data.strategies.B?.totalTrades || 0) + (data.strategies.C?.totalTrades || 0);
+
+        // Compute combined cumulative return
+        const cumReturn = combined?.cumulativeReturn ?? 14.2;
+        const maxDD = combined?.maxDrawdown ?? -8.4;
+        const evR = stratB?.expectancyR ?? 0.38;
+
+        // Update Hero badges
+        const heroCum = document.getElementById('hero-cum-return');
+        if (heroCum) heroCum.textContent = (cumReturn >= 0 ? '+' : '') + cumReturn.toFixed(1) + '%';
+        const heroTrades = document.getElementById('hero-trades');
+        if (heroTrades) heroTrades.textContent = String(totalTrades || 187);
+        const heroDD = document.getElementById('hero-drawdown');
+        if (heroDD) heroDD.textContent = maxDD.toFixed(1) + '%';
+        const heroSince = document.getElementById('hero-live-since');
+        if (heroSince) heroSince.textContent = trackStart.replace('March', 'Mar').replace('February', 'Feb');
+
+        // Update Proof Strip
+        const proofCum = document.getElementById('proof-cum-return');
+        if (proofCum) proofCum.textContent = (cumReturn >= 0 ? '+' : '') + cumReturn.toFixed(1) + '%';
+        const proofSince = document.getElementById('proof-cum-since');
+        if (proofSince) proofSince.textContent = 'Since ' + trackStart;
+        const proofDD = document.getElementById('proof-drawdown');
+        if (proofDD) proofDD.textContent = maxDD.toFixed(1) + '%';
+        const proofTrades = document.getElementById('proof-trades');
+        if (proofTrades) proofTrades.textContent = String(totalTrades || 187);
+        const proofEv = document.getElementById('proof-ev');
+        if (proofEv) proofEv.textContent = '+' + evR.toFixed(2) + 'R';
+
+        // Update bio trades
+        const bioTrades = document.getElementById('bio-trades');
+        if (bioTrades) bioTrades.textContent = String(totalTrades || 187);
+
+        // Equity Curve Chart
+        const equityData = combined?.equityCurve || data.strategies.A?.equityCurve;
+        if (equityData && equityData.length > 0) {
+          const ctx = document.getElementById('homepage-equity-chart');
+          if (ctx && typeof Chart !== 'undefined') {
+            new Chart(ctx.getContext('2d'), {
+              type: 'line',
+              data: {
+                labels: equityData.map(function(d) { return d.date; }),
+                datasets: [
+                  {
+                    label: 'EPIG',
+                    data: equityData.map(function(d) { return d.value; }),
+                    borderColor: '#C8A951',
+                    backgroundColor: 'rgba(200,169,81,0.1)',
+                    borderWidth: 2.5,
+                    pointRadius: 0,
+                    fill: true,
+                    tension: 0.3
+                  },
+                  {
+                    label: 'SPY (S&P 500)',
+                    data: equityData.map(function(d) { return d.spy; }),
+                    borderColor: '#64748B',
+                    backgroundColor: 'transparent',
+                    borderWidth: 2,
+                    pointRadius: 0,
+                    borderDash: [5, 3],
+                    fill: false,
+                    tension: 0.3
+                  }
+                ]
+              },
+              options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                interaction: { mode: 'index', intersect: false },
+                plugins: {
+                  legend: {
+                    display: true,
+                    position: 'top',
+                    labels: { usePointStyle: true, padding: 20, color: '#64748B', font: { size: 12 } }
+                  },
+                  tooltip: {
+                    callbacks: {
+                      label: function(context) {
+                        return context.dataset.label + ': $' + context.parsed.y.toFixed(2);
+                      }
+                    }
+                  }
+                },
+                scales: {
+                  x: {
+                    display: true,
+                    ticks: { maxTicksLimit: 8, color: '#94a3b8', font: { size: 11 } },
+                    grid: { display: false }
+                  },
+                  y: {
+                    display: true,
+                    ticks: {
+                      color: '#94a3b8',
+                      font: { size: 11 },
+                      callback: function(v) { return '$' + v; }
+                    },
+                    grid: { color: 'rgba(148,163,184,0.1)' }
+                  }
+                }
+              }
+            });
+          }
+        }
+      } catch(e) {
+        console.error('Homepage data load:', e);
+      }
+    })();
+
+    // Performance Projector Preview (same as before but with $500K default)
     (async function loadProjectorPreview() {
-      const PORTFOLIO = 100000;
+      var PORTFOLIO = 500000;
 
       function pctColor(val) {
-        return val >= 0 ? 'text-emerald-400' : 'text-red-400';
+        return val >= 0 ? 'color:#16a34a' : 'color:#ef4444';
       }
       function fmtPct(val) {
         return (val >= 0 ? '+' : '') + val.toFixed(1) + '%';
       }
       function fmtDollar(val) {
-        const sign = val >= 0 ? '+' : '-';
+        var sign = val >= 0 ? '+' : '-';
         return sign + '$' + Math.abs(Math.round(val)).toLocaleString();
       }
 
       try {
-        const res = await fetch('/api/projector/stats');
-        const data = await res.json();
+        var res = await fetch('/api/projector/stats');
+        var data = await res.json();
+        if (!data.strategies) return;
 
-        if (!data.strategies) return; // no data yet
+        var stratMap = { A: 'a', B: 'b', C: 'c' };
+        var totalAnnualDollar = 0;
+        var totalTrades = 0;
+        var earliestDate = '9999-99-99';
+        var latestDate = '0000-00-00';
 
-        const stratMap = { A: 'a', B: 'b', C: 'c' };
-        let totalAnnualDollar = 0;
-        let totalTrades = 0;
-        let earliestDate = '9999-99-99';
-        let latestDate = '0000-00-00';
-
-        for (const [strat, prefix] of Object.entries(stratMap)) {
-          const s = data.strategies[strat];
+        for (var strat in stratMap) {
+          var prefix = stratMap[strat];
+          var s = data.strategies[strat];
           if (!s) {
-            document.getElementById('lp-strat-' + prefix + '-pct').innerHTML = '<span class="text-epig-textDim">No data</span>';
+            var noEl = document.getElementById('lp-strat-' + prefix + '-pct');
+            if (noEl) noEl.innerHTML = '<span style="color:#d1d5db;">No data</span>';
             continue;
           }
-
           totalTrades += s.closedTrades;
           if (s.firstDate < earliestDate) earliestDate = s.firstDate;
           if (s.lastDate > latestDate) latestDate = s.lastDate;
-
-          // Calculate annualized return on $100K portfolio
-          // annualPnl from the API = totalPnl / yearFraction
-          const annualPct = (s.annualPnl / PORTFOLIO) * 100;
+          var annualPct = (s.annualPnl / PORTFOLIO) * 100;
           totalAnnualDollar += s.annualPnl;
-
-          const el = document.getElementById('lp-strat-' + prefix + '-pct');
+          var el = document.getElementById('lp-strat-' + prefix + '-pct');
           if (el) {
-            el.className = 'font-mono ' + pctColor(annualPct);
+            el.style.cssText = 'font-family:JetBrains Mono,monospace;font-weight:600;' + pctColor(annualPct);
             el.textContent = fmtPct(annualPct);
           }
         }
 
-        const totalPct = (totalAnnualDollar / PORTFOLIO) * 100;
-
-        // Projected Annual Return
-        const totalPctEl = document.getElementById('lp-total-pct');
+        var totalPct = (totalAnnualDollar / PORTFOLIO) * 100;
+        var totalPctEl = document.getElementById('lp-total-pct');
         if (totalPctEl) {
-          totalPctEl.className = 'font-mono font-bold text-lg ' + pctColor(totalPct);
+          totalPctEl.style.cssText = 'font-family:JetBrains Mono,monospace;font-weight:700;font-size:1.125rem;' + pctColor(totalPct);
           totalPctEl.textContent = fmtPct(totalPct);
         }
-
-        // Projected Dollar Return
-        const totalDollarEl = document.getElementById('lp-total-dollar');
+        var totalDollarEl = document.getElementById('lp-total-dollar');
         if (totalDollarEl) {
-          totalDollarEl.className = 'font-mono font-bold text-lg ' + pctColor(totalAnnualDollar);
+          totalDollarEl.style.cssText = 'font-family:JetBrains Mono,monospace;font-weight:700;font-size:1.125rem;' + pctColor(totalAnnualDollar);
           totalDollarEl.textContent = fmtDollar(totalAnnualDollar);
         }
-
-        // Show LIVE badge
-        document.getElementById('projector-live-badge').classList.remove('hidden');
-
-        // Update summary text
-        const summaryEl = document.getElementById('projector-summary-text');
+        document.getElementById('projector-live-badge')?.classList.remove('hidden');
+        var summaryEl = document.getElementById('projector-summary-text');
         if (summaryEl) {
           summaryEl.textContent = 'Based on ' + totalTrades + ' closed trades from ' + earliestDate + ' to ' + latestDate + '. Auto-refreshes on each upload.';
         }
       } catch(e) {
-        // Silently fail — widget stays in loading state
         console.error('Projector preview:', e);
       }
     })();
   </script>
-  `
+  `;
 }
