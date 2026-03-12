@@ -625,10 +625,7 @@ export function landingPage(): string {
       <p class="text-white/70 text-base leading-relaxed max-w-[580px] mx-auto mb-8" style="font-family:'Source Sans Pro',sans-serif;">
         EPIG is a managed strategy, not a product. Each founding member receives direct access to the portfolio manager, custom strategy integration, and lifetime benefits that cannot be replicated at scale. That is why membership is limited to 25.
       </p>
-      <p class="text-lg font-bold mb-8" style="color:#C8A951;font-family:'Calibri','Source Sans Pro',sans-serif;">
-        22 of 25 founding memberships remaining.
-      </p>
-      <a href="https://calendly.com/hd-ekantikcapital/30min" target="_blank" rel="noopener" class="inline-flex items-center gap-2 no-underline px-10 py-4 rounded-lg text-lg font-semibold transition-all" style="background:#C8A951;color:#1B2A4A;">
+<a href="https://calendly.com/hd-ekantikcapital/30min" target="_blank" rel="noopener" class="inline-flex items-center gap-2 no-underline px-10 py-4 rounded-lg text-lg font-semibold transition-all" style="background:#C8A951;color:#1B2A4A;">
         <i class="fas fa-calendar-check"></i> Schedule Your Founding Member Consultation
       </a>
       <div class="mt-6">
