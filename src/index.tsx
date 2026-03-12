@@ -1154,6 +1154,7 @@ function buildFifoRoundTrips(fills: any[]): any[] {
     let currentTripCash = 0
     let currentTripFills = 0
     let currentTripRisk = 0 // sum of buy-side cash outflows
+    let usedFifo = false
     let firstDate = ''
     let lastDate = ''
 
@@ -1172,6 +1173,15 @@ function buildFifoRoundTrips(fills: any[]): any[] {
       netQty += signedQty
       currentTripFills++
       currentTripCash += netCash
+
+      if (hasFifo) {
+        // Use IB FIFO P&L (accumulates only on closing fills)
+        currentTripCash += fillPnl
+        usedFifo = true
+      } else {
+        // Fallback: accumulate NetCash for legacy data
+        currentTripCash += netCash
+      }
 
       // Track risk: sum of absolute value of buy-side cash (money at risk)
       if (f.side === 'BUY') {
@@ -1192,6 +1202,7 @@ function buildFifoRoundTrips(fills: any[]): any[] {
         currentTripCash = 0
         currentTripFills = 0
         currentTripRisk = 0
+        usedFifo = false
         firstDate = ''
         lastDate = ''
       }
