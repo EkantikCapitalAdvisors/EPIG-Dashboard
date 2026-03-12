@@ -565,7 +565,7 @@ app.post('/api/admin/upload/preview', async (c) => {
       const symbol = stripQuotes(row['Symbol'] || '')
       const tradeId = stripQuotes(row['TradeID'] || '')
       const tradeDate = stripQuotes(row['TradeDate'] || row['ReportDate'] || '')
-      const dateTime = stripQuotes(row['Date/Time'] || '')
+      const dateTime = stripQuotes(row['DateTime'] || row['Date/Time'] || '')
       const side = stripQuotes(row['Buy/Sell'] || '').replace('-', '').toUpperCase() === 'SELL' ? 'SELL' : 'BUY'
       const qty = Math.abs(parseInt(stripQuotes(row['Quantity'] || '0')))
       const price = parseFloat(stripQuotes(row['TradePrice'] || row['Price'] || '0'))
@@ -757,15 +757,8 @@ app.post('/api/admin/upload/confirm', async (c) => {
 
       // Idempotency check
       if (tradeId) {
-        const existing = await db.prepare("SELECT id, fifo_pnl, ib_commission FROM trades WHERE ib_execution_id = ?").bind(tradeId).first() as any
-        if (existing) {
-          // Backfill fifo_pnl and ib_commission if they were missing (NULL)
-          if (existing.fifo_pnl === null || existing.ib_commission === null) {
-            await db.prepare("UPDATE trades SET fifo_pnl = ?, ib_commission = ? WHERE id = ?")
-              .bind(trade.fifoPnl != null ? trade.fifoPnl : 0, trade.commission != null ? trade.commission : 0, existing.id).run()
-          }
-          dupCount++; continue
-        }
+        const existing = await db.prepare("SELECT id FROM trades WHERE ib_execution_id = ?").bind(tradeId).first()
+        if (existing) { dupCount++; continue }
       }
 
       const strategy = trade.strategy || 'A'
@@ -1023,91 +1016,6 @@ app.get('/api/admin/uploads', async (c) => {
 })
 
 // ══════════════════════════════════════════════════════════
-// API: DEBUG - Check fifo_pnl/ib_commission status
-// ══════════════════════════════════════════════════════════
-app.get('/api/admin/debug/fifo-status', async (c) => {
-  const db = c.env.DB
-  if (!db) return c.json({ error: 'No DB' }, 500)
-
-  const total = await db.prepare("SELECT COUNT(*) as cnt FROM trades").first() as any
-  const nullFifo = await db.prepare("SELECT COUNT(*) as cnt FROM trades WHERE fifo_pnl IS NULL").first() as any
-  const nullComm = await db.prepare("SELECT COUNT(*) as cnt FROM trades WHERE ib_commission IS NULL").first() as any
-  const zeroFifo = await db.prepare("SELECT COUNT(*) as cnt FROM trades WHERE fifo_pnl = 0").first() as any
-  const nonZeroFifo = await db.prepare("SELECT COUNT(*) as cnt FROM trades WHERE fifo_pnl != 0 AND fifo_pnl IS NOT NULL").first() as any
-  const sample = await db.prepare("SELECT id, ib_execution_id, instrument, fifo_pnl, ib_commission, realized_pnl, side FROM trades ORDER BY id DESC LIMIT 10").all()
-
-  return c.json({
-    totalTrades: total?.cnt,
-    nullFifoPnl: nullFifo?.cnt,
-    nullIbCommission: nullComm?.cnt,
-    zeroFifoPnl: zeroFifo?.cnt,
-    nonZeroFifoPnl: nonZeroFifo?.cnt,
-    sampleTrades: sample.results || [],
-  })
-})
-
-// ══════════════════════════════════════════════════════════
-// API: BACKFILL - Force update fifo_pnl/ib_commission from re-uploaded CSV
-// ══════════════════════════════════════════════════════════
-app.post('/api/admin/upload/backfill', async (c) => {
-  const db = c.env.DB
-  if (!db) return c.json({ error: 'No DB' }, 500)
-
-  try {
-    const body = await c.req.parseBody()
-    const file = body['file']
-    if (!file || typeof file === 'string') {
-      return c.json({ error: 'No file uploaded.' }, 400)
-    }
-
-    const csvText = await (file as File).text()
-    const parsedRows = parseIBCsv(csvText)
-    const executionRows = parsedRows.filter((r: any) => {
-      const tradeId = (r['TradeID'] || '').trim()
-      return tradeId !== '' && tradeId !== 'TradeID'
-    })
-
-    let updated = 0
-    let skipped = 0
-    let notFound = 0
-
-    for (const row of executionRows) {
-      const tradeId = stripQuotes(row['TradeID'] || '').trim()
-      if (!tradeId) { skipped++; continue }
-
-      const fifoPnl = parseFloat(stripQuotes(row['FifoPnlRealized'] || '0'))
-      const commission = parseFloat(stripQuotes(row['IBCommission'] || row['Commission'] || '0'))
-
-      const result = await db.prepare(
-        "UPDATE trades SET fifo_pnl = ?, ib_commission = ? WHERE ib_execution_id = ? AND (fifo_pnl IS NULL OR ib_commission IS NULL)"
-      ).bind(fifoPnl, commission, tradeId).run()
-
-      if (result.meta?.changes && result.meta.changes > 0) {
-        updated++
-      } else {
-        // Check if trade exists at all
-        const exists = await db.prepare("SELECT id FROM trades WHERE ib_execution_id = ?").bind(tradeId).first()
-        if (exists) {
-          skipped++ // already has values
-        } else {
-          notFound++
-        }
-      }
-    }
-
-    return c.json({
-      success: true,
-      totalRows: executionRows.length,
-      updated,
-      skipped,
-      notFound,
-    })
-  } catch (err: any) {
-    return c.json({ error: err.message }, 500)
-  }
-})
-
-// ══════════════════════════════════════════════════════════
 // API: LEADS
 // ══════════════════════════════════════════════════════════
 app.post('/api/leads/subscribe', async (c) => {
@@ -1222,17 +1130,16 @@ function buildFifoRoundTrips(fills: any[]): any[] {
     let currentTripCash = 0
     let currentTripFills = 0
     let currentTripRisk = 0 // sum of buy-side cash outflows
-    let usedFifo = false
     let firstDate = ''
     let lastDate = ''
 
     for (const f of instrumentFills) {
       const qty = f.quantity || 1
       const signedQty = f.side === 'BUY' ? qty : -qty
-      // Prefer IB's authoritative FifoPnlRealized + commission when available
-      // fifo_pnl is only non-zero on closing fills; true P&L = fifo_pnl + ib_commission
-      const hasFifo = f.fifo_pnl !== null && f.fifo_pnl !== undefined && f.fifo_pnl !== 0
-      const fillPnl = hasFifo ? (f.fifo_pnl + (f.ib_commission || 0)) : 0
+      // Use NetCash (realized_pnl) for round-trip P&L calculation.
+      // IB's FifoPnlRealized is non-zero on BOTH opening and closing fills,
+      // which makes it unsuitable for per-fill accumulation in round-trips.
+      // NetCash correctly sums to round-trip P&L when position goes flat.
       const netCash = f.realized_pnl || 0
 
       if (currentTripFills === 0) firstDate = f.trade_date
@@ -1240,15 +1147,7 @@ function buildFifoRoundTrips(fills: any[]): any[] {
 
       netQty += signedQty
       currentTripFills++
-
-      if (hasFifo) {
-        // Use IB FIFO P&L (accumulates only on closing fills)
-        currentTripCash += fillPnl
-        usedFifo = true
-      } else {
-        // Fallback: accumulate NetCash for legacy data
-        currentTripCash += netCash
-      }
+      currentTripCash += netCash
 
       // Track risk: sum of absolute value of buy-side cash (money at risk)
       if (f.side === 'BUY') {
@@ -1269,7 +1168,6 @@ function buildFifoRoundTrips(fills: any[]): any[] {
         currentTripCash = 0
         currentTripFills = 0
         currentTripRisk = 0
-        usedFifo = false
         firstDate = ''
         lastDate = ''
       }
@@ -1345,11 +1243,8 @@ function buildSpreadRoundTrips(fills: any[]): any[] {
     // Create a round trip for each strike pair
     for (const [lowStrike, highStrike] of strikePairs) {
       const pairFills = groupFills.filter((f: any) => f.strike === lowStrike || f.strike === highStrike)
-      // Prefer IB FIFO P&L when available
-      const hasFifo = pairFills.some((f: any) => f.fifo_pnl !== null && f.fifo_pnl !== undefined && f.fifo_pnl !== 0)
-      const totalCash = hasFifo
-        ? pairFills.reduce((s: number, f: any) => s + (f.fifo_pnl || 0) + (f.ib_commission || 0), 0)
-        : pairFills.reduce((s: number, f: any) => s + (f.realized_pnl || 0), 0)
+      // Use NetCash for P&L (IB's FifoPnlRealized is non-zero on both legs, unsuitable for accumulation)
+      const totalCash = pairFills.reduce((s: number, f: any) => s + (f.realized_pnl || 0), 0)
       const buyLegs = pairFills.filter((f: any) => f.side === 'BUY')
       const riskDollar = buyLegs.reduce((s: number, f: any) => s + Math.abs(f.realized_pnl || 0), 0)
 
