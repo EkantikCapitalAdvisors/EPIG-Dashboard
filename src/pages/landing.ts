@@ -1,8 +1,8 @@
 export function landingPage(): string {
   return `
   <!-- ════ SECTION 1: HERO ════ -->
-  <section class="relative overflow-hidden" style="background:linear-gradient(135deg,#1B2A4A 0%,#243656 100%);">
-    <div class="absolute inset-0" style="background:radial-gradient(ellipse at 50% 0%, rgba(200,169,81,0.06) 0%, transparent 70%);"></div>
+  <section class="relative overflow-hidden" style="background:#111827;">
+    <div class="absolute inset-0" style="background:radial-gradient(ellipse at 50% 0%, rgba(200,169,81,0.04) 0%, transparent 70%);"></div>
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-20 text-center relative">
       <h1 style="font-family:'Playfair Display',Georgia,serif;font-weight:400;" class="text-3xl sm:text-4xl lg:text-[42px] text-white mb-4 leading-tight">
         Your Capital, Managed with Structural Discipline.
@@ -64,21 +64,21 @@ export function landingPage(): string {
 
       <!-- 3 Differentiator Badges -->
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div class="rounded-xl border border-[#1e293b] p-6 text-center" style="background:#1B2A4A;">
+        <div class="rounded-xl border border-[#1e293b] p-6 text-center" style="background:#1a1f2e;">
           <div class="w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4" style="background:rgba(200,169,81,0.15);">
             <i class="fas fa-user-shield text-lg" style="color:#C8A951;"></i>
           </div>
           <h4 class="font-bold text-white mb-2">Managed for You</h4>
           <p class="text-sm text-[#94a3b8]">We execute every trade. You review performance.</p>
         </div>
-        <div class="rounded-xl border border-[#1e293b] p-6 text-center" style="background:#1B2A4A;">
+        <div class="rounded-xl border border-[#1e293b] p-6 text-center" style="background:#1a1f2e;">
           <div class="w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4" style="background:rgba(200,169,81,0.15);">
             <i class="fas fa-certificate text-lg" style="color:#C8A951;"></i>
           </div>
           <h4 class="font-bold text-white mb-2">Verified via IB</h4>
           <p class="text-sm text-[#94a3b8]">Every fill carries a unique Interactive Brokers TradeID. No backtests. No paper trades.</p>
         </div>
-        <div class="rounded-xl border border-[#1e293b] p-6 text-center" style="background:#1B2A4A;">
+        <div class="rounded-xl border border-[#1e293b] p-6 text-center" style="background:#1a1f2e;">
           <div class="w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4" style="background:rgba(200,169,81,0.15);">
             <i class="fas fa-eye text-lg" style="color:#C8A951;"></i>
           </div>
@@ -90,7 +90,7 @@ export function landingPage(): string {
   </section>
 
   <!-- ════ SECTION 3: THREE-LAYER DESIGN ════ -->
-  <section style="background:#0a0e17;">
+  <section style="background:#111827;">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
       <div class="text-center mb-14">
         <h2 style="font-family:'Playfair Display',Georgia,serif;" class="text-3xl sm:text-4xl font-bold text-white mb-4">Three Layers. One Integrated System.</h2>
@@ -102,7 +102,7 @@ export function landingPage(): string {
       <!-- Three Cards -->
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-10">
         <!-- Layer A -->
-        <div class="rounded-2xl border border-[#2a2a3e] bg-[#12121e] p-6 relative overflow-hidden">
+        <div class="rounded-2xl border border-[#1e293b] bg-[#1a1f2e] p-6 relative overflow-hidden">
           <div class="absolute top-0 left-0 right-0 h-1" style="background:linear-gradient(to right,#C8A951,#e0c878);"></div>
           <div class="flex items-center gap-3 mb-4 mt-2">
             <span class="inline-flex items-center justify-center px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider" style="background:rgba(200,169,81,0.15);color:#C8A951;border:1px solid rgba(200,169,81,0.3);">Layer A</span>
@@ -116,12 +116,12 @@ export function landingPage(): string {
               <span class="text-[#8892a6] text-sm">Capital Deployed</span>
               <span style="color:#C8A951;" class="font-mono font-bold text-sm">70&ndash;85%</span>
             </div>
-            <div class="h-px bg-[#2a2a3e]"></div>
+            <div class="h-px bg-[#1e293b]"></div>
             <div class="flex justify-between items-center">
               <span class="text-[#8892a6] text-sm">Target Contribution</span>
               <span style="color:#C8A951;" class="font-mono font-bold text-sm">4&ndash;6% annually</span>
             </div>
-            <div class="h-px bg-[#2a2a3e]"></div>
+            <div class="h-px bg-[#1e293b]"></div>
             <div class="flex justify-between items-center">
               <span class="text-[#8892a6] text-sm">Risk Profile</span>
               <span class="text-white text-sm">Market-aligned</span>
@@ -130,7 +130,7 @@ export function landingPage(): string {
         </div>
 
         <!-- Layer B -->
-        <div class="rounded-2xl border border-[#2a2a3e] bg-[#12121e] p-6 relative overflow-hidden">
+        <div class="rounded-2xl border border-[#1e293b] bg-[#1a1f2e] p-6 relative overflow-hidden">
           <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-emerald-500 to-green-400"></div>
           <div class="flex items-center gap-3 mb-4 mt-2">
             <span class="inline-flex items-center justify-center px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-emerald-500/15 text-emerald-400 border border-emerald-500/30">Layer B</span>
@@ -144,12 +144,12 @@ export function landingPage(): string {
               <span class="text-[#8892a6] text-sm">Capital at Risk</span>
               <span class="text-emerald-400 font-mono font-bold text-sm">3&ndash;5%</span>
             </div>
-            <div class="h-px bg-[#2a2a3e]"></div>
+            <div class="h-px bg-[#1e293b]"></div>
             <div class="flex justify-between items-center">
               <span class="text-[#8892a6] text-sm">Target Contribution</span>
               <span class="text-emerald-400 font-mono font-bold text-sm">8&ndash;12% annually</span>
             </div>
-            <div class="h-px bg-[#2a2a3e]"></div>
+            <div class="h-px bg-[#1e293b]"></div>
             <div class="flex justify-between items-center">
               <span class="text-[#8892a6] text-sm">Risk Profile</span>
               <span class="text-white text-sm">Defined risk per trade</span>
@@ -161,7 +161,7 @@ export function landingPage(): string {
         </div>
 
         <!-- Layer C -->
-        <div class="rounded-2xl border border-[#2a2a3e] bg-[#12121e] p-6 relative overflow-hidden">
+        <div class="rounded-2xl border border-[#1e293b] bg-[#1a1f2e] p-6 relative overflow-hidden">
           <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-purple-500 to-violet-400"></div>
           <div class="flex items-center gap-3 mb-4 mt-2">
             <span class="inline-flex items-center justify-center px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-purple-500/15 text-purple-400 border border-purple-500/30">Layer C</span>
@@ -175,12 +175,12 @@ export function landingPage(): string {
               <span class="text-[#8892a6] text-sm">Capital at Risk</span>
               <span class="text-purple-400 font-mono font-bold text-sm">3&ndash;5%</span>
             </div>
-            <div class="h-px bg-[#2a2a3e]"></div>
+            <div class="h-px bg-[#1e293b]"></div>
             <div class="flex justify-between items-center">
               <span class="text-[#8892a6] text-sm">Target Contribution</span>
               <span class="text-purple-400 font-mono font-bold text-sm">4&ndash;8% annually</span>
             </div>
-            <div class="h-px bg-[#2a2a3e]"></div>
+            <div class="h-px bg-[#1e293b]"></div>
             <div class="flex justify-between items-center">
               <span class="text-[#8892a6] text-sm">Risk Profile</span>
               <span class="text-white text-sm">Asymmetric</span>
@@ -191,21 +191,21 @@ export function landingPage(): string {
 
       <!-- Summary Strip -->
       <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <div class="rounded-xl border border-[#2a2a3e] bg-[#12121e] p-5 text-center">
+        <div class="rounded-xl border border-[#1e293b] bg-[#1a1f2e] p-5 text-center">
           <div class="text-xs text-[#8892a6] uppercase tracking-wider font-semibold mb-2">Target CAGR</div>
           <div class="text-2xl font-extrabold text-white font-mono">16<span class="text-lg text-[#8892a6]">%+</span></div>
           <div class="text-[11px] text-[#8892a6] mt-1">Across full market cycles</div>
         </div>
-        <div class="rounded-xl border border-[#2a2a3e] bg-[#12121e] p-5 text-center">
+        <div class="rounded-xl border border-[#1e293b] bg-[#1a1f2e] p-5 text-center">
           <div class="text-xs text-[#8892a6] uppercase tracking-wider font-semibold mb-2">Principal at Risk</div>
           <div class="text-2xl font-extrabold text-emerald-400 font-mono">&lt;5<span class="text-lg text-[#8892a6]">%</span></div>
           <div class="text-[11px] text-[#8892a6] mt-1">At any given time</div>
         </div>
-        <div class="rounded-xl border border-[#2a2a3e] bg-[#12121e] p-5 text-center">
+        <div class="rounded-xl border border-[#1e293b] bg-[#1a1f2e] p-5 text-center">
           <div class="text-xs text-[#8892a6] uppercase tracking-wider font-semibold mb-2">Trades / Year</div>
           <div class="text-2xl font-extrabold text-white font-mono">150<span class="text-lg text-[#8892a6]">&ndash;200</span></div>
         </div>
-        <div class="rounded-xl border border-[#2a2a3e] bg-[#12121e] p-5 text-center">
+        <div class="rounded-xl border border-[#1e293b] bg-[#1a1f2e] p-5 text-center">
           <div class="text-xs text-[#8892a6] uppercase tracking-wider font-semibold mb-2">Your Role</div>
           <div class="text-sm font-semibold text-white mt-2">Review performance.</div>
           <div class="text-[11px] text-[#8892a6] mt-1">We handle execution.</div>
@@ -216,7 +216,7 @@ export function landingPage(): string {
 
 
   <!-- ════ SECTION 5: SPY vs EPIG COMPARISON TABLE ════ -->
-  <section style="background:#0a0e17;">
+  <section style="background:#111827;">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
       <div class="text-center mb-12">
         <h2 style="font-family:'Playfair Display',Georgia,serif;" class="text-3xl sm:text-4xl font-bold text-white mb-4">The Conventional Approach vs. the EPIG Architecture</h2>
@@ -226,47 +226,47 @@ export function landingPage(): string {
       </div>
 
       <!-- Comparison Table -->
-      <div class="overflow-x-auto rounded-xl border border-[#2a2a3e] mb-10">
+      <div class="overflow-x-auto rounded-xl border border-[#1e293b] mb-10">
         <table class="w-full text-sm" style="font-family:'Source Sans Pro',sans-serif;">
           <thead>
-            <tr style="background:#1B2A4A;">
+            <tr style="background:#1a1f2e;">
               <th class="text-left px-5 py-3.5 text-white font-semibold">Dimension</th>
               <th class="text-left px-5 py-3.5 text-white font-semibold">S&amp;P 500 Buy &amp; Hold</th>
               <th class="text-left px-5 py-3.5 font-semibold" style="color:#C8A951;">EPIG Managed</th>
             </tr>
           </thead>
           <tbody>
-            <tr class="bg-[#12121e]">
+            <tr class="bg-[#1a1f2e]">
               <td class="px-5 py-3 text-white font-medium">Market Exposure</td>
               <td class="px-5 py-3 text-gray-400">100% constant</td>
               <td class="px-5 py-3 text-emerald-400">&lt;5% tactical, rest protected</td>
             </tr>
-            <tr class="bg-[#0d1118]">
+            <tr class="bg-[#151a27]">
               <td class="px-5 py-3 text-white font-medium">Drawdown Risk</td>
               <td class="px-5 py-3 text-gray-400">30&ndash;50%+ in major corrections</td>
               <td class="px-5 py-3 text-emerald-400">&lt;10% engineered target</td>
             </tr>
-            <tr class="bg-[#12121e]">
+            <tr class="bg-[#1a1f2e]">
               <td class="px-5 py-3 text-white font-medium">Lost Decade Risk</td>
               <td class="px-5 py-3 text-gray-400">Real (2000&ndash;2010: ~0% return)</td>
               <td class="px-5 py-3 text-emerald-400">Market-neutral income sleeve</td>
             </tr>
-            <tr class="bg-[#0d1118]">
+            <tr class="bg-[#151a27]">
               <td class="px-5 py-3 text-white font-medium">Entry Timing</td>
               <td class="px-5 py-3 text-gray-400">Returns depend on P/E at entry</td>
               <td class="px-5 py-3 text-emerald-400">P/E independent by design</td>
             </tr>
-            <tr class="bg-[#12121e]">
+            <tr class="bg-[#1a1f2e]">
               <td class="px-5 py-3 text-white font-medium">Liquidity</td>
               <td class="px-5 py-3 text-gray-400">Fully invested at all times</td>
               <td class="px-5 py-3 text-emerald-400">50&ndash;90% accessible at any time</td>
             </tr>
-            <tr class="bg-[#0d1118]">
+            <tr class="bg-[#151a27]">
               <td class="px-5 py-3 text-white font-medium">Transparency</td>
               <td class="px-5 py-3 text-gray-400">Quarterly brokerage statements</td>
               <td class="px-5 py-3 text-emerald-400">Every trade published weekly</td>
             </tr>
-            <tr class="bg-[#12121e]">
+            <tr class="bg-[#1a1f2e]">
               <td class="px-5 py-3 text-white font-medium">Who Manages It</td>
               <td class="px-5 py-3 text-gray-400">You (or a passive index fund)</td>
               <td class="px-5 py-3 text-emerald-400">Ekantik Capital (active, rules-based)</td>
@@ -296,7 +296,7 @@ export function landingPage(): string {
 
       <!-- 4 Protection Mechanism Cards -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
-        <div class="rounded-xl border border-[#1e293b] p-6" style="background:#1B2A4A;">
+        <div class="rounded-xl border border-[#1e293b] p-6" style="background:#1a1f2e;">
           <div class="flex items-center gap-3 mb-4">
             <div class="w-10 h-10 rounded-full flex items-center justify-center" style="background:rgba(200,169,81,0.15);">
               <i class="fas fa-shield-halved" style="color:#C8A951;"></i>
@@ -307,7 +307,7 @@ export function landingPage(): string {
             At any given moment, the vast majority of your portfolio sits in SPY, cash, or Treasury bills. Only 1&ndash;5% is deployed in active tactical positions. This means a total wipeout of every active trade would impact less than 5% of your capital.
           </p>
         </div>
-        <div class="rounded-xl border border-[#1e293b] p-6" style="background:#1B2A4A;">
+        <div class="rounded-xl border border-[#1e293b] p-6" style="background:#1a1f2e;">
           <div class="flex items-center gap-3 mb-4">
             <div class="w-10 h-10 rounded-full flex items-center justify-center" style="background:rgba(200,169,81,0.15);">
               <i class="fas fa-hand" style="color:#C8A951;"></i>
@@ -318,7 +318,7 @@ export function landingPage(): string {
             Layer B futures trades use a 20-point hard stop. Layer C options trades risk only the debit paid. No trade is ever entered without a predefined maximum loss. There is no scenario where a single trade causes outsized damage.
           </p>
         </div>
-        <div class="rounded-xl border border-[#1e293b] p-6" style="background:#1B2A4A;">
+        <div class="rounded-xl border border-[#1e293b] p-6" style="background:#1a1f2e;">
           <div class="flex items-center gap-3 mb-4">
             <div class="w-10 h-10 rounded-full flex items-center justify-center" style="background:rgba(200,169,81,0.15);">
               <i class="fas fa-power-off" style="color:#C8A951;"></i>
@@ -329,7 +329,7 @@ export function landingPage(): string {
             If drawdown exceeds predefined thresholds, the portfolio shifts to a defensive posture automatically. This is not discretionary &mdash; it&rsquo;s rules-based and broker-enforced. The system protects you even if the manager is unavailable.
           </p>
         </div>
-        <div class="rounded-xl border border-[#1e293b] p-6" style="background:#1B2A4A;">
+        <div class="rounded-xl border border-[#1e293b] p-6" style="background:#1a1f2e;">
           <div class="flex items-center gap-3 mb-4">
             <div class="w-10 h-10 rounded-full flex items-center justify-center" style="background:rgba(200,169,81,0.15);">
               <i class="fas fa-money-bill-wave" style="color:#C8A951;"></i>
@@ -356,7 +356,7 @@ export function landingPage(): string {
   </section>
 
   <!-- ════ SECTION 7: WHO MANAGES YOUR CAPITAL ════ -->
-  <section style="background:#0a0e17;">
+  <section style="background:#111827;">
     <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
       <div class="text-center mb-12">
         <h2 style="font-family:'Playfair Display',Georgia,serif;" class="text-3xl sm:text-4xl font-bold text-white mb-4">The Person Behind the Portfolio</h2>
@@ -426,7 +426,7 @@ export function landingPage(): string {
         </p>
       </div>
 
-      <div class="rounded-2xl border border-[#1e293b] p-8 md:p-10 mb-8" style="background:#1B2A4A;">
+      <div class="rounded-2xl border border-[#1e293b] p-8 md:p-10 mb-8" style="background:#1a1f2e;">
         <div class="flex flex-col md:flex-row items-start gap-10">
           <div class="flex-1">
             <div class="flex items-center gap-3 mb-5">
@@ -453,13 +453,13 @@ export function landingPage(): string {
             </a>
           </div>
           <div class="flex-1 w-full">
-            <div class="rounded-xl border border-[#2a2a3e] p-5" style="background:#0a0e17;">
+            <div class="rounded-xl border border-[#1e293b] p-5" style="background:#111827;">
               <div class="space-y-4">
                 <div class="flex justify-between items-center">
                   <span class="text-sm text-[#94a3b8]">Portfolio Size</span>
                   <span class="font-mono font-bold" style="color:#C8A951;">$500,000</span>
                 </div>
-                <div class="h-px bg-[#2a2a3e]"></div>
+                <div class="h-px bg-[#1e293b]"></div>
                 <div class="flex justify-between items-center">
                   <span class="text-sm text-[#94a3b8]">Strategy A &mdash; Core Allocation</span>
                   <span class="font-mono" id="lp-strat-a-pct"><span class="text-[#64748b]">--</span></span>
@@ -472,7 +472,7 @@ export function landingPage(): string {
                   <span class="text-sm text-[#94a3b8]">Strategy C &mdash; Episodic Pivots</span>
                   <span class="font-mono" id="lp-strat-c-pct"><span class="text-[#64748b]">--</span></span>
                 </div>
-                <div class="h-px bg-[#2a2a3e]"></div>
+                <div class="h-px bg-[#1e293b]"></div>
                 <div class="flex justify-between items-center">
                   <span class="font-semibold text-white">Projected Annual Return</span>
                   <span class="font-mono font-bold text-lg" id="lp-total-pct"><span class="text-[#64748b]">--</span></span>
@@ -506,7 +506,7 @@ export function landingPage(): string {
   </section>
 
   <!-- ════ SECTION 9: FAQ (INLINE ACCORDION) ════ -->
-  <section id="faq" style="background:#0a0e17;">
+  <section id="faq" style="background:#111827;">
     <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
       <div class="text-center mb-12">
         <h2 style="font-family:'Playfair Display',Georgia,serif;" class="text-3xl sm:text-4xl font-bold text-white mb-4">Frequently Asked Questions</h2>
@@ -619,7 +619,7 @@ export function landingPage(): string {
   </section>
 
   <!-- ════ SECTION 10: FINAL CTA ════ -->
-  <section style="background:#1B2A4A;">
+  <section style="background:#111827;border-top:1px solid #1e293b;">
     <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
       <h2 style="font-family:'Playfair Display',Georgia,serif;" class="text-2xl sm:text-[28px] font-bold text-white mb-6">This Opportunity Has a Capacity Limit.</h2>
       <p class="text-white/70 text-base leading-relaxed max-w-[580px] mx-auto mb-8" style="font-family:'Source Sans Pro',sans-serif;">
