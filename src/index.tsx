@@ -80,7 +80,7 @@ app.get('/api/og-image', async (c) => {
     const db = c.env.DB
     if (db) {
       const allTrades = await db.prepare(
-        "SELECT strategy, side, instrument, realized_pnl, quantity, trade_date, asset_class, strike, expiry, put_call, result FROM trades WHERE trade_date >= '2026-01-01' ORDER BY trade_date ASC, id ASC"
+        "SELECT strategy, side, instrument, realized_pnl, fifo_pnl, ib_commission, quantity, trade_date, asset_class, strike, expiry, put_call, result FROM trades WHERE trade_date >= '2026-01-01' ORDER BY trade_date ASC, id ASC"
       ).all()
       const rows: any[] = allTrades.results || []
       if (rows.length > 0) {
@@ -237,7 +237,7 @@ app.get('/api/dashboard/summary', async (c) => {
   try {
     // Fetch 2026 fills for all strategies
     const allTrades = await db.prepare(
-      "SELECT id, strategy, side, instrument, entry_price, exit_price, realized_pnl, quantity, trade_date, asset_class, strike, expiry, put_call, result FROM trades WHERE trade_date >= '2026-01-01' ORDER BY trade_date ASC, id ASC"
+      "SELECT id, strategy, side, instrument, entry_price, exit_price, realized_pnl, fifo_pnl, ib_commission, quantity, trade_date, asset_class, strike, expiry, put_call, result FROM trades WHERE trade_date >= '2026-01-01' ORDER BY trade_date ASC, id ASC"
     ).all()
     const rows: any[] = allTrades.results || []
 
@@ -568,10 +568,12 @@ app.post('/api/admin/upload/preview', async (c) => {
       const dateTime = stripQuotes(row['Date/Time'] || '')
       const side = stripQuotes(row['Buy/Sell'] || '').replace('-', '').toUpperCase() === 'SELL' ? 'SELL' : 'BUY'
       const qty = Math.abs(parseInt(stripQuotes(row['Quantity'] || '0')))
-      const price = parseFloat(stripQuotes(row['Price'] || '0'))
-      const amount = parseFloat(stripQuotes(row['Amount'] || '0'))
+      const price = parseFloat(stripQuotes(row['TradePrice'] || row['Price'] || '0'))
+      const amount = parseFloat(stripQuotes(row['TradeMoney'] || row['Amount'] || '0'))
       const netCash = parseFloat(stripQuotes(row['NetCash'] || '0'))
-      const commission = parseFloat(stripQuotes(row['Commission'] || '0'))
+      const commission = parseFloat(stripQuotes(row['IBCommission'] || row['Commission'] || '0'))
+      // FifoPnlRealized = IB's authoritative realized P&L (only on closing fills, before commissions)
+      const fifoPnl = parseFloat(stripQuotes(row['FifoPnlRealized'] || '0'))
       const strike = stripQuotes(row['Strike'] || '') || null
       const expiry = stripQuotes(row['Expiry'] || '') || null
       const putCall = stripQuotes(row['Put/Call'] || '') || null
@@ -604,6 +606,7 @@ app.post('/api/admin/upload/preview', async (c) => {
         amount,
         netCash,
         commission,
+        fifoPnl,
         strike: strike ? parseFloat(strike) : null,
         expiry: expiry ? formatIBDate(expiry) : null,
         putCall,
@@ -765,14 +768,15 @@ app.post('/api/admin/upload/confirm', async (c) => {
       try {
         await db.prepare(`
           INSERT INTO trades (strategy, source, ib_execution_id, asset_class, trade_date, side, instrument, quantity,
-            strike, expiry, put_call, entry_price, realized_pnl, result)
-          VALUES (?, 'IB', ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'OPEN')
+            strike, expiry, put_call, entry_price, realized_pnl, fifo_pnl, ib_commission, result)
+          VALUES (?, 'IB', ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'OPEN')
         `).bind(
           strategy, tradeId, assetClass,
           trade.tradeDate || '', side, trade.fullSymbol || trade.symbol || '',
           trade.quantity || 1,
           trade.strike || null, trade.expiry || null, trade.putCall || null,
-          trade.price || 0, trade.netCash || 0
+          trade.price || 0, trade.netCash || 0,
+          trade.fifoPnl || null, trade.commission || null
         ).run()
         newCount++
         strategyCounts[strategy] = (strategyCounts[strategy] || 0) + 1
@@ -856,7 +860,7 @@ app.get('/api/projector/stats', async (c) => {
   try {
     // Only consider 2026 trades for forward projections
     const allTrades = await db.prepare(
-      "SELECT id, strategy, side, instrument, entry_price, exit_price, realized_pnl, quantity, trade_date, asset_class, strike, expiry, put_call, result FROM trades WHERE trade_date >= '2026-01-01' ORDER BY trade_date ASC, id ASC"
+      "SELECT id, strategy, side, instrument, entry_price, exit_price, realized_pnl, fifo_pnl, ib_commission, quantity, trade_date, asset_class, strike, expiry, put_call, result FROM trades WHERE trade_date >= '2026-01-01' ORDER BY trade_date ASC, id ASC"
     ).all()
     const rows: any[] = allTrades.results || []
     if (rows.length === 0) return c.json({ strategies: null, message: 'No trades in database' })
@@ -1126,20 +1130,33 @@ function buildFifoRoundTrips(fills: any[]): any[] {
     let currentTripCash = 0
     let currentTripFills = 0
     let currentTripRisk = 0 // sum of buy-side cash outflows
+    let usedFifo = false
     let firstDate = ''
     let lastDate = ''
 
     for (const f of instrumentFills) {
       const qty = f.quantity || 1
       const signedQty = f.side === 'BUY' ? qty : -qty
-      const netCash = f.realized_pnl || 0 // This is actually IB NetCash
+      // Prefer IB's authoritative FifoPnlRealized + commission when available
+      // fifo_pnl is only non-zero on closing fills; true P&L = fifo_pnl + ib_commission
+      const hasFifo = f.fifo_pnl !== null && f.fifo_pnl !== undefined && f.fifo_pnl !== 0
+      const fillPnl = hasFifo ? (f.fifo_pnl + (f.ib_commission || 0)) : 0
+      const netCash = f.realized_pnl || 0
 
       if (currentTripFills === 0) firstDate = f.trade_date
       lastDate = f.trade_date
 
       netQty += signedQty
-      currentTripCash += netCash
       currentTripFills++
+
+      if (hasFifo) {
+        // Use IB FIFO P&L (accumulates only on closing fills)
+        currentTripCash += fillPnl
+        usedFifo = true
+      } else {
+        // Fallback: accumulate NetCash for legacy data
+        currentTripCash += netCash
+      }
 
       // Track risk: sum of absolute value of buy-side cash (money at risk)
       if (f.side === 'BUY') {
@@ -1160,6 +1177,7 @@ function buildFifoRoundTrips(fills: any[]): any[] {
         currentTripCash = 0
         currentTripFills = 0
         currentTripRisk = 0
+        usedFifo = false
         firstDate = ''
         lastDate = ''
       }
@@ -1235,7 +1253,11 @@ function buildSpreadRoundTrips(fills: any[]): any[] {
     // Create a round trip for each strike pair
     for (const [lowStrike, highStrike] of strikePairs) {
       const pairFills = groupFills.filter((f: any) => f.strike === lowStrike || f.strike === highStrike)
-      const totalCash = pairFills.reduce((s: number, f: any) => s + (f.realized_pnl || 0), 0)
+      // Prefer IB FIFO P&L when available
+      const hasFifo = pairFills.some((f: any) => f.fifo_pnl !== null && f.fifo_pnl !== undefined && f.fifo_pnl !== 0)
+      const totalCash = hasFifo
+        ? pairFills.reduce((s: number, f: any) => s + (f.fifo_pnl || 0) + (f.ib_commission || 0), 0)
+        : pairFills.reduce((s: number, f: any) => s + (f.realized_pnl || 0), 0)
       const buyLegs = pairFills.filter((f: any) => f.side === 'BUY')
       const riskDollar = buyLegs.reduce((s: number, f: any) => s + Math.abs(f.realized_pnl || 0), 0)
 
