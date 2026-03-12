@@ -994,6 +994,30 @@ app.get('/api/admin/strategy-counts', async (c) => {
 })
 
 // ══════════════════════════════════════════════════════════
+// API: WIPE ALL TRADES (reset for clean re-import)
+// ══════════════════════════════════════════════════════════
+app.post('/api/admin/wipe-trades', async (c) => {
+  const db = c.env.DB
+  if (!db) return c.json({ error: 'No DB' }, 500)
+
+  try {
+    const countResult = await db.prepare("SELECT COUNT(*) as cnt FROM trades").first() as any
+    const count = countResult?.cnt || 0
+
+    await db.prepare("DELETE FROM trades").run()
+    await db.prepare("DELETE FROM upload_batches").run()
+
+    await db.prepare(
+      "INSERT INTO audit_log (admin_id, action, entity, details) VALUES ('admin', 'WIPE', 'trades', ?)"
+    ).bind(`Wiped ${count} trades and upload history for clean re-import`).run()
+
+    return c.json({ success: true, deleted: count })
+  } catch (err: any) {
+    return c.json({ error: err.message }, 500)
+  }
+})
+
+// ══════════════════════════════════════════════════════════
 // API: AUDIT LOG
 // ══════════════════════════════════════════════════════════
 app.get('/api/admin/audit', async (c) => {
