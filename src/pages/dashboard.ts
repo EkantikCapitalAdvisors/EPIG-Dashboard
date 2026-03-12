@@ -44,10 +44,16 @@ export function dashboardPage(): string {
     </div>
 
     <!-- Date Range -->
-    <div class="flex flex-wrap gap-2 mb-8">
+    <div class="flex flex-wrap items-center gap-2 mb-8">
       <button class="text-xs px-3 py-1.5 rounded-md bg-epig-card border border-epig-border text-epig-textDim hover:text-white hover:border-blue-500 transition-all date-btn" data-range="30d" onclick="switchDateRange('30d')">30D</button>
       <button class="text-xs px-3 py-1.5 rounded-md bg-epig-card border border-epig-border text-epig-textDim hover:text-white hover:border-blue-500 transition-all date-btn" data-range="90d" onclick="switchDateRange('90d')">90D</button>
       <button class="text-xs px-3 py-1.5 rounded-md bg-blue-500/20 border border-blue-500/50 text-blue-400 font-semibold transition-all date-btn active" data-range="all" onclick="switchDateRange('all')">YTD</button>
+      <button class="text-xs px-3 py-1.5 rounded-md bg-epig-card border border-epig-border text-epig-textDim hover:text-white hover:border-blue-500 transition-all date-btn" data-range="custom" onclick="switchDateRange('custom')">Custom</button>
+      <div id="custom-date-inputs" class="hidden flex items-center gap-2 ml-2">
+        <input type="date" id="custom-start" class="text-xs px-2 py-1 rounded-md bg-epig-card border border-epig-border text-white font-mono" onchange="applyCustomDateRange()" />
+        <span class="text-xs text-epig-textDim">to</span>
+        <input type="date" id="custom-end" class="text-xs px-2 py-1 rounded-md bg-epig-card border border-epig-border text-white font-mono" onchange="applyCustomDateRange()" />
+      </div>
     </div>
 
     <!-- ═══════════════════ KPI Grid: Combined Portfolio ═══════════════════ -->
@@ -311,6 +317,8 @@ export function dashboardPage(): string {
   </div>
 
   <style>
+    #custom-date-inputs input[type="date"] { color-scheme: dark; }
+    #custom-date-inputs input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(0.7); cursor: pointer; }
     .returns-view-btn { background: rgba(30,41,59,0.5); border: 1px solid rgba(51,65,85,0.5); color: #64748b; }
     .returns-view-btn.active { background: rgba(59,130,246,0.2); border-color: rgba(59,130,246,0.5); color: #60a5fa; font-weight: 600; }
     .returns-view-btn:hover:not(.active) { color: #cbd5e1; border-color: rgba(100,116,139,0.6); }
@@ -323,6 +331,8 @@ export function dashboardPage(): string {
     let currentStrategy = 'A';
     let currentReturnsView = 'monthly';
     let currentDateRange = 'all';
+    let customStartDate = '';
+    let customEndDate = '';
     let equityChart = null;
     let drawdownChart = null;
 
@@ -371,8 +381,137 @@ export function dashboardPage(): string {
         activeBtn.classList.add('active', 'bg-blue-500/20', 'border-blue-500/50', 'text-blue-400', 'font-semibold');
         activeBtn.classList.remove('bg-epig-card', 'border-epig-border', 'text-epig-textDim');
       }
+      // Show/hide custom date inputs
+      const customInputs = document.getElementById('custom-date-inputs');
+      if (range === 'custom') {
+        customInputs.classList.remove('hidden');
+        customInputs.classList.add('flex');
+        // Set defaults if empty
+        if (!document.getElementById('custom-start').value && dashData && dashData.strategies) {
+          const d = dashData.strategies[currentStrategy];
+          if (d && d.dataRange) {
+            document.getElementById('custom-start').value = d.dataRange.firstDate || '';
+            document.getElementById('custom-end').value = d.dataRange.lastDate || '';
+          }
+        }
+        customStartDate = document.getElementById('custom-start').value;
+        customEndDate = document.getElementById('custom-end').value;
+      } else {
+        customInputs.classList.add('hidden');
+        customInputs.classList.remove('flex');
+      }
       updateKPIs();
+      updateCharts();
+      updateReturnsView();
+      updateTradeTable();
       updateBanner();
+    }
+
+    function applyCustomDateRange() {
+      customStartDate = document.getElementById('custom-start').value;
+      customEndDate = document.getElementById('custom-end').value;
+      if (customStartDate && customEndDate) {
+        updateKPIs();
+        updateCharts();
+        updateReturnsView();
+        updateTradeTable();
+        updateBanner();
+      }
+    }
+
+    // Filter data arrays by current date range
+    function filterByDateRange(items, dateKey) {
+      if (!items) return items;
+      if (currentDateRange === 'all') return items;
+      const now = new Date();
+      let startDate, endDate;
+      if (currentDateRange === '30d') {
+        startDate = new Date(now); startDate.setDate(startDate.getDate() - 30);
+        endDate = now;
+      } else if (currentDateRange === '90d') {
+        startDate = new Date(now); startDate.setDate(startDate.getDate() - 90);
+        endDate = now;
+      } else if (currentDateRange === 'custom') {
+        if (!customStartDate || !customEndDate) return items;
+        startDate = new Date(customStartDate);
+        endDate = new Date(customEndDate);
+        endDate.setHours(23, 59, 59); // include the end date fully
+      } else {
+        return items;
+      }
+      const startStr = startDate.toISOString().slice(0, 10);
+      const endStr = endDate.toISOString().slice(0, 10);
+      return items.filter(item => {
+        const d = item[dateKey];
+        return d && d >= startStr && d <= endStr;
+      });
+    }
+
+    // Recompute KPIs from filtered round-trip data
+    function computeFilteredStats(strategy) {
+      if (!dashData || !dashData.strategies) return null;
+      const d = dashData.strategies[strategy];
+      if (!d) return null;
+      if (currentDateRange === 'all') return null; // use original data
+      // For 30d/90d with pre-computed rolling metrics (non-custom), keep original behavior
+      if (currentDateRange !== 'custom') return null;
+
+      // Filter equity curve points and recompute
+      const eqFiltered = filterByDateRange(d.equityCurve || [], 'date');
+      const trades = d.recentTrades || [];
+      const filteredTrades = filterByDateRange(trades, 'date');
+
+      // Filter monthly returns
+      const monthlyFiltered = (d.monthlyReturns || []).filter(m => {
+        const monthNum = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'].indexOf(m.month) + 1;
+        const dateStr = m.year + '-' + String(monthNum).padStart(2, '0') + '-15';
+        return dateStr >= customStartDate && dateStr <= customEndDate;
+      });
+
+      // Filter weekly returns
+      const weeklyFiltered = (d.weeklyReturns || []).filter(w => {
+        return w.weekEnd >= customStartDate && w.weekStart <= customEndDate;
+      });
+
+      // Calculate stats from equity curve if available
+      let totalPnl = 0, totalTrades = 0, winCount = 0, lossCount = 0;
+      let grossWins = 0, grossLosses = 0;
+      let peak = 0, maxDD = 0, cumPnl = 0;
+
+      if (eqFiltered.length >= 2) {
+        // Calculate return from first to last equity point
+        const startVal = eqFiltered[0].value;
+        const endVal = eqFiltered[eqFiltered.length - 1].value;
+        const cumReturn = ((endVal - startVal) / startVal) * 100;
+
+        // Use equity curve differences to approximate trades
+        for (let i = 1; i < eqFiltered.length; i++) {
+          const diff = eqFiltered[i].value - eqFiltered[i-1].value;
+          if (diff === 0) continue;
+          totalTrades++;
+          const pnlEst = diff * 1000; // scale from indexed to approx dollars
+          cumPnl += pnlEst;
+          if (pnlEst > 0) { winCount++; grossWins += pnlEst; }
+          else { lossCount++; grossLosses += Math.abs(pnlEst); }
+          if (cumPnl > peak) peak = cumPnl;
+          const dd = peak - cumPnl;
+          if (dd > maxDD) maxDD = dd;
+        }
+
+        return {
+          cumulativeReturn: cumReturn,
+          maxDrawdown: -(maxDD / 100000) * 100,
+          winRate: totalTrades > 0 ? (winCount / totalTrades) * 100 : 0,
+          totalTrades,
+          totalPnl: cumPnl,
+          profitFactor: grossLosses > 0 ? grossWins / grossLosses : 0,
+          equityCurve: eqFiltered,
+          monthlyReturns: monthlyFiltered,
+          weeklyReturns: weeklyFiltered,
+          filteredTrades,
+        };
+      }
+      return { equityCurve: eqFiltered, monthlyReturns: monthlyFiltered, weeklyReturns: weeklyFiltered, filteredTrades };
     }
 
     function switchReturnsView(view) {
@@ -432,7 +571,7 @@ export function dashboardPage(): string {
       if (d && (d.totalFills > 0 || d.totalTrades > 0)) {
         banner.classList.remove('hidden');
         const range = d.dataRange || {};
-        const rangeLabel = currentDateRange === '30d' ? 'Last 30 days' : currentDateRange === '90d' ? 'Last 90 days' : '2026 YTD';
+        const rangeLabel = currentDateRange === '30d' ? 'Last 30 days' : currentDateRange === '90d' ? 'Last 90 days' : currentDateRange === 'custom' ? (customStartDate + ' to ' + customEndDate) : '2026 YTD';
           const rolling = d.rollingMetrics || {};
           const rBanner = currentDateRange === '30d' ? rolling['30d'] : currentDateRange === '90d' ? rolling['90d'] : null;
           const shownTrades = rBanner ? (rBanner.trades || 0) : (d.totalTrades || 0);
@@ -453,7 +592,9 @@ export function dashboardPage(): string {
 
       // Get rolling metrics if date range is active
       const rolling = d.rollingMetrics || {};
+      const isCustom = currentDateRange === 'custom';
       const r = currentDateRange === '30d' ? rolling['30d'] : currentDateRange === '90d' ? rolling['90d'] : null;
+      const cf = isCustom ? computeFilteredStats(s) : null;
 
       if (d.lastUpdated) {
         document.getElementById('last-updated').textContent = new Date(d.lastUpdated).toLocaleDateString('en-US', { weekday:'short', year:'numeric', month:'short', day:'numeric' });
@@ -466,22 +607,26 @@ export function dashboardPage(): string {
         if (colorVal !== undefined) el.className = 'kpi-value ' + pnlColor(colorVal);
       }
 
-      // Helper: use rolling value if in 30d/90d mode, otherwise use all-time value
-      const wr = r ? (r.winRate || 0) : (d.winRate || 0);
+      // Helper: use rolling value if in 30d/90d mode, custom filtered if custom, otherwise all-time
+      const wr = r ? (r.winRate || 0) : cf && cf.winRate !== undefined ? cf.winRate : (d.winRate || 0);
       const evR = r ? (r.expectancyR || 0) : (d.evPerTradeR || 0);
-      const trades = r ? (r.trades || 0) : (d.totalTrades || 0);
+      const trades = r ? (r.trades || 0) : cf && cf.totalTrades !== undefined ? cf.totalTrades : (d.totalTrades || 0);
       const evDollar = r ? (r.expectancy || 0) : (d.expectancyDollar || 0);
+      const cumRet = cf && cf.cumulativeReturn !== undefined ? cf.cumulativeReturn : d.cumulativeReturn;
+      const maxDD = cf && cf.maxDrawdown !== undefined ? cf.maxDrawdown : d.maxDrawdown;
+      const tPnl = cf && cf.totalPnl !== undefined ? cf.totalPnl : d.totalPnl;
+      const pf = cf && cf.profitFactor !== undefined ? cf.profitFactor : d.profitFactor;
 
       if (s === 'Combined') {
-        setKpi('kpi-comb-cumreturn', r ? '—' : fmtPct(d.cumulativeReturn), r ? 0 : d.cumulativeReturn);
-        setKpi('kpi-comb-maxdd', r ? '—' : fmtPct(d.maxDrawdown), r ? 0 : d.maxDrawdown);
+        setKpi('kpi-comb-cumreturn', r ? '—' : fmtPct(cumRet), r ? 0 : cumRet);
+        setKpi('kpi-comb-maxdd', r ? '—' : fmtPct(maxDD), r ? 0 : maxDD);
         setKpi('kpi-comb-winrate', wr.toFixed(1) + '%', wr >= 50 ? 1 : -1);
-        setKpi('kpi-comb-pf', r ? '—' : (d.profitFactor || 0).toFixed(2));
+        setKpi('kpi-comb-pf', r ? '—' : (pf || 0).toFixed(2));
         setKpi('kpi-comb-trades', trades);
         const fillsEl = document.getElementById('kpi-comb-fills');
-        if (fillsEl) fillsEl.textContent = r ? '' : (d.totalFills || 0) + ' fills';
-        setKpi('kpi-comb-pnl', r ? fmtPnl(evDollar) + '/trade' : fmtPnl(d.totalPnl), r ? evDollar : d.totalPnl);
-        setKpi('kpi-comb-annual', r ? '—' : fmtPnl(d.annualPnl), r ? 0 : d.annualPnl);
+        if (fillsEl) fillsEl.textContent = (r || isCustom) ? '' : (d.totalFills || 0) + ' fills';
+        setKpi('kpi-comb-pnl', r ? fmtPnl(evDollar) + '/trade' : fmtPnl(tPnl), r ? evDollar : tPnl);
+        setKpi('kpi-comb-annual', (r || isCustom) ? '—' : fmtPnl(d.annualPnl), (r || isCustom) ? 0 : d.annualPnl);
         setKpi('kpi-comb-sharpe', r ? '—' : (d.sharpeRatio||0).toFixed(2) + ' / ' + (d.sortinoRatio||0).toFixed(2));
 
         // Contribution bar
@@ -510,14 +655,14 @@ export function dashboardPage(): string {
       }
 
       if (s === 'A') {
-        setKpi('kpi-a-cumreturn', r ? '—' : fmtPct(d.cumulativeReturn), r ? 0 : d.cumulativeReturn);
+        setKpi('kpi-a-cumreturn', r ? '—' : fmtPct(cumRet), r ? 0 : cumRet);
         setKpi('kpi-a-winrate', wr.toFixed(1) + '%', wr >= 50 ? 1 : -1);
-        setKpi('kpi-a-maxdd', r ? '—' : fmtPct(d.maxDrawdown), r ? 0 : d.maxDrawdown);
+        setKpi('kpi-a-maxdd', r ? '—' : fmtPct(maxDD), r ? 0 : maxDD);
         setKpi('kpi-a-sharpe', r ? '—' : (d.sharpeRatio || 0).toFixed(2));
         setKpi('kpi-a-trades', trades);
         const fillsA = document.getElementById('kpi-a-fills');
         if (fillsA) fillsA.textContent = r ? '' : (d.totalFills || 0) + ' fills';
-        setKpi('kpi-a-pnl', r ? fmtPnl(evDollar) + '/trade' : fmtPnl(d.totalPnl), r ? evDollar : d.totalPnl);
+        setKpi('kpi-a-pnl', r ? fmtPnl(evDollar) + '/trade' : fmtPnl(tPnl), r ? evDollar : tPnl);
         setKpi('kpi-a-evr', (evR >= 0 ? '+' : '') + evR.toFixed(2) + 'R', evR);
         setKpi('kpi-a-wl', r ? '—' : '$' + (d.avgWinDollar||0).toFixed(0) + ' / $' + (d.avgLossDollar||0).toFixed(0));
         setKpi('kpi-a-risk', r ? '—' : '$' + (d.riskPerTrade||0).toFixed(0));
@@ -532,38 +677,38 @@ export function dashboardPage(): string {
       }
 
       if (s === 'B') {
-        setKpi('kpi-b-cumreturn', r ? '—' : fmtPct(d.cumulativeReturn), r ? 0 : d.cumulativeReturn);
-        setKpi('kpi-b-maxdd', r ? '—' : fmtPct(d.maxDrawdown), r ? 0 : d.maxDrawdown);
+        setKpi('kpi-b-cumreturn', r ? '—' : fmtPct(cumRet), r ? 0 : cumRet);
+        setKpi('kpi-b-maxdd', r ? '—' : fmtPct(maxDD), r ? 0 : maxDD);
         setKpi('kpi-b-winrate', wr.toFixed(1) + '%', wr >= 50 ? 1 : -1);
         setKpi('kpi-b-evr', (evR >= 0 ? '+' : '') + evR.toFixed(2) + 'R', evR);
-        setKpi('kpi-b-pf', r ? '—' : (d.profitFactor || 0).toFixed(2));
+        setKpi('kpi-b-pf', r ? '—' : (pf || 0).toFixed(2));
         setKpi('kpi-b-trades', trades);
         const fillsB = document.getElementById('kpi-b-fills');
-        if (fillsB) fillsB.textContent = r ? '' : (d.totalFills || 0) + ' fills';
-        setKpi('kpi-b-pnl', r ? fmtPnl(evDollar) + '/trade' : fmtPnl(d.totalPnl), r ? evDollar : d.totalPnl);
+        if (fillsB) fillsB.textContent = (r || isCustom) ? '' : (d.totalFills || 0) + ' fills';
+        setKpi('kpi-b-pnl', r ? fmtPnl(evDollar) + '/trade' : fmtPnl(tPnl), r ? evDollar : tPnl);
         setKpi('kpi-b-wl', r ? '—' : '$' + (d.avgWinDollar||0).toFixed(0) + ' / $' + (d.avgLossDollar||0).toFixed(0));
         setKpi('kpi-b-risk', r ? '—' : '$' + (d.riskPerTrade||0).toFixed(0));
         setKpi('kpi-b-sharpe', r ? '—' : (d.sharpeRatio||0).toFixed(2) + ' / ' + (d.sortinoRatio||0).toFixed(2));
-        setKpi('kpi-b-annual', r ? '—' : fmtPnl(d.annualPnl), r ? 0 : d.annualPnl);
+        setKpi('kpi-b-annual', (r || isCustom) ? '—' : fmtPnl(d.annualPnl), (r || isCustom) ? 0 : d.annualPnl);
         const r30 = d.rollingMetrics && d.rollingMetrics['30d'] ? d.rollingMetrics['30d'] : {};
         const r90 = d.rollingMetrics && d.rollingMetrics['90d'] ? d.rollingMetrics['90d'] : {};
         setRolling('b', r30, r90);
       }
 
       if (s === 'C') {
-        setKpi('kpi-c-cumreturn', r ? '—' : fmtPct(d.cumulativeReturn), r ? 0 : d.cumulativeReturn);
-        setKpi('kpi-c-maxdd', r ? '—' : fmtPct(d.maxDrawdown), r ? 0 : d.maxDrawdown);
+        setKpi('kpi-c-cumreturn', r ? '—' : fmtPct(cumRet), r ? 0 : cumRet);
+        setKpi('kpi-c-maxdd', r ? '—' : fmtPct(maxDD), r ? 0 : maxDD);
         setKpi('kpi-c-winrate', wr.toFixed(1) + '%', wr >= 50 ? 1 : -1);
         setKpi('kpi-c-evr', (evR >= 0 ? '+' : '') + evR.toFixed(2) + 'R', evR);
-        setKpi('kpi-c-pf', r ? '—' : (d.profitFactor || 0).toFixed(2));
+        setKpi('kpi-c-pf', r ? '—' : (pf || 0).toFixed(2));
         setKpi('kpi-c-trades', trades);
         const fillsC = document.getElementById('kpi-c-fills');
-        if (fillsC) fillsC.textContent = r ? '' : (d.totalFills || 0) + ' fills';
-        setKpi('kpi-c-pnl', r ? fmtPnl(evDollar) + '/trade' : fmtPnl(d.totalPnl), r ? evDollar : d.totalPnl);
+        if (fillsC) fillsC.textContent = (r || isCustom) ? '' : (d.totalFills || 0) + ' fills';
+        setKpi('kpi-c-pnl', r ? fmtPnl(evDollar) + '/trade' : fmtPnl(tPnl), r ? evDollar : tPnl);
         setKpi('kpi-c-wl', r ? '—' : '$' + (d.avgWinDollar||0).toFixed(0) + ' / $' + (d.avgLossDollar||0).toFixed(0));
         setKpi('kpi-c-risk', r ? '—' : '$' + (d.riskPerTrade||0).toFixed(0));
         setKpi('kpi-c-sharpe', r ? '—' : (d.sharpeRatio||0).toFixed(2) + ' / ' + (d.sortinoRatio||0).toFixed(2));
-        setKpi('kpi-c-annual', r ? '—' : fmtPnl(d.annualPnl), r ? 0 : d.annualPnl);
+        setKpi('kpi-c-annual', (r || isCustom) ? '—' : fmtPnl(d.annualPnl), (r || isCustom) ? 0 : d.annualPnl);
         const r30 = d.rollingMetrics && d.rollingMetrics['30d'] ? d.rollingMetrics['30d'] : {};
         const r90 = d.rollingMetrics && d.rollingMetrics['90d'] ? d.rollingMetrics['90d'] : {};
         setRolling('c', r30, r90);
@@ -605,10 +750,12 @@ export function dashboardPage(): string {
       const d = dashData.strategies[currentStrategy];
       if (!d) return;
       const color = strategyColors[currentStrategy] || '#a855f7';
+      const cf = currentDateRange === 'custom' ? computeFilteredStats(currentStrategy) : null;
 
       if (equityChart) equityChart.destroy();
       const eqCtx = document.getElementById('equity-chart').getContext('2d');
-      const eqData = d.equityCurve || [];
+      const eqDataRaw = (cf && cf.equityCurve) ? cf.equityCurve : (d.equityCurve || []);
+      const eqData = (currentDateRange === '30d' || currentDateRange === '90d') ? filterByDateRange(d.equityCurve || [], 'date') : eqDataRaw;
       if (eqData.length === 0) {
         equityChart = new Chart(eqCtx, { type: 'line', data: { datasets: [] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } } });
       } else {
@@ -638,7 +785,8 @@ export function dashboardPage(): string {
 
       if (drawdownChart) drawdownChart.destroy();
       const ddCtx = document.getElementById('drawdown-chart').getContext('2d');
-      const ddData = d.drawdownCurve || [];
+      const ddDataRaw = d.drawdownCurve || [];
+      const ddData = (currentDateRange !== 'all') ? filterByDateRange(ddDataRaw, 'date') : ddDataRaw;
       if (ddData.length === 0) {
         drawdownChart = new Chart(ddCtx, { type: 'line', data: { datasets: [] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } } });
       } else {
@@ -700,7 +848,8 @@ export function dashboardPage(): string {
       if (!d) return;
       const body = document.getElementById('weekly-body');
       body.innerHTML = '';
-      const weeks = d.weeklyReturns || [];
+      const allWeeks = d.weeklyReturns || [];
+      const weeks = (currentDateRange !== 'all') ? filterByDateRange(allWeeks, 'weekEnd') : allWeeks;
       if (weeks.length === 0) {
         body.innerHTML = '<tr><td colspan="4" class="px-4 py-8 text-center text-epig-textDim">No weekly return data available yet</td></tr>';
         return;
@@ -731,7 +880,9 @@ export function dashboardPage(): string {
       if (!d || !d.recentTrades || d.recentTrades.length === 0) return;
       const body = document.getElementById('trade-body');
       body.innerHTML = '';
-      d.recentTrades.forEach(t => {
+      const allTrades = d.recentTrades || [];
+      const filteredTrades = (currentDateRange !== 'all') ? filterByDateRange(allTrades, 'date') : allTrades;
+      filteredTrades.forEach(t => {
         const color = pnlColor(t.pnl);
         const badge = t.result === 'WIN' ? 'win-badge' : t.result === 'LOSS' ? 'loss-badge' : 'text-epig-textDim';
         body.innerHTML += '<tr class="border-b border-epig-border/50 trade-row transition-colors">' +
