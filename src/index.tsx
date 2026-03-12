@@ -1161,10 +1161,10 @@ function buildFifoRoundTrips(fills: any[]): any[] {
     for (const f of instrumentFills) {
       const qty = f.quantity || 1
       const signedQty = f.side === 'BUY' ? qty : -qty
-      // Use NetCash (realized_pnl) for round-trip P&L calculation.
-      // IB's FifoPnlRealized is non-zero on BOTH opening and closing fills,
-      // which makes it unsuitable for per-fill accumulation in round-trips.
-      // NetCash correctly sums to round-trip P&L when position goes flat.
+      // Prefer IB's authoritative FifoPnlRealized + commission when available
+      // fifo_pnl is only non-zero on closing fills; true P&L = fifo_pnl + ib_commission
+      const hasFifo = f.fifo_pnl !== null && f.fifo_pnl !== undefined && f.fifo_pnl !== 0
+      const fillPnl = hasFifo ? (f.fifo_pnl + (f.ib_commission || 0)) : 0
       const netCash = f.realized_pnl || 0
 
       if (currentTripFills === 0) firstDate = f.trade_date
@@ -1172,7 +1172,6 @@ function buildFifoRoundTrips(fills: any[]): any[] {
 
       netQty += signedQty
       currentTripFills++
-      currentTripCash += netCash
 
       if (hasFifo) {
         // Use IB FIFO P&L (accumulates only on closing fills)
@@ -1278,8 +1277,11 @@ function buildSpreadRoundTrips(fills: any[]): any[] {
     // Create a round trip for each strike pair
     for (const [lowStrike, highStrike] of strikePairs) {
       const pairFills = groupFills.filter((f: any) => f.strike === lowStrike || f.strike === highStrike)
-      // Use NetCash for P&L (IB's FifoPnlRealized is non-zero on both legs, unsuitable for accumulation)
-      const totalCash = pairFills.reduce((s: number, f: any) => s + (f.realized_pnl || 0), 0)
+      // Prefer IB FIFO P&L when available
+      const hasFifo = pairFills.some((f: any) => f.fifo_pnl !== null && f.fifo_pnl !== undefined && f.fifo_pnl !== 0)
+      const totalCash = hasFifo
+        ? pairFills.reduce((s: number, f: any) => s + (f.fifo_pnl || 0) + (f.ib_commission || 0), 0)
+        : pairFills.reduce((s: number, f: any) => s + (f.realized_pnl || 0), 0)
       const buyLegs = pairFills.filter((f: any) => f.side === 'BUY')
       const riskDollar = buyLegs.reduce((s: number, f: any) => s + Math.abs(f.realized_pnl || 0), 0)
 
