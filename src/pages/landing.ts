@@ -50,40 +50,40 @@ export function landingPage(): string {
   </section>
 
   <!-- ════ SECTION 2: WHAT IS EPIG? ════ -->
-  <section style="background:#FAF8F5;">
+  <section style="background:#111827;">
     <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
-      <h2 style="font-family:'Playfair Display',Georgia,serif;color:#1B2A4A;" class="text-3xl sm:text-4xl font-bold mb-8">What Is EPIG?</h2>
-      <div style="font-family:'Source Sans Pro',sans-serif;max-width:640px;color:#334155;" class="mx-auto text-base leading-[1.7] text-left space-y-4 mb-12">
-        <p><strong style="color:#1B2A4A;">EPIG</strong> stands for <strong style="color:#1B2A4A;">Enduring Principal-Protected Income &amp; Growth</strong>.</p>
+      <h2 style="font-family:'Playfair Display',Georgia,serif;color:#C8A951;" class="text-3xl sm:text-4xl font-bold mb-8">What Is EPIG?</h2>
+      <div style="font-family:'Source Sans Pro',sans-serif;max-width:640px;color:#94a3b8;" class="mx-auto text-base leading-[1.7] text-left space-y-4 mb-12">
+        <p><strong class="text-white">EPIG</strong> stands for <strong class="text-white">Enduring Principal-Protected Income &amp; Growth</strong>.</p>
         <p>It is a rules-based, managed investment strategy with three layers:</p>
-        <p><strong style="color:#1B2A4A;">Layer A</strong> holds 70&ndash;85% of your capital in SPY, high-quality equities, and cash equivalents. This is your structural floor &mdash; designed so the vast majority of your wealth is never at risk.</p>
-        <p><strong style="color:#1B2A4A;">Layer B</strong> overlays a small tactical position (3&ndash;5% of capital) in S&amp;P 500 futures with defined 20-point stops. This generates systematic income through high-frequency, low-risk trades.</p>
-        <p><strong style="color:#1B2A4A;">Layer C</strong> deploys 3&ndash;5% into asymmetric options positions during market dislocations &mdash; limited downside, outsized upside potential. Deployed selectively, not constantly.</p>
-        <p>The result: a strategy engineered to target <strong style="color:#1B2A4A;">16%+ CAGR</strong> across full market cycles while keeping original capital at risk below 5%.</p>
+        <p><strong class="text-white">Layer A</strong> holds 70&ndash;85% of your capital in SPY, high-quality equities, and cash equivalents. This is your structural floor &mdash; designed so the vast majority of your wealth is never at risk.</p>
+        <p><strong class="text-white">Layer B</strong> overlays a small tactical position (3&ndash;5% of capital) in S&amp;P 500 futures with defined 20-point stops. This generates systematic income through high-frequency, low-risk trades.</p>
+        <p><strong class="text-white">Layer C</strong> deploys 3&ndash;5% into asymmetric options positions during market dislocations &mdash; limited downside, outsized upside potential. Deployed selectively, not constantly.</p>
+        <p>The result: a strategy engineered to target <strong class="text-white">16%+ CAGR</strong> across full market cycles while keeping original capital at risk below 5%.</p>
       </div>
 
       <!-- 3 Differentiator Badges -->
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div class="rounded-xl bg-white border border-gray-200 p-6 text-center shadow-sm">
-          <div class="w-12 h-12 rounded-full bg-[#1B2A4A]/10 flex items-center justify-center mx-auto mb-4">
-            <i class="fas fa-user-shield text-[#1B2A4A] text-lg"></i>
+        <div class="rounded-xl border border-[#1e293b] p-6 text-center" style="background:#1B2A4A;">
+          <div class="w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4" style="background:rgba(200,169,81,0.15);">
+            <i class="fas fa-user-shield text-lg" style="color:#C8A951;"></i>
           </div>
-          <h4 class="font-bold text-[#1B2A4A] mb-2">Managed for You</h4>
-          <p class="text-sm text-gray-500">We execute every trade. You review performance.</p>
+          <h4 class="font-bold text-white mb-2">Managed for You</h4>
+          <p class="text-sm text-[#94a3b8]">We execute every trade. You review performance.</p>
         </div>
-        <div class="rounded-xl bg-white border border-gray-200 p-6 text-center shadow-sm">
-          <div class="w-12 h-12 rounded-full bg-[#1B2A4A]/10 flex items-center justify-center mx-auto mb-4">
-            <i class="fas fa-certificate text-[#1B2A4A] text-lg"></i>
+        <div class="rounded-xl border border-[#1e293b] p-6 text-center" style="background:#1B2A4A;">
+          <div class="w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4" style="background:rgba(200,169,81,0.15);">
+            <i class="fas fa-certificate text-lg" style="color:#C8A951;"></i>
           </div>
-          <h4 class="font-bold text-[#1B2A4A] mb-2">Verified via IB</h4>
-          <p class="text-sm text-gray-500">Every fill carries a unique Interactive Brokers TradeID. No backtests. No paper trades.</p>
+          <h4 class="font-bold text-white mb-2">Verified via IB</h4>
+          <p class="text-sm text-[#94a3b8]">Every fill carries a unique Interactive Brokers TradeID. No backtests. No paper trades.</p>
         </div>
-        <div class="rounded-xl bg-white border border-gray-200 p-6 text-center shadow-sm">
-          <div class="w-12 h-12 rounded-full bg-[#1B2A4A]/10 flex items-center justify-center mx-auto mb-4">
-            <i class="fas fa-eye text-[#1B2A4A] text-lg"></i>
+        <div class="rounded-xl border border-[#1e293b] p-6 text-center" style="background:#1B2A4A;">
+          <div class="w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4" style="background:rgba(200,169,81,0.15);">
+            <i class="fas fa-eye text-lg" style="color:#C8A951;"></i>
           </div>
-          <h4 class="font-bold text-[#1B2A4A] mb-2">Fully Transparent</h4>
-          <p class="text-sm text-gray-500">Both wins and losses are published. The dashboard hides nothing.</p>
+          <h4 class="font-bold text-white mb-2">Fully Transparent</h4>
+          <p class="text-sm text-[#94a3b8]">Both wins and losses are published. The dashboard hides nothing.</p>
         </div>
       </div>
     </div>
@@ -214,55 +214,6 @@ export function landingPage(): string {
     </div>
   </section>
 
-  <!-- ════ SECTION 4: LIVE PROOF STRIP ════ -->
-  <section style="background:#FAF8F5;">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-      <div class="text-center mb-12">
-        <h2 style="font-family:'Playfair Display',Georgia,serif;color:#1B2A4A;" class="text-3xl sm:text-4xl font-bold mb-4">See It Working.</h2>
-        <p class="text-gray-500 text-lg" style="font-family:'Source Sans Pro',sans-serif;">Real capital. Real trades. Updated every Monday from Interactive Brokers execution reports.</p>
-      </div>
-
-      <!-- 4 Metric Cards -->
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
-        <div class="rounded-xl bg-white border border-gray-200 p-5 text-center shadow-sm">
-          <div class="text-xs text-gray-400 uppercase tracking-wider font-semibold mb-2">Cumulative Return</div>
-          <div id="proof-cum-return" style="font-family:Georgia,serif;color:#1B2A4A;" class="text-3xl font-bold">14.2%</div>
-          <div id="proof-cum-since" class="text-xs text-gray-400 mt-1">Since March 2025</div>
-        </div>
-        <div class="rounded-xl bg-white border border-gray-200 p-5 text-center shadow-sm">
-          <div class="text-xs text-gray-400 uppercase tracking-wider font-semibold mb-2">Max Drawdown</div>
-          <div id="proof-drawdown" style="font-family:Georgia,serif;color:#1B2A4A;" class="text-3xl font-bold">-8.4%</div>
-          <div class="text-xs text-gray-400 mt-1">Peak-to-trough</div>
-        </div>
-        <div class="rounded-xl bg-white border border-gray-200 p-5 text-center shadow-sm">
-          <div class="text-xs text-gray-400 uppercase tracking-wider font-semibold mb-2">Total Verified Trades</div>
-          <div id="proof-trades" style="font-family:Georgia,serif;color:#1B2A4A;" class="text-3xl font-bold">187</div>
-          <div class="text-xs text-gray-400 mt-1">All with IB TradeID</div>
-        </div>
-        <div class="rounded-xl bg-white border border-gray-200 p-5 text-center shadow-sm">
-          <div class="text-xs text-gray-400 uppercase tracking-wider font-semibold mb-2">EV per Trade</div>
-          <div id="proof-ev" style="font-family:Georgia,serif;color:#1B2A4A;" class="text-3xl font-bold">+0.38R</div>
-          <div class="text-xs text-gray-400 mt-1">Positive = strategy makes money over time</div>
-        </div>
-      </div>
-
-      <!-- Equity Curve Chart -->
-      <div class="bg-white rounded-2xl border border-gray-200 p-6 shadow-sm mb-8">
-        <canvas id="homepage-equity-chart" height="300"></canvas>
-        <p class="text-xs text-gray-400 mt-4 text-center" style="font-family:'Source Sans Pro',sans-serif;">
-          Actual after-commission performance of EPIG managed portfolio vs. SPY (S&amp;P 500 ETF), both indexed to $100. Updated weekly.
-        </p>
-      </div>
-
-      <!-- CTA -->
-      <div class="text-center">
-        <a href="/dashboard" class="inline-flex items-center gap-2 no-underline px-8 py-3.5 rounded-lg text-base font-semibold transition-all" style="background:#C8A951;color:#1B2A4A;">
-          Explore the Full Dashboard <i class="fas fa-arrow-right"></i>
-        </a>
-        <p class="text-sm text-gray-400 mt-3">Every trade. Every fill. Every loss. Nothing hidden.</p>
-      </div>
-    </div>
-  </section>
 
   <!-- ════ SECTION 5: SPY vs EPIG COMPARISON TABLE ════ -->
   <section style="background:#0a0e17;">
@@ -334,70 +285,70 @@ export function landingPage(): string {
   </section>
 
   <!-- ════ SECTION 6: HOW YOUR CAPITAL IS PROTECTED ════ -->
-  <section style="background:#FAF8F5;">
+  <section style="background:#111827;">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
       <div class="text-center mb-14">
-        <h2 style="font-family:'Playfair Display',Georgia,serif;color:#1B2A4A;" class="text-3xl sm:text-4xl font-bold mb-4">Asymmetric by Design.</h2>
-        <p class="text-gray-500 text-lg" style="font-family:'Source Sans Pro',sans-serif;">
+        <h2 style="font-family:'Playfair Display',Georgia,serif;color:#C8A951;" class="text-3xl sm:text-4xl font-bold mb-4">Asymmetric by Design.</h2>
+        <p class="text-[#94a3b8] text-lg" style="font-family:'Source Sans Pro',sans-serif;">
           EPIG&rsquo;s architecture is built around a single principle: protect first, then compound. Here&rsquo;s how.
         </p>
       </div>
 
       <!-- 4 Protection Mechanism Cards -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
-        <div class="rounded-xl bg-white border border-gray-200 p-6 shadow-sm">
+        <div class="rounded-xl border border-[#1e293b] p-6" style="background:#1B2A4A;">
           <div class="flex items-center gap-3 mb-4">
-            <div class="w-10 h-10 rounded-full bg-[#1B2A4A]/10 flex items-center justify-center">
-              <i class="fas fa-shield-halved text-[#1B2A4A]"></i>
+            <div class="w-10 h-10 rounded-full flex items-center justify-center" style="background:rgba(200,169,81,0.15);">
+              <i class="fas fa-shield-halved" style="color:#C8A951;"></i>
             </div>
-            <h4 class="font-bold text-[#1B2A4A]">85&ndash;99% of Capital Is Always Protected</h4>
+            <h4 class="font-bold text-white">85&ndash;99% of Capital Is Always Protected</h4>
           </div>
-          <p class="text-sm text-gray-500 leading-relaxed" style="font-family:'Source Sans Pro',sans-serif;">
+          <p class="text-sm text-[#94a3b8] leading-relaxed" style="font-family:'Source Sans Pro',sans-serif;">
             At any given moment, the vast majority of your portfolio sits in SPY, cash, or Treasury bills. Only 1&ndash;5% is deployed in active tactical positions. This means a total wipeout of every active trade would impact less than 5% of your capital.
           </p>
         </div>
-        <div class="rounded-xl bg-white border border-gray-200 p-6 shadow-sm">
+        <div class="rounded-xl border border-[#1e293b] p-6" style="background:#1B2A4A;">
           <div class="flex items-center gap-3 mb-4">
-            <div class="w-10 h-10 rounded-full bg-[#1B2A4A]/10 flex items-center justify-center">
-              <i class="fas fa-hand text-[#1B2A4A]"></i>
+            <div class="w-10 h-10 rounded-full flex items-center justify-center" style="background:rgba(200,169,81,0.15);">
+              <i class="fas fa-hand" style="color:#C8A951;"></i>
             </div>
-            <h4 class="font-bold text-[#1B2A4A]">Every Trade Has a Hard Stop</h4>
+            <h4 class="font-bold text-white">Every Trade Has a Hard Stop</h4>
           </div>
-          <p class="text-sm text-gray-500 leading-relaxed" style="font-family:'Source Sans Pro',sans-serif;">
+          <p class="text-sm text-[#94a3b8] leading-relaxed" style="font-family:'Source Sans Pro',sans-serif;">
             Layer B futures trades use a 20-point hard stop. Layer C options trades risk only the debit paid. No trade is ever entered without a predefined maximum loss. There is no scenario where a single trade causes outsized damage.
           </p>
         </div>
-        <div class="rounded-xl bg-white border border-gray-200 p-6 shadow-sm">
+        <div class="rounded-xl border border-[#1e293b] p-6" style="background:#1B2A4A;">
           <div class="flex items-center gap-3 mb-4">
-            <div class="w-10 h-10 rounded-full bg-[#1B2A4A]/10 flex items-center justify-center">
-              <i class="fas fa-power-off text-[#1B2A4A]"></i>
+            <div class="w-10 h-10 rounded-full flex items-center justify-center" style="background:rgba(200,169,81,0.15);">
+              <i class="fas fa-power-off" style="color:#C8A951;"></i>
             </div>
-            <h4 class="font-bold text-[#1B2A4A]">Automatic Shutdown Protocols</h4>
+            <h4 class="font-bold text-white">Automatic Shutdown Protocols</h4>
           </div>
-          <p class="text-sm text-gray-500 leading-relaxed" style="font-family:'Source Sans Pro',sans-serif;">
+          <p class="text-sm text-[#94a3b8] leading-relaxed" style="font-family:'Source Sans Pro',sans-serif;">
             If drawdown exceeds predefined thresholds, the portfolio shifts to a defensive posture automatically. This is not discretionary &mdash; it&rsquo;s rules-based and broker-enforced. The system protects you even if the manager is unavailable.
           </p>
         </div>
-        <div class="rounded-xl bg-white border border-gray-200 p-6 shadow-sm">
+        <div class="rounded-xl border border-[#1e293b] p-6" style="background:#1B2A4A;">
           <div class="flex items-center gap-3 mb-4">
-            <div class="w-10 h-10 rounded-full bg-[#1B2A4A]/10 flex items-center justify-center">
-              <i class="fas fa-money-bill-wave text-[#1B2A4A]"></i>
+            <div class="w-10 h-10 rounded-full flex items-center justify-center" style="background:rgba(200,169,81,0.15);">
+              <i class="fas fa-money-bill-wave" style="color:#C8A951;"></i>
             </div>
-            <h4 class="font-bold text-[#1B2A4A]">Access Your Capital Whenever You Need It</h4>
+            <h4 class="font-bold text-white">Access Your Capital Whenever You Need It</h4>
           </div>
-          <p class="text-sm text-gray-500 leading-relaxed" style="font-family:'Source Sans Pro',sans-serif;">
+          <p class="text-sm text-[#94a3b8] leading-relaxed" style="font-family:'Source Sans Pro',sans-serif;">
             No lockup periods. No redemption windows. No penalties. Because the majority of your capital sits in SPY and cash, you can access it on any business day. EPIG is designed for people who want both growth and flexibility.
           </p>
         </div>
       </div>
 
       <!-- Caveat Box -->
-      <div class="rounded-xl p-6" style="background:#f1f5f9;border-left:3px solid #64748B;">
-        <h4 class="font-bold text-[#1B2A4A] mb-3">What This Is Not</h4>
-        <p class="text-sm text-gray-600 leading-relaxed mb-3" style="font-family:'Source Sans Pro',sans-serif;">
+      <div class="rounded-xl p-6" style="background:rgba(200,169,81,0.06);border-left:3px solid #C8A951;">
+        <h4 class="font-bold text-white mb-3">What This Is Not</h4>
+        <p class="text-sm text-[#94a3b8] leading-relaxed mb-3" style="font-family:'Source Sans Pro',sans-serif;">
           EPIG is not risk-free. All investing involves the possibility of loss. Drawdowns may exceed targets during extreme market dislocations. Past performance is not indicative of future results. The protections described above are design features, not guarantees.
         </p>
-        <p class="text-sm text-gray-600 leading-relaxed mb-0" style="font-family:'Source Sans Pro',sans-serif;">
+        <p class="text-sm text-[#94a3b8] leading-relaxed mb-0" style="font-family:'Source Sans Pro',sans-serif;">
           We believe the best way to earn trust is to be honest about risk &mdash; which is why we publish every loss alongside every win.
         </p>
       </div>
@@ -466,20 +417,20 @@ export function landingPage(): string {
   </section>
 
   <!-- ════ SECTION 8: PERFORMANCE PROJECTOR ════ -->
-  <section style="background:#FAF8F5;">
+  <section style="background:#111827;">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
       <div class="text-center mb-12">
-        <h2 style="font-family:'Playfair Display',Georgia,serif;color:#1B2A4A;" class="text-3xl sm:text-4xl font-bold mb-4">What Could This Mean for Your Portfolio?</h2>
-        <p class="text-gray-500 text-lg max-w-3xl mx-auto" style="font-family:'Source Sans Pro',sans-serif;">
+        <h2 style="font-family:'Playfair Display',Georgia,serif;color:#C8A951;" class="text-3xl sm:text-4xl font-bold mb-4">What Could This Mean for Your Portfolio?</h2>
+        <p class="text-[#94a3b8] text-lg max-w-3xl mx-auto" style="font-family:'Source Sans Pro',sans-serif;">
           Model your own scenario using real 2026 trade data from verified IB fills. Adjust portfolio size and see per-strategy breakdowns.
         </p>
       </div>
 
-      <div class="bg-white rounded-2xl border border-gray-200 shadow-sm p-8 md:p-10 mb-8">
+      <div class="rounded-2xl border border-[#1e293b] p-8 md:p-10 mb-8" style="background:#1B2A4A;">
         <div class="flex flex-col md:flex-row items-start gap-10">
           <div class="flex-1">
             <div class="flex items-center gap-3 mb-5">
-              <h3 class="text-2xl font-bold" style="color:#1B2A4A;">Project Your Year-End Returns</h3>
+              <h3 class="text-2xl font-bold text-white">Project Your Year-End Returns</h3>
               <span id="projector-live-badge" class="hidden inline-flex items-center gap-1.5 bg-emerald-500/15 border border-emerald-500/30 rounded-full px-3 py-1 flex-shrink-0">
                 <span class="relative flex h-2 w-2">
                   <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
@@ -488,50 +439,50 @@ export function landingPage(): string {
                 <span class="text-emerald-600 text-xs font-bold uppercase tracking-wider">Live</span>
               </span>
             </div>
-            <p class="text-gray-500 text-base leading-relaxed mb-4">
+            <p class="text-[#94a3b8] text-base leading-relaxed mb-4">
               See how YTD performance across all three strategies could compound through year-end.
-              Powered by <strong class="text-gray-700">real 2026 trade data</strong> from verified IB fills &mdash;
+              Powered by <strong class="text-white">real 2026 trade data</strong> from verified IB fills &mdash;
               adjust portfolio size and explore per-strategy breakdowns.
             </p>
-            <p id="projector-data-summary" class="text-xs text-gray-400 mb-6">
+            <p id="projector-data-summary" class="text-xs text-[#64748b] mb-6">
               <i class="fas fa-database text-emerald-500 mr-1"></i>
               <span id="projector-summary-text">Loading live trade data...</span>
             </p>
-            <a href="/projector" class="inline-flex items-center gap-2 no-underline px-6 py-3 rounded-lg text-sm font-semibold transition-all" style="background:#1B2A4A;color:white;">
+            <a href="/projector" class="inline-flex items-center gap-2 no-underline px-6 py-3 rounded-lg text-sm font-semibold transition-all" style="background:#C8A951;color:#1B2A4A;">
               <i class="fas fa-chart-line"></i> Open Performance Projector
             </a>
           </div>
           <div class="flex-1 w-full">
-            <div class="rounded-xl border border-gray-200 bg-gray-50 p-5">
+            <div class="rounded-xl border border-[#2a2a3e] p-5" style="background:#0a0e17;">
               <div class="space-y-4">
                 <div class="flex justify-between items-center">
-                  <span class="text-sm text-gray-500">Portfolio Size</span>
-                  <span class="font-mono font-bold" style="color:#1B2A4A;">$500,000</span>
+                  <span class="text-sm text-[#94a3b8]">Portfolio Size</span>
+                  <span class="font-mono font-bold" style="color:#C8A951;">$500,000</span>
                 </div>
-                <div class="h-px bg-gray-200"></div>
+                <div class="h-px bg-[#2a2a3e]"></div>
                 <div class="flex justify-between items-center">
-                  <span class="text-sm text-gray-500">Strategy A &mdash; Core Allocation</span>
-                  <span class="font-mono" id="lp-strat-a-pct"><span class="text-gray-300">--</span></span>
-                </div>
-                <div class="flex justify-between items-center">
-                  <span class="text-sm text-gray-500">Strategy B &mdash; Tactical Futures</span>
-                  <span class="font-mono" id="lp-strat-b-pct"><span class="text-gray-300">--</span></span>
+                  <span class="text-sm text-[#94a3b8]">Strategy A &mdash; Core Allocation</span>
+                  <span class="font-mono" id="lp-strat-a-pct"><span class="text-[#64748b]">--</span></span>
                 </div>
                 <div class="flex justify-between items-center">
-                  <span class="text-sm text-gray-500">Strategy C &mdash; Episodic Pivots</span>
-                  <span class="font-mono" id="lp-strat-c-pct"><span class="text-gray-300">--</span></span>
-                </div>
-                <div class="h-px bg-gray-200"></div>
-                <div class="flex justify-between items-center">
-                  <span class="font-semibold text-gray-700">Projected Annual Return</span>
-                  <span class="font-mono font-bold text-lg" id="lp-total-pct"><span class="text-gray-300">--</span></span>
+                  <span class="text-sm text-[#94a3b8]">Strategy B &mdash; Tactical Futures</span>
+                  <span class="font-mono" id="lp-strat-b-pct"><span class="text-[#64748b]">--</span></span>
                 </div>
                 <div class="flex justify-between items-center">
-                  <span class="font-semibold text-gray-700">Projected Dollar Return</span>
-                  <span class="font-mono font-bold text-lg" id="lp-total-dollar"><span class="text-gray-300">--</span></span>
+                  <span class="text-sm text-[#94a3b8]">Strategy C &mdash; Episodic Pivots</span>
+                  <span class="font-mono" id="lp-strat-c-pct"><span class="text-[#64748b]">--</span></span>
+                </div>
+                <div class="h-px bg-[#2a2a3e]"></div>
+                <div class="flex justify-between items-center">
+                  <span class="font-semibold text-white">Projected Annual Return</span>
+                  <span class="font-mono font-bold text-lg" id="lp-total-pct"><span class="text-[#64748b]">--</span></span>
+                </div>
+                <div class="flex justify-between items-center">
+                  <span class="font-semibold text-white">Projected Dollar Return</span>
+                  <span class="font-mono font-bold text-lg" id="lp-total-dollar"><span class="text-[#64748b]">--</span></span>
                 </div>
               </div>
-              <p class="text-[10px] text-gray-400 mt-4 italic">
+              <p class="text-[10px] text-[#64748b] mt-4 italic">
                 *Based on YTD performance extrapolated to full year. Past performance is not indicative of future results.
               </p>
             </div>
@@ -541,12 +492,12 @@ export function landingPage(): string {
 
       <!-- CTA Below Projector -->
       <div class="text-center">
-        <p class="text-sm text-gray-500 mb-4">These projections use actual trade data. Past performance is not indicative of future results.</p>
+        <p class="text-sm text-[#64748b] mb-4">These projections use actual trade data. Past performance is not indicative of future results.</p>
         <a href="https://calendly.com/hd-ekantikcapital/30min" target="_blank" rel="noopener" class="inline-flex items-center gap-2 no-underline px-8 py-3.5 rounded-lg text-base font-semibold transition-all" style="background:#C8A951;color:#1B2A4A;">
           <i class="fas fa-calendar-check"></i> Schedule Your Founding Member Consultation
         </a>
         <div class="mt-4">
-          <a href="https://freedom.ekantikcapital.com" target="_blank" rel="noopener" class="text-sm no-underline hover:underline" style="color:#1B2A4A;">
+          <a href="https://freedom.ekantikcapital.com" target="_blank" rel="noopener" class="text-sm no-underline hover:underline" style="color:#C8A951;">
             See how EPIG fits your Financial Freedom plan &rarr;
           </a>
         </div>
@@ -736,93 +687,10 @@ export function landingPage(): string {
         const heroSince = document.getElementById('hero-live-since');
         if (heroSince) heroSince.textContent = trackStart.replace('March', 'Mar').replace('February', 'Feb');
 
-        // Update Proof Strip
-        const proofCum = document.getElementById('proof-cum-return');
-        if (proofCum) proofCum.textContent = (cumReturn >= 0 ? '+' : '') + cumReturn.toFixed(1) + '%';
-        const proofSince = document.getElementById('proof-cum-since');
-        if (proofSince) proofSince.textContent = 'Since ' + trackStart;
-        const proofDD = document.getElementById('proof-drawdown');
-        if (proofDD) proofDD.textContent = maxDD.toFixed(1) + '%';
-        const proofTrades = document.getElementById('proof-trades');
-        if (proofTrades) proofTrades.textContent = String(totalTrades || 187);
-        const proofEv = document.getElementById('proof-ev');
-        if (proofEv) proofEv.textContent = '+' + evR.toFixed(2) + 'R';
-
         // Update bio trades
         const bioTrades = document.getElementById('bio-trades');
         if (bioTrades) bioTrades.textContent = String(totalTrades || 187);
 
-        // Equity Curve Chart
-        const equityData = combined?.equityCurve || data.strategies.A?.equityCurve;
-        if (equityData && equityData.length > 0) {
-          const ctx = document.getElementById('homepage-equity-chart');
-          if (ctx && typeof Chart !== 'undefined') {
-            new Chart(ctx.getContext('2d'), {
-              type: 'line',
-              data: {
-                labels: equityData.map(function(d) { return d.date; }),
-                datasets: [
-                  {
-                    label: 'EPIG',
-                    data: equityData.map(function(d) { return d.value; }),
-                    borderColor: '#C8A951',
-                    backgroundColor: 'rgba(200,169,81,0.1)',
-                    borderWidth: 2.5,
-                    pointRadius: 0,
-                    fill: true,
-                    tension: 0.3
-                  },
-                  {
-                    label: 'SPY (S&P 500)',
-                    data: equityData.map(function(d) { return d.spy; }),
-                    borderColor: '#64748B',
-                    backgroundColor: 'transparent',
-                    borderWidth: 2,
-                    pointRadius: 0,
-                    borderDash: [5, 3],
-                    fill: false,
-                    tension: 0.3
-                  }
-                ]
-              },
-              options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                interaction: { mode: 'index', intersect: false },
-                plugins: {
-                  legend: {
-                    display: true,
-                    position: 'top',
-                    labels: { usePointStyle: true, padding: 20, color: '#64748B', font: { size: 12 } }
-                  },
-                  tooltip: {
-                    callbacks: {
-                      label: function(context) {
-                        return context.dataset.label + ': $' + context.parsed.y.toFixed(2);
-                      }
-                    }
-                  }
-                },
-                scales: {
-                  x: {
-                    display: true,
-                    ticks: { maxTicksLimit: 8, color: '#94a3b8', font: { size: 11 } },
-                    grid: { display: false }
-                  },
-                  y: {
-                    display: true,
-                    ticks: {
-                      color: '#94a3b8',
-                      font: { size: 11 },
-                      callback: function(v) { return '$' + v; }
-                    },
-                    grid: { color: 'rgba(148,163,184,0.1)' }
-                  }
-                }
-              }
-            });
-          }
-        }
       } catch(e) {
         console.error('Homepage data load:', e);
       }

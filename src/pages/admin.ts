@@ -170,6 +170,22 @@ export function adminPage(): string {
       <div id="upload-history" class="text-sm text-epig-textDim">Loading...</div>
     </div>
 
+    <!-- Wipe & Re-import -->
+    <div class="kpi-card mb-6 border border-red-900/30">
+      <h2 class="font-bold text-lg mb-2 flex items-center gap-2">
+        <i class="fas fa-trash-alt text-red-400"></i>
+        Reset Trades
+      </h2>
+      <p class="text-sm text-epig-textDim mb-3">
+        Delete all trades and upload history for a clean re-import. This cannot be undone.
+      </p>
+      <button class="bg-red-700 hover:bg-red-600 text-white text-sm font-bold px-4 py-2 rounded transition-colors"
+        onclick="wipeTrades()" id="wipe-btn">
+        <i class="fas fa-exclamation-triangle mr-1"></i> Wipe All Trades
+      </button>
+      <div id="wipe-status" class="hidden text-sm p-3 rounded-lg mt-3"></div>
+    </div>
+
     <!-- Strategy A Allocation (collapsible — separate from upload flow) -->
     <div class="kpi-card mb-6">
       <button class="w-full flex items-center justify-between" onclick="document.getElementById('alloc-panel').classList.toggle('hidden'); this.querySelector('.alloc-arrow').classList.toggle('rotate-180');">
@@ -527,6 +543,33 @@ export function adminPage(): string {
         btn.innerHTML = '<i class="fas fa-database mr-1"></i> Confirm & Ingest';
         btn.disabled = false;
       }
+    }
+
+    // ══════════════════════════════════════════════════
+    // Wipe All Trades
+    // ══════════════════════════════════════════════════
+    async function wipeTrades() {
+      if (!confirm('Are you sure you want to DELETE ALL TRADES? This cannot be undone.')) return;
+      if (!confirm('This will remove all ' + document.getElementById('wipe-btn').dataset.count + ' trades. Type OK to confirm.')) return;
+
+      const btn = document.getElementById('wipe-btn');
+      btn.disabled = true;
+      btn.innerHTML = '<i class="fas fa-spinner fa-spin mr-1"></i> Wiping...';
+
+      try {
+        const res = await fetch('/api/admin/wipe-trades', { method: 'POST' });
+        const data = await res.json();
+        if (data.success) {
+          showStatus('wipe-status', 'Deleted ' + data.deleted + ' trades. You can now re-upload your CSV.', 'success');
+          loadAdminData();
+        } else {
+          showStatus('wipe-status', 'Error: ' + (data.error || 'Unknown'), 'error');
+        }
+      } catch(err) {
+        showStatus('wipe-status', 'Failed: ' + err.message, 'error');
+      }
+      btn.disabled = false;
+      btn.innerHTML = '<i class="fas fa-exclamation-triangle mr-1"></i> Wipe All Trades';
     }
 
     // ══════════════════════════════════════════════════
