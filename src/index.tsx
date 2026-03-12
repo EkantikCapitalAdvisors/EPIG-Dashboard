@@ -1023,6 +1023,91 @@ app.get('/api/admin/uploads', async (c) => {
 })
 
 // ══════════════════════════════════════════════════════════
+// API: DEBUG - Check fifo_pnl/ib_commission status
+// ══════════════════════════════════════════════════════════
+app.get('/api/admin/debug/fifo-status', async (c) => {
+  const db = c.env.DB
+  if (!db) return c.json({ error: 'No DB' }, 500)
+
+  const total = await db.prepare("SELECT COUNT(*) as cnt FROM trades").first() as any
+  const nullFifo = await db.prepare("SELECT COUNT(*) as cnt FROM trades WHERE fifo_pnl IS NULL").first() as any
+  const nullComm = await db.prepare("SELECT COUNT(*) as cnt FROM trades WHERE ib_commission IS NULL").first() as any
+  const zeroFifo = await db.prepare("SELECT COUNT(*) as cnt FROM trades WHERE fifo_pnl = 0").first() as any
+  const nonZeroFifo = await db.prepare("SELECT COUNT(*) as cnt FROM trades WHERE fifo_pnl != 0 AND fifo_pnl IS NOT NULL").first() as any
+  const sample = await db.prepare("SELECT id, ib_execution_id, instrument, fifo_pnl, ib_commission, realized_pnl, side FROM trades ORDER BY id DESC LIMIT 10").all()
+
+  return c.json({
+    totalTrades: total?.cnt,
+    nullFifoPnl: nullFifo?.cnt,
+    nullIbCommission: nullComm?.cnt,
+    zeroFifoPnl: zeroFifo?.cnt,
+    nonZeroFifoPnl: nonZeroFifo?.cnt,
+    sampleTrades: sample.results || [],
+  })
+})
+
+// ══════════════════════════════════════════════════════════
+// API: BACKFILL - Force update fifo_pnl/ib_commission from re-uploaded CSV
+// ══════════════════════════════════════════════════════════
+app.post('/api/admin/upload/backfill', async (c) => {
+  const db = c.env.DB
+  if (!db) return c.json({ error: 'No DB' }, 500)
+
+  try {
+    const body = await c.req.parseBody()
+    const file = body['file']
+    if (!file || typeof file === 'string') {
+      return c.json({ error: 'No file uploaded.' }, 400)
+    }
+
+    const csvText = await (file as File).text()
+    const parsedRows = parseIBCsv(csvText)
+    const executionRows = parsedRows.filter((r: any) => {
+      const tradeId = (r['TradeID'] || '').trim()
+      return tradeId !== '' && tradeId !== 'TradeID'
+    })
+
+    let updated = 0
+    let skipped = 0
+    let notFound = 0
+
+    for (const row of executionRows) {
+      const tradeId = stripQuotes(row['TradeID'] || '').trim()
+      if (!tradeId) { skipped++; continue }
+
+      const fifoPnl = parseFloat(stripQuotes(row['FifoPnlRealized'] || '0'))
+      const commission = parseFloat(stripQuotes(row['IBCommission'] || row['Commission'] || '0'))
+
+      const result = await db.prepare(
+        "UPDATE trades SET fifo_pnl = ?, ib_commission = ? WHERE ib_execution_id = ? AND (fifo_pnl IS NULL OR ib_commission IS NULL)"
+      ).bind(fifoPnl, commission, tradeId).run()
+
+      if (result.meta?.changes && result.meta.changes > 0) {
+        updated++
+      } else {
+        // Check if trade exists at all
+        const exists = await db.prepare("SELECT id FROM trades WHERE ib_execution_id = ?").bind(tradeId).first()
+        if (exists) {
+          skipped++ // already has values
+        } else {
+          notFound++
+        }
+      }
+    }
+
+    return c.json({
+      success: true,
+      totalRows: executionRows.length,
+      updated,
+      skipped,
+      notFound,
+    })
+  } catch (err: any) {
+    return c.json({ error: err.message }, 500)
+  }
+})
+
+// ══════════════════════════════════════════════════════════
 // API: LEADS
 // ══════════════════════════════════════════════════════════
 app.post('/api/leads/subscribe', async (c) => {
