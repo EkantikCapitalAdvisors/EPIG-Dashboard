@@ -757,8 +757,15 @@ app.post('/api/admin/upload/confirm', async (c) => {
 
       // Idempotency check
       if (tradeId) {
-        const existing = await db.prepare("SELECT id FROM trades WHERE ib_execution_id = ?").bind(tradeId).first()
-        if (existing) { dupCount++; continue }
+        const existing = await db.prepare("SELECT id, fifo_pnl, ib_commission FROM trades WHERE ib_execution_id = ?").bind(tradeId).first() as any
+        if (existing) {
+          // Update fifo_pnl and ib_commission if they were missing (NULL) and new data has them
+          if (existing.fifo_pnl === null && trade.fifoPnl != null && trade.fifoPnl !== 0) {
+            await db.prepare("UPDATE trades SET fifo_pnl = ?, ib_commission = ? WHERE id = ?")
+              .bind(trade.fifoPnl, trade.commission != null ? trade.commission : null, existing.id).run()
+          }
+          dupCount++; continue
+        }
       }
 
       const strategy = trade.strategy || 'A'
@@ -776,7 +783,7 @@ app.post('/api/admin/upload/confirm', async (c) => {
           trade.quantity || 1,
           trade.strike || null, trade.expiry || null, trade.putCall || null,
           trade.price || 0, trade.netCash || 0,
-          trade.fifoPnl || null, trade.commission || null
+          trade.fifoPnl != null ? trade.fifoPnl : null, trade.commission != null ? trade.commission : null
         ).run()
         newCount++
         strategyCounts[strategy] = (strategyCounts[strategy] || 0) + 1
