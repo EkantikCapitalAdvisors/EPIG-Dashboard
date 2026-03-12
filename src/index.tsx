@@ -759,10 +759,10 @@ app.post('/api/admin/upload/confirm', async (c) => {
       if (tradeId) {
         const existing = await db.prepare("SELECT id, fifo_pnl, ib_commission FROM trades WHERE ib_execution_id = ?").bind(tradeId).first() as any
         if (existing) {
-          // Update fifo_pnl and ib_commission if they were missing (NULL) and new data has them
-          if (existing.fifo_pnl === null && trade.fifoPnl != null && trade.fifoPnl !== 0) {
+          // Backfill fifo_pnl and ib_commission if they were missing (NULL)
+          if (existing.fifo_pnl === null || existing.ib_commission === null) {
             await db.prepare("UPDATE trades SET fifo_pnl = ?, ib_commission = ? WHERE id = ?")
-              .bind(trade.fifoPnl, trade.commission != null ? trade.commission : null, existing.id).run()
+              .bind(trade.fifoPnl != null ? trade.fifoPnl : 0, trade.commission != null ? trade.commission : 0, existing.id).run()
           }
           dupCount++; continue
         }
