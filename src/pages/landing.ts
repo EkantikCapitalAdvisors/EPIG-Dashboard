@@ -698,7 +698,8 @@ export function landingPage(): string {
 
     // Performance Projector Preview (same as before but with $500K default)
     (async function loadProjectorPreview() {
-      var PORTFOLIO = 500000;
+      var ACTUAL_PORTFOLIO = 100000;  // Real capital traded
+      var DISPLAY_PORTFOLIO = 500000; // User-facing portfolio size
 
       function pctColor(val) {
         return val >= 0 ? 'color:#16a34a' : 'color:#ef4444';
@@ -733,7 +734,7 @@ export function landingPage(): string {
           totalTrades += s.closedTrades;
           if (s.firstDate < earliestDate) earliestDate = s.firstDate;
           if (s.lastDate > latestDate) latestDate = s.lastDate;
-          var annualPct = (s.annualPnl / PORTFOLIO) * 100;
+          var annualPct = (s.annualPnl / ACTUAL_PORTFOLIO) * 100;
           totalAnnualDollar += s.annualPnl;
           var el = document.getElementById('lp-strat-' + prefix + '-pct');
           if (el) {
@@ -742,7 +743,8 @@ export function landingPage(): string {
           }
         }
 
-        var totalPct = (totalAnnualDollar / PORTFOLIO) * 100;
+        var totalPct = (totalAnnualDollar / ACTUAL_PORTFOLIO) * 100;
+        var scaledAnnualDollar = totalAnnualDollar * (DISPLAY_PORTFOLIO / ACTUAL_PORTFOLIO);
         var totalPctEl = document.getElementById('lp-total-pct');
         if (totalPctEl) {
           totalPctEl.style.cssText = 'font-family:JetBrains Mono,monospace;font-weight:700;font-size:1.125rem;' + pctColor(totalPct);
@@ -750,8 +752,8 @@ export function landingPage(): string {
         }
         var totalDollarEl = document.getElementById('lp-total-dollar');
         if (totalDollarEl) {
-          totalDollarEl.style.cssText = 'font-family:JetBrains Mono,monospace;font-weight:700;font-size:1.125rem;' + pctColor(totalAnnualDollar);
-          totalDollarEl.textContent = fmtDollar(totalAnnualDollar);
+          totalDollarEl.style.cssText = 'font-family:JetBrains Mono,monospace;font-weight:700;font-size:1.125rem;' + pctColor(scaledAnnualDollar);
+          totalDollarEl.textContent = fmtDollar(scaledAnnualDollar);
         }
         document.getElementById('projector-live-badge')?.classList.remove('hidden');
         var summaryEl = document.getElementById('projector-summary-text');
