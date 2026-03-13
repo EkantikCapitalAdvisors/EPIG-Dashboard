@@ -247,6 +247,9 @@ app.get('/api/dashboard/summary', async (c) => {
 
     if (rows.length === 0) return c.json(buildFallbackSummary())
 
+    // Fetch real SPY prices for benchmark comparison
+    const spyPrices = await fetchSPYPrices()
+
     // ── Compute PORTFOLIO-WIDE date range ──
     // All strategies must annualize over the same time span so that
     // per-strategy annualized returns sum correctly to the combined total.
@@ -334,7 +337,7 @@ app.get('/api/dashboard/summary', async (c) => {
       const expectancyR = riskPerTrade > 0 ? round(expectancyDollar / riskPerTrade, 2) : 0
 
       // Equity curve from round-trip P&L (date-ordered)
-      const equityCurve = buildRoundTripEquityCurve(closedSorted, startingCapital)
+      const equityCurve = buildRoundTripEquityCurve(closedSorted, startingCapital, spyPrices)
       const drawdownCurve = buildDrawdownCurve(equityCurve)
 
       // Monthly returns from round trips
@@ -473,7 +476,7 @@ app.get('/api/dashboard/summary', async (c) => {
     }
 
     // Combined equity curve, drawdown, monthly, weekly returns
-    const combEquity = buildRoundTripEquityCurve(allClosed, startingCapital)
+    const combEquity = buildRoundTripEquityCurve(allClosed, startingCapital, spyPrices)
     const combDrawdown = buildDrawdownCurve(combEquity)
     const combMonthly = buildRoundTripMonthlyReturns(allClosed, startingCapital)
     const combWeekly = buildRoundTripWeeklyReturns(allClosed, startingCapital)
@@ -1476,24 +1479,72 @@ function buildMonthlyReturns(trades: any[], mode: 'points' | 'R') {
 // (equity curves, monthly returns, rolling metrics from round trips)
 // ══════════════════════════════════════════════════════════
 
-function buildRoundTripEquityCurve(closedRTs: any[], startingCapital: number): any[] {
+function buildRoundTripEquityCurve(closedRTs: any[], startingCapital: number, spyPrices?: Record<string, number>): any[] {
   if (closedRTs.length === 0) return []
   let cumValue = 100 // index starting at 100
-  let spyVal = 100
-  const data: any[] = [{ date: closedRTs[0].firstDate || closedRTs[0].lastDate, value: 100, spy: 100 }]
+  const firstDate = closedRTs[0].firstDate || closedRTs[0].lastDate
+  const spyBasePrice = spyPrices ? findClosestSPYPrice(spyPrices, firstDate) : null
+  const data: any[] = [{ date: firstDate, value: 100, spy: 100 }]
 
   for (const rt of closedRTs) {
     const pnlPct = rt.pnl / startingCapital
     cumValue *= (1 + pnlPct)
-    // Simple SPY benchmark: ~14.6% annual return + small noise
-    spyVal *= (1 + 0.146 / 365 + (Math.sin(data.length * 0.3) * 0.001))
+    const rtDate = rt.lastDate || rt.firstDate
+    let spyIndexed = 100
+    if (spyBasePrice && spyPrices) {
+      const currentSPY = findClosestSPYPrice(spyPrices, rtDate)
+      if (currentSPY) spyIndexed = round((currentSPY / spyBasePrice) * 100, 2)
+    }
     data.push({
-      date: rt.lastDate || rt.firstDate,
+      date: rtDate,
       value: round(cumValue, 2),
-      spy: round(spyVal, 2),
+      spy: spyIndexed,
     })
   }
   return data
+}
+
+// Find the closest SPY price on or before the given date
+function findClosestSPYPrice(spyPrices: Record<string, number>, date: string): number | null {
+  if (spyPrices[date]) return spyPrices[date]
+  // Walk back up to 7 days to find the closest trading day
+  const d = new Date(date)
+  for (let i = 1; i <= 7; i++) {
+    d.setDate(d.getDate() - 1)
+    const key = d.toISOString().slice(0, 10)
+    if (spyPrices[key]) return spyPrices[key]
+  }
+  // If nothing found walking back, try the earliest available
+  const sorted = Object.keys(spyPrices).sort()
+  return sorted.length > 0 ? spyPrices[sorted[0]] : null
+}
+
+// Fetch real SPY daily close prices from Yahoo Finance
+async function fetchSPYPrices(): Promise<Record<string, number>> {
+  try {
+    const now = Math.floor(Date.now() / 1000)
+    const start = Math.floor(new Date('2025-12-01').getTime() / 1000)
+    const url = `https://query1.finance.yahoo.com/v8/finance/chart/SPY?period1=${start}&period2=${now}&interval=1d`
+    const res = await fetch(url, {
+      headers: { 'User-Agent': 'Mozilla/5.0' },
+    })
+    if (!res.ok) return {}
+    const json: any = await res.json()
+    const result = json?.chart?.result?.[0]
+    if (!result) return {}
+    const timestamps: number[] = result.timestamp || []
+    const closes: number[] = result.indicators?.quote?.[0]?.close || []
+    const prices: Record<string, number> = {}
+    for (let i = 0; i < timestamps.length; i++) {
+      if (closes[i] != null) {
+        const dateStr = new Date(timestamps[i] * 1000).toISOString().slice(0, 10)
+        prices[dateStr] = closes[i]
+      }
+    }
+    return prices
+  } catch {
+    return {}
+  }
 }
 
 function buildRoundTripMonthlyReturns(closedRTs: any[], startingCapital: number): any[] {
