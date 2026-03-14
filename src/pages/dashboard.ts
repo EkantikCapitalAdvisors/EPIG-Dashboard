@@ -85,8 +85,8 @@ export function dashboardPage(): string {
           <div class="kpi-value" id="kpi-comb-pnl">—</div>
         </div>
         <div class="kpi-card">
-          <div class="kpi-label">Annualized P&L</div>
-          <div class="kpi-value" id="kpi-comb-annual">—</div>
+          <div class="kpi-label">Projected Annual R</div>
+          <div class="kpi-value" id="kpi-comb-annualr">—</div>
         </div>
       </div>
       <!-- Sharpe/Sortino row -->
@@ -158,9 +158,10 @@ export function dashboardPage(): string {
           </div>
         </div>
       </div>
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+      <div class="grid grid-cols-2 md:grid-cols-5 gap-4 mb-8">
         <div class="kpi-card"><div class="kpi-label">Total P&L</div><div class="kpi-value" id="kpi-a-pnl">—</div></div>
         <div class="kpi-card"><div class="kpi-label">EV per Trade (R)</div><div class="kpi-value" id="kpi-a-evr">—</div></div>
+        <div class="kpi-card"><div class="kpi-label">Projected Annual R</div><div class="kpi-value" id="kpi-a-annualr">—</div></div>
         <div class="kpi-card"><div class="kpi-label">Avg Win / Avg Loss</div><div class="kpi-value text-white" id="kpi-a-wl">—</div></div>
         <div class="kpi-card"><div class="kpi-label">Risk per Trade</div><div class="kpi-value text-white" id="kpi-a-risk">—</div></div>
       </div>
@@ -181,7 +182,7 @@ export function dashboardPage(): string {
         <div class="kpi-card"><div class="kpi-label">Avg Win / Avg Loss</div><div class="kpi-value text-white" id="kpi-b-wl">—</div></div>
         <div class="kpi-card"><div class="kpi-label">Risk per Trade</div><div class="kpi-value text-white" id="kpi-b-risk">—</div></div>
         <div class="kpi-card"><div class="kpi-label">Sharpe / Sortino</div><div class="kpi-value text-white" id="kpi-b-sharpe">—</div></div>
-        <div class="kpi-card"><div class="kpi-label">Annualized P&L</div><div class="kpi-value" id="kpi-b-annual">—</div></div>
+        <div class="kpi-card"><div class="kpi-label">Projected Annual R</div><div class="kpi-value" id="kpi-b-annualr">—</div></div>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
         <div class="kpi-card"><div class="text-xs text-epig-textDim uppercase tracking-wider mb-3 font-semibold">Rolling 30-Day</div><div class="grid grid-cols-3 gap-4"><div><div class="kpi-label">Win Rate</div><div class="font-mono text-lg font-bold" id="b-r30-wr">—</div></div><div><div class="kpi-label">Expectancy (R)</div><div class="font-mono text-lg font-bold" id="b-r30-ev">—</div></div><div><div class="kpi-label">Trades</div><div class="font-mono text-white text-lg font-bold" id="b-r30-t">—</div></div></div></div>
@@ -204,7 +205,7 @@ export function dashboardPage(): string {
         <div class="kpi-card"><div class="kpi-label">Avg Win / Avg Loss</div><div class="kpi-value text-white" id="kpi-c-wl">—</div></div>
         <div class="kpi-card"><div class="kpi-label">Risk per Trade</div><div class="kpi-value text-white" id="kpi-c-risk">—</div></div>
         <div class="kpi-card"><div class="kpi-label">Sharpe / Sortino</div><div class="kpi-value text-white" id="kpi-c-sharpe">—</div></div>
-        <div class="kpi-card"><div class="kpi-label">Annualized P&L</div><div class="kpi-value" id="kpi-c-annual">—</div></div>
+        <div class="kpi-card"><div class="kpi-label">Projected Annual R</div><div class="kpi-value" id="kpi-c-annualr">—</div></div>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
         <div class="kpi-card"><div class="text-xs text-epig-textDim uppercase tracking-wider mb-3 font-semibold">Rolling 30-Day</div><div class="grid grid-cols-3 gap-4"><div><div class="kpi-label">Win Rate</div><div class="font-mono text-lg font-bold" id="c-r30-wr">—</div></div><div><div class="kpi-label">Expectancy (R)</div><div class="font-mono text-lg font-bold" id="c-r30-ev">—</div></div><div><div class="kpi-label">Trades</div><div class="font-mono text-white text-lg font-bold" id="c-r30-t">—</div></div></div></div>
@@ -626,7 +627,8 @@ export function dashboardPage(): string {
         const fillsEl = document.getElementById('kpi-comb-fills');
         if (fillsEl) fillsEl.textContent = (r || isCustom) ? '' : (d.totalFills || 0) + ' fills';
         setKpi('kpi-comb-pnl', r ? fmtPnl(evDollar) + '/trade' : fmtPnl(tPnl), r ? evDollar : tPnl);
-        setKpi('kpi-comb-annual', (r || isCustom) ? '—' : fmtPnl(d.annualPnl), (r || isCustom) ? 0 : d.annualPnl);
+        const combAR = d.projectedAnnualR || 0;
+        setKpi('kpi-comb-annualr', (r || isCustom) ? '—' : (combAR >= 0 ? '+' : '') + combAR.toFixed(1) + 'R', (r || isCustom) ? 0 : combAR);
         setKpi('kpi-comb-sharpe', r ? '—' : (d.sharpeRatio||0).toFixed(2) + ' / ' + (d.sortinoRatio||0).toFixed(2));
 
         // Contribution bar
@@ -664,6 +666,8 @@ export function dashboardPage(): string {
         if (fillsA) fillsA.textContent = r ? '' : (d.totalFills || 0) + ' fills';
         setKpi('kpi-a-pnl', r ? fmtPnl(evDollar) + '/trade' : fmtPnl(tPnl), r ? evDollar : tPnl);
         setKpi('kpi-a-evr', (evR >= 0 ? '+' : '') + evR.toFixed(2) + 'R', evR);
+        const aAR = d.projectedAnnualR || 0;
+        setKpi('kpi-a-annualr', (r || isCustom) ? '—' : (aAR >= 0 ? '+' : '') + aAR.toFixed(1) + 'R', (r || isCustom) ? 0 : aAR);
         setKpi('kpi-a-wl', r ? '—' : '$' + (d.avgWinDollar||0).toFixed(0) + ' / $' + (d.avgLossDollar||0).toFixed(0));
         setKpi('kpi-a-risk', r ? '—' : '$' + (d.riskPerTrade||0).toFixed(0));
         if (!r && d.currentAllocation) {
@@ -689,7 +693,8 @@ export function dashboardPage(): string {
         setKpi('kpi-b-wl', r ? '—' : '$' + (d.avgWinDollar||0).toFixed(0) + ' / $' + (d.avgLossDollar||0).toFixed(0));
         setKpi('kpi-b-risk', r ? '—' : '$' + (d.riskPerTrade||0).toFixed(0));
         setKpi('kpi-b-sharpe', r ? '—' : (d.sharpeRatio||0).toFixed(2) + ' / ' + (d.sortinoRatio||0).toFixed(2));
-        setKpi('kpi-b-annual', (r || isCustom) ? '—' : fmtPnl(d.annualPnl), (r || isCustom) ? 0 : d.annualPnl);
+        const bAR = d.projectedAnnualR || 0;
+        setKpi('kpi-b-annualr', (r || isCustom) ? '—' : (bAR >= 0 ? '+' : '') + bAR.toFixed(1) + 'R', (r || isCustom) ? 0 : bAR);
         const r30 = d.rollingMetrics && d.rollingMetrics['30d'] ? d.rollingMetrics['30d'] : {};
         const r90 = d.rollingMetrics && d.rollingMetrics['90d'] ? d.rollingMetrics['90d'] : {};
         setRolling('b', r30, r90);
@@ -708,7 +713,8 @@ export function dashboardPage(): string {
         setKpi('kpi-c-wl', r ? '—' : '$' + (d.avgWinDollar||0).toFixed(0) + ' / $' + (d.avgLossDollar||0).toFixed(0));
         setKpi('kpi-c-risk', r ? '—' : '$' + (d.riskPerTrade||0).toFixed(0));
         setKpi('kpi-c-sharpe', r ? '—' : (d.sharpeRatio||0).toFixed(2) + ' / ' + (d.sortinoRatio||0).toFixed(2));
-        setKpi('kpi-c-annual', (r || isCustom) ? '—' : fmtPnl(d.annualPnl), (r || isCustom) ? 0 : d.annualPnl);
+        const cAR = d.projectedAnnualR || 0;
+        setKpi('kpi-c-annualr', (r || isCustom) ? '—' : (cAR >= 0 ? '+' : '') + cAR.toFixed(1) + 'R', (r || isCustom) ? 0 : cAR);
         const r30 = d.rollingMetrics && d.rollingMetrics['30d'] ? d.rollingMetrics['30d'] : {};
         const r90 = d.rollingMetrics && d.rollingMetrics['90d'] ? d.rollingMetrics['90d'] : {};
         setRolling('c', r30, r90);

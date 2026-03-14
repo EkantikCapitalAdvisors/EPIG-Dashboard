@@ -234,6 +234,30 @@ export function adminPage(): string {
         </div>
       </div>
     </div>
+
+    <!-- SPY Benchmark Prices -->
+    <div class="kpi-card">
+      <button class="w-full flex items-center justify-between" onclick="document.getElementById('spy-panel').classList.toggle('hidden'); this.querySelector('.spy-arrow').classList.toggle('rotate-180');">
+        <h2 class="font-bold text-lg flex items-center gap-2">
+          <i class="fas fa-chart-line text-slate-400"></i>
+          SPY Benchmark Prices
+        </h2>
+        <i class="fas fa-chevron-down text-epig-textDim spy-arrow transition-transform duration-200"></i>
+      </button>
+      <div id="spy-panel" class="hidden mt-4">
+        <p class="text-sm text-epig-textDim mb-4">
+          Refresh SPY daily close prices used for the benchmark line on the equity curve.
+          Prices are cached in the database and auto-refresh when stale.
+        </p>
+        <div class="flex items-center gap-4">
+          <button class="btn-primary text-sm" onclick="refreshSPY()" id="spy-refresh-btn" style="padding: 10px 24px;">
+            <i class="fas fa-sync-alt mr-1"></i> Refresh SPY Prices
+          </button>
+          <span id="spy-count" class="text-sm text-epig-textDim"></span>
+        </div>
+        <div id="spy-status" class="hidden text-sm p-3 rounded-lg mt-3"></div>
+      </div>
+    </div>
   </div>
 
   <script>
@@ -603,6 +627,29 @@ export function adminPage(): string {
       } catch(err) {
         showStatus('snapshot-status', 'Snapshot failed: ' + err.message, 'error');
       }
+    }
+
+    // ══════════════════════════════════════════════════
+    // SPY Price Refresh
+    // ══════════════════════════════════════════════════
+    async function refreshSPY() {
+      const btn = document.getElementById('spy-refresh-btn');
+      btn.disabled = true;
+      btn.innerHTML = '<i class="fas fa-spinner fa-spin mr-1"></i> Fetching...';
+      try {
+        const res = await fetch('/api/admin/refresh-spy', { method: 'POST' });
+        const data = await res.json();
+        if (data.ok) {
+          showStatus('spy-status', 'Loaded ' + data.count + ' days of SPY prices (' + data.from + ' to ' + data.to + ')', 'success');
+          document.getElementById('spy-count').textContent = data.count + ' days cached';
+        } else {
+          showStatus('spy-status', 'Error: ' + (data.error || 'Could not fetch SPY data'), 'error');
+        }
+      } catch(err) {
+        showStatus('spy-status', 'Failed: ' + err.message, 'error');
+      }
+      btn.disabled = false;
+      btn.innerHTML = '<i class="fas fa-sync-alt mr-1"></i> Refresh SPY Prices';
     }
 
     // ══════════════════════════════════════════════════
