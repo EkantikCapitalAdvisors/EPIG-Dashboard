@@ -391,6 +391,7 @@ app.get('/api/dashboard/summary', async (c) => {
         avgWinR: round(avgWinR, 2),
         riskPerTrade: round(riskPerTrade, 2),
         evPerTradeR: round(evPerTradeR, 2),
+        projectedAnnualR: round(tradesPerYear * evPerTradeR, 1),
         tradesPerYear: Math.round(tradesPerYear),
         annualPnl: round(portfolioYearFraction > 0 ? totalPnl / portfolioYearFraction : totalPnl, 2),
         totalPnl: round(totalPnl, 2),
@@ -469,6 +470,14 @@ app.get('/api/dashboard/summary', async (c) => {
     const combGrossLoss = combLosses.reduce((s: number, rt: any) => s + Math.abs(rt.pnl), 0)
     const combPF = combGrossLoss > 0 ? round(combGrossWin / combGrossLoss, 2) : combGrossWin > 0 ? 999 : 0
 
+    // Combined EV per trade (R) and projected annual R
+    const combAvgWin = combWins.length > 0 ? combWins.reduce((s: number, rt: any) => s + rt.pnl, 0) / combWins.length : 0
+    const combAvgLoss = combLosses.length > 0 ? combLosses.reduce((s: number, rt: any) => s + Math.abs(rt.pnl), 0) / combLosses.length : 0
+    const combRiskPerTrade = combAvgLoss > 0 ? combAvgLoss : combAvgWin
+    const combAvgWinR = combRiskPerTrade > 0 ? combAvgWin / combRiskPerTrade : 0
+    const combEvPerTradeR = combWinRate * combAvgWinR - (1 - combWinRate) * 1.0
+    const combProjectedAnnualR = round(combTPY * combEvPerTradeR, 1)
+
     // Per-strategy contribution
     const stratContrib: Record<string, number> = {}
     for (const strat of ['A', 'B', 'C']) {
@@ -507,6 +516,7 @@ app.get('/api/dashboard/summary', async (c) => {
       totalFills: allFills.length,
       openTrades: 0,
       totalPnl: round(combTotalPnl, 2),
+      projectedAnnualR: combProjectedAnnualR,
       annualPnl: round(combYearFraction > 0 ? combTotalPnl / combYearFraction : combTotalPnl, 2),
       dataRange: { firstDate: combFirstDate, lastDate: combLastDate, daySpan: Math.round(combDaySpan) },
       lastUpdated: combLastDate ? combLastDate + 'T16:00:00Z' : '2026-02-20T16:00:00Z',
@@ -1761,7 +1771,7 @@ function buildEmptyStrategy(strat: string, snapshot: any): any {
     winRate: 0, expectancyDollar: 0, expectancyR: 0, expectancyPoints: 0,
     profitFactor: 0, totalTrades: 0, totalFills: 0, openTrades: 0,
     avgWinDollar: 0, avgLossDollar: 0, avgWinR: 0, riskPerTrade: 0,
-    evPerTradeR: 0, tradesPerYear: 0, annualPnl: 0, totalPnl: 0,
+    evPerTradeR: 0, projectedAnnualR: 0, tradesPerYear: 0, annualPnl: 0, totalPnl: 0,
     dataRange: { firstDate: '', lastDate: '', daySpan: 0 },
     lastUpdated: '2026-02-20T16:00:00Z',
     currentAllocation: strat === 'A' ? { spy: snapshot.spy_pct, stocks: snapshot.stock_pct, cash: snapshot.cash_pct } : undefined,
