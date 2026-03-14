@@ -247,8 +247,8 @@ app.get('/api/dashboard/summary', async (c) => {
 
     if (rows.length === 0) return c.json(buildFallbackSummary())
 
-    // Fetch real SPY prices for benchmark comparison
-    const spyPrices = await fetchSPYPrices()
+    // Fetch real SPY prices for benchmark comparison (D1-cached)
+    const spyPrices = await fetchSPYPrices(db)
 
     // ── Compute PORTFOLIO-WIDE date range ──
     // All strategies must annualize over the same time span so that
@@ -1080,6 +1080,61 @@ app.get('/api/health', async (c) => {
   }
 })
 
+// ══════════════════════════════════════════════════════════
+// API: ADMIN — REFRESH SPY PRICES
+// ══════════════════════════════════════════════════════════
+app.post('/api/admin/refresh-spy', async (c) => {
+  const db = c.env.DB
+  if (!db) return c.json({ error: 'No database' }, 500)
+
+  try {
+    await db.prepare("CREATE TABLE IF NOT EXISTS spy_prices (date TEXT PRIMARY KEY, close REAL NOT NULL)").run()
+    const fresh = await fetchSPYFromAPIs()
+    const count = Object.keys(fresh).length
+    if (count === 0) {
+      return c.json({ error: 'Could not fetch SPY prices from any source' }, 502)
+    }
+    const stmt = db.prepare("INSERT OR REPLACE INTO spy_prices (date, close) VALUES (?, ?)")
+    const batch = Object.entries(fresh).map(([d, p]) => stmt.bind(d, p))
+    for (let i = 0; i < batch.length; i += 100) {
+      await db.batch(batch.slice(i, i + 100))
+    }
+    // Get date range
+    const dates = Object.keys(fresh).sort()
+    return c.json({
+      ok: true,
+      count,
+      from: dates[0],
+      to: dates[dates.length - 1],
+    })
+  } catch (e: any) {
+    return c.json({ error: e.message }, 500)
+  }
+})
+
+// Admin endpoint to manually seed SPY prices via JSON body
+app.post('/api/admin/seed-spy', async (c) => {
+  const db = c.env.DB
+  if (!db) return c.json({ error: 'No database' }, 500)
+
+  try {
+    await db.prepare("CREATE TABLE IF NOT EXISTS spy_prices (date TEXT PRIMARY KEY, close REAL NOT NULL)").run()
+    const body = await c.req.json<{ prices: Record<string, number> }>()
+    if (!body.prices || Object.keys(body.prices).length === 0) {
+      return c.json({ error: 'Body must contain { prices: { "YYYY-MM-DD": close, ... } }' }, 400)
+    }
+    const stmt = db.prepare("INSERT OR REPLACE INTO spy_prices (date, close) VALUES (?, ?)")
+    const entries = Object.entries(body.prices)
+    for (let i = 0; i < entries.length; i += 100) {
+      const batch = entries.slice(i, i + 100).map(([d, p]) => stmt.bind(d, p))
+      await db.batch(batch)
+    }
+    return c.json({ ok: true, count: entries.length })
+  } catch (e: any) {
+    return c.json({ error: e.message }, 500)
+  }
+})
+
 export default app
 
 // ══════════════════════════════════════════════════════════
@@ -1519,32 +1574,98 @@ function findClosestSPYPrice(spyPrices: Record<string, number>, date: string): n
   return sorted.length > 0 ? spyPrices[sorted[0]] : null
 }
 
-// Fetch real SPY daily close prices from Yahoo Finance
-async function fetchSPYPrices(): Promise<Record<string, number>> {
+// Fetch SPY daily close prices — reads from D1 cache, falls back to external APIs
+async function fetchSPYPrices(db: D1Database): Promise<Record<string, number>> {
   try {
-    const now = Math.floor(Date.now() / 1000)
-    const start = Math.floor(new Date('2025-12-01').getTime() / 1000)
-    const url = `https://query1.finance.yahoo.com/v8/finance/chart/SPY?period1=${start}&period2=${now}&interval=1d`
-    const res = await fetch(url, {
-      headers: { 'User-Agent': 'Mozilla/5.0' },
-    })
-    if (!res.ok) return {}
-    const json: any = await res.json()
-    const result = json?.chart?.result?.[0]
-    if (!result) return {}
-    const timestamps: number[] = result.timestamp || []
-    const closes: number[] = result.indicators?.quote?.[0]?.close || []
+    // Ensure table exists (safe to call repeatedly)
+    await db.prepare("CREATE TABLE IF NOT EXISTS spy_prices (date TEXT PRIMARY KEY, close REAL NOT NULL)").run()
+
+    // Read cached prices from D1
+    const cached = await db.prepare("SELECT date, close FROM spy_prices ORDER BY date ASC").all()
     const prices: Record<string, number> = {}
-    for (let i = 0; i < timestamps.length; i++) {
-      if (closes[i] != null) {
-        const dateStr = new Date(timestamps[i] * 1000).toISOString().slice(0, 10)
-        prices[dateStr] = closes[i]
+    for (const row of (cached.results || []) as any[]) {
+      prices[row.date] = row.close
+    }
+
+    // Check if we need to refresh (no data, or latest cached date is >1 day old)
+    const dates = Object.keys(prices).sort()
+    const latestCached = dates.length > 0 ? dates[dates.length - 1] : null
+    const now = new Date()
+    const needsRefresh = !latestCached ||
+      (now.getTime() - new Date(latestCached).getTime()) > 2 * 24 * 60 * 60 * 1000 // >2 days stale
+
+    if (needsRefresh) {
+      const fresh = await fetchSPYFromAPIs()
+      if (Object.keys(fresh).length > 0) {
+        // Upsert into D1
+        const stmt = db.prepare("INSERT OR REPLACE INTO spy_prices (date, close) VALUES (?, ?)")
+        const batch = Object.entries(fresh).map(([d, p]) => stmt.bind(d, p))
+        if (batch.length > 0) {
+          // D1 batch limit is 500, chunk if needed
+          for (let i = 0; i < batch.length; i += 100) {
+            await db.batch(batch.slice(i, i + 100))
+          }
+        }
+        Object.assign(prices, fresh)
       }
     }
     return prices
   } catch {
     return {}
   }
+}
+
+// Try multiple free APIs to get SPY daily prices
+async function fetchSPYFromAPIs(): Promise<Record<string, number>> {
+  // Try Yahoo Finance (query2 endpoint, sometimes works)
+  try {
+    const now = Math.floor(Date.now() / 1000)
+    const start = Math.floor(new Date('2025-12-01').getTime() / 1000)
+    const url = `https://query2.finance.yahoo.com/v8/finance/chart/SPY?period1=${start}&period2=${now}&interval=1d`
+    const res = await fetch(url, {
+      headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36' },
+    })
+    if (res.ok) {
+      const json: any = await res.json()
+      const result = json?.chart?.result?.[0]
+      if (result?.timestamp?.length) {
+        const timestamps: number[] = result.timestamp
+        const closes: number[] = result.indicators?.quote?.[0]?.close || []
+        const prices: Record<string, number> = {}
+        for (let i = 0; i < timestamps.length; i++) {
+          if (closes[i] != null) {
+            prices[new Date(timestamps[i] * 1000).toISOString().slice(0, 10)] = closes[i]
+          }
+        }
+        if (Object.keys(prices).length > 0) return prices
+      }
+    }
+  } catch {}
+
+  // Fallback: Stooq CSV (free, no auth)
+  try {
+    const res = await fetch('https://stooq.com/q/d/l/?s=spy.us&d1=20251201&i=d', {
+      headers: { 'User-Agent': 'Mozilla/5.0' },
+    })
+    if (res.ok) {
+      const csv = await res.text()
+      const lines = csv.trim().split('\n')
+      if (lines.length > 1) {
+        const prices: Record<string, number> = {}
+        for (let i = 1; i < lines.length; i++) {
+          const cols = lines[i].split(',')
+          if (cols.length >= 5) {
+            const date = cols[0] // YYYY-MM-DD format
+            const close = parseFloat(cols[4])
+            if (date && !isNaN(close)) prices[date] = close
+          }
+        }
+        if (Object.keys(prices).length > 0) return prices
+      }
+    }
+  } catch {}
+
+  return {}
 }
 
 function buildRoundTripMonthlyReturns(closedRTs: any[], startingCapital: number): any[] {
