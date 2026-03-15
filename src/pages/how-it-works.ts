@@ -180,7 +180,7 @@ export function howItWorksPage(): string {
             </div>
             <div>
               <span class="text-xs text-white font-semibold block">Upload & Auto-Classify</span>
-              <span class="text-[11px] text-epig-textDim">STK → A, FUT → B, OPT → C &mdash; duplicates rejected</span>
+              <span class="text-[11px] text-epig-textDim">SPY → A, FUT/OPT → B, other STK → C &mdash; duplicates rejected</span>
             </div>
           </div>
           <div class="flex items-center gap-3">
@@ -217,13 +217,12 @@ export function howItWorksPage(): string {
           <div class="flex items-center gap-3 mb-3">
             <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg text-xs font-bold uppercase bg-orange-500/15 text-orange-400 border border-orange-500/30">A</span>
             <div>
-              <h3 class="font-bold text-white text-sm">Core Allocation</h3>
-              <span class="text-[11px] text-orange-400/70 font-mono">~80% of capital &bull; SPY + equities + cash</span>
+              <h3 class="font-bold text-white text-sm">SPY Investments</h3>
+              <span class="text-[11px] text-orange-400/70 font-mono">SPY (S&amp;P 500 ETF) positions</span>
             </div>
           </div>
           <p class="text-xs text-epig-textDim leading-relaxed">
-            The structural base. Keeps the majority of capital in market-tracking assets with active downside management.
-            This is not a &ldquo;buy and hold&rdquo; &mdash; allocation shifts based on risk environment.
+            Your core SPY position. Provides broad market exposure and anchors the portfolio with S&amp;P 500 participation.
           </p>
         </div>
 
@@ -232,16 +231,16 @@ export function howItWorksPage(): string {
           <div class="flex items-center gap-3 mb-3">
             <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg text-xs font-bold uppercase bg-emerald-500/15 text-emerald-400 border border-emerald-500/30">B</span>
             <div>
-              <h3 class="font-bold text-white text-sm">Tactical Futures</h3>
-              <span class="text-[11px] text-emerald-400/70 font-mono">3&ndash;5% VaR &bull; MES/ES &bull; ~150&ndash;200 trades/yr</span>
+              <h3 class="font-bold text-white text-sm">Futures &amp; Options</h3>
+              <span class="text-[11px] text-emerald-400/70 font-mono">FUT + OPT &bull; MES/ES + verticals &bull; defined risk</span>
             </div>
             <span class="ml-auto flex items-center gap-1.5 text-[11px] font-semibold" style="color:#5865F2;">
               <i class="fab fa-discord"></i> Real-Time Alerts
             </span>
           </div>
           <p class="text-xs text-epig-textDim leading-relaxed">
-            The income engine. Defined-risk futures trades with 20-point stops on Micro and E-mini S&P 500 contracts.
-            High frequency, small risk per trade, systematic edge.
+            All futures and options trades combined &mdash; defined-risk futures with stops, plus options verticals and directional plays.
+            Systematic income generation and asymmetric opportunity capture.
             <strong class="text-white">Every entry and exit is sent as a Discord alert in real time.</strong>
           </p>
         </div>
@@ -251,16 +250,15 @@ export function howItWorksPage(): string {
           <div class="flex items-center gap-3 mb-3">
             <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg text-xs font-bold uppercase bg-purple-500/15 text-purple-400 border border-purple-500/30">C</span>
             <div>
-              <h3 class="font-bold text-white text-sm">Episodic Pivots</h3>
-              <span class="text-[11px] text-purple-400/70 font-mono">3&ndash;5% position sizing &bull; options &bull; ~60&ndash;100 trades/yr</span>
+              <h3 class="font-bold text-white text-sm">Stocks (non-SPY)</h3>
+              <span class="text-[11px] text-purple-400/70 font-mono">Individual equities outside SPY</span>
             </div>
             <span class="ml-auto flex items-center gap-1.5 text-[11px] font-semibold" style="color:#5865F2;">
               <i class="fab fa-discord"></i> Real-Time Alerts
             </span>
           </div>
           <p class="text-xs text-epig-textDim leading-relaxed">
-            The asymmetry layer. Options verticals and directional plays targeting outsized moves during market dislocations.
-            Defined risk on every trade. Small bets, large potential payoffs.
+            Individual stock positions outside of SPY &mdash; select equities held for strategic opportunities and sector exposure.
             <strong class="text-white">Every entry and exit is sent as a Discord alert in real time.</strong>
           </p>
         </div>

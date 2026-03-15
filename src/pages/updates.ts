@@ -14,8 +14,8 @@ export function updatesPage(): string {
         </div>
         <h3 class="font-semibold mb-2">Weekly Data Upload &mdash; Week of Feb 17</h3>
         <p class="text-sm text-epig-textDim leading-relaxed">
-          IB Flex Query data uploaded for all three strategies. 12 new trades added to Strategy B,
-          3 new trades for Strategy C. Strategy A allocation unchanged (80/15/5).
+          IB Flex Query data uploaded for all three strategies. 12 new futures trades and 3 options trades added to Strategy B.
+          Strategy A (SPY) and Strategy C (stocks) unchanged.
         </p>
       </div>
 
@@ -38,8 +38,8 @@ export function updatesPage(): string {
         </div>
         <h3 class="font-semibold mb-2">Weekly Data Upload &mdash; Week of Feb 10</h3>
         <p class="text-sm text-epig-textDim leading-relaxed">
-          Standard weekly upload. 8 trades for Strategy B, 2 for Strategy C.
-          Strategy A allocation adjusted: SPY reduced to 80% from 85%, stock sleeve increased to 15%.
+          Standard weekly upload. 8 futures trades and 2 options trades added to Strategy B.
+          Strategy A (SPY) unchanged. Strategy C (stocks) unchanged.
         </p>
       </div>
 
