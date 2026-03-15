@@ -533,7 +533,9 @@ app.get('/api/dashboard/summary', async (c) => {
       ? new Date(portfolioFirstDate).toLocaleDateString('en-US', { month: 'long', year: 'numeric' })
       : 'March 2025'
 
-    return c.json({ strategies: result, trackRecordStart })
+    return c.json({ strategies: result, trackRecordStart }, 200, {
+      'Cache-Control': 'no-cache, no-store, must-revalidate',
+    })
   } catch (e: any) {
     console.error('Dashboard error:', e.message)
     return c.json(buildFallbackSummary())
@@ -1087,6 +1089,58 @@ app.get('/api/health', async (c) => {
     })
   } catch (e: any) {
     return c.json({ status: 'error', message: e.message })
+  }
+})
+
+// ══════════════════════════════════════════════════════════
+// DEBUG: Inspect raw D1 data and round-trip computation
+// ══════════════════════════════════════════════════════════
+app.get('/api/admin/debug-pnl', async (c) => {
+  const db = c.env.DB
+  if (!db) return c.json({ error: 'no DB' }, 500)
+
+  try {
+    const allTrades = await db.prepare(
+      "SELECT id, strategy, side, instrument, entry_price, exit_price, realized_pnl, fifo_pnl, ib_commission, quantity, trade_date, asset_class, strike, expiry, put_call, result FROM trades WHERE trade_date >= '2026-01-01' ORDER BY trade_date ASC, id ASC"
+    ).all()
+    const rows: any[] = allTrades.results || []
+
+    const debug: Record<string, any> = { totalFills: rows.length }
+
+    for (const strat of ['A', 'B', 'C']) {
+      const fills = rows.filter((r: any) => r.strategy === strat)
+      if (fills.length === 0) { debug[strat] = { fills: 0 }; continue }
+
+      const roundTrips = buildRoundTrips(fills, strat)
+      const closed = roundTrips.filter((rt: any) => rt.closed && rt.pnl !== 0)
+      const totalPnl = closed.reduce((s: number, rt: any) => s + rt.pnl, 0)
+
+      const sampleFills = fills.slice(0, 5).map((f: any) => ({
+        id: f.id, side: f.side, instrument: f.instrument,
+        entry_price: f.entry_price, realized_pnl: f.realized_pnl,
+        fifo_pnl: f.fifo_pnl, ib_commission: f.ib_commission,
+        quantity: f.quantity, asset_class: f.asset_class,
+      }))
+
+      const sampleRTs = closed.slice(0, 5).map((rt: any) => ({
+        pnl: rt.pnl, instrument: rt.instrument, fillCount: rt.fillCount,
+        firstDate: rt.firstDate, lastDate: rt.lastDate,
+      }))
+
+      debug[strat] = {
+        fills: fills.length,
+        roundTrips: closed.length,
+        openRTs: roundTrips.filter((rt: any) => !rt.closed).length,
+        totalPnl: round(totalPnl, 2),
+        cumulativeReturnPct: round((totalPnl / 100000) * 100, 1),
+        sampleFills,
+        sampleRTs,
+      }
+    }
+
+    return c.json(debug)
+  } catch (e: any) {
+    return c.json({ error: e.message }, 500)
   }
 })
 
