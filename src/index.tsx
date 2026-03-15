@@ -340,8 +340,9 @@ app.get('/api/dashboard/summary', async (c) => {
       const equityCurve = buildRoundTripEquityCurve(closedSorted, startingCapital, spyPrices)
       const drawdownCurve = buildDrawdownCurve(equityCurve)
 
-      // Monthly returns from round trips
+      // Monthly & weekly returns from round trips
       const monthlyReturns = buildRoundTripMonthlyReturns(closedSorted, startingCapital)
+      const weeklyReturns = buildRoundTripWeeklyReturns(closedSorted, startingCapital)
 
       // Rolling metrics from round trips
       const rolling30 = computeRollingRTMetrics(closedSorted, 30)
@@ -405,6 +406,7 @@ app.get('/api/dashboard/summary', async (c) => {
         equityCurve,
         drawdownCurve,
         monthlyReturns,
+        weeklyReturns,
         rollingMetrics: {
           '30d': rolling30,
           '90d': rolling90,
@@ -491,17 +493,6 @@ app.get('/api/dashboard/summary', async (c) => {
     const combWeekly = buildRoundTripWeeklyReturns(allClosed, startingCapital)
     const combRolling30 = computeRollingRTMetrics(allClosed, 30)
     const combRolling90 = computeRollingRTMetrics(allClosed, 90)
-
-    // Also compute weekly returns per individual strategy
-    for (const strat of ['A', 'B', 'C']) {
-      if (result[strat] && result[strat].totalFills > 0) {
-        const sFills = rows.filter((r: any) => r.strategy === strat)
-        const sRTs = buildRoundTrips(sFills, strat)
-        const sClosed = sRTs.filter((rt: any) => rt.closed && rt.pnl !== 0)
-          .sort((a: any, b: any) => (a.lastDate || a.firstDate || '').localeCompare(b.lastDate || b.firstDate || ''))
-        result[strat].weeklyReturns = buildRoundTripWeeklyReturns(sClosed, startingCapital)
-      }
-    }
 
     result['Combined'] = {
       name: 'Combined Portfolio',
