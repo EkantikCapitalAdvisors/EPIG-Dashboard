@@ -1242,14 +1242,12 @@ function buildFifoRoundTrips(fills: any[]): any[] {
     const mult = isFutures ? futuresMultiplier(instrument) : 1
 
     let netQty = 0
-    let currentTripFifo = 0    // sum of fifo_pnl from closing fills (already includes commissions)
-    let currentTripNetCash = 0  // fallback for stocks: sum of netCash across all fills
+    let currentTripNetCash = 0  // sum of IB NetCash across all fills (correct P&L for stocks)
     let currentTripFills = 0
     let currentTripRisk = 0
-    let usedFifo = false
     let firstDate = ''
     let lastDate = ''
-    // For futures price-based P&L: track notional bought/sold
+    // For futures: track notional bought/sold to compute P&L from prices
     let buyNotional = 0   // sum of (price × qty) for BUY fills
     let sellNotional = 0  // sum of (price × qty) for SELL fills
     let totalCommission = 0
@@ -1257,9 +1255,6 @@ function buildFifoRoundTrips(fills: any[]): any[] {
     for (const f of instrumentFills) {
       const qty = f.quantity || 1
       const signedQty = f.side === 'BUY' ? qty : -qty
-      // IB's FifoPnlRealized is only non-zero on closing fills and already includes
-      // all commissions (opening + closing). Don't add ib_commission again.
-      const hasFifo = f.fifo_pnl !== null && f.fifo_pnl !== undefined && f.fifo_pnl !== 0
 
       if (currentTripFills === 0) firstDate = f.trade_date
       lastDate = f.trade_date
@@ -1267,13 +1262,11 @@ function buildFifoRoundTrips(fills: any[]): any[] {
       netQty += signedQty
       currentTripFills++
 
-      if (hasFifo) {
-        // Closing fill: fifo_pnl is the authoritative realized P&L (includes commissions)
-        currentTripFifo += f.fifo_pnl
-        usedFifo = true
-      }
-
-      // Accumulate netCash as fallback for stocks (NOT valid for futures)
+      // NetCash = cash in/out per fill. Sum across a round trip = correct P&L for stocks.
+      // NOTE: Do NOT use IB's FifoPnlRealized — it reflects FIFO cost-basis P&L relative
+      // to the entire position history (including shares held before the report period),
+      // not the P&L of this specific round trip. It cancels out within round trips for
+      // instruments with pre-existing positions, giving wrong (~$0) results.
       currentTripNetCash += (f.realized_pnl || 0)
 
       // Track price × qty for futures price-based P&L
@@ -1293,18 +1286,12 @@ function buildFifoRoundTrips(fills: any[]): any[] {
 
       // When position is flat → round trip complete
       if (netQty === 0 && currentTripFills >= 2) {
-        let pnl: number
-        if (usedFifo) {
-          // fifo_pnl is the authoritative source (includes commissions)
-          pnl = currentTripFifo
-        } else if (isFutures) {
-          // For futures, NetCash is MTM variation margin — NOT trade P&L.
-          // Compute from prices: (sell_notional - buy_notional) × multiplier + commissions
-          pnl = (sellNotional - buyNotional) * mult + totalCommission
-        } else {
-          // For stocks, NetCash = proceeds + commission → valid fallback
-          pnl = currentTripNetCash
-        }
+        // Futures: compute from trade prices × contract multiplier (NetCash may contain
+        // MTM variation margin in some IB report formats, making it unreliable for futures)
+        // Stocks: NetCash sum = (sell proceeds - buy cost + commissions) = correct P&L
+        const pnl = isFutures
+          ? (sellNotional - buyNotional) * mult + totalCommission
+          : currentTripNetCash
         roundTrips.push({
           pnl: round(pnl, 2),
           closed: true,
@@ -1314,11 +1301,9 @@ function buildFifoRoundTrips(fills: any[]): any[] {
           riskDollar: round(currentTripRisk, 2),
           instrument,
         })
-        currentTripFifo = 0
         currentTripNetCash = 0
         currentTripFills = 0
         currentTripRisk = 0
-        usedFifo = false
         buyNotional = 0
         sellNotional = 0
         totalCommission = 0
@@ -1329,14 +1314,9 @@ function buildFifoRoundTrips(fills: any[]): any[] {
 
     // If there are remaining fills (open position)
     if (currentTripFills > 0) {
-      let pnl: number
-      if (usedFifo) {
-        pnl = currentTripFifo
-      } else if (isFutures) {
-        pnl = (sellNotional - buyNotional) * mult + totalCommission
-      } else {
-        pnl = currentTripNetCash
-      }
+      const pnl = isFutures
+        ? (sellNotional - buyNotional) * mult + totalCommission
+        : currentTripNetCash
       roundTrips.push({
         pnl: round(pnl, 2),
         closed: false,
