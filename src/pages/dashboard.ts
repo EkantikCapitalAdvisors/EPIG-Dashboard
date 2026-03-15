@@ -33,13 +33,13 @@ export function dashboardPage(): string {
         <span class="inline-block w-3 h-3 rounded-full bg-purple-500 mr-2"></span>Combined Portfolio
       </button>
       <button class="strategy-tab active" data-strategy="A" onclick="switchStrategy('A')">
-        <span class="inline-block w-3 h-3 rounded-full bg-blue-500 mr-2"></span>Strategy A
+        <span class="inline-block w-3 h-3 rounded-full bg-blue-500 mr-2"></span>A &mdash; SPY
       </button>
       <button class="strategy-tab" data-strategy="B" onclick="switchStrategy('B')">
-        <span class="inline-block w-3 h-3 rounded-full bg-emerald-500 mr-2"></span>Strategy B
+        <span class="inline-block w-3 h-3 rounded-full bg-emerald-500 mr-2"></span>B &mdash; Futures &amp; Options
       </button>
       <button class="strategy-tab" data-strategy="C" onclick="switchStrategy('C')">
-        <span class="inline-block w-3 h-3 rounded-full bg-amber-500 mr-2"></span>Strategy C
+        <span class="inline-block w-3 h-3 rounded-full bg-amber-500 mr-2"></span>C &mdash; Stocks
       </button>
     </div>
 

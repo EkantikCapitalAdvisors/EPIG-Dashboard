@@ -56,9 +56,9 @@ export function landingPage(): string {
       <div style="font-family:'Source Sans Pro',sans-serif;max-width:640px;color:#94a3b8;" class="mx-auto text-base leading-[1.7] text-left space-y-4 mb-12">
         <p><strong class="text-white">EPIG</strong> stands for <strong class="text-white">Enduring Principal-Protected Income &amp; Growth</strong>.</p>
         <p>It is a rules-based, managed investment strategy with three layers:</p>
-        <p><strong class="text-white">Layer A</strong> holds 70&ndash;85% of your capital in SPY, high-quality equities, and cash equivalents. This is your structural floor &mdash; designed so the vast majority of your wealth is never at risk.</p>
-        <p><strong class="text-white">Layer B</strong> overlays a small tactical position (3&ndash;5% of capital) in S&amp;P 500 futures with defined 20-point stops. This generates systematic income through high-frequency, low-risk trades.</p>
-        <p><strong class="text-white">Layer C</strong> deploys 3&ndash;5% into asymmetric options positions during market dislocations &mdash; limited downside, outsized upside potential. Deployed selectively, not constantly.</p>
+        <p><strong class="text-white">Layer A</strong> holds your SPY (S&amp;P 500 ETF) position &mdash; the core structural allocation that provides broad market exposure and serves as your capital&rsquo;s anchor.</p>
+        <p><strong class="text-white">Layer B</strong> encompasses all futures and options trades &mdash; tactical S&amp;P 500 futures (MES/ES) with defined stops and asymmetric options positions during market dislocations.</p>
+        <p><strong class="text-white">Layer C</strong> tracks individual stock positions outside of SPY &mdash; select equities held for strategic opportunities beyond the core index allocation.</p>
         <p>The result: a strategy engineered to target <strong class="text-white">16%+ CAGR</strong> across full market cycles while keeping original capital at risk below 5%.</p>
       </div>
 
@@ -107,9 +107,9 @@ export function landingPage(): string {
           <div class="flex items-center gap-3 mb-4 mt-2">
             <span class="inline-flex items-center justify-center px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider" style="background:rgba(200,169,81,0.15);color:#C8A951;border:1px solid rgba(200,169,81,0.3);">Layer A</span>
           </div>
-          <h3 class="text-xl font-bold text-white mb-1">The Structural Floor</h3>
+          <h3 class="text-xl font-bold text-white mb-1">SPY Investments</h3>
           <p class="text-[#8892a6] text-sm leading-relaxed mb-5" style="font-family:'Source Sans Pro',sans-serif;">
-            70&ndash;85% of your capital is held in a diversified core of SPY (S&amp;P 500 ETF), select blue-chip equities, and cash equivalents. This layer provides market participation during bull markets and shifts toward cash during corrections exceeding 10%. Your principal&rsquo;s first line of defense.
+            Your core SPY (S&amp;P 500 ETF) allocation &mdash; providing broad market exposure, capital preservation, and participation in long-term equity growth. This layer anchors the portfolio.
           </p>
           <div class="space-y-3 mb-5">
             <div class="flex justify-between items-center">
@@ -135,9 +135,9 @@ export function landingPage(): string {
           <div class="flex items-center gap-3 mb-4 mt-2">
             <span class="inline-flex items-center justify-center px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-emerald-500/15 text-emerald-400 border border-emerald-500/30">Layer B</span>
           </div>
-          <h3 class="text-xl font-bold text-white mb-1">The Income Engine</h3>
+          <h3 class="text-xl font-bold text-white mb-1">Futures &amp; Options</h3>
           <p class="text-[#8892a6] text-sm leading-relaxed mb-5" style="font-family:'Source Sans Pro',sans-serif;">
-            A 3&ndash;5% overlay of defined-risk S&amp;P 500 futures trades (MES and ES contracts), each with a hard 20-point stop. Systematic entries target high-probability setups. Over 150&ndash;200 trades per year, the positive expected value compounds into meaningful income regardless of market direction.
+            All futures and options trades &mdash; defined-risk S&amp;P 500 futures (MES/ES) with hard stops, plus asymmetric options positions (vertical spreads on SPY, QQQ, and select equities). Systematic income generation and episodic opportunity capture combined.
           </p>
           <div class="space-y-3 mb-5">
             <div class="flex justify-between items-center">
@@ -166,9 +166,9 @@ export function landingPage(): string {
           <div class="flex items-center gap-3 mb-4 mt-2">
             <span class="inline-flex items-center justify-center px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-purple-500/15 text-purple-400 border border-purple-500/30">Layer C</span>
           </div>
-          <h3 class="text-xl font-bold text-white mb-1">The Convexity Sleeve</h3>
+          <h3 class="text-xl font-bold text-white mb-1">Stocks (non-SPY)</h3>
           <p class="text-[#8892a6] text-sm leading-relaxed mb-5" style="font-family:'Source Sans Pro',sans-serif;">
-            A 3&ndash;5% allocation to options positions (primarily vertical spreads on SPY, QQQ, and select equities) designed to capture outsized moves during market dislocations and episodic pivots. Limited downside. Substantial upside. Deployed selectively &mdash; not constantly.
+            Individual stock positions outside of SPY &mdash; select equities chosen for strategic opportunities, sector exposure, or tactical plays beyond the core index allocation.
           </p>
           <div class="space-y-3 mb-5">
             <div class="flex justify-between items-center">
@@ -461,15 +461,15 @@ export function landingPage(): string {
                 </div>
                 <div class="h-px bg-[#1e293b]"></div>
                 <div class="flex justify-between items-center">
-                  <span class="text-sm text-[#94a3b8]">Strategy A &mdash; Core Allocation</span>
+                  <span class="text-sm text-[#94a3b8]">Strategy A &mdash; SPY Investments</span>
                   <span class="font-mono" id="lp-strat-a-pct"><span class="text-[#64748b]">--</span></span>
                 </div>
                 <div class="flex justify-between items-center">
-                  <span class="text-sm text-[#94a3b8]">Strategy B &mdash; Tactical Futures</span>
+                  <span class="text-sm text-[#94a3b8]">Strategy B &mdash; Futures &amp; Options</span>
                   <span class="font-mono" id="lp-strat-b-pct"><span class="text-[#64748b]">--</span></span>
                 </div>
                 <div class="flex justify-between items-center">
-                  <span class="text-sm text-[#94a3b8]">Strategy C &mdash; Episodic Pivots</span>
+                  <span class="text-sm text-[#94a3b8]">Strategy C &mdash; Stocks (non-SPY)</span>
                   <span class="font-mono" id="lp-strat-c-pct"><span class="text-[#64748b]">--</span></span>
                 </div>
                 <div class="h-px bg-[#1e293b]"></div>

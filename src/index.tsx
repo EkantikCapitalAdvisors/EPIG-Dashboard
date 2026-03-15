@@ -174,17 +174,17 @@ app.get('/api/og-image', async (c) => {
 
   <!-- Strategy A -->
   <rect x="85" y="302" width="12" height="12" rx="3" fill="#3b82f6"/>
-  <text x="110" y="314" font-family="Arial,Helvetica,sans-serif" font-size="16" fill="#94a3b8">A  |  Core Allocation</text>
+  <text x="110" y="314" font-family="Arial,Helvetica,sans-serif" font-size="16" fill="#94a3b8">A  |  SPY Investments</text>
   <text x="540" y="314" font-family="monospace" font-size="18" font-weight="bold" fill="${stratA.startsWith('-') ? '#ef4444' : '#10b981'}">${stratA}</text>
 
   <!-- Strategy B -->
   <rect x="85" y="338" width="12" height="12" rx="3" fill="#10b981"/>
-  <text x="110" y="350" font-family="Arial,Helvetica,sans-serif" font-size="16" fill="#94a3b8">B  |  Tactical Futures</text>
+  <text x="110" y="350" font-family="Arial,Helvetica,sans-serif" font-size="16" fill="#94a3b8">B  |  Futures &amp; Options</text>
   <text x="540" y="350" font-family="monospace" font-size="18" font-weight="bold" fill="${stratB.startsWith('-') ? '#ef4444' : '#10b981'}">${stratB}</text>
 
   <!-- Strategy C -->
   <rect x="85" y="374" width="12" height="12" rx="3" fill="#f59e0b"/>
-  <text x="110" y="386" font-family="Arial,Helvetica,sans-serif" font-size="16" fill="#94a3b8">C  |  Episodic Pivots</text>
+  <text x="110" y="386" font-family="Arial,Helvetica,sans-serif" font-size="16" fill="#94a3b8">C  |  Stocks (non-SPY)</text>
   <text x="540" y="386" font-family="monospace" font-size="18" font-weight="bold" fill="${stratC.startsWith('-') ? '#ef4444' : '#10b981'}">${stratC}</text>
 
   <!-- Divider line in card -->
@@ -367,9 +367,9 @@ app.get('/api/dashboard/summary', async (c) => {
       }))
 
       const stratNames: Record<string, string> = {
-        A: 'Strategy A — Core Allocation',
-        B: 'Strategy B — Futures Alerts',
-        C: 'Strategy C — Episodic Pivots',
+        A: 'Strategy A — SPY Investments',
+        B: 'Strategy B — Futures & Options',
+        C: 'Strategy C — Stocks (non-SPY)',
       }
 
       result[strat] = {
@@ -584,18 +584,19 @@ app.post('/api/admin/upload/preview', async (c) => {
       const expiry = stripQuotes(row['Expiry'] || '') || null
       const putCall = stripQuotes(row['Put/Call'] || '') || null
 
-      // Auto-classify strategy (initial pass)
-      let strategy: string
-      if (assetClass === 'FUT' || assetClass === 'FOP') {
-        strategy = 'B'
-      } else if (assetClass === 'OPT') {
-        strategy = 'C'
-      } else {
-        strategy = 'A' // STK, CASH, or unknown
-      }
-
       // Clean symbol (remove CUSIP padding for options)
       const cleanSymbol = symbol.trim().split(/\s+/)[0]
+
+      // Auto-classify strategy (initial pass)
+      // A = SPY Investments, B = Futures and/or Options, C = Stocks (outside SPY)
+      let strategy: string
+      if (assetClass === 'FUT' || assetClass === 'FOP' || assetClass === 'OPT') {
+        strategy = 'B'
+      } else if (assetClass === 'STK' && cleanSymbol.toUpperCase() === 'SPY') {
+        strategy = 'A'
+      } else {
+        strategy = 'C' // Non-SPY stocks, CASH, or unknown
+      }
 
       return {
         rowIndex: idx,
@@ -690,9 +691,9 @@ app.post('/api/admin/upload/preview', async (c) => {
             trades[si].spreadGroup = spreadId
             trades[si].spreadType = spreadType
 
-            // Ensure both legs are Strategy C
-            trades[bi].strategy = 'C'
-            trades[si].strategy = 'C'
+            // Ensure both legs are Strategy B (Futures and/or Options)
+            trades[bi].strategy = 'B'
+            trades[si].strategy = 'B'
 
             paired.add(bi)
             paired.add(si)
@@ -1200,21 +1201,21 @@ export default app
  * Builds round-trip trades from individual IB fill records.
  *
  * For each strategy:
- * - **Strategy A (STK)**: Groups fills by instrument (SPY, MSFT, TSLA).
+ * - **Strategy A (SPY)**: Groups fills by instrument (SPY only).
  *   Uses FIFO matching: buys build a position, sells close it.
  *   When net position returns to zero → one completed round trip.
  *   P&L = sum of all NetCash values in the round trip.
  *
- * - **Strategy B (FUT)**: Groups fills by instrument (MESH6, MES).
+ * - **Strategy B (FUT/OPT)**: Groups fills by instrument (MESH6, MES) or by spread for options.
  *   Same FIFO matching. Each flat position = one round trip.
  *
- * - **Strategy C (OPT/FOP)**: Groups fills by spread (same date+expiry+putCall).
+ * - **Strategy C (STK non-SPY)**: Groups fills by instrument (MSFT, TSLA, etc.).
  *   Each vertical spread = 2 legs opened then 2 legs closed = 1 round trip.
  *   P&L = sum of all 4 legs' NetCash.
  *   If not a spread, falls back to instrument-level FIFO like A/B.
  */
 function buildRoundTrips(fills: any[], strategy: string): { pnl: number; closed: boolean; fillCount: number; firstDate: string; lastDate: string; riskDollar: number }[] {
-  if (strategy === 'C') {
+  if (strategy === 'B') {
     return buildSpreadRoundTrips(fills)
   }
   return buildFifoRoundTrips(fills)
@@ -1379,7 +1380,7 @@ function buildFifoRoundTrips(fills: any[]): any[] {
 
 /**
  * Spread round-trip builder for OPT/FOP.
- * Strategy C trades are vertical spreads: 2 legs open + 2 legs close = 1 trade.
+ * Strategy B option trades may be vertical spreads: 2 legs open + 2 legs close = 1 trade.
  *
  * Grouping logic:
  * 1. Group by expiry + putCall (all legs of a vertical share these)
@@ -1469,7 +1470,7 @@ function buildSpreadRoundTrips(fills: any[]): any[] {
     }
   }
 
-  // Handle non-option fills in Strategy C with FIFO
+  // Handle non-option fills in Strategy B with FIFO
   if (nonOptFills.length > 0) {
     roundTrips.push(...buildFifoRoundTrips(nonOptFills))
   }
@@ -1846,9 +1847,9 @@ function computeRollingRTMetrics(closedRTs: any[], days: number): { winRate: num
 
 function buildEmptyStrategy(strat: string, snapshot: any): any {
   const names: Record<string, string> = {
-    A: 'Strategy A — Core Allocation',
-    B: 'Strategy B — Futures Alerts',
-    C: 'Strategy C — Episodic Pivots',
+    A: 'Strategy A — SPY Investments',
+    B: 'Strategy B — Futures & Options',
+    C: 'Strategy C — Stocks (non-SPY)',
   }
   return {
     name: names[strat] || `Strategy ${strat}`,
@@ -1893,7 +1894,7 @@ function buildFallbackSummary() {
     trackRecordStart: 'March 2025',
     strategies: {
       A: {
-        name: 'Strategy A — Core Allocation',
+        name: 'Strategy A — SPY Investments',
         cumulativeReturn: 14.2, cagr: 12.8, maxDrawdown: -8.4, sharpeRatio: 1.42, sortinoRatio: 2.1,
         currentAllocation: { spy: 80, stocks: 15, cash: 5 },
         lastUpdated: '2026-02-17T09:00:00Z',
@@ -1902,7 +1903,7 @@ function buildFallbackSummary() {
         monthlyReturns: generateSyntheticMonthlyReturns(),
       },
       B: {
-        name: 'Strategy B — Futures Alerts',
+        name: 'Strategy B — Futures & Options',
         cumulativeReturn: 38.6, cagr: 32.1, maxDrawdown: -12.3, sharpeRatio: 1.85, sortinoRatio: 2.8,
         winRate: 62.4, expectancyPoints: 4.2, expectancyR: 0.38, profitFactor: 1.92, totalTrades: 187,
         lastUpdated: '2026-02-17T09:00:00Z',
@@ -1913,7 +1914,7 @@ function buildFallbackSummary() {
         recentTrades: generateSyntheticTrades('futures', 20),
       },
       C: {
-        name: 'Strategy C — Episodic Pivots',
+        name: 'Strategy C — Stocks (non-SPY)',
         cumulativeReturn: 52.1, cagr: 44.3, maxDrawdown: -18.7, sharpeRatio: 1.25, sortinoRatio: 1.9,
         winRate: 48.2, expectancyR: 0.72, profitFactor: 1.68, totalTrades: 94,
         lastUpdated: '2026-02-17T09:00:00Z',

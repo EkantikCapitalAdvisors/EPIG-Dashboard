@@ -20,9 +20,9 @@ export function adminPage(): string {
       </h2>
       <p class="text-sm text-epig-textDim mb-4">
         Upload your Interactive Brokers Flex Query CSV. Trades are <strong class="text-white">auto-classified</strong>
-        by asset class: <span class="text-blue-400">STK &rarr; Strategy A</span>,
-        <span class="text-emerald-400">FUT &rarr; Strategy B</span>,
-        <span class="text-amber-400">OPT &rarr; Strategy C</span>.
+        by asset class: <span class="text-blue-400">SPY &rarr; Strategy A</span>,
+        <span class="text-emerald-400">FUT/OPT &rarr; Strategy B</span>,
+        <span class="text-amber-400">non-SPY STK &rarr; Strategy C</span>.
         You can change any assignment before confirming.
         <a href="/how-it-works#flex-query-setup" class="text-blue-400 no-underline hover:text-blue-300 ml-1">
           <i class="fas fa-question-circle mr-0.5"></i>How to create a Flex Query
@@ -80,13 +80,13 @@ export function adminPage(): string {
             All <span id="count-all"></span>
           </button>
           <button class="px-3 py-1.5 text-xs font-semibold rounded-lg bg-epig-card text-epig-textDim border border-epig-border" onclick="filterTrades('A')" data-filter="A">
-            <span class="text-blue-400">A</span> STK <span id="count-A"></span>
+            <span class="text-blue-400">A</span> SPY <span id="count-A"></span>
           </button>
           <button class="px-3 py-1.5 text-xs font-semibold rounded-lg bg-epig-card text-epig-textDim border border-epig-border" onclick="filterTrades('B')" data-filter="B">
-            <span class="text-emerald-400">B</span> FUT <span id="count-B"></span>
+            <span class="text-emerald-400">B</span> FUT/OPT <span id="count-B"></span>
           </button>
           <button class="px-3 py-1.5 text-xs font-semibold rounded-lg bg-epig-card text-epig-textDim border border-epig-border" onclick="filterTrades('C')" data-filter="C">
-            <span class="text-amber-400">C</span> OPT <span id="count-C"></span>
+            <span class="text-amber-400">C</span> Stocks <span id="count-C"></span>
           </button>
         </div>
 
@@ -411,9 +411,9 @@ export function adminPage(): string {
       const summaryEl = document.getElementById('review-summary');
       summaryEl.innerHTML =
         '<div class="bg-epig-bg rounded-lg p-3 text-center"><div class="text-xs text-epig-textDim">Total</div><div class="font-bold font-mono text-white">' + parsedTrades.length + '</div></div>' +
-        '<div class="bg-blue-500/10 border border-blue-500/20 rounded-lg p-3 text-center"><div class="text-xs text-blue-400">A (Stocks)</div><div class="font-bold font-mono text-blue-400" id="summary-a">' + countStrategy('A') + '</div></div>' +
-        '<div class="bg-emerald-500/10 border border-emerald-500/20 rounded-lg p-3 text-center"><div class="text-xs text-emerald-400">B (Futures)</div><div class="font-bold font-mono text-emerald-400" id="summary-b">' + countStrategy('B') + '</div></div>' +
-        '<div class="bg-amber-500/10 border border-amber-500/20 rounded-lg p-3 text-center"><div class="text-xs text-amber-400">C (Options)</div><div class="font-bold font-mono text-amber-400" id="summary-c">' + countStrategy('C') + '</div></div>' +
+        '<div class="bg-blue-500/10 border border-blue-500/20 rounded-lg p-3 text-center"><div class="text-xs text-blue-400">A (SPY)</div><div class="font-bold font-mono text-blue-400" id="summary-a">' + countStrategy('A') + '</div></div>' +
+        '<div class="bg-emerald-500/10 border border-emerald-500/20 rounded-lg p-3 text-center"><div class="text-xs text-emerald-400">B (FUT/OPT)</div><div class="font-bold font-mono text-emerald-400" id="summary-b">' + countStrategy('B') + '</div></div>' +
+        '<div class="bg-amber-500/10 border border-amber-500/20 rounded-lg p-3 text-center"><div class="text-xs text-amber-400">C (Stocks)</div><div class="font-bold font-mono text-amber-400" id="summary-c">' + countStrategy('C') + '</div></div>' +
         '<div class="bg-purple-500/10 border border-purple-500/20 rounded-lg p-3 text-center"><div class="text-xs text-purple-400">Spreads</div><div class="font-bold font-mono text-purple-400">' + countSpreads() + '</div></div>';
 
       updateCounts();

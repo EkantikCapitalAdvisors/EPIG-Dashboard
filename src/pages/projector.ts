@@ -34,7 +34,7 @@ export function projectorPage(): string {
         <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 to-blue-400"></div>
         <h3 class="font-bold text-lg mt-2 mb-1 flex items-center gap-2">
           <span class="w-8 h-8 rounded-lg bg-blue-500/15 flex items-center justify-center text-blue-400 font-bold text-sm">A</span>
-          Core Allocation
+          SPY Investments
         </h3>
         <div id="a-data-source" class="text-[10px] text-epig-textDim mb-4"></div>
 
@@ -176,7 +176,7 @@ export function projectorPage(): string {
         <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-amber-500 to-amber-400"></div>
         <h3 class="font-bold text-lg mt-2 mb-1 flex items-center gap-2">
           <span class="w-8 h-8 rounded-lg bg-amber-500/15 flex items-center justify-center text-amber-400 font-bold text-sm">C</span>
-          Episodic Pivots
+          Stocks (non-SPY)
         </h3>
         <div id="c-data-source" class="text-[10px] text-epig-textDim mb-4"></div>
 
@@ -250,7 +250,7 @@ export function projectorPage(): string {
         <div class="flex justify-between items-center py-2">
           <div class="flex items-center gap-3">
             <span class="w-3 h-3 rounded-full bg-blue-500"></span>
-            <span>Strategy A &mdash; Core Allocation</span>
+            <span>Strategy A &mdash; SPY Investments</span>
           </div>
           <div class="text-right">
             <span class="font-mono font-bold text-blue-400" id="combined-a-dollar">$4,032</span>
@@ -260,7 +260,7 @@ export function projectorPage(): string {
         <div class="flex justify-between items-center py-2">
           <div class="flex items-center gap-3">
             <span class="w-3 h-3 rounded-full bg-emerald-500"></span>
-            <span>Strategy B &mdash; Futures</span>
+            <span>Strategy B &mdash; Futures &amp; Options</span>
           </div>
           <div class="text-right">
             <span class="font-mono font-bold text-emerald-400" id="combined-b-dollar">$11,400</span>
@@ -270,7 +270,7 @@ export function projectorPage(): string {
         <div class="flex justify-between items-center py-2">
           <div class="flex items-center gap-3">
             <span class="w-3 h-3 rounded-full bg-amber-500"></span>
-            <span>Strategy C &mdash; Pivots</span>
+            <span>Strategy C &mdash; Stocks</span>
           </div>
           <div class="text-right">
             <span class="font-mono font-bold text-amber-400" id="combined-c-dollar">$20,064</span>
