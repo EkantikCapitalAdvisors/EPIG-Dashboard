@@ -1,8 +1,8 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "epig-investment",
+  "name": "epig-dashboard",
+  "main": "dist/_worker.js",
   "compatibility_date": "2026-02-21",
-  "pages_build_output_dir": "./dist",
   "compatibility_flags": [
     "nodejs_compat"
   ],
