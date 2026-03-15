@@ -1219,9 +1219,10 @@ function buildFifoRoundTrips(fills: any[]): any[] {
 
   for (const [instrument, instrumentFills] of Object.entries(byInstrument)) {
     let netQty = 0
-    let currentTripCash = 0
+    let currentTripFifo = 0    // sum of fifo_pnl from closing fills (already includes commissions)
+    let currentTripNetCash = 0  // fallback: sum of netCash across all fills (works for stocks only)
     let currentTripFills = 0
-    let currentTripRisk = 0 // sum of buy-side cash outflows
+    let currentTripRisk = 0
     let usedFifo = false
     let firstDate = ''
     let lastDate = ''
@@ -1229,11 +1230,9 @@ function buildFifoRoundTrips(fills: any[]): any[] {
     for (const f of instrumentFills) {
       const qty = f.quantity || 1
       const signedQty = f.side === 'BUY' ? qty : -qty
-      // Prefer IB's authoritative FifoPnlRealized + commission when available
-      // fifo_pnl is only non-zero on closing fills; true P&L = fifo_pnl + ib_commission
+      // IB's FifoPnlRealized is only non-zero on closing fills and already includes
+      // all commissions (opening + closing). Don't add ib_commission again.
       const hasFifo = f.fifo_pnl !== null && f.fifo_pnl !== undefined && f.fifo_pnl !== 0
-      const fillPnl = hasFifo ? (f.fifo_pnl + (f.ib_commission || 0)) : 0
-      const netCash = f.realized_pnl || 0
 
       if (currentTripFills === 0) firstDate = f.trade_date
       lastDate = f.trade_date
@@ -1242,23 +1241,27 @@ function buildFifoRoundTrips(fills: any[]): any[] {
       currentTripFills++
 
       if (hasFifo) {
-        // Use IB FIFO P&L (accumulates only on closing fills)
-        currentTripCash += fillPnl
+        // Closing fill: fifo_pnl is the authoritative realized P&L (includes commissions)
+        currentTripFifo += f.fifo_pnl
         usedFifo = true
-      } else {
-        // Fallback: accumulate NetCash for legacy data
-        currentTripCash += netCash
       }
 
-      // Track risk: sum of absolute value of buy-side cash (money at risk)
+      // Always accumulate netCash as legacy fallback (valid for stocks where
+      // netCash = proceeds + commission; NOT valid for futures where netCash = MTM variation)
+      currentTripNetCash += (f.realized_pnl || 0)
+
+      // Track risk: entry-side cost basis
       if (f.side === 'BUY') {
-        currentTripRisk += Math.abs(netCash)
+        const entryValue = f.quantity ? Math.abs(f.quantity * (f.entry_price || 0)) : Math.abs(f.realized_pnl || 0)
+        currentTripRisk += entryValue || Math.abs(f.realized_pnl || 0)
       }
 
       // When position is flat → round trip complete
       if (netQty === 0 && currentTripFills >= 2) {
+        // Use FIFO P&L if any closing fill had fifo_pnl data; otherwise fall back to netCash
+        const pnl = usedFifo ? currentTripFifo : currentTripNetCash
         roundTrips.push({
-          pnl: round(currentTripCash, 2),
+          pnl: round(pnl, 2),
           closed: true,
           fillCount: currentTripFills,
           firstDate,
@@ -1266,7 +1269,8 @@ function buildFifoRoundTrips(fills: any[]): any[] {
           riskDollar: round(currentTripRisk, 2),
           instrument,
         })
-        currentTripCash = 0
+        currentTripFifo = 0
+        currentTripNetCash = 0
         currentTripFills = 0
         currentTripRisk = 0
         usedFifo = false
@@ -1277,8 +1281,9 @@ function buildFifoRoundTrips(fills: any[]): any[] {
 
     // If there are remaining fills (open position)
     if (currentTripFills > 0) {
+      const pnl = usedFifo ? currentTripFifo : currentTripNetCash
       roundTrips.push({
-        pnl: round(currentTripCash, 2),
+        pnl: round(pnl, 2),
         closed: false,
         fillCount: currentTripFills,
         firstDate,
@@ -1345,10 +1350,10 @@ function buildSpreadRoundTrips(fills: any[]): any[] {
     // Create a round trip for each strike pair
     for (const [lowStrike, highStrike] of strikePairs) {
       const pairFills = groupFills.filter((f: any) => f.strike === lowStrike || f.strike === highStrike)
-      // Prefer IB FIFO P&L when available
+      // Prefer IB FIFO P&L when available (fifo_pnl already includes commissions)
       const hasFifo = pairFills.some((f: any) => f.fifo_pnl !== null && f.fifo_pnl !== undefined && f.fifo_pnl !== 0)
       const totalCash = hasFifo
-        ? pairFills.reduce((s: number, f: any) => s + (f.fifo_pnl || 0) + (f.ib_commission || 0), 0)
+        ? pairFills.reduce((s: number, f: any) => s + (f.fifo_pnl || 0), 0)
         : pairFills.reduce((s: number, f: any) => s + (f.realized_pnl || 0), 0)
       const buyLegs = pairFills.filter((f: any) => f.side === 'BUY')
       const riskDollar = buyLegs.reduce((s: number, f: any) => s + Math.abs(f.realized_pnl || 0), 0)
