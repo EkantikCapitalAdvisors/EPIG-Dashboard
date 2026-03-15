@@ -85,7 +85,7 @@ export function dashboardPage(): string {
           <div class="kpi-value" id="kpi-comb-pnl">—</div>
         </div>
         <div class="kpi-card">
-          <div class="kpi-label">Projected Annual Return</div>
+          <div class="kpi-label">Proj. Annual Return</div>
           <div class="kpi-value" id="kpi-comb-annualr">—</div>
         </div>
       </div>
