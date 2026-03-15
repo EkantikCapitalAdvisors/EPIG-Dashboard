@@ -85,7 +85,7 @@ export function dashboardPage(): string {
           <div class="kpi-value" id="kpi-comb-pnl">—</div>
         </div>
         <div class="kpi-card">
-          <div class="kpi-label">Projected Annual R</div>
+          <div class="kpi-label">Projected Annual Return</div>
           <div class="kpi-value" id="kpi-comb-annualr">—</div>
         </div>
       </div>
@@ -161,7 +161,7 @@ export function dashboardPage(): string {
       <div class="grid grid-cols-2 md:grid-cols-5 gap-4 mb-8">
         <div class="kpi-card"><div class="kpi-label">Total P&L</div><div class="kpi-value" id="kpi-a-pnl">—</div></div>
         <div class="kpi-card"><div class="kpi-label">EV per Trade (R)</div><div class="kpi-value" id="kpi-a-evr">—</div></div>
-        <div class="kpi-card"><div class="kpi-label">Projected Annual R</div><div class="kpi-value" id="kpi-a-annualr">—</div></div>
+        <div class="kpi-card"><div class="kpi-label">Projected Annual Return</div><div class="kpi-value" id="kpi-a-annualr">—</div></div>
         <div class="kpi-card"><div class="kpi-label">Avg Win / Avg Loss</div><div class="kpi-value text-white" id="kpi-a-wl">—</div></div>
         <div class="kpi-card"><div class="kpi-label">Risk per Trade</div><div class="kpi-value text-white" id="kpi-a-risk">—</div></div>
       </div>
@@ -182,7 +182,7 @@ export function dashboardPage(): string {
         <div class="kpi-card"><div class="kpi-label">Avg Win / Avg Loss</div><div class="kpi-value text-white" id="kpi-b-wl">—</div></div>
         <div class="kpi-card"><div class="kpi-label">Risk per Trade</div><div class="kpi-value text-white" id="kpi-b-risk">—</div></div>
         <div class="kpi-card"><div class="kpi-label">Sharpe / Sortino</div><div class="kpi-value text-white" id="kpi-b-sharpe">—</div></div>
-        <div class="kpi-card"><div class="kpi-label">Projected Annual R</div><div class="kpi-value" id="kpi-b-annualr">—</div></div>
+        <div class="kpi-card"><div class="kpi-label">Projected Annual Return</div><div class="kpi-value" id="kpi-b-annualr">—</div></div>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
         <div class="kpi-card"><div class="text-xs text-epig-textDim uppercase tracking-wider mb-3 font-semibold">Rolling 30-Day</div><div class="grid grid-cols-3 gap-4"><div><div class="kpi-label">Win Rate</div><div class="font-mono text-lg font-bold" id="b-r30-wr">—</div></div><div><div class="kpi-label">Expectancy (R)</div><div class="font-mono text-lg font-bold" id="b-r30-ev">—</div></div><div><div class="kpi-label">Trades</div><div class="font-mono text-white text-lg font-bold" id="b-r30-t">—</div></div></div></div>
@@ -205,7 +205,7 @@ export function dashboardPage(): string {
         <div class="kpi-card"><div class="kpi-label">Avg Win / Avg Loss</div><div class="kpi-value text-white" id="kpi-c-wl">—</div></div>
         <div class="kpi-card"><div class="kpi-label">Risk per Trade</div><div class="kpi-value text-white" id="kpi-c-risk">—</div></div>
         <div class="kpi-card"><div class="kpi-label">Sharpe / Sortino</div><div class="kpi-value text-white" id="kpi-c-sharpe">—</div></div>
-        <div class="kpi-card"><div class="kpi-label">Projected Annual R</div><div class="kpi-value" id="kpi-c-annualr">—</div></div>
+        <div class="kpi-card"><div class="kpi-label">Projected Annual Return</div><div class="kpi-value" id="kpi-c-annualr">—</div></div>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
         <div class="kpi-card"><div class="text-xs text-epig-textDim uppercase tracking-wider mb-3 font-semibold">Rolling 30-Day</div><div class="grid grid-cols-3 gap-4"><div><div class="kpi-label">Win Rate</div><div class="font-mono text-lg font-bold" id="c-r30-wr">—</div></div><div><div class="kpi-label">Expectancy (R)</div><div class="font-mono text-lg font-bold" id="c-r30-ev">—</div></div><div><div class="kpi-label">Trades</div><div class="font-mono text-white text-lg font-bold" id="c-r30-t">—</div></div></div></div>
