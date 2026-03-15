@@ -627,8 +627,8 @@ export function dashboardPage(): string {
         const fillsEl = document.getElementById('kpi-comb-fills');
         if (fillsEl) fillsEl.textContent = (r || isCustom) ? '' : (d.totalFills || 0) + ' fills';
         setKpi('kpi-comb-pnl', r ? fmtPnl(evDollar) + '/trade' : fmtPnl(tPnl), r ? evDollar : tPnl);
-        const combAR = d.projectedAnnualR || 0;
-        setKpi('kpi-comb-annualr', (r || isCustom) ? '—' : (combAR >= 0 ? '+' : '') + combAR.toFixed(1) + 'R', (r || isCustom) ? 0 : combAR);
+        const combCAGR = d.cagr || 0;
+        setKpi('kpi-comb-annualr', (r || isCustom) ? '—' : (combCAGR >= 0 ? '+' : '') + combCAGR.toFixed(1) + '%', (r || isCustom) ? 0 : combCAGR);
         setKpi('kpi-comb-sharpe', r ? '—' : (d.sharpeRatio||0).toFixed(2) + ' / ' + (d.sortinoRatio||0).toFixed(2));
 
         // Contribution bar
