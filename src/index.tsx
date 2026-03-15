@@ -533,7 +533,9 @@ app.get('/api/dashboard/summary', async (c) => {
       ? new Date(portfolioFirstDate).toLocaleDateString('en-US', { month: 'long', year: 'numeric' })
       : 'March 2025'
 
-    return c.json({ strategies: result, trackRecordStart })
+    return c.json({ strategies: result, trackRecordStart }, 200, {
+      'Cache-Control': 'no-cache, no-store, must-revalidate',
+    })
   } catch (e: any) {
     console.error('Dashboard error:', e.message)
     return c.json(buildFallbackSummary())
