@@ -31,7 +31,7 @@ export function landingPage(): string {
           <div class="text-xs text-white/60 mt-1">Max Drawdown</div>
         </div>
         <div class="rounded-xl bg-white/[0.08] border border-white/[0.12] p-4 text-center">
-          <div id="hero-live-since" class="text-2xl sm:text-[28px] font-bold text-white" style="font-family:'JetBrains Mono',monospace;">Mar 2025</div>
+          <div id="hero-live-since" class="text-2xl sm:text-[28px] font-bold text-white" style="font-family:'JetBrains Mono',monospace;">Mar 2026</div>
           <div class="text-xs text-white/60 mt-1">Live Since</div>
         </div>
       </div>
@@ -57,8 +57,8 @@ export function landingPage(): string {
         <p><strong class="text-white">EPIG</strong> stands for <strong class="text-white">Enduring Principal-Protected Income &amp; Growth</strong>.</p>
         <p>It is a rules-based, managed investment strategy with three layers:</p>
         <p><strong class="text-white">Layer A</strong> holds your SPY (S&amp;P 500 ETF) position &mdash; the core structural allocation that provides broad market exposure and serves as your capital&rsquo;s anchor.</p>
-        <p><strong class="text-white">Layer B</strong> encompasses all futures and market-related options trades &mdash; tactical S&amp;P 500 futures (MES/ES) with defined stops, plus SPY/SPX options during market dislocations.</p>
-        <p><strong class="text-white">Layer C</strong> tracks individual stock positions outside of SPY and options on individual stocks &mdash; select equities held for strategic opportunities beyond the core index allocation.</p>
+        <p><strong class="text-white">Layer B</strong> encompasses all futures and market-level options trades &mdash; tactical S&amp;P 500 futures (MES/ES) with defined stops, plus SPY/SPX options during market dislocations.</p>
+        <p><strong class="text-white">Layer C</strong> tracks individual stocks outside of SPY and options on individual stocks &mdash; select equities and stock options chosen for strategic opportunities, sector exposure, or tactical plays beyond the core index allocation.</p>
         <p>The result: a strategy engineered to target <strong class="text-white">16%+ CAGR</strong> across full market cycles while keeping original capital at risk below 5%.</p>
       </div>
 
