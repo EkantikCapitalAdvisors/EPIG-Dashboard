@@ -31,7 +31,7 @@ export function landingPage(): string {
           <div class="text-xs text-white/60 mt-1">Max Drawdown</div>
         </div>
         <div class="rounded-xl bg-white/[0.08] border border-white/[0.12] p-4 text-center">
-          <div id="hero-live-since" class="text-2xl sm:text-[28px] font-bold text-white" style="font-family:'JetBrains Mono',monospace;">Mar 2026</div>
+          <div id="hero-live-since" class="text-2xl sm:text-[28px] font-bold text-white" style="font-family:'JetBrains Mono',monospace;">Jan 2026</div>
           <div class="text-xs text-white/60 mt-1">Live Since</div>
         </div>
       </div>
