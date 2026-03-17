@@ -290,8 +290,7 @@ export function landingPage(): string {
       <div class="text-center mb-14">
         <h2 style="font-family:'Playfair Display',Georgia,serif;color:#C8A951;" class="text-3xl sm:text-4xl font-bold mb-4">The Power of Never Having a Losing Year</h2>
         <p class="text-gray-400 text-lg max-w-3xl mx-auto" style="font-family:'Source Sans Pro',sans-serif;">
-          Compounding at 16% CAGR with zero negative years creates an extraordinary gap over time.
-          The chart below shows how $100K grows under EPIG&rsquo;s structural discipline vs. actual S&amp;P 500 total returns &mdash; including the crashes, the recoveries, and the lost years.
+          What happens to $100K over a decade if you never have a losing year? We compared EPIG&rsquo;s 16% CAGR target against actual S&amp;P 500 total returns across two very different market regimes &mdash; so you can gauge the potential edge regardless of what the next decade looks like.
         </p>
       </div>
 
@@ -322,26 +321,26 @@ export function landingPage(): string {
           </div>
         </div>
 
-        <!-- Period 2: 2005–2025 (20 Years) -->
+        <!-- Period 2: 2015–2025 (The Bull Decade) -->
         <div class="rounded-xl border border-[#1e293b] p-6" style="background:#1a1f2e;">
           <div class="flex items-center justify-between mb-2">
-            <h3 class="text-lg font-bold text-white" style="font-family:'Playfair Display',Georgia,serif;">2005 &ndash; 2025</h3>
-            <span class="text-xs uppercase tracking-wider font-semibold px-2.5 py-1 rounded-full bg-blue-500/15 text-blue-400">20-Year Window</span>
+            <h3 class="text-lg font-bold text-white" style="font-family:'Playfair Display',Georgia,serif;">2015 &ndash; 2025</h3>
+            <span class="text-xs uppercase tracking-wider font-semibold px-2.5 py-1 rounded-full bg-emerald-500/15 text-emerald-400">The Bull Decade</span>
           </div>
           <p class="text-xs text-[#64748b] mb-4" style="font-family:'Source Sans Pro',sans-serif;">Growth of $100,000 &mdash; S&amp;P 500 total return vs. 16% CAGR compounding</p>
           <div class="relative" style="height:260px;">
-            <canvas id="compound-chart-2005"></canvas>
+            <canvas id="compound-chart-2015"></canvas>
           </div>
           <div class="grid grid-cols-2 gap-4 mt-5 pt-5 border-t border-[#1e293b]">
             <div class="text-center">
               <div class="text-xs text-[#8892a6] uppercase tracking-wider font-semibold mb-1">S&amp;P 500</div>
-              <div class="text-xl font-bold font-mono text-blue-400">$718,392</div>
-              <div class="text-[11px] text-[#64748b] mt-0.5">~10.3% CAGR &mdash; solid, but volatile</div>
+              <div class="text-xl font-bold font-mono text-blue-400">$342,619</div>
+              <div class="text-[11px] text-[#64748b] mt-0.5">~13% CAGR &mdash; strong, but with -18% and -4% years</div>
             </div>
             <div class="text-center">
               <div class="text-xs uppercase tracking-wider font-semibold mb-1" style="color:#C8A951;">EPIG at 16% CAGR</div>
-              <div class="text-xl font-bold font-mono text-emerald-400">$1,946,076</div>
-              <div class="text-[11px] text-emerald-500/70 mt-0.5">2.7x more &mdash; smooth, predictable growth</div>
+              <div class="text-xl font-bold font-mono text-emerald-400">$441,144</div>
+              <div class="text-[11px] text-emerald-500/70 mt-0.5">1.3x more &mdash; same result, no drawdowns</div>
             </div>
           </div>
         </div>
@@ -349,12 +348,15 @@ export function landingPage(): string {
 
       <!-- Key Takeaway -->
       <div class="rounded-xl p-6" style="background:rgba(200,169,81,0.06);border-left:3px solid #C8A951;">
-        <h4 class="font-bold text-white mb-3">Why This Matters</h4>
+        <h4 class="font-bold text-white mb-3">Two Regimes. One Conclusion.</h4>
         <p class="text-sm text-gray-300 leading-relaxed mb-3" style="font-family:'Source Sans Pro',sans-serif;">
-          The S&amp;P 500 has delivered strong long-term returns &mdash; but the path matters as much as the destination. A -37% crash in 2008 required a +59% recovery just to break even. A -18% drop in 2022 erased two years of gains. These drawdowns force investors to make emotional decisions at the worst possible time.
+          <strong class="text-white">In a bad decade</strong> (2000&ndash;2010), the S&amp;P went nowhere &mdash; two crashes wiped out a full decade of gains. EPIG&rsquo;s 16% CAGR with no losing years would have turned $100K into $441K while the market barely broke even. The gap is massive: 4.2x.
+        </p>
+        <p class="text-sm text-gray-300 leading-relaxed mb-3" style="font-family:'Source Sans Pro',sans-serif;">
+          <strong class="text-white">In a great decade</strong> (2015&ndash;2025), the S&amp;P delivered ~13% CAGR &mdash; a genuinely strong run. Yet EPIG still outperforms by ~$99K on a $100K investment, and does it without a single year of losses. No -18% in 2022. No -4% in 2018. No recovery years wasted.
         </p>
         <p class="text-sm text-gray-300 leading-relaxed mb-0" style="font-family:'Source Sans Pro',sans-serif;">
-          <strong class="text-white">EPIG&rsquo;s structural advantage:</strong> By targeting consistent 16% annual returns with no losing years, the compounding effect is uninterrupted. No recovery years needed. No psychological damage. No sequence-of-returns risk. The gap widens every single year &mdash; and it&rsquo;s mathematically irreversible.
+          <strong class="text-white">The question isn&rsquo;t which decade comes next.</strong> It&rsquo;s whether you want your wealth to depend on which one it is. EPIG is designed to compound regardless.
         </p>
       </div>
 
@@ -826,9 +828,9 @@ export function landingPage(): string {
       }
 
       var data2000 = buildSeries(2000, 2010);
-      var data2005 = buildSeries(2005, 2024);
+      var data2015 = buildSeries(2015, 2024);
       createChart('compound-chart-2000', data2000, '#ef4444');
-      createChart('compound-chart-2005', data2005, '#3b82f6');
+      createChart('compound-chart-2015', data2015, '#3b82f6');
     })();
 
     // FAQ Accordion
