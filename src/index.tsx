@@ -589,9 +589,20 @@ app.post('/api/admin/upload/preview', async (c) => {
 
       // Auto-classify strategy (initial pass)
       // A = SPY Investments (SPY stock only)
-      // B = Futures & Options (FUT, FOP, and market-related OPT — SPY/SPX options)
+      // B = Futures & Options (FUT, FOP, and market/macro OPT — indices, oil, gold, bitcoin, treasuries)
       // C = Stocks (non-SPY) + individual stock options
-      const MARKET_OPTION_SYMBOLS = ['SPY', 'SPX', 'SPXW', 'XSP']
+      const MARKET_OPTION_SYMBOLS = [
+        // Equity indices
+        'SPY', 'SPX', 'SPXW', 'XSP', 'QQQ', 'IWM', 'DIA', 'VIX', 'VXX', 'UVXY',
+        // Oil & energy
+        'USO', 'XLE', 'UCO', 'SCO', 'OIH',
+        // Gold & precious metals
+        'GLD', 'IAU', 'SLV', 'GDX', 'GDXJ',
+        // Bitcoin & crypto
+        'IBIT', 'BITO', 'GBTC', 'ETHE', 'FBTC',
+        // Treasury bonds & rates
+        'TLT', 'IEF', 'SHY', 'TBT', 'TMF', 'EDV', 'GOVT', 'BND', 'AGG',
+      ]
       let strategy: string
       if (assetClass === 'FUT' || assetClass === 'FOP') {
         strategy = 'B'
