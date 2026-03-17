@@ -284,6 +284,87 @@ export function landingPage(): string {
     </div>
   </section>
 
+  <!-- ════ SECTION 5B: POWER OF COMPOUNDING — NO LOSING YEARS ════ -->
+  <section style="background:#0f1420;">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+      <div class="text-center mb-14">
+        <h2 style="font-family:'Playfair Display',Georgia,serif;color:#C8A951;" class="text-3xl sm:text-4xl font-bold mb-4">The Power of Never Having a Losing Year</h2>
+        <p class="text-gray-400 text-lg max-w-3xl mx-auto" style="font-family:'Source Sans Pro',sans-serif;">
+          Compounding at 16% CAGR with zero negative years creates an extraordinary gap over time.
+          The chart below shows how $100K grows under EPIG&rsquo;s structural discipline vs. actual S&amp;P 500 total returns &mdash; including the crashes, the recoveries, and the lost years.
+        </p>
+      </div>
+
+      <!-- Two Period Comparison -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-10">
+
+        <!-- Period 1: 2000–2010 (The Lost Decade) -->
+        <div class="rounded-xl border border-[#1e293b] p-6" style="background:#1a1f2e;">
+          <div class="flex items-center justify-between mb-2">
+            <h3 class="text-lg font-bold text-white" style="font-family:'Playfair Display',Georgia,serif;">2000 &ndash; 2010</h3>
+            <span class="text-xs uppercase tracking-wider font-semibold px-2.5 py-1 rounded-full bg-red-500/15 text-red-400">The Lost Decade</span>
+          </div>
+          <p class="text-xs text-[#64748b] mb-4" style="font-family:'Source Sans Pro',sans-serif;">Growth of $100,000 &mdash; S&amp;P 500 total return vs. 16% CAGR compounding</p>
+          <div class="relative" style="height:260px;">
+            <canvas id="compound-chart-2000"></canvas>
+          </div>
+          <div class="grid grid-cols-2 gap-4 mt-5 pt-5 border-t border-[#1e293b]">
+            <div class="text-center">
+              <div class="text-xs text-[#8892a6] uppercase tracking-wider font-semibold mb-1">S&amp;P 500</div>
+              <div class="text-xl font-bold font-mono text-red-400">$104,673</div>
+              <div class="text-[11px] text-[#64748b] mt-0.5">0.5% CAGR &mdash; an entire decade lost</div>
+            </div>
+            <div class="text-center">
+              <div class="text-xs uppercase tracking-wider font-semibold mb-1" style="color:#C8A951;">EPIG at 16% CAGR</div>
+              <div class="text-xl font-bold font-mono text-emerald-400">$441,144</div>
+              <div class="text-[11px] text-emerald-500/70 mt-0.5">4.2x more &mdash; no drawdown, no lost years</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Period 2: 2005–2025 (20 Years) -->
+        <div class="rounded-xl border border-[#1e293b] p-6" style="background:#1a1f2e;">
+          <div class="flex items-center justify-between mb-2">
+            <h3 class="text-lg font-bold text-white" style="font-family:'Playfair Display',Georgia,serif;">2005 &ndash; 2025</h3>
+            <span class="text-xs uppercase tracking-wider font-semibold px-2.5 py-1 rounded-full bg-blue-500/15 text-blue-400">20-Year Window</span>
+          </div>
+          <p class="text-xs text-[#64748b] mb-4" style="font-family:'Source Sans Pro',sans-serif;">Growth of $100,000 &mdash; S&amp;P 500 total return vs. 16% CAGR compounding</p>
+          <div class="relative" style="height:260px;">
+            <canvas id="compound-chart-2005"></canvas>
+          </div>
+          <div class="grid grid-cols-2 gap-4 mt-5 pt-5 border-t border-[#1e293b]">
+            <div class="text-center">
+              <div class="text-xs text-[#8892a6] uppercase tracking-wider font-semibold mb-1">S&amp;P 500</div>
+              <div class="text-xl font-bold font-mono text-blue-400">$718,392</div>
+              <div class="text-[11px] text-[#64748b] mt-0.5">~10.3% CAGR &mdash; solid, but volatile</div>
+            </div>
+            <div class="text-center">
+              <div class="text-xs uppercase tracking-wider font-semibold mb-1" style="color:#C8A951;">EPIG at 16% CAGR</div>
+              <div class="text-xl font-bold font-mono text-emerald-400">$1,946,076</div>
+              <div class="text-[11px] text-emerald-500/70 mt-0.5">2.7x more &mdash; smooth, predictable growth</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Key Takeaway -->
+      <div class="rounded-xl p-6" style="background:rgba(200,169,81,0.06);border-left:3px solid #C8A951;">
+        <h4 class="font-bold text-white mb-3">Why This Matters</h4>
+        <p class="text-sm text-gray-300 leading-relaxed mb-3" style="font-family:'Source Sans Pro',sans-serif;">
+          The S&amp;P 500 has delivered strong long-term returns &mdash; but the path matters as much as the destination. A -37% crash in 2008 required a +59% recovery just to break even. A -18% drop in 2022 erased two years of gains. These drawdowns force investors to make emotional decisions at the worst possible time.
+        </p>
+        <p class="text-sm text-gray-300 leading-relaxed mb-0" style="font-family:'Source Sans Pro',sans-serif;">
+          <strong class="text-white">EPIG&rsquo;s structural advantage:</strong> By targeting consistent 16% annual returns with no losing years, the compounding effect is uninterrupted. No recovery years needed. No psychological damage. No sequence-of-returns risk. The gap widens every single year &mdash; and it&rsquo;s mathematically irreversible.
+        </p>
+      </div>
+
+      <!-- Disclaimer -->
+      <p class="text-[10px] text-[#64748b] mt-6 text-center italic" style="font-family:'Source Sans Pro',sans-serif;">
+        *The 16% CAGR figure represents EPIG&rsquo;s target annual return based on strategy design and backtested modeling. It is not a guarantee of future performance. S&amp;P 500 returns reflect actual total returns (price + dividends). Past performance is not indicative of future results.
+      </p>
+    </div>
+  </section>
+
   <!-- ════ SECTION 6: HOW YOUR CAPITAL IS PROTECTED ════ -->
   <section style="background:#111827;">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
@@ -641,6 +722,115 @@ export function landingPage(): string {
 
   <!-- ════ HOMEPAGE CLIENT-SIDE SCRIPTS ════ -->
   <script>
+    // ═══ Compounding Comparison Charts ═══
+    (function renderCompoundingCharts() {
+      // S&P 500 actual total returns by year
+      var spReturns = {
+        2000:-0.091, 2001:-0.119, 2002:-0.221, 2003:0.287, 2004:0.109,
+        2005:0.049, 2006:0.158, 2007:0.055, 2008:-0.370, 2009:0.265,
+        2010:0.151, 2011:0.021, 2012:0.160, 2013:0.324, 2014:0.137,
+        2015:0.014, 2016:0.120, 2017:0.218, 2018:-0.044, 2019:0.315,
+        2020:0.184, 2021:0.287, 2022:-0.181, 2023:0.263, 2024:0.250
+      };
+      var epigRate = 0.16;
+
+      function buildSeries(startYear, endYear) {
+        var labels = [String(startYear)];
+        var spValues = [100000];
+        var epigValues = [100000];
+        var spVal = 100000;
+        var epigVal = 100000;
+        for (var y = startYear; y <= endYear; y++) {
+          spVal *= (1 + (spReturns[y] || 0));
+          epigVal *= (1 + epigRate);
+          spValues.push(Math.round(spVal));
+          epigValues.push(Math.round(epigVal));
+          labels.push(String(y));
+        }
+        return { labels: labels, sp: spValues, epig: epigValues };
+      }
+
+      function createChart(canvasId, data, spColor) {
+        var ctx = document.getElementById(canvasId);
+        if (!ctx) return;
+        new Chart(ctx, {
+          type: 'line',
+          data: {
+            labels: data.labels,
+            datasets: [
+              {
+                label: 'EPIG (16% CAGR)',
+                data: data.epig,
+                borderColor: '#10b981',
+                backgroundColor: 'rgba(16,185,129,0.08)',
+                fill: true,
+                tension: 0.3,
+                pointRadius: 0,
+                borderWidth: 2.5
+              },
+              {
+                label: 'S&P 500 (Actual)',
+                data: data.sp,
+                borderColor: spColor,
+                backgroundColor: 'transparent',
+                fill: false,
+                tension: 0.3,
+                pointRadius: 0,
+                borderWidth: 2,
+                borderDash: [6, 3]
+              }
+            ]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            interaction: { mode: 'index', intersect: false },
+            plugins: {
+              legend: {
+                display: true,
+                position: 'top',
+                labels: { color: '#94a3b8', font: { size: 11 }, boxWidth: 14, padding: 12 }
+              },
+              tooltip: {
+                backgroundColor: '#1e293b',
+                titleColor: '#f1f5f9',
+                bodyColor: '#94a3b8',
+                borderColor: '#2d3a4d',
+                borderWidth: 1,
+                callbacks: {
+                  label: function(ctx) {
+                    return ctx.dataset.label + ': $' + ctx.parsed.y.toLocaleString();
+                  }
+                }
+              }
+            },
+            scales: {
+              x: {
+                grid: { color: 'rgba(255,255,255,0.04)' },
+                ticks: { color: '#64748b', font: { size: 10 }, maxTicksLimit: 6 }
+              },
+              y: {
+                grid: { color: 'rgba(255,255,255,0.04)' },
+                ticks: {
+                  color: '#64748b',
+                  font: { size: 10 },
+                  callback: function(v) {
+                    if (v >= 1000000) return '$' + (v/1000000).toFixed(1) + 'M';
+                    return '$' + (v/1000).toFixed(0) + 'K';
+                  }
+                }
+              }
+            }
+          }
+        });
+      }
+
+      var data2000 = buildSeries(2000, 2010);
+      var data2005 = buildSeries(2005, 2024);
+      createChart('compound-chart-2000', data2000, '#ef4444');
+      createChart('compound-chart-2005', data2005, '#3b82f6');
+    })();
+
     // FAQ Accordion
     function toggleFaq(btn) {
       const answer = btn.nextElementSibling;
