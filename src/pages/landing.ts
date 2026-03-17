@@ -57,8 +57,8 @@ export function landingPage(): string {
         <p><strong class="text-white">EPIG</strong> stands for <strong class="text-white">Enduring Principal-Protected Income &amp; Growth</strong>.</p>
         <p>It is a rules-based, managed investment strategy with three layers:</p>
         <p><strong class="text-white">Layer A</strong> holds your SPY (S&amp;P 500 ETF) position &mdash; the core structural allocation that provides broad market exposure and serves as your capital&rsquo;s anchor.</p>
-        <p><strong class="text-white">Layer B</strong> encompasses all futures and options trades &mdash; tactical S&amp;P 500 futures (MES/ES) with defined stops and asymmetric options positions during market dislocations.</p>
-        <p><strong class="text-white">Layer C</strong> tracks individual stock positions outside of SPY &mdash; select equities held for strategic opportunities beyond the core index allocation.</p>
+        <p><strong class="text-white">Layer B</strong> encompasses all futures and market-related options trades &mdash; tactical S&amp;P 500 futures (MES/ES) with defined stops, plus SPY/SPX options during market dislocations.</p>
+        <p><strong class="text-white">Layer C</strong> tracks individual stock positions outside of SPY and options on individual stocks &mdash; select equities held for strategic opportunities beyond the core index allocation.</p>
         <p>The result: a strategy engineered to target <strong class="text-white">16%+ CAGR</strong> across full market cycles while keeping original capital at risk below 5%.</p>
       </div>
 
@@ -135,9 +135,9 @@ export function landingPage(): string {
           <div class="flex items-center gap-3 mb-4 mt-2">
             <span class="inline-flex items-center justify-center px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-emerald-500/15 text-emerald-400 border border-emerald-500/30">Layer B</span>
           </div>
-          <h3 class="text-xl font-bold text-white mb-1">Futures &amp; Options</h3>
+          <h3 class="text-xl font-bold text-white mb-1">Futures &amp; Market Options</h3>
           <p class="text-[#8892a6] text-sm leading-relaxed mb-5" style="font-family:'Source Sans Pro',sans-serif;">
-            All futures and options trades &mdash; defined-risk S&amp;P 500 futures (MES/ES) with hard stops, plus asymmetric options positions (vertical spreads on SPY, QQQ, and select equities). Systematic income generation and episodic opportunity capture combined.
+            All futures and market-related options trades &mdash; defined-risk S&amp;P 500 futures (MES/ES) with hard stops, plus SPY/SPX options verticals. Systematic income generation and episodic opportunity capture combined.
           </p>
           <div class="space-y-3 mb-5">
             <div class="flex justify-between items-center">
@@ -166,9 +166,9 @@ export function landingPage(): string {
           <div class="flex items-center gap-3 mb-4 mt-2">
             <span class="inline-flex items-center justify-center px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-purple-500/15 text-purple-400 border border-purple-500/30">Layer C</span>
           </div>
-          <h3 class="text-xl font-bold text-white mb-1">Stocks (non-SPY)</h3>
+          <h3 class="text-xl font-bold text-white mb-1">Stocks &amp; Stock Options</h3>
           <p class="text-[#8892a6] text-sm leading-relaxed mb-5" style="font-family:'Source Sans Pro',sans-serif;">
-            Individual stock positions outside of SPY &mdash; select equities chosen for strategic opportunities, sector exposure, or tactical plays beyond the core index allocation.
+            Individual stock positions outside of SPY and options on individual stocks &mdash; select equities and stock options chosen for strategic opportunities, sector exposure, or tactical plays beyond the core index allocation.
           </p>
           <div class="space-y-3 mb-5">
             <div class="flex justify-between items-center">
@@ -465,11 +465,11 @@ export function landingPage(): string {
                   <span class="font-mono" id="lp-strat-a-pct"><span class="text-[#64748b]">--</span></span>
                 </div>
                 <div class="flex justify-between items-center">
-                  <span class="text-sm text-[#94a3b8]">Strategy B &mdash; Futures &amp; Options</span>
+                  <span class="text-sm text-[#94a3b8]">Strategy B &mdash; Futures &amp; Market Options</span>
                   <span class="font-mono" id="lp-strat-b-pct"><span class="text-[#64748b]">--</span></span>
                 </div>
                 <div class="flex justify-between items-center">
-                  <span class="text-sm text-[#94a3b8]">Strategy C &mdash; Stocks (non-SPY)</span>
+                  <span class="text-sm text-[#94a3b8]">Strategy C &mdash; Stocks &amp; Stock Options</span>
                   <span class="font-mono" id="lp-strat-c-pct"><span class="text-[#64748b]">--</span></span>
                 </div>
                 <div class="h-px bg-[#1e293b]"></div>

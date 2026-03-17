@@ -105,7 +105,7 @@ export function projectorPage(): string {
         <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-emerald-500 to-emerald-400"></div>
         <h3 class="font-bold text-lg mt-2 mb-1 flex items-center gap-2">
           <span class="w-8 h-8 rounded-lg bg-emerald-500/15 flex items-center justify-center text-emerald-400 font-bold text-sm">B</span>
-          Futures Alerts
+          Futures &amp; Market Options
         </h3>
         <div id="b-data-source" class="text-[10px] text-epig-textDim mb-4"></div>
 
@@ -176,7 +176,7 @@ export function projectorPage(): string {
         <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-amber-500 to-amber-400"></div>
         <h3 class="font-bold text-lg mt-2 mb-1 flex items-center gap-2">
           <span class="w-8 h-8 rounded-lg bg-amber-500/15 flex items-center justify-center text-amber-400 font-bold text-sm">C</span>
-          Stocks (non-SPY)
+          Stocks &amp; Stock Options
         </h3>
         <div id="c-data-source" class="text-[10px] text-epig-textDim mb-4"></div>
 
@@ -260,7 +260,7 @@ export function projectorPage(): string {
         <div class="flex justify-between items-center py-2">
           <div class="flex items-center gap-3">
             <span class="w-3 h-3 rounded-full bg-emerald-500"></span>
-            <span>Strategy B &mdash; Futures &amp; Options</span>
+            <span>Strategy B &mdash; Futures &amp; Market Options</span>
           </div>
           <div class="text-right">
             <span class="font-mono font-bold text-emerald-400" id="combined-b-dollar">$11,400</span>
@@ -270,7 +270,7 @@ export function projectorPage(): string {
         <div class="flex justify-between items-center py-2">
           <div class="flex items-center gap-3">
             <span class="w-3 h-3 rounded-full bg-amber-500"></span>
-            <span>Strategy C &mdash; Stocks</span>
+            <span>Strategy C &mdash; Stocks &amp; Stock Options</span>
           </div>
           <div class="text-right">
             <span class="font-mono font-bold text-amber-400" id="combined-c-dollar">$20,064</span>

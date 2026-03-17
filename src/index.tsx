@@ -179,12 +179,12 @@ app.get('/api/og-image', async (c) => {
 
   <!-- Strategy B -->
   <rect x="85" y="338" width="12" height="12" rx="3" fill="#10b981"/>
-  <text x="110" y="350" font-family="Arial,Helvetica,sans-serif" font-size="16" fill="#94a3b8">B  |  Futures &amp; Options</text>
+  <text x="110" y="350" font-family="Arial,Helvetica,sans-serif" font-size="16" fill="#94a3b8">B  |  Futures &amp; Market Options</text>
   <text x="540" y="350" font-family="monospace" font-size="18" font-weight="bold" fill="${stratB.startsWith('-') ? '#ef4444' : '#10b981'}">${stratB}</text>
 
   <!-- Strategy C -->
   <rect x="85" y="374" width="12" height="12" rx="3" fill="#f59e0b"/>
-  <text x="110" y="386" font-family="Arial,Helvetica,sans-serif" font-size="16" fill="#94a3b8">C  |  Stocks (non-SPY)</text>
+  <text x="110" y="386" font-family="Arial,Helvetica,sans-serif" font-size="16" fill="#94a3b8">C  |  Stocks &amp; Stock Options</text>
   <text x="540" y="386" font-family="monospace" font-size="18" font-weight="bold" fill="${stratC.startsWith('-') ? '#ef4444' : '#10b981'}">${stratC}</text>
 
   <!-- Divider line in card -->
@@ -368,8 +368,8 @@ app.get('/api/dashboard/summary', async (c) => {
 
       const stratNames: Record<string, string> = {
         A: 'Strategy A — SPY Investments',
-        B: 'Strategy B — Futures & Options',
-        C: 'Strategy C — Stocks (non-SPY)',
+        B: 'Strategy B — Futures & Market Options',
+        C: 'Strategy C — Stocks & Stock Options',
       }
 
       result[strat] = {
@@ -588,10 +588,16 @@ app.post('/api/admin/upload/preview', async (c) => {
       const cleanSymbol = symbol.trim().split(/\s+/)[0]
 
       // Auto-classify strategy (initial pass)
-      // A = SPY Investments, B = Futures and/or Options, C = Stocks (outside SPY)
+      // A = SPY Investments (SPY stock only)
+      // B = Futures & Options (FUT, FOP, and market-related OPT — SPY/SPX options)
+      // C = Stocks (non-SPY) + individual stock options
+      const MARKET_OPTION_SYMBOLS = ['SPY', 'SPX', 'SPXW', 'XSP']
       let strategy: string
-      if (assetClass === 'FUT' || assetClass === 'FOP' || assetClass === 'OPT') {
+      if (assetClass === 'FUT' || assetClass === 'FOP') {
         strategy = 'B'
+      } else if (assetClass === 'OPT') {
+        // Market/index options → B, individual stock options → C
+        strategy = MARKET_OPTION_SYMBOLS.includes(cleanSymbol.toUpperCase()) ? 'B' : 'C'
       } else if (assetClass === 'STK' && cleanSymbol.toUpperCase() === 'SPY') {
         strategy = 'A'
       } else {
@@ -1206,16 +1212,17 @@ export default app
  *   When net position returns to zero → one completed round trip.
  *   P&L = sum of all NetCash values in the round trip.
  *
- * - **Strategy B (FUT/OPT)**: Groups fills by instrument (MESH6, MES) or by spread for options.
- *   Same FIFO matching. Each flat position = one round trip.
+ * - **Strategy B (FUT/FOP + market OPT)**: Groups fills by instrument (MESH6, MES) or by spread
+ *   for market-related options (SPY/SPX). Same FIFO matching. Each flat position = one round trip.
  *
- * - **Strategy C (STK non-SPY)**: Groups fills by instrument (MSFT, TSLA, etc.).
- *   Each vertical spread = 2 legs opened then 2 legs closed = 1 round trip.
+ * - **Strategy C (STK non-SPY + individual stock OPT)**: Groups fills by instrument (MSFT, TSLA, etc.)
+ *   and individual stock options. Each vertical spread = 2 legs opened then 2 legs closed = 1 round trip.
  *   P&L = sum of all 4 legs' NetCash.
  *   If not a spread, falls back to instrument-level FIFO like A/B.
  */
 function buildRoundTrips(fills: any[], strategy: string): { pnl: number; closed: boolean; fillCount: number; firstDate: string; lastDate: string; riskDollar: number }[] {
-  if (strategy === 'B') {
+  if (strategy === 'B' || strategy === 'C') {
+    // Both B and C can contain OPT fills (market options in B, stock options in C)
     return buildSpreadRoundTrips(fills)
   }
   return buildFifoRoundTrips(fills)
@@ -1848,8 +1855,8 @@ function computeRollingRTMetrics(closedRTs: any[], days: number): { winRate: num
 function buildEmptyStrategy(strat: string, snapshot: any): any {
   const names: Record<string, string> = {
     A: 'Strategy A — SPY Investments',
-    B: 'Strategy B — Futures & Options',
-    C: 'Strategy C — Stocks (non-SPY)',
+    B: 'Strategy B — Futures & Market Options',
+    C: 'Strategy C — Stocks & Stock Options',
   }
   return {
     name: names[strat] || `Strategy ${strat}`,
@@ -1903,7 +1910,7 @@ function buildFallbackSummary() {
         monthlyReturns: generateSyntheticMonthlyReturns(),
       },
       B: {
-        name: 'Strategy B — Futures & Options',
+        name: 'Strategy B — Futures & Market Options',
         cumulativeReturn: 38.6, cagr: 32.1, maxDrawdown: -12.3, sharpeRatio: 1.85, sortinoRatio: 2.8,
         winRate: 62.4, expectancyPoints: 4.2, expectancyR: 0.38, profitFactor: 1.92, totalTrades: 187,
         lastUpdated: '2026-02-17T09:00:00Z',
@@ -1914,7 +1921,7 @@ function buildFallbackSummary() {
         recentTrades: generateSyntheticTrades('futures', 20),
       },
       C: {
-        name: 'Strategy C — Stocks (non-SPY)',
+        name: 'Strategy C — Stocks & Stock Options',
         cumulativeReturn: 52.1, cagr: 44.3, maxDrawdown: -18.7, sharpeRatio: 1.25, sortinoRatio: 1.9,
         winRate: 48.2, expectancyR: 0.72, profitFactor: 1.68, totalTrades: 94,
         lastUpdated: '2026-02-17T09:00:00Z',

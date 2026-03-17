@@ -180,7 +180,7 @@ export function howItWorksPage(): string {
             </div>
             <div>
               <span class="text-xs text-white font-semibold block">Upload & Auto-Classify</span>
-              <span class="text-[11px] text-epig-textDim">SPY → A, FUT/OPT → B, other STK → C &mdash; duplicates rejected</span>
+              <span class="text-[11px] text-epig-textDim">SPY → A, FUT/FOP/market OPT → B, other STK/stock OPT → C &mdash; duplicates rejected</span>
             </div>
           </div>
           <div class="flex items-center gap-3">
@@ -231,15 +231,15 @@ export function howItWorksPage(): string {
           <div class="flex items-center gap-3 mb-3">
             <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg text-xs font-bold uppercase bg-emerald-500/15 text-emerald-400 border border-emerald-500/30">B</span>
             <div>
-              <h3 class="font-bold text-white text-sm">Futures &amp; Options</h3>
-              <span class="text-[11px] text-emerald-400/70 font-mono">FUT + OPT &bull; MES/ES + verticals &bull; defined risk</span>
+              <h3 class="font-bold text-white text-sm">Futures &amp; Market Options</h3>
+              <span class="text-[11px] text-emerald-400/70 font-mono">FUT + FOP + market OPT (SPY/SPX) &bull; MES/ES &bull; defined risk</span>
             </div>
             <span class="ml-auto flex items-center gap-1.5 text-[11px] font-semibold" style="color:#5865F2;">
               <i class="fab fa-discord"></i> Real-Time Alerts
             </span>
           </div>
           <p class="text-xs text-epig-textDim leading-relaxed">
-            All futures and options trades combined &mdash; defined-risk futures with stops, plus options verticals and directional plays.
+            All futures and market-related options trades &mdash; defined-risk futures (MES/ES) with stops, plus SPY/SPX options verticals and directional plays.
             Systematic income generation and asymmetric opportunity capture.
             <strong class="text-white">Every entry and exit is sent as a Discord alert in real time.</strong>
           </p>
@@ -250,15 +250,15 @@ export function howItWorksPage(): string {
           <div class="flex items-center gap-3 mb-3">
             <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg text-xs font-bold uppercase bg-purple-500/15 text-purple-400 border border-purple-500/30">C</span>
             <div>
-              <h3 class="font-bold text-white text-sm">Stocks (non-SPY)</h3>
-              <span class="text-[11px] text-purple-400/70 font-mono">Individual equities outside SPY</span>
+              <h3 class="font-bold text-white text-sm">Stocks &amp; Stock Options</h3>
+              <span class="text-[11px] text-purple-400/70 font-mono">Individual equities outside SPY + stock options</span>
             </div>
             <span class="ml-auto flex items-center gap-1.5 text-[11px] font-semibold" style="color:#5865F2;">
               <i class="fab fa-discord"></i> Real-Time Alerts
             </span>
           </div>
           <p class="text-xs text-epig-textDim leading-relaxed">
-            Individual stock positions outside of SPY &mdash; select equities held for strategic opportunities and sector exposure.
+            Individual stock positions outside of SPY and options on individual stocks &mdash; select equities held for strategic opportunities and sector exposure.
             <strong class="text-white">Every entry and exit is sent as a Discord alert in real time.</strong>
           </p>
         </div>
