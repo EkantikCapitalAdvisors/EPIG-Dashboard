@@ -32,14 +32,11 @@ export function dashboardPage(): string {
       <button class="strategy-tab" data-strategy="Combined" onclick="switchStrategy('Combined')">
         <span class="inline-block w-3 h-3 rounded-full bg-purple-500 mr-2"></span>Combined Portfolio
       </button>
-      <button class="strategy-tab active" data-strategy="A" onclick="switchStrategy('A')">
-        <span class="inline-block w-3 h-3 rounded-full bg-blue-500 mr-2"></span>A &mdash; SPY
+      <button class="strategy-tab active" data-strategy="Investing" onclick="switchStrategy('Investing')">
+        <span class="inline-block w-3 h-3 rounded-full mr-2" style="background:#C8A951;"></span>Investing &mdash; SPY &amp; Stocks
       </button>
-      <button class="strategy-tab" data-strategy="B" onclick="switchStrategy('B')">
-        <span class="inline-block w-3 h-3 rounded-full bg-emerald-500 mr-2"></span>B &mdash; Futures &amp; Options
-      </button>
-      <button class="strategy-tab" data-strategy="C" onclick="switchStrategy('C')">
-        <span class="inline-block w-3 h-3 rounded-full bg-amber-500 mr-2"></span>C &mdash; Stocks
+      <button class="strategy-tab" data-strategy="Trading" onclick="switchStrategy('Trading')">
+        <span class="inline-block w-3 h-3 rounded-full bg-emerald-500 mr-2"></span>Trading &mdash; Futures &amp; Options
       </button>
     </div>
 
@@ -124,92 +121,68 @@ export function dashboardPage(): string {
       </div>
     </div>
 
-    <!-- ═══════════════════ KPI Grid: Strategy A ═══════════════════ -->
-    <!-- Static fallback values shown before JS loads; updated with each deploy -->
-    <div id="kpi-grid-A" class="kpi-grid-panel">
+    <!-- ═══════════════════ KPI Grid: Investing Strategy ═══════════════════ -->
+    <div id="kpi-grid-Investing" class="kpi-grid-panel">
       <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-8">
         <div class="kpi-card">
           <div class="kpi-label">Cumulative Return</div>
-          <div class="kpi-value text-emerald-400" id="kpi-a-cumreturn">+14.2%</div>
+          <div class="kpi-value text-emerald-400" id="kpi-inv-cumreturn">+14.2%</div>
         </div>
         <div class="kpi-card">
           <div class="kpi-label">Win Rate</div>
-          <div class="kpi-value" id="kpi-a-winrate">—</div>
+          <div class="kpi-value" id="kpi-inv-winrate">—</div>
         </div>
         <div class="kpi-card">
           <div class="kpi-label">Max Drawdown</div>
-          <div class="kpi-value text-red-400" id="kpi-a-maxdd">-8.4%</div>
+          <div class="kpi-value text-red-400" id="kpi-inv-maxdd">-8.4%</div>
         </div>
         <div class="kpi-card">
           <div class="kpi-label">Sharpe Ratio</div>
-          <div class="kpi-value" id="kpi-a-sharpe">1.42</div>
+          <div class="kpi-value" id="kpi-inv-sharpe">1.42</div>
         </div>
         <div class="kpi-card">
           <div class="kpi-label">Total Trades</div>
-          <div class="kpi-value text-white" id="kpi-a-trades">—</div>
-          <div class="text-xs text-epig-textDim mt-1" id="kpi-a-fills"></div>
+          <div class="kpi-value text-white" id="kpi-inv-trades">—</div>
+          <div class="text-xs text-epig-textDim mt-1" id="kpi-inv-fills"></div>
         </div>
         <div class="kpi-card">
           <div class="kpi-label">Current Allocation</div>
           <div class="text-sm mt-2">
-            <div class="flex justify-between"><span class="text-epig-textDim">SPY</span><span class="font-mono text-blue-400" id="alloc-spy">80%</span></div>
-            <div class="flex justify-between"><span class="text-epig-textDim">Stocks</span><span class="font-mono text-blue-400" id="alloc-stocks">15%</span></div>
-            <div class="flex justify-between"><span class="text-epig-textDim">Cash</span><span class="font-mono text-blue-400" id="alloc-cash">5%</span></div>
+            <div class="flex justify-between"><span class="text-epig-textDim">SPY</span><span class="font-mono" style="color:#C8A951;" id="alloc-spy">80%</span></div>
+            <div class="flex justify-between"><span class="text-epig-textDim">Stocks</span><span class="font-mono" style="color:#C8A951;" id="alloc-stocks">15%</span></div>
+            <div class="flex justify-between"><span class="text-epig-textDim">Cash</span><span class="font-mono" style="color:#C8A951;" id="alloc-cash">5%</span></div>
           </div>
         </div>
       </div>
       <div class="grid grid-cols-2 md:grid-cols-5 gap-4 mb-8">
-        <div class="kpi-card"><div class="kpi-label">Total P&L</div><div class="kpi-value" id="kpi-a-pnl">—</div></div>
-        <div class="kpi-card"><div class="kpi-label">EV per Trade (R)</div><div class="kpi-value" id="kpi-a-evr">—</div></div>
-        <div class="kpi-card"><div class="kpi-label">Projected Annual R</div><div class="kpi-value" id="kpi-a-annualr">—</div></div>
-        <div class="kpi-card"><div class="kpi-label">Avg Win / Avg Loss</div><div class="kpi-value text-white" id="kpi-a-wl">—</div></div>
-        <div class="kpi-card"><div class="kpi-label">Risk per Trade</div><div class="kpi-value text-white" id="kpi-a-risk">—</div></div>
+        <div class="kpi-card"><div class="kpi-label">Total P&L</div><div class="kpi-value" id="kpi-inv-pnl">—</div></div>
+        <div class="kpi-card"><div class="kpi-label">EV per Trade (R)</div><div class="kpi-value" id="kpi-inv-evr">—</div></div>
+        <div class="kpi-card"><div class="kpi-label">Projected Annual R</div><div class="kpi-value" id="kpi-inv-annualr">—</div></div>
+        <div class="kpi-card"><div class="kpi-label">Avg Win / Avg Loss</div><div class="kpi-value text-white" id="kpi-inv-wl">—</div></div>
+        <div class="kpi-card"><div class="kpi-label">Risk per Trade</div><div class="kpi-value text-white" id="kpi-inv-risk">—</div></div>
       </div>
     </div>
 
-    <!-- ═══════════════════ KPI Grid: Strategy B ═══════════════════ -->
-    <div id="kpi-grid-B" class="kpi-grid-panel hidden">
+    <!-- ═══════════════════ KPI Grid: Trading Strategy ═══════════════════ -->
+    <div id="kpi-grid-Trading" class="kpi-grid-panel hidden">
       <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-7 gap-4 mb-8">
-        <div class="kpi-card"><div class="kpi-label">Cumulative Return</div><div class="kpi-value" id="kpi-b-cumreturn">—</div></div>
-        <div class="kpi-card"><div class="kpi-label">Max Drawdown</div><div class="kpi-value" id="kpi-b-maxdd">—</div></div>
-        <div class="kpi-card"><div class="kpi-label">Win Rate</div><div class="kpi-value" id="kpi-b-winrate">—</div></div>
-        <div class="kpi-card"><div class="kpi-label">EV per Trade (R)</div><div class="kpi-value" id="kpi-b-evr">—</div></div>
-        <div class="kpi-card"><div class="kpi-label">Profit Factor</div><div class="kpi-value text-white" id="kpi-b-pf">—</div></div>
-        <div class="kpi-card"><div class="kpi-label">Total Trades</div><div class="kpi-value text-white" id="kpi-b-trades">—</div><div class="text-xs text-epig-textDim mt-1" id="kpi-b-fills"></div></div>
-        <div class="kpi-card"><div class="kpi-label">Total P&L</div><div class="kpi-value" id="kpi-b-pnl">—</div></div>
+        <div class="kpi-card"><div class="kpi-label">Cumulative Return</div><div class="kpi-value" id="kpi-trd-cumreturn">—</div></div>
+        <div class="kpi-card"><div class="kpi-label">Max Drawdown</div><div class="kpi-value" id="kpi-trd-maxdd">—</div></div>
+        <div class="kpi-card"><div class="kpi-label">Win Rate</div><div class="kpi-value" id="kpi-trd-winrate">—</div></div>
+        <div class="kpi-card"><div class="kpi-label">EV per Trade (R)</div><div class="kpi-value" id="kpi-trd-evr">—</div></div>
+        <div class="kpi-card"><div class="kpi-label">Profit Factor</div><div class="kpi-value text-white" id="kpi-trd-pf">—</div></div>
+        <div class="kpi-card"><div class="kpi-label">Total Trades</div><div class="kpi-value text-white" id="kpi-trd-trades">—</div><div class="text-xs text-epig-textDim mt-1" id="kpi-trd-fills"></div></div>
+        <div class="kpi-card"><div class="kpi-label">Total P&L</div><div class="kpi-value" id="kpi-trd-pnl">—</div></div>
       </div>
       <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-        <div class="kpi-card"><div class="kpi-label">Avg Win / Avg Loss</div><div class="kpi-value text-white" id="kpi-b-wl">—</div></div>
-        <div class="kpi-card"><div class="kpi-label">Risk per Trade</div><div class="kpi-value text-white" id="kpi-b-risk">—</div></div>
-        <div class="kpi-card"><div class="kpi-label">Sharpe / Sortino</div><div class="kpi-value text-white" id="kpi-b-sharpe">—</div></div>
-        <div class="kpi-card"><div class="kpi-label">Projected Annual R</div><div class="kpi-value" id="kpi-b-annualr">—</div></div>
+        <div class="kpi-card"><div class="kpi-label">Avg Win / Avg Loss</div><div class="kpi-value text-white" id="kpi-trd-wl">—</div></div>
+        <div class="kpi-card"><div class="kpi-label">Risk per Trade</div><div class="kpi-value text-white" id="kpi-trd-risk">—</div></div>
+        <div class="kpi-card"><div class="kpi-label">Sharpe / Sortino</div><div class="kpi-value text-white" id="kpi-trd-sharpe">—</div></div>
+        <div class="kpi-card"><div class="kpi-label">Projected Annual R</div><div class="kpi-value" id="kpi-trd-annualr">—</div></div>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-        <div class="kpi-card"><div class="text-xs text-epig-textDim uppercase tracking-wider mb-3 font-semibold">Rolling 30-Day</div><div class="grid grid-cols-3 gap-4"><div><div class="kpi-label">Win Rate</div><div class="font-mono text-lg font-bold" id="b-r30-wr">—</div></div><div><div class="kpi-label">Expectancy (R)</div><div class="font-mono text-lg font-bold" id="b-r30-ev">—</div></div><div><div class="kpi-label">Trades</div><div class="font-mono text-white text-lg font-bold" id="b-r30-t">—</div></div></div></div>
-        <div class="kpi-card"><div class="text-xs text-epig-textDim uppercase tracking-wider mb-3 font-semibold">Rolling 90-Day</div><div class="grid grid-cols-3 gap-4"><div><div class="kpi-label">Win Rate</div><div class="font-mono text-lg font-bold" id="b-r90-wr">—</div></div><div><div class="kpi-label">Expectancy (R)</div><div class="font-mono text-lg font-bold" id="b-r90-ev">—</div></div><div><div class="kpi-label">Trades</div><div class="font-mono text-white text-lg font-bold" id="b-r90-t">—</div></div></div></div>
-      </div>
-    </div>
-
-    <!-- ═══════════════════ KPI Grid: Strategy C ═══════════════════ -->
-    <div id="kpi-grid-C" class="kpi-grid-panel hidden">
-      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-7 gap-4 mb-8">
-        <div class="kpi-card"><div class="kpi-label">Cumulative Return</div><div class="kpi-value" id="kpi-c-cumreturn">—</div></div>
-        <div class="kpi-card"><div class="kpi-label">Max Drawdown</div><div class="kpi-value" id="kpi-c-maxdd">—</div></div>
-        <div class="kpi-card"><div class="kpi-label">Win Rate</div><div class="kpi-value" id="kpi-c-winrate">—</div></div>
-        <div class="kpi-card"><div class="kpi-label">EV per Trade (R)</div><div class="kpi-value" id="kpi-c-evr">—</div></div>
-        <div class="kpi-card"><div class="kpi-label">Profit Factor</div><div class="kpi-value text-white" id="kpi-c-pf">—</div></div>
-        <div class="kpi-card"><div class="kpi-label">Total Trades</div><div class="kpi-value text-white" id="kpi-c-trades">—</div><div class="text-xs text-epig-textDim mt-1" id="kpi-c-fills"></div></div>
-        <div class="kpi-card"><div class="kpi-label">Total P&L</div><div class="kpi-value" id="kpi-c-pnl">—</div></div>
-      </div>
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-        <div class="kpi-card"><div class="kpi-label">Avg Win / Avg Loss</div><div class="kpi-value text-white" id="kpi-c-wl">—</div></div>
-        <div class="kpi-card"><div class="kpi-label">Risk per Trade</div><div class="kpi-value text-white" id="kpi-c-risk">—</div></div>
-        <div class="kpi-card"><div class="kpi-label">Sharpe / Sortino</div><div class="kpi-value text-white" id="kpi-c-sharpe">—</div></div>
-        <div class="kpi-card"><div class="kpi-label">Projected Annual R</div><div class="kpi-value" id="kpi-c-annualr">—</div></div>
-      </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-        <div class="kpi-card"><div class="text-xs text-epig-textDim uppercase tracking-wider mb-3 font-semibold">Rolling 30-Day</div><div class="grid grid-cols-3 gap-4"><div><div class="kpi-label">Win Rate</div><div class="font-mono text-lg font-bold" id="c-r30-wr">—</div></div><div><div class="kpi-label">Expectancy (R)</div><div class="font-mono text-lg font-bold" id="c-r30-ev">—</div></div><div><div class="kpi-label">Trades</div><div class="font-mono text-white text-lg font-bold" id="c-r30-t">—</div></div></div></div>
-        <div class="kpi-card"><div class="text-xs text-epig-textDim uppercase tracking-wider mb-3 font-semibold">Rolling 90-Day</div><div class="grid grid-cols-3 gap-4"><div><div class="kpi-label">Win Rate</div><div class="font-mono text-lg font-bold" id="c-r90-wr">—</div></div><div><div class="kpi-label">Expectancy (R)</div><div class="font-mono text-lg font-bold" id="c-r90-ev">—</div></div><div><div class="kpi-label">Trades</div><div class="font-mono text-white text-lg font-bold" id="c-r90-t">—</div></div></div></div>
+        <div class="kpi-card"><div class="text-xs text-epig-textDim uppercase tracking-wider mb-3 font-semibold">Rolling 30-Day</div><div class="grid grid-cols-3 gap-4"><div><div class="kpi-label">Win Rate</div><div class="font-mono text-lg font-bold" id="trd-r30-wr">—</div></div><div><div class="kpi-label">Expectancy (R)</div><div class="font-mono text-lg font-bold" id="trd-r30-ev">—</div></div><div><div class="kpi-label">Trades</div><div class="font-mono text-white text-lg font-bold" id="trd-r30-t">—</div></div></div></div>
+        <div class="kpi-card"><div class="text-xs text-epig-textDim uppercase tracking-wider mb-3 font-semibold">Rolling 90-Day</div><div class="grid grid-cols-3 gap-4"><div><div class="kpi-label">Win Rate</div><div class="font-mono text-lg font-bold" id="trd-r90-wr">—</div></div><div><div class="kpi-label">Expectancy (R)</div><div class="font-mono text-lg font-bold" id="trd-r90-ev">—</div></div><div><div class="kpi-label">Trades</div><div class="font-mono text-white text-lg font-bold" id="trd-r90-t">—</div></div></div></div>
       </div>
     </div>
 
@@ -329,7 +302,7 @@ export function dashboardPage(): string {
 
   <script>
     let dashData = null;
-    let currentStrategy = 'A';
+    let currentStrategy = 'Investing';
     let currentReturnsView = 'monthly';
     let currentDateRange = 'all';
     let customStartDate = '';
@@ -337,7 +310,7 @@ export function dashboardPage(): string {
     let equityChart = null;
     let drawdownChart = null;
 
-    const strategyColors = { A: '#3b82f6', B: '#10b981', C: '#f59e0b', Combined: '#a855f7' };
+    const strategyColors = { Investing: '#C8A951', Trading: '#10b981', Combined: '#a855f7' };
 
     async function loadDashboard() {
       try {
@@ -357,8 +330,8 @@ export function dashboardPage(): string {
       document.querySelectorAll('.kpi-grid-panel').forEach(p => p.classList.add('hidden'));
       const grid = document.getElementById('kpi-grid-'+s);
       if (grid) grid.classList.remove('hidden');
-      // Show trade table for B, C (not A, not Combined)
-      if (s === 'A' || s === 'Combined') {
+      // Show trade table for Trading (not Investing, not Combined)
+      if (s === 'Investing' || s === 'Combined') {
         document.getElementById('trade-table-section').classList.add('hidden');
       } else {
         document.getElementById('trade-table-section').classList.remove('hidden');
@@ -635,19 +608,16 @@ export function dashboardPage(): string {
         const contrib = d.strategyContribution || {};
         const bar = document.getElementById('contrib-bar');
         const legend = document.getElementById('contrib-legend');
-        const total = Math.abs(contrib.A || 0) + Math.abs(contrib.B || 0) + Math.abs(contrib.C || 0);
+        const total = Math.abs(contrib.Investing || 0) + Math.abs(contrib.Trading || 0);
         if (bar && legend && total > 0) {
-          const pctA = Math.abs(contrib.A || 0) / total * 100;
-          const pctB = Math.abs(contrib.B || 0) / total * 100;
-          const pctC = Math.abs(contrib.C || 0) / total * 100;
+          const pctInv = Math.abs(contrib.Investing || 0) / total * 100;
+          const pctTrd = Math.abs(contrib.Trading || 0) / total * 100;
           bar.innerHTML = '' +
-            '<div style="width:'+pctA+'%;background:#3b82f6;opacity:'+(contrib.A>=0?'1':'0.4')+'" class="h-full" title="A: '+fmtPnl(contrib.A)+'"></div>' +
-            '<div style="width:'+pctB+'%;background:#10b981;opacity:'+(contrib.B>=0?'1':'0.4')+'" class="h-full" title="B: '+fmtPnl(contrib.B)+'"></div>' +
-            '<div style="width:'+pctC+'%;background:#f59e0b;opacity:'+(contrib.C>=0?'1':'0.4')+'" class="h-full" title="C: '+fmtPnl(contrib.C)+'"></div>';
+            '<div style="width:'+pctInv+'%;background:#C8A951;opacity:'+(contrib.Investing>=0?'1':'0.4')+'" class="h-full" title="Investing: '+fmtPnl(contrib.Investing)+'"></div>' +
+            '<div style="width:'+pctTrd+'%;background:#10b981;opacity:'+(contrib.Trading>=0?'1':'0.4')+'" class="h-full" title="Trading: '+fmtPnl(contrib.Trading)+'"></div>';
           legend.innerHTML = '' +
-            '<span><span class="inline-block w-2.5 h-2.5 rounded-sm mr-1" style="background:#3b82f6"></span>A: '+fmtPnl(contrib.A)+'</span>' +
-            '<span><span class="inline-block w-2.5 h-2.5 rounded-sm mr-1" style="background:#10b981"></span>B: '+fmtPnl(contrib.B)+'</span>' +
-            '<span><span class="inline-block w-2.5 h-2.5 rounded-sm mr-1" style="background:#f59e0b"></span>C: '+fmtPnl(contrib.C)+'</span>';
+            '<span><span class="inline-block w-2.5 h-2.5 rounded-sm mr-1" style="background:#C8A951"></span>Investing: '+fmtPnl(contrib.Investing)+'</span>' +
+            '<span><span class="inline-block w-2.5 h-2.5 rounded-sm mr-1" style="background:#10b981"></span>Trading: '+fmtPnl(contrib.Trading)+'</span>';
         }
 
         // Rolling for Combined
@@ -656,20 +626,20 @@ export function dashboardPage(): string {
         setCombRolling(r30, r90);
       }
 
-      if (s === 'A') {
-        setKpi('kpi-a-cumreturn', r ? '—' : fmtPct(cumRet), r ? 0 : cumRet);
-        setKpi('kpi-a-winrate', wr.toFixed(1) + '%', wr >= 50 ? 1 : -1);
-        setKpi('kpi-a-maxdd', r ? '—' : fmtPct(maxDD), r ? 0 : maxDD);
-        setKpi('kpi-a-sharpe', r ? '—' : (d.sharpeRatio || 0).toFixed(2));
-        setKpi('kpi-a-trades', trades);
-        const fillsA = document.getElementById('kpi-a-fills');
-        if (fillsA) fillsA.textContent = r ? '' : (d.totalFills || 0) + ' fills';
-        setKpi('kpi-a-pnl', r ? fmtPnl(evDollar) + '/trade' : fmtPnl(tPnl), r ? evDollar : tPnl);
-        setKpi('kpi-a-evr', (evR >= 0 ? '+' : '') + evR.toFixed(2) + 'R', evR);
-        const aAR = d.projectedAnnualR || 0;
-        setKpi('kpi-a-annualr', (r || isCustom) ? '—' : (aAR >= 0 ? '+' : '') + aAR.toFixed(1) + 'R', (r || isCustom) ? 0 : aAR);
-        setKpi('kpi-a-wl', r ? '—' : '$' + (d.avgWinDollar||0).toFixed(0) + ' / $' + (d.avgLossDollar||0).toFixed(0));
-        setKpi('kpi-a-risk', r ? '—' : '$' + (d.riskPerTrade||0).toFixed(0));
+      if (s === 'Investing') {
+        setKpi('kpi-inv-cumreturn', r ? '—' : fmtPct(cumRet), r ? 0 : cumRet);
+        setKpi('kpi-inv-winrate', wr.toFixed(1) + '%', wr >= 50 ? 1 : -1);
+        setKpi('kpi-inv-maxdd', r ? '—' : fmtPct(maxDD), r ? 0 : maxDD);
+        setKpi('kpi-inv-sharpe', r ? '—' : (d.sharpeRatio || 0).toFixed(2));
+        setKpi('kpi-inv-trades', trades);
+        const fillsInv = document.getElementById('kpi-inv-fills');
+        if (fillsInv) fillsInv.textContent = r ? '' : (d.totalFills || 0) + ' fills';
+        setKpi('kpi-inv-pnl', r ? fmtPnl(evDollar) + '/trade' : fmtPnl(tPnl), r ? evDollar : tPnl);
+        setKpi('kpi-inv-evr', (evR >= 0 ? '+' : '') + evR.toFixed(2) + 'R', evR);
+        const invAR = d.projectedAnnualR || 0;
+        setKpi('kpi-inv-annualr', (r || isCustom) ? '—' : (invAR >= 0 ? '+' : '') + invAR.toFixed(1) + 'R', (r || isCustom) ? 0 : invAR);
+        setKpi('kpi-inv-wl', r ? '—' : '$' + (d.avgWinDollar||0).toFixed(0) + ' / $' + (d.avgLossDollar||0).toFixed(0));
+        setKpi('kpi-inv-risk', r ? '—' : '$' + (d.riskPerTrade||0).toFixed(0));
         if (!r && d.currentAllocation) {
           const s1 = document.getElementById('alloc-spy');
           const s2 = document.getElementById('alloc-stocks');
@@ -680,44 +650,24 @@ export function dashboardPage(): string {
         }
       }
 
-      if (s === 'B') {
-        setKpi('kpi-b-cumreturn', r ? '—' : fmtPct(cumRet), r ? 0 : cumRet);
-        setKpi('kpi-b-maxdd', r ? '—' : fmtPct(maxDD), r ? 0 : maxDD);
-        setKpi('kpi-b-winrate', wr.toFixed(1) + '%', wr >= 50 ? 1 : -1);
-        setKpi('kpi-b-evr', (evR >= 0 ? '+' : '') + evR.toFixed(2) + 'R', evR);
-        setKpi('kpi-b-pf', r ? '—' : (pf || 0).toFixed(2));
-        setKpi('kpi-b-trades', trades);
-        const fillsB = document.getElementById('kpi-b-fills');
-        if (fillsB) fillsB.textContent = (r || isCustom) ? '' : (d.totalFills || 0) + ' fills';
-        setKpi('kpi-b-pnl', r ? fmtPnl(evDollar) + '/trade' : fmtPnl(tPnl), r ? evDollar : tPnl);
-        setKpi('kpi-b-wl', r ? '—' : '$' + (d.avgWinDollar||0).toFixed(0) + ' / $' + (d.avgLossDollar||0).toFixed(0));
-        setKpi('kpi-b-risk', r ? '—' : '$' + (d.riskPerTrade||0).toFixed(0));
-        setKpi('kpi-b-sharpe', r ? '—' : (d.sharpeRatio||0).toFixed(2) + ' / ' + (d.sortinoRatio||0).toFixed(2));
-        const bAR = d.projectedAnnualR || 0;
-        setKpi('kpi-b-annualr', (r || isCustom) ? '—' : (bAR >= 0 ? '+' : '') + bAR.toFixed(1) + 'R', (r || isCustom) ? 0 : bAR);
+      if (s === 'Trading') {
+        setKpi('kpi-trd-cumreturn', r ? '—' : fmtPct(cumRet), r ? 0 : cumRet);
+        setKpi('kpi-trd-maxdd', r ? '—' : fmtPct(maxDD), r ? 0 : maxDD);
+        setKpi('kpi-trd-winrate', wr.toFixed(1) + '%', wr >= 50 ? 1 : -1);
+        setKpi('kpi-trd-evr', (evR >= 0 ? '+' : '') + evR.toFixed(2) + 'R', evR);
+        setKpi('kpi-trd-pf', r ? '—' : (pf || 0).toFixed(2));
+        setKpi('kpi-trd-trades', trades);
+        const fillsTrd = document.getElementById('kpi-trd-fills');
+        if (fillsTrd) fillsTrd.textContent = (r || isCustom) ? '' : (d.totalFills || 0) + ' fills';
+        setKpi('kpi-trd-pnl', r ? fmtPnl(evDollar) + '/trade' : fmtPnl(tPnl), r ? evDollar : tPnl);
+        setKpi('kpi-trd-wl', r ? '—' : '$' + (d.avgWinDollar||0).toFixed(0) + ' / $' + (d.avgLossDollar||0).toFixed(0));
+        setKpi('kpi-trd-risk', r ? '—' : '$' + (d.riskPerTrade||0).toFixed(0));
+        setKpi('kpi-trd-sharpe', r ? '—' : (d.sharpeRatio||0).toFixed(2) + ' / ' + (d.sortinoRatio||0).toFixed(2));
+        const trdAR = d.projectedAnnualR || 0;
+        setKpi('kpi-trd-annualr', (r || isCustom) ? '—' : (trdAR >= 0 ? '+' : '') + trdAR.toFixed(1) + 'R', (r || isCustom) ? 0 : trdAR);
         const r30 = d.rollingMetrics && d.rollingMetrics['30d'] ? d.rollingMetrics['30d'] : {};
         const r90 = d.rollingMetrics && d.rollingMetrics['90d'] ? d.rollingMetrics['90d'] : {};
-        setRolling('b', r30, r90);
-      }
-
-      if (s === 'C') {
-        setKpi('kpi-c-cumreturn', r ? '—' : fmtPct(cumRet), r ? 0 : cumRet);
-        setKpi('kpi-c-maxdd', r ? '—' : fmtPct(maxDD), r ? 0 : maxDD);
-        setKpi('kpi-c-winrate', wr.toFixed(1) + '%', wr >= 50 ? 1 : -1);
-        setKpi('kpi-c-evr', (evR >= 0 ? '+' : '') + evR.toFixed(2) + 'R', evR);
-        setKpi('kpi-c-pf', r ? '—' : (pf || 0).toFixed(2));
-        setKpi('kpi-c-trades', trades);
-        const fillsC = document.getElementById('kpi-c-fills');
-        if (fillsC) fillsC.textContent = (r || isCustom) ? '' : (d.totalFills || 0) + ' fills';
-        setKpi('kpi-c-pnl', r ? fmtPnl(evDollar) + '/trade' : fmtPnl(tPnl), r ? evDollar : tPnl);
-        setKpi('kpi-c-wl', r ? '—' : '$' + (d.avgWinDollar||0).toFixed(0) + ' / $' + (d.avgLossDollar||0).toFixed(0));
-        setKpi('kpi-c-risk', r ? '—' : '$' + (d.riskPerTrade||0).toFixed(0));
-        setKpi('kpi-c-sharpe', r ? '—' : (d.sharpeRatio||0).toFixed(2) + ' / ' + (d.sortinoRatio||0).toFixed(2));
-        const cAR = d.projectedAnnualR || 0;
-        setKpi('kpi-c-annualr', (r || isCustom) ? '—' : (cAR >= 0 ? '+' : '') + cAR.toFixed(1) + 'R', (r || isCustom) ? 0 : cAR);
-        const r30 = d.rollingMetrics && d.rollingMetrics['30d'] ? d.rollingMetrics['30d'] : {};
-        const r90 = d.rollingMetrics && d.rollingMetrics['90d'] ? d.rollingMetrics['90d'] : {};
-        setRolling('c', r30, r90);
+        setRolling('trd', r30, r90);
       }
     }
 

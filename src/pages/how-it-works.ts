@@ -180,7 +180,7 @@ export function howItWorksPage(): string {
             </div>
             <div>
               <span class="text-xs text-white font-semibold block">Upload & Auto-Classify</span>
-              <span class="text-[11px] text-epig-textDim">SPY → A, FUT/OPT → B, other STK → C &mdash; duplicates rejected</span>
+              <span class="text-[11px] text-epig-textDim">SPY + STK → Investing, FUT/FOP + all OPT → Trading &mdash; duplicates rejected</span>
             </div>
           </div>
           <div class="flex items-center gap-3">
@@ -197,68 +197,56 @@ export function howItWorksPage(): string {
     </div>
 
     <!-- ════════════════════════════════════════════════════════ -->
-    <!-- SECTION 3: THE THREE STRATEGIES                         -->
+    <!-- SECTION 3: THE TWO STRATEGIES                            -->
     <!-- ════════════════════════════════════════════════════════ -->
     <div class="kpi-card mb-8">
       <div class="flex items-center gap-3 mb-6">
         <div class="w-10 h-10 rounded-lg bg-purple-500/15 flex items-center justify-center flex-shrink-0">
           <i class="fas fa-layer-group text-purple-400 text-lg"></i>
         </div>
-        <h2 class="font-bold text-xl">Three Layers. One System.</h2>
+        <h2 class="font-bold text-xl">Two Strategies. One System.</h2>
       </div>
       <p class="text-sm text-epig-textMuted leading-relaxed mb-6">
-        EPIG runs three distinct strategies simultaneously &mdash; each designed for a different return profile.
+        EPIG runs two integrated strategies &mdash; each designed for a different return profile.
         Together, they create a portfolio that protects capital, generates income, and captures asymmetric upside.
       </p>
 
       <div class="space-y-4">
-        <!-- Strategy A -->
-        <div class="rounded-xl border border-orange-500/20 bg-orange-500/[0.03] p-5">
+        <!-- Investing -->
+        <div class="rounded-xl border p-5" style="border-color: rgba(200,169,81,0.3); background: rgba(200,169,81,0.03);">
           <div class="flex items-center gap-3 mb-3">
-            <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg text-xs font-bold uppercase bg-orange-500/15 text-orange-400 border border-orange-500/30">A</span>
+            <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg text-xs font-bold uppercase border" style="background: rgba(200,169,81,0.15); color: #C8A951; border-color: rgba(200,169,81,0.3);">
+              <i class="fas fa-landmark"></i>
+            </span>
             <div>
-              <h3 class="font-bold text-white text-sm">SPY Investments</h3>
-              <span class="text-[11px] text-orange-400/70 font-mono">SPY (S&amp;P 500 ETF) positions</span>
+              <h3 class="font-bold text-white text-sm">Investing</h3>
+              <span class="text-[11px] font-mono" style="color: rgba(200,169,81,0.7);">SPY &amp; individual stocks (STK) &bull; 70% allocation</span>
             </div>
           </div>
           <p class="text-xs text-epig-textDim leading-relaxed">
-            Your core SPY position. Provides broad market exposure and anchors the portfolio with S&amp;P 500 participation.
+            Core equity positions &mdash; SPY for broad market exposure plus select individual stocks for strategic opportunities and sector exposure.
+            Targets <strong class="text-white">2x market returns</strong> through disciplined position management and tactical allocation.
           </p>
         </div>
 
-        <!-- Strategy B -->
+        <!-- Trading -->
         <div class="rounded-xl border border-emerald-500/20 bg-emerald-500/[0.03] p-5">
           <div class="flex items-center gap-3 mb-3">
-            <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg text-xs font-bold uppercase bg-emerald-500/15 text-emerald-400 border border-emerald-500/30">B</span>
+            <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg text-xs font-bold uppercase bg-emerald-500/15 text-emerald-400 border border-emerald-500/30">
+              <i class="fas fa-bolt"></i>
+            </span>
             <div>
-              <h3 class="font-bold text-white text-sm">Futures &amp; Options</h3>
-              <span class="text-[11px] text-emerald-400/70 font-mono">FUT + OPT &bull; MES/ES + verticals &bull; defined risk</span>
+              <h3 class="font-bold text-white text-sm">Trading</h3>
+              <span class="text-[11px] text-emerald-400/70 font-mono">Futures (FUT/FOP) &amp; all options (OPT) &bull; 30% allocation</span>
             </div>
             <span class="ml-auto flex items-center gap-1.5 text-[11px] font-semibold" style="color:#5865F2;">
               <i class="fab fa-discord"></i> Real-Time Alerts
             </span>
           </div>
           <p class="text-xs text-epig-textDim leading-relaxed">
-            All futures and options trades combined &mdash; defined-risk futures with stops, plus options verticals and directional plays.
+            Futures (MES/ES) with defined stops, plus options verticals and directional plays.
             Systematic income generation and asymmetric opportunity capture.
-            <strong class="text-white">Every entry and exit is sent as a Discord alert in real time.</strong>
-          </p>
-        </div>
-
-        <!-- Strategy C -->
-        <div class="rounded-xl border border-purple-500/20 bg-purple-500/[0.03] p-5">
-          <div class="flex items-center gap-3 mb-3">
-            <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg text-xs font-bold uppercase bg-purple-500/15 text-purple-400 border border-purple-500/30">C</span>
-            <div>
-              <h3 class="font-bold text-white text-sm">Stocks (non-SPY)</h3>
-              <span class="text-[11px] text-purple-400/70 font-mono">Individual equities outside SPY</span>
-            </div>
-            <span class="ml-auto flex items-center gap-1.5 text-[11px] font-semibold" style="color:#5865F2;">
-              <i class="fab fa-discord"></i> Real-Time Alerts
-            </span>
-          </div>
-          <p class="text-xs text-epig-textDim leading-relaxed">
-            Individual stock positions outside of SPY &mdash; select equities held for strategic opportunities and sector exposure.
+            Targets <strong class="text-white">50% annual return</strong> on allocated capital.
             <strong class="text-white">Every entry and exit is sent as a Discord alert in real time.</strong>
           </p>
         </div>
@@ -346,7 +334,7 @@ export function howItWorksPage(): string {
 
       <p class="text-sm text-epig-textMuted leading-relaxed mb-6">
         As a subscriber, you receive <strong class="text-white">real-time Discord alerts</strong>
-        every time a Strategy A, B, or C trade is placed.
+        every time an Investing or Trading trade is placed.
       </p>
 
       <!-- Discord alert mockup -->
@@ -362,7 +350,7 @@ export function howItWorksPage(): string {
           <span class="ml-auto text-[10px] text-[#949ba4]">Today at 10:32 AM</span>
         </div>
         <div class="bg-[#1e1f22] rounded-lg p-4 border-l-4 border-emerald-500">
-          <div class="text-xs font-bold text-emerald-400 mb-2">🟢 STRATEGY B &mdash; TRADE ENTRY</div>
+          <div class="text-xs font-bold text-emerald-400 mb-2">🟢 TRADING &mdash; TRADE ENTRY</div>
           <div class="grid grid-cols-2 gap-y-1.5 text-xs">
             <span class="text-[#949ba4]">Instrument</span><span class="text-white font-mono">MES (Micro E-mini)</span>
             <span class="text-[#949ba4]">Direction</span><span class="text-white font-mono">LONG</span>

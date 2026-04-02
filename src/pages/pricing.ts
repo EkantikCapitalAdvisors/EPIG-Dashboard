@@ -21,7 +21,7 @@ export function pricingPage(): string {
           <i class="fas fa-check text-emerald-400"></i> Full performance dashboard
         </div>
         <div class="flex items-center gap-2 text-sm text-epig-textMuted">
-          <i class="fas fa-check text-emerald-400"></i> All three strategy metrics
+          <i class="fas fa-check text-emerald-400"></i> All strategy metrics
         </div>
         <div class="flex items-center gap-2 text-sm text-epig-textMuted">
           <i class="fas fa-check text-emerald-400"></i> Trade-by-trade history
@@ -65,7 +65,7 @@ export function pricingPage(): string {
           </div>
           <div class="flex items-center gap-2 text-sm">
             <i class="fas fa-bell text-blue-400"></i>
-            <span>Trade alerts for all 3 strategies</span>
+            <span>Trade alerts for both strategies</span>
           </div>
           <div class="flex items-center gap-2 text-sm">
             <i class="fas fa-calendar text-blue-400"></i>
@@ -109,7 +109,7 @@ export function pricingPage(): string {
           </div>
           <div class="flex items-center gap-2 text-sm">
             <i class="fas fa-bell text-emerald-400"></i>
-            <span>Trade alerts for all 3 strategies</span>
+            <span>Trade alerts for both strategies</span>
           </div>
           <div class="flex items-center gap-2 text-sm">
             <i class="fas fa-star text-emerald-400"></i>

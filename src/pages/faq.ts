@@ -20,8 +20,8 @@ export function faqPage(): string {
             <i class="fas fa-chevron-down text-epig-textDim text-xs transition-transform group-open:rotate-180"></i>
           </summary>
           <div class="px-5 pb-5 text-sm text-epig-textDim leading-relaxed">
-            EPIG (Ekantik Principal Protection Income &amp; Growth) is a three-layer investment design that combines SPY investments (Strategy A),
-            futures and options trades (Strategy B), and individual stock positions outside SPY (Strategy C). All trades are executed in a real Interactive Brokers account
+            EPIG (Ekantik Principal Protection Income &amp; Growth) is a two-component managed investment strategy: an Investing component (SPY &amp; individual stocks, 70% allocation targeting 2&times; market returns)
+            and a Trading component (futures &amp; options, 30% allocation targeting 50% annual return). All trades are executed in a real Interactive Brokers account
             and shared with full transparency.
           </div>
         </details>
@@ -112,8 +112,8 @@ export function faqPage(): string {
           </summary>
           <div class="px-5 pb-5 text-sm text-epig-textDim leading-relaxed">
             <strong class="text-white">Strategy A:</strong> SPY (S&amp;P 500 ETF).<br>
-            <strong class="text-white">Strategy B:</strong> Micro E-mini S&amp;P 500 (MES), E-mini S&amp;P 500 (ES) futures, and options on SPY, QQQ, and select equities (primarily vertical spreads).<br>
-            <strong class="text-white">Strategy C:</strong> Individual stocks outside of SPY.
+            <strong class="text-white">Strategy B:</strong> Micro E-mini S&amp;P 500 (MES), E-mini S&amp;P 500 (ES) futures, and market-related options on SPY/SPX (primarily vertical spreads).<br>
+            <strong class="text-white">Strategy C:</strong> Individual stocks outside of SPY and options on individual stocks.
           </div>
         </details>
         <details class="group kpi-card !p-0 overflow-hidden">
@@ -123,7 +123,7 @@ export function faqPage(): string {
           </summary>
           <div class="px-5 pb-5 text-sm text-epig-textDim leading-relaxed">
             You can start very small. 1 MES contract requires roughly $1,500 margin and risks ~$30 per trade (20-point stop &times; $5/point).
-            For Strategy B options, minimum risk is the debit paid for a spread (typically $50&ndash;$500 per trade).
+            For Trading strategy options, minimum risk is the debit paid for a spread (typically $50&ndash;$500 per trade).
             There is no minimum on our side &mdash; only your broker&rsquo;s requirements.
           </div>
         </details>
