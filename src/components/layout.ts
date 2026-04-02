@@ -6,7 +6,7 @@ interface SocialMeta {
 }
 
 const SITE_URL = 'https://epig-dashboard.pages.dev'
-const DEFAULT_DESCRIPTION = 'Verified IB trade data \u00b7 3 strategies \u00b7 Real-time Discord alerts \u00b7 Full transparency. See exactly how we protect capital and compound returns \u2014 every trade tracked from a live brokerage account.'
+const DEFAULT_DESCRIPTION = 'Verified IB trade data \u00b7 2 integrated strategies \u00b7 Full transparency. See exactly how we protect capital and compound returns \u2014 every trade tracked from a live brokerage account.'
 const DEFAULT_IMAGE = SITE_URL + '/static/og-image.png'
 
 export function layout(title: string, content: string, social?: SocialMeta): string {
@@ -324,7 +324,7 @@ export function layout(title: string, content: string, social?: SocialMeta): str
       const url = encodeURIComponent(window.location.href);
       const title = encodeURIComponent(document.title);
       const text = encodeURIComponent(
-        'Check out EPIG Investment Design — verified trade performance from a live IB account. 3 strategies, full transparency, real-time Discord alerts.'
+        'Check out EPIG Investment Design — verified trade performance from a live IB account. 2 integrated strategies, full transparency.'
       );
 
       // Desktop sidebar links

@@ -20,9 +20,8 @@ export function adminPage(): string {
       </h2>
       <p class="text-sm text-epig-textDim mb-4">
         Upload your Interactive Brokers Flex Query CSV. Trades are <strong class="text-white">auto-classified</strong>
-        by asset class: <span class="text-blue-400">SPY &rarr; Strategy A</span>,
-        <span class="text-emerald-400">FUT/FOP/market OPT &rarr; Strategy B</span>,
-        <span class="text-amber-400">non-SPY STK/stock OPT &rarr; Strategy C</span>.
+        by asset class: <span style="color:#C8A951">STK &rarr; Investing</span>,
+        <span class="text-emerald-400">FUT/FOP/OPT &rarr; Trading</span>.
         You can change any assignment before confirming.
         <a href="/how-it-works#flex-query-setup" class="text-blue-400 no-underline hover:text-blue-300 ml-1">
           <i class="fas fa-question-circle mr-0.5"></i>How to create a Flex Query
@@ -56,14 +55,11 @@ export function adminPage(): string {
             Step 2: Review &amp; Confirm
           </h2>
           <div class="flex items-center gap-3">
-            <button class="text-xs text-epig-textDim hover:text-white transition-colors" onclick="setAllStrategy('A')">
-              All &rarr; A
+            <button class="text-xs text-epig-textDim hover:text-white transition-colors" onclick="setAllStrategy('Investing')">
+              All &rarr; Investing
             </button>
-            <button class="text-xs text-epig-textDim hover:text-white transition-colors" onclick="setAllStrategy('B')">
-              All &rarr; B
-            </button>
-            <button class="text-xs text-epig-textDim hover:text-white transition-colors" onclick="setAllStrategy('C')">
-              All &rarr; C
+            <button class="text-xs text-epig-textDim hover:text-white transition-colors" onclick="setAllStrategy('Trading')">
+              All &rarr; Trading
             </button>
             <button class="text-xs text-epig-textDim hover:text-white transition-colors" onclick="resetStrategies()">
               Reset Auto
@@ -72,21 +68,18 @@ export function adminPage(): string {
         </div>
 
         <!-- Summary Banner -->
-        <div id="review-summary" class="grid grid-cols-2 md:grid-cols-5 gap-3 mb-4"></div>
+        <div id="review-summary" class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4"></div>
 
         <!-- Filter Tabs -->
         <div class="flex gap-2 mb-4" id="filter-tabs">
           <button class="px-3 py-1.5 text-xs font-semibold rounded-lg bg-blue-500/15 text-blue-400 border border-blue-500/30" onclick="filterTrades('all')" data-filter="all">
             All <span id="count-all"></span>
           </button>
-          <button class="px-3 py-1.5 text-xs font-semibold rounded-lg bg-epig-card text-epig-textDim border border-epig-border" onclick="filterTrades('A')" data-filter="A">
-            <span class="text-blue-400">A</span> SPY <span id="count-A"></span>
+          <button class="px-3 py-1.5 text-xs font-semibold rounded-lg bg-epig-card text-epig-textDim border border-epig-border" onclick="filterTrades('Investing')" data-filter="Investing">
+            <span style="color:#C8A951">Investing</span> STK <span id="count-Investing"></span>
           </button>
-          <button class="px-3 py-1.5 text-xs font-semibold rounded-lg bg-epig-card text-epig-textDim border border-epig-border" onclick="filterTrades('B')" data-filter="B">
-            <span class="text-emerald-400">B</span> FUT/OPT <span id="count-B"></span>
-          </button>
-          <button class="px-3 py-1.5 text-xs font-semibold rounded-lg bg-epig-card text-epig-textDim border border-epig-border" onclick="filterTrades('C')" data-filter="C">
-            <span class="text-amber-400">C</span> Stocks/OPT <span id="count-C"></span>
+          <button class="px-3 py-1.5 text-xs font-semibold rounded-lg bg-epig-card text-epig-textDim border border-epig-border" onclick="filterTrades('Trading')" data-filter="Trading">
+            <span class="text-emerald-400">Trading</span> FUT/OPT <span id="count-Trading"></span>
           </button>
         </div>
 
@@ -138,22 +131,18 @@ export function adminPage(): string {
     </div>
 
     <!-- Stats -->
-    <div class="grid grid-cols-2 md:grid-cols-5 gap-4 mb-6" id="admin-stats">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6" id="admin-stats">
       <div class="kpi-card text-center">
         <div class="kpi-label">Total Trades</div>
         <div class="kpi-value text-white" id="stat-trades">...</div>
       </div>
       <div class="kpi-card text-center">
-        <div class="kpi-label">Strategy A</div>
-        <div class="kpi-value text-blue-400" id="stat-a">...</div>
+        <div class="kpi-label">Investing</div>
+        <div class="kpi-value" style="color:#C8A951" id="stat-investing">...</div>
       </div>
       <div class="kpi-card text-center">
-        <div class="kpi-label">Strategy B</div>
-        <div class="kpi-value text-emerald-400" id="stat-b">...</div>
-      </div>
-      <div class="kpi-card text-center">
-        <div class="kpi-label">Strategy C</div>
-        <div class="kpi-value text-amber-400" id="stat-c">...</div>
+        <div class="kpi-label">Trading</div>
+        <div class="kpi-value text-emerald-400" id="stat-trading">...</div>
       </div>
       <div class="kpi-card text-center">
         <div class="kpi-label">DB Status</div>
@@ -186,18 +175,18 @@ export function adminPage(): string {
       <div id="wipe-status" class="hidden text-sm p-3 rounded-lg mt-3"></div>
     </div>
 
-    <!-- Strategy A Allocation (collapsible — separate from upload flow) -->
+    <!-- Investing Allocation (collapsible — separate from upload flow) -->
     <div class="kpi-card mb-6">
       <button class="w-full flex items-center justify-between" onclick="document.getElementById('alloc-panel').classList.toggle('hidden'); this.querySelector('.alloc-arrow').classList.toggle('rotate-180');">
         <h2 class="font-bold text-lg flex items-center gap-2">
           <i class="fas fa-chart-pie text-blue-400"></i>
-          Strategy A &mdash; Allocation Snapshot
+          Investing &mdash; Allocation Snapshot
         </h2>
         <i class="fas fa-chevron-down text-epig-textDim alloc-arrow transition-transform duration-200"></i>
       </button>
       <div id="alloc-panel" class="hidden mt-4">
         <p class="text-sm text-epig-textDim mb-4">
-          Record a new allocation split for Strategy A. This is separate from trade uploads &mdash;
+          Record a new allocation split for Investing. This is separate from trade uploads &mdash;
           it tracks how the portfolio is allocated across SPY, individual stocks, and cash.
         </p>
         <div class="grid grid-cols-1 sm:grid-cols-4 gap-4">
@@ -281,13 +270,11 @@ export function adminPage(): string {
         try {
           const stratRes = await fetch('/api/admin/strategy-counts');
           const strat = await stratRes.json();
-          document.getElementById('stat-a').textContent = strat.A || '0';
-          document.getElementById('stat-b').textContent = strat.B || '0';
-          document.getElementById('stat-c').textContent = strat.C || '0';
+          document.getElementById('stat-investing').textContent = strat.Investing || '0';
+          document.getElementById('stat-trading').textContent = strat.Trading || '0';
         } catch(e) {
-          document.getElementById('stat-a').textContent = '-';
-          document.getElementById('stat-b').textContent = '-';
-          document.getElementById('stat-c').textContent = '-';
+          document.getElementById('stat-investing').textContent = '-';
+          document.getElementById('stat-trading').textContent = '-';
         }
       } catch(e) {
         document.getElementById('stat-db').textContent = 'Offline';
@@ -411,9 +398,8 @@ export function adminPage(): string {
       const summaryEl = document.getElementById('review-summary');
       summaryEl.innerHTML =
         '<div class="bg-epig-bg rounded-lg p-3 text-center"><div class="text-xs text-epig-textDim">Total</div><div class="font-bold font-mono text-white">' + parsedTrades.length + '</div></div>' +
-        '<div class="bg-blue-500/10 border border-blue-500/20 rounded-lg p-3 text-center"><div class="text-xs text-blue-400">A (SPY)</div><div class="font-bold font-mono text-blue-400" id="summary-a">' + countStrategy('A') + '</div></div>' +
-        '<div class="bg-emerald-500/10 border border-emerald-500/20 rounded-lg p-3 text-center"><div class="text-xs text-emerald-400">B (FUT/OPT)</div><div class="font-bold font-mono text-emerald-400" id="summary-b">' + countStrategy('B') + '</div></div>' +
-        '<div class="bg-amber-500/10 border border-amber-500/20 rounded-lg p-3 text-center"><div class="text-xs text-amber-400">C (Stocks/OPT)</div><div class="font-bold font-mono text-amber-400" id="summary-c">' + countStrategy('C') + '</div></div>' +
+        '<div style="background:rgba(200,169,81,0.1);border:1px solid rgba(200,169,81,0.2)" class="rounded-lg p-3 text-center"><div class="text-xs" style="color:#C8A951">Investing (STK)</div><div class="font-bold font-mono" style="color:#C8A951" id="summary-investing">' + countStrategy('Investing') + '</div></div>' +
+        '<div class="bg-emerald-500/10 border border-emerald-500/20 rounded-lg p-3 text-center"><div class="text-xs text-emerald-400">Trading (FUT/OPT)</div><div class="font-bold font-mono text-emerald-400" id="summary-trading">' + countStrategy('Trading') + '</div></div>' +
         '<div class="bg-purple-500/10 border border-purple-500/20 rounded-lg p-3 text-center"><div class="text-xs text-purple-400">Spreads</div><div class="font-bold font-mono text-purple-400">' + countSpreads() + '</div></div>';
 
       updateCounts();
@@ -425,11 +411,12 @@ export function adminPage(): string {
 
     function renderTradeRows() {
       const tbody = document.getElementById('review-tbody');
-      const strategyColors = { A: 'blue', B: 'emerald', C: 'amber' };
+      const strategyColors = { Investing: 'gold', Trading: 'emerald' };
 
       tbody.innerHTML = parsedTrades.map((t, idx) => {
         const hidden = currentFilter !== 'all' && t.strategy !== currentFilter ? 'style="display:none"' : '';
-        const color = strategyColors[t.strategy] || 'blue';
+        const selectStyle = t.strategy === 'Investing' ? 'color:#C8A951' : '';
+        const selectClass = t.strategy === 'Trading' ? 'text-emerald-400' : '';
         const sideColor = t.side === 'BUY' ? 'text-emerald-400' : 'text-red-400';
         const cashColor = t.netCash >= 0 ? 'text-emerald-400' : 'text-red-400';
         const spreadBg = t.spreadGroup ? ' bg-purple-500/[0.04]' : '';
@@ -441,10 +428,9 @@ export function adminPage(): string {
 
         return '<tr class="border-b border-epig-border/30 trade-row hover:bg-white/[0.02]' + spreadBg + '" data-idx="' + idx + '" data-strategy="' + t.strategy + '" ' + hidden + '>' +
           '<td class="px-2 py-1.5">' +
-            '<select class="bg-epig-bg border border-epig-border rounded px-1.5 py-1 text-xs font-bold text-' + color + '-400 focus:outline-none focus:border-blue-500 strategy-select" data-idx="' + idx + '" onchange="changeStrategy(' + idx + ', this.value)">' +
-            '<option value="A"' + (t.strategy==='A' ? ' selected' : '') + ' class="text-blue-400">A</option>' +
-            '<option value="B"' + (t.strategy==='B' ? ' selected' : '') + ' class="text-emerald-400">B</option>' +
-            '<option value="C"' + (t.strategy==='C' ? ' selected' : '') + ' class="text-amber-400">C</option>' +
+            '<select class="bg-epig-bg border border-epig-border rounded px-1.5 py-1 text-xs font-bold ' + selectClass + ' focus:outline-none focus:border-blue-500 strategy-select" style="' + selectStyle + '" data-idx="' + idx + '" onchange="changeStrategy(' + idx + ', this.value)">' +
+            '<option value="Investing"' + (t.strategy==='Investing' ? ' selected' : '') + ' style="color:#C8A951">Investing</option>' +
+            '<option value="Trading"' + (t.strategy==='Trading' ? ' selected' : '') + ' class="text-emerald-400">Trading</option>' +
             '</select></td>' +
           '<td class="px-2 py-1.5 text-xs font-mono text-epig-textDim">' + t.assetClass + '</td>' +
           '<td class="px-2 py-1.5">' + spreadBadge + '</td>' +
@@ -465,8 +451,13 @@ export function adminPage(): string {
       updateCounts();
       // Update the select color
       const select = document.querySelector('select[data-idx="' + idx + '"]');
-      const colors = { A: 'text-blue-400', B: 'text-emerald-400', C: 'text-amber-400' };
-      select.className = select.className.replace(/text-(blue|emerald|amber)-400/g, colors[newStrategy]);
+      if (newStrategy === 'Investing') {
+        select.style.color = '#C8A951';
+        select.className = select.className.replace(/text-emerald-400/g, '');
+      } else {
+        select.style.color = '';
+        select.className = select.className.replace(/text-emerald-400/g, '') + ' text-emerald-400';
+      }
     }
 
     function setAllStrategy(strategy) {
@@ -506,15 +497,13 @@ export function adminPage(): string {
     function countSpreads() { const groups = new Set(parsedTrades.filter(t => t.spreadGroup).map(t => t.spreadGroup)); return groups.size; }
 
     function updateCounts() {
-      const a = countStrategy('A'), b = countStrategy('B'), c = countStrategy('C');
+      const inv = countStrategy('Investing'), trd = countStrategy('Trading');
       const el = (id) => document.getElementById(id);
       if (el('count-all')) el('count-all').textContent = '(' + parsedTrades.length + ')';
-      if (el('count-A')) el('count-A').textContent = '(' + a + ')';
-      if (el('count-B')) el('count-B').textContent = '(' + b + ')';
-      if (el('count-C')) el('count-C').textContent = '(' + c + ')';
-      if (el('summary-a')) el('summary-a').textContent = a;
-      if (el('summary-b')) el('summary-b').textContent = b;
-      if (el('summary-c')) el('summary-c').textContent = c;
+      if (el('count-Investing')) el('count-Investing').textContent = '(' + inv + ')';
+      if (el('count-Trading')) el('count-Trading').textContent = '(' + trd + ')';
+      if (el('summary-investing')) el('summary-investing').textContent = inv;
+      if (el('summary-trading')) el('summary-trading').textContent = trd;
       if (el('ingest-count')) el('ingest-count').textContent = '(' + parsedTrades.length + ')';
     }
 

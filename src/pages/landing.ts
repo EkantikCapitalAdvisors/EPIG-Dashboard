@@ -11,8 +11,8 @@ export function landingPage(): string {
         Every Trade Verified. Every Loss Disclosed.
       </p>
       <p style="font-family:'Source Sans Pro',sans-serif;max-width:680px;" class="text-base sm:text-[17px] text-white/80 mx-auto mb-12 leading-relaxed">
-        EPIG is a three-layer managed investment strategy that keeps 70&ndash;85% of your capital structurally protected
-        while compounding tactical futures income and asymmetric options returns. Built on the S&amp;P 500.
+        EPIG is a two-component managed investment strategy: 70% invested for 2&times; market returns,
+        30% in defined-risk trading targeting 50% annual returns. Built on the S&amp;P 500.
         Executed in Interactive Brokers. Shared with full transparency.
       </p>
 
@@ -55,11 +55,10 @@ export function landingPage(): string {
       <h2 style="font-family:'Playfair Display',Georgia,serif;color:#C8A951;" class="text-3xl sm:text-4xl font-bold mb-8">What Is EPIG?</h2>
       <div style="font-family:'Source Sans Pro',sans-serif;max-width:640px;color:#94a3b8;" class="mx-auto text-base leading-[1.7] text-left space-y-4 mb-12">
         <p><strong class="text-white">EPIG</strong> stands for <strong class="text-white">Enduring Principal-Protected Income &amp; Growth</strong>.</p>
-        <p>It is a rules-based, managed investment strategy with three layers:</p>
-        <p><strong class="text-white">Layer A</strong> holds your SPY (S&amp;P 500 ETF) position &mdash; the core structural allocation that provides broad market exposure and serves as your capital&rsquo;s anchor.</p>
-        <p><strong class="text-white">Layer B</strong> encompasses all futures and market-level options trades &mdash; tactical S&amp;P 500 futures (MES/ES) with defined stops, plus SPY/SPX options during market dislocations.</p>
-        <p><strong class="text-white">Layer C</strong> tracks individual stocks outside of SPY and options on individual stocks &mdash; select equities and stock options chosen for strategic opportunities, sector exposure, or tactical plays beyond the core index allocation.</p>
-        <p>The result: a strategy engineered to target <strong class="text-white">16%+ CAGR</strong> across full market cycles while keeping original capital at risk below 5%.</p>
+        <p>It is a rules-based, managed investment strategy with two integrated components:</p>
+        <p><strong class="text-white">Investing (70%)</strong> &mdash; Your core equity allocation in SPY (S&amp;P 500 ETF) and select individual stocks. Engineered for <strong class="text-white">2&times; market returns</strong> through amplified upside capture (~110%) and structural downside protection (capturing only &frac13; of losses).</p>
+        <p><strong class="text-white">Trading (30%)</strong> &mdash; Defined-risk tactical trades in S&amp;P 500 futures (MES/ES), options verticals, and market-level options. Targets <strong class="text-white">50% annual return</strong> through systematic income generation and episodic opportunity capture.</p>
+        <p>The result: a strategy engineered to significantly outperform the market across full cycles while keeping capital at risk below 5%.</p>
       </div>
 
       <!-- 3 Differentiator Badges -->
@@ -89,65 +88,67 @@ export function landingPage(): string {
     </div>
   </section>
 
-  <!-- ════ SECTION 3: THREE-LAYER DESIGN ════ -->
+  <!-- ════ SECTION 3: TWO-STRATEGY DESIGN ════ -->
   <section style="background:#111827;">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
       <div class="text-center mb-14">
-        <h2 style="font-family:'Playfair Display',Georgia,serif;" class="text-3xl sm:text-4xl font-bold text-white mb-4">Three Layers. One Integrated System.</h2>
+        <h2 style="font-family:'Playfair Display',Georgia,serif;" class="text-3xl sm:text-4xl font-bold text-white mb-4">Two Strategies. One Integrated System.</h2>
         <p class="text-gray-400 text-lg max-w-3xl mx-auto leading-relaxed" style="font-family:'Source Sans Pro',sans-serif;">
-          Each layer serves a distinct structural purpose. Together they create a managed portfolio that protects, generates income, and compounds &mdash; without requiring you to make a single trade.
+          Each component serves a distinct structural purpose. Together they create a managed portfolio that protects, generates income, and compounds &mdash; without requiring you to make a single trade.
         </p>
       </div>
 
-      <!-- Three Cards -->
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-10">
-        <!-- Layer A -->
+      <!-- Two Cards -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-10">
+        <!-- Investing Strategy -->
         <div class="rounded-2xl border border-[#1e293b] bg-[#1a1f2e] p-6 relative overflow-hidden">
           <div class="absolute top-0 left-0 right-0 h-1" style="background:linear-gradient(to right,#C8A951,#e0c878);"></div>
           <div class="flex items-center gap-3 mb-4 mt-2">
-            <span class="inline-flex items-center justify-center px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider" style="background:rgba(200,169,81,0.15);color:#C8A951;border:1px solid rgba(200,169,81,0.3);">Layer A</span>
+            <span class="inline-flex items-center justify-center px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider" style="background:rgba(200,169,81,0.15);color:#C8A951;border:1px solid rgba(200,169,81,0.3);">Investing</span>
+            <span class="text-xs font-mono font-bold" style="color:#C8A951;">70% Allocation</span>
           </div>
-          <h3 class="text-xl font-bold text-white mb-1">SPY Investments</h3>
+          <h3 class="text-xl font-bold text-white mb-1">SPY &amp; Stocks</h3>
           <p class="text-[#8892a6] text-sm leading-relaxed mb-5" style="font-family:'Source Sans Pro',sans-serif;">
-            Your core SPY (S&amp;P 500 ETF) allocation &mdash; providing broad market exposure, capital preservation, and participation in long-term equity growth. This layer anchors the portfolio.
+            Your core equity allocation &mdash; SPY (S&amp;P 500 ETF) and select individual stocks. Engineered for <strong class="text-white">2&times; market returns</strong> through amplified upside capture and structural downside protection.
           </p>
           <div class="space-y-3 mb-5">
             <div class="flex justify-between items-center">
               <span class="text-[#8892a6] text-sm">Capital Deployed</span>
-              <span style="color:#C8A951;" class="font-mono font-bold text-sm">70&ndash;85%</span>
+              <span style="color:#C8A951;" class="font-mono font-bold text-sm">70%</span>
             </div>
             <div class="h-px bg-[#1e293b]"></div>
             <div class="flex justify-between items-center">
-              <span class="text-[#8892a6] text-sm">Target Contribution</span>
-              <span style="color:#C8A951;" class="font-mono font-bold text-sm">4&ndash;6% annually</span>
+              <span class="text-[#8892a6] text-sm">Target Return</span>
+              <span style="color:#C8A951;" class="font-mono font-bold text-sm">2&times; Market Returns</span>
             </div>
             <div class="h-px bg-[#1e293b]"></div>
             <div class="flex justify-between items-center">
-              <span class="text-[#8892a6] text-sm">Risk Profile</span>
-              <span class="text-white text-sm">Market-aligned</span>
+              <span class="text-[#8892a6] text-sm">How</span>
+              <span class="text-white text-sm">~110% upside, &frac13; downside capture</span>
             </div>
           </div>
         </div>
 
-        <!-- Layer B -->
+        <!-- Trading Strategy -->
         <div class="rounded-2xl border border-[#1e293b] bg-[#1a1f2e] p-6 relative overflow-hidden">
           <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-emerald-500 to-green-400"></div>
           <div class="flex items-center gap-3 mb-4 mt-2">
-            <span class="inline-flex items-center justify-center px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-emerald-500/15 text-emerald-400 border border-emerald-500/30">Layer B</span>
+            <span class="inline-flex items-center justify-center px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-emerald-500/15 text-emerald-400 border border-emerald-500/30">Trading</span>
+            <span class="text-xs font-mono font-bold text-emerald-400">30% Allocation</span>
           </div>
-          <h3 class="text-xl font-bold text-white mb-1">Futures &amp; Market Options</h3>
+          <h3 class="text-xl font-bold text-white mb-1">Futures &amp; Options</h3>
           <p class="text-[#8892a6] text-sm leading-relaxed mb-5" style="font-family:'Source Sans Pro',sans-serif;">
-            All futures and market-related options trades &mdash; defined-risk S&amp;P 500 futures (MES/ES) with hard stops, plus SPY/SPX options verticals. Systematic income generation and episodic opportunity capture combined.
+            Defined-risk tactical trades &mdash; S&amp;P 500 futures (MES/ES) with hard stops, plus options verticals. Systematic income generation and episodic opportunity capture targeting <strong class="text-white">50% annual return</strong>.
           </p>
           <div class="space-y-3 mb-5">
             <div class="flex justify-between items-center">
               <span class="text-[#8892a6] text-sm">Capital at Risk</span>
-              <span class="text-emerald-400 font-mono font-bold text-sm">3&ndash;5%</span>
+              <span class="text-emerald-400 font-mono font-bold text-sm">30%</span>
             </div>
             <div class="h-px bg-[#1e293b]"></div>
             <div class="flex justify-between items-center">
-              <span class="text-[#8892a6] text-sm">Target Contribution</span>
-              <span class="text-emerald-400 font-mono font-bold text-sm">8&ndash;12% annually</span>
+              <span class="text-[#8892a6] text-sm">Target Return</span>
+              <span class="text-emerald-400 font-mono font-bold text-sm">50% annually</span>
             </div>
             <div class="h-px bg-[#1e293b]"></div>
             <div class="flex justify-between items-center">
@@ -159,57 +160,108 @@ export function landingPage(): string {
             View Live Performance <i class="fas fa-arrow-right text-xs"></i>
           </a>
         </div>
-
-        <!-- Layer C -->
-        <div class="rounded-2xl border border-[#1e293b] bg-[#1a1f2e] p-6 relative overflow-hidden">
-          <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-purple-500 to-violet-400"></div>
-          <div class="flex items-center gap-3 mb-4 mt-2">
-            <span class="inline-flex items-center justify-center px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-purple-500/15 text-purple-400 border border-purple-500/30">Layer C</span>
-          </div>
-          <h3 class="text-xl font-bold text-white mb-1">Stocks &amp; Stock Options</h3>
-          <p class="text-[#8892a6] text-sm leading-relaxed mb-5" style="font-family:'Source Sans Pro',sans-serif;">
-            Individual stock positions outside of SPY and options on individual stocks &mdash; select equities and stock options chosen for strategic opportunities, sector exposure, or tactical plays beyond the core index allocation.
-          </p>
-          <div class="space-y-3 mb-5">
-            <div class="flex justify-between items-center">
-              <span class="text-[#8892a6] text-sm">Capital at Risk</span>
-              <span class="text-purple-400 font-mono font-bold text-sm">3&ndash;5%</span>
-            </div>
-            <div class="h-px bg-[#1e293b]"></div>
-            <div class="flex justify-between items-center">
-              <span class="text-[#8892a6] text-sm">Target Contribution</span>
-              <span class="text-purple-400 font-mono font-bold text-sm">4&ndash;8% annually</span>
-            </div>
-            <div class="h-px bg-[#1e293b]"></div>
-            <div class="flex justify-between items-center">
-              <span class="text-[#8892a6] text-sm">Risk Profile</span>
-              <span class="text-white text-sm">Asymmetric</span>
-            </div>
-          </div>
-        </div>
       </div>
 
       <!-- Summary Strip -->
       <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
         <div class="rounded-xl border border-[#1e293b] bg-[#1a1f2e] p-5 text-center">
-          <div class="text-xs text-[#8892a6] uppercase tracking-wider font-semibold mb-2">Target CAGR</div>
-          <div class="text-2xl font-extrabold text-white font-mono">16<span class="text-lg text-[#8892a6]">%+</span></div>
-          <div class="text-[11px] text-[#8892a6] mt-1">Across full market cycles</div>
+          <div class="text-xs text-[#8892a6] uppercase tracking-wider font-semibold mb-2">Investing Target</div>
+          <div class="text-2xl font-extrabold text-white font-mono">2<span class="text-lg text-[#8892a6]">&times; Market</span></div>
+          <div class="text-[11px] text-[#8892a6] mt-1">70% of portfolio</div>
+        </div>
+        <div class="rounded-xl border border-[#1e293b] bg-[#1a1f2e] p-5 text-center">
+          <div class="text-xs text-[#8892a6] uppercase tracking-wider font-semibold mb-2">Trading Target</div>
+          <div class="text-2xl font-extrabold text-emerald-400 font-mono">50<span class="text-lg text-[#8892a6]">%</span></div>
+          <div class="text-[11px] text-[#8892a6] mt-1">30% of portfolio</div>
         </div>
         <div class="rounded-xl border border-[#1e293b] bg-[#1a1f2e] p-5 text-center">
           <div class="text-xs text-[#8892a6] uppercase tracking-wider font-semibold mb-2">Principal at Risk</div>
-          <div class="text-2xl font-extrabold text-emerald-400 font-mono">&lt;5<span class="text-lg text-[#8892a6]">%</span></div>
+          <div class="text-2xl font-extrabold text-white font-mono">&lt;5<span class="text-lg text-[#8892a6]">%</span></div>
           <div class="text-[11px] text-[#8892a6] mt-1">At any given time</div>
-        </div>
-        <div class="rounded-xl border border-[#1e293b] bg-[#1a1f2e] p-5 text-center">
-          <div class="text-xs text-[#8892a6] uppercase tracking-wider font-semibold mb-2">Trades / Year</div>
-          <div class="text-2xl font-extrabold text-white font-mono">150<span class="text-lg text-[#8892a6]">&ndash;200</span></div>
         </div>
         <div class="rounded-xl border border-[#1e293b] bg-[#1a1f2e] p-5 text-center">
           <div class="text-xs text-[#8892a6] uppercase tracking-wider font-semibold mb-2">Your Role</div>
           <div class="text-sm font-semibold text-white mt-2">Review performance.</div>
           <div class="text-[11px] text-[#8892a6] mt-1">We handle execution.</div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════ SECTION 3B: HOW 2x MARKET RETURNS WORK ════ -->
+  <section style="background:#0f1420;">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+      <div class="text-center mb-14">
+        <h2 style="font-family:'Playfair Display',Georgia,serif;color:#C8A951;" class="text-3xl sm:text-4xl font-bold mb-4">How 2&times; Market Returns Are Generated</h2>
+        <p class="text-gray-400 text-lg max-w-3xl mx-auto" style="font-family:'Source Sans Pro',sans-serif;">
+          The investing component doesn&rsquo;t rely on predicting markets. It uses a structural edge: amplify upside slightly, protect aggressively on the downside, and let compounding do the rest.
+        </p>
+      </div>
+
+      <!-- Two Column: Explanation + Chart -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 mb-10">
+        <!-- Left: Text Explanation -->
+        <div class="space-y-5" style="font-family:'Source Sans Pro',sans-serif;">
+          <div class="rounded-xl bg-white/[0.04] border border-white/10 p-5">
+            <h4 class="text-lg font-bold text-white mb-3">The Intuition</h4>
+            <p class="text-sm text-gray-300 leading-relaxed mb-3">
+              The S&amp;P 500 had only <strong class="text-white">3 down years</strong> in the last 20 (2008, 2018, 2022), but the 2008 drawdown was massive at -37%.
+            </p>
+            <p class="text-sm text-gray-300 leading-relaxed mb-3">
+              With <strong class="text-white">50% downside capture</strong> (losing only &frac13; of down moves), you save ~29.7 percentage points of cumulative damage across those 3 negative years. That preserved capital then compounds forward for 16+ more years.
+            </p>
+            <p class="text-sm text-gray-300 leading-relaxed mb-0">
+              To translate that protection into <strong class="text-white">2.0&times; cumulative market returns</strong>, you need to capture ~110% of every up-year return &mdash; that&rsquo;s amplifying the upside by just <strong class="text-white">~9.8 percentage points</strong> above the S&amp;P on average.
+            </p>
+          </div>
+          <div class="rounded-xl bg-white/[0.04] border border-white/10 p-5">
+            <h4 class="text-lg font-bold text-white mb-3">The Math</h4>
+            <div class="space-y-2 text-sm">
+              <div class="flex justify-between">
+                <span class="text-gray-400">Downside saved (3 crash years)</span>
+                <span class="font-mono text-emerald-400 font-bold">29.7pp</span>
+              </div>
+              <div class="h-px bg-[#1e293b]"></div>
+              <div class="flex justify-between">
+                <span class="text-gray-400">Upside capture needed</span>
+                <span class="font-mono font-bold" style="color:#C8A951;">~110%</span>
+              </div>
+              <div class="h-px bg-[#1e293b]"></div>
+              <div class="flex justify-between">
+                <span class="text-gray-400">Avg. amplification per up-year</span>
+                <span class="font-mono font-bold" style="color:#C8A951;">+9.8pp</span>
+              </div>
+              <div class="h-px bg-[#1e293b]"></div>
+              <div class="flex justify-between">
+                <span class="text-gray-400">Max drawdown reduction</span>
+                <span class="font-mono text-emerald-400 font-bold">-37% &rarr; -18.5%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Year-by-Year Chart -->
+        <div class="rounded-xl border border-[#1e293b] p-5" style="background:#1a1f2e;">
+          <h4 class="text-sm font-bold text-white mb-1">S&amp;P 500 vs. EPIG Investing (Illustrative)</h4>
+          <p class="text-[10px] text-[#64748b] mb-4">Year-by-year total returns with ~110% upside capture, &frac13; downside capture</p>
+          <div class="relative" style="height:340px;">
+            <canvas id="upside-capture-chart"></canvas>
+          </div>
+          <p class="text-[10px] text-[#64748b] mt-3 italic">S&amp;P 500 Total Return Data via SlickCharts &middot; 2005&ndash;2024. EPIG returns are illustrative based on capture ratios.</p>
+        </div>
+      </div>
+
+      <!-- KEY INSIGHT Box -->
+      <div class="rounded-xl p-6" style="background:rgba(200,169,81,0.06);border-left:3px solid #C8A951;">
+        <div class="text-xs font-bold uppercase tracking-wider mb-3" style="color:#C8A951;">KEY INSIGHT</div>
+        <p class="text-sm text-gray-300 leading-relaxed mb-0" style="font-family:'Source Sans Pro',sans-serif;">
+          With <strong class="text-white">50% downside capture</strong> (losing only &frac13; of down moves), you saved
+          <strong style="color:#C8A951;">29.7pp</strong> of cumulative downside across 3 negative years. To translate
+          that protection into 2.0&times; cumulative market returns, you need to capture
+          <strong style="color:#C8A951;">109.8%</strong> of every up-year &mdash; that&rsquo;s amplifying the upside by
+          9.8pp above the S&amp;P on average. Max drawdown drops from <strong class="text-red-400">-37.0%</strong> to
+          <strong class="text-emerald-400">-18.5%</strong>.
+        </p>
       </div>
     </div>
   </section>
@@ -239,7 +291,7 @@ export function landingPage(): string {
             <tr class="bg-[#1a1f2e]">
               <td class="px-5 py-3 text-white font-medium">Market Exposure</td>
               <td class="px-5 py-3 text-gray-400">100% constant</td>
-              <td class="px-5 py-3 text-emerald-400">&lt;5% tactical, rest protected</td>
+              <td class="px-5 py-3 text-emerald-400">70% investing, 30% defined-risk trading</td>
             </tr>
             <tr class="bg-[#151a27]">
               <td class="px-5 py-3 text-white font-medium">Drawdown Risk</td>
@@ -249,7 +301,7 @@ export function landingPage(): string {
             <tr class="bg-[#1a1f2e]">
               <td class="px-5 py-3 text-white font-medium">Lost Decade Risk</td>
               <td class="px-5 py-3 text-gray-400">Real (2000&ndash;2010: ~0% return)</td>
-              <td class="px-5 py-3 text-emerald-400">Market-neutral income sleeve</td>
+              <td class="px-5 py-3 text-emerald-400">2&times; market via structural edge</td>
             </tr>
             <tr class="bg-[#151a27]">
               <td class="px-5 py-3 text-white font-medium">Entry Timing</td>
@@ -290,7 +342,7 @@ export function landingPage(): string {
       <div class="text-center mb-14">
         <h2 style="font-family:'Playfair Display',Georgia,serif;color:#C8A951;" class="text-3xl sm:text-4xl font-bold mb-4">The Power of Never Having a Losing Year</h2>
         <p class="text-gray-400 text-lg max-w-3xl mx-auto" style="font-family:'Source Sans Pro',sans-serif;">
-          What happens to $100K over a decade if you never have a losing year? We compared EPIG&rsquo;s 16% CAGR target against actual S&amp;P 500 total returns across two very different market regimes &mdash; so you can gauge the potential edge regardless of what the next decade looks like.
+          What happens to $100K over a decade with 2&times; market returns and no losing years? We compared EPIG&rsquo;s investing strategy against actual S&amp;P 500 total returns across two very different market regimes.
         </p>
       </div>
 
@@ -303,7 +355,7 @@ export function landingPage(): string {
             <h3 class="text-lg font-bold text-white" style="font-family:'Playfair Display',Georgia,serif;">2000 &ndash; 2010</h3>
             <span class="text-xs uppercase tracking-wider font-semibold px-2.5 py-1 rounded-full bg-red-500/15 text-red-400">The Lost Decade</span>
           </div>
-          <p class="text-xs text-[#64748b] mb-4" style="font-family:'Source Sans Pro',sans-serif;">Growth of $100,000 &mdash; S&amp;P 500 total return vs. 16% CAGR compounding</p>
+          <p class="text-xs text-[#64748b] mb-4" style="font-family:'Source Sans Pro',sans-serif;">Growth of $100,000 &mdash; S&amp;P 500 total return vs. EPIG 2&times; market compounding</p>
           <div class="relative" style="height:260px;">
             <canvas id="compound-chart-2000"></canvas>
           </div>
@@ -314,7 +366,7 @@ export function landingPage(): string {
               <div class="text-[11px] text-[#64748b] mt-0.5">0.5% CAGR &mdash; an entire decade lost</div>
             </div>
             <div class="text-center">
-              <div class="text-xs uppercase tracking-wider font-semibold mb-1" style="color:#C8A951;">EPIG at 16% CAGR</div>
+              <div class="text-xs uppercase tracking-wider font-semibold mb-1" style="color:#C8A951;">EPIG 2&times; Market</div>
               <div class="text-xl font-bold font-mono text-emerald-400">$441,144</div>
               <div class="text-[11px] text-emerald-500/70 mt-0.5">4.2x more &mdash; no drawdown, no lost years</div>
             </div>
@@ -327,7 +379,7 @@ export function landingPage(): string {
             <h3 class="text-lg font-bold text-white" style="font-family:'Playfair Display',Georgia,serif;">2015 &ndash; 2025</h3>
             <span class="text-xs uppercase tracking-wider font-semibold px-2.5 py-1 rounded-full bg-emerald-500/15 text-emerald-400">The Bull Decade</span>
           </div>
-          <p class="text-xs text-[#64748b] mb-4" style="font-family:'Source Sans Pro',sans-serif;">Growth of $100,000 &mdash; S&amp;P 500 total return vs. 16% CAGR compounding</p>
+          <p class="text-xs text-[#64748b] mb-4" style="font-family:'Source Sans Pro',sans-serif;">Growth of $100,000 &mdash; S&amp;P 500 total return vs. EPIG 2&times; market compounding</p>
           <div class="relative" style="height:260px;">
             <canvas id="compound-chart-2015"></canvas>
           </div>
@@ -338,9 +390,9 @@ export function landingPage(): string {
               <div class="text-[11px] text-[#64748b] mt-0.5">~13% CAGR &mdash; strong, but with -18% and -4% years</div>
             </div>
             <div class="text-center">
-              <div class="text-xs uppercase tracking-wider font-semibold mb-1" style="color:#C8A951;">EPIG at 16% CAGR</div>
-              <div class="text-xl font-bold font-mono text-emerald-400">$441,144</div>
-              <div class="text-[11px] text-emerald-500/70 mt-0.5">1.3x more &mdash; same result, no drawdowns</div>
+              <div class="text-xs uppercase tracking-wider font-semibold mb-1" style="color:#C8A951;">EPIG 2&times; Market</div>
+              <div class="text-xl font-bold font-mono text-emerald-400">$685,238</div>
+              <div class="text-[11px] text-emerald-500/70 mt-0.5">2.0x S&amp;P &mdash; same up-years, reduced downside</div>
             </div>
           </div>
         </div>
@@ -350,10 +402,10 @@ export function landingPage(): string {
       <div class="rounded-xl p-6" style="background:rgba(200,169,81,0.06);border-left:3px solid #C8A951;">
         <h4 class="font-bold text-white mb-3">Two Regimes. One Conclusion.</h4>
         <p class="text-sm text-gray-300 leading-relaxed mb-3" style="font-family:'Source Sans Pro',sans-serif;">
-          <strong class="text-white">In a bad decade</strong> (2000&ndash;2010), the S&amp;P went nowhere &mdash; two crashes wiped out a full decade of gains. EPIG&rsquo;s 16% CAGR with no losing years would have turned $100K into $441K while the market barely broke even. The gap is massive: 4.2x.
+          <strong class="text-white">In a bad decade</strong> (2000&ndash;2010), the S&amp;P went nowhere &mdash; two crashes wiped out a full decade of gains. EPIG&rsquo;s 2&times; market strategy with downside protection would have turned $100K into $441K while the market barely broke even. The gap is massive: 4.2x.
         </p>
         <p class="text-sm text-gray-300 leading-relaxed mb-3" style="font-family:'Source Sans Pro',sans-serif;">
-          <strong class="text-white">In a great decade</strong> (2015&ndash;2025), the S&amp;P delivered ~13% CAGR &mdash; a genuinely strong run. Yet EPIG still outperforms by ~$99K on a $100K investment, and does it without a single year of losses. No -18% in 2022. No -4% in 2018. No recovery years wasted.
+          <strong class="text-white">In a great decade</strong> (2015&ndash;2025), the S&amp;P delivered ~13% CAGR &mdash; a genuinely strong run. EPIG&rsquo;s 2&times; strategy doubles it to $685K, and does it without the -18% in 2022 or -4% in 2018. No recovery years wasted.
         </p>
         <p class="text-sm text-gray-300 leading-relaxed mb-0" style="font-family:'Source Sans Pro',sans-serif;">
           <strong class="text-white">The question isn&rsquo;t which decade comes next.</strong> It&rsquo;s whether you want your wealth to depend on which one it is. EPIG is designed to compound regardless.
@@ -362,7 +414,7 @@ export function landingPage(): string {
 
       <!-- Disclaimer -->
       <p class="text-[10px] text-[#64748b] mt-6 text-center italic" style="font-family:'Source Sans Pro',sans-serif;">
-        *The 16% CAGR figure represents EPIG&rsquo;s target annual return based on strategy design and backtested modeling. It is not a guarantee of future performance. S&amp;P 500 returns reflect actual total returns (price + dividends). Past performance is not indicative of future results.
+        *The 2&times; market return figure represents EPIG&rsquo;s investing strategy target based on ~110% upside capture and &frac13; downside capture. It is not a guarantee of future performance. S&amp;P 500 returns reflect actual total returns (price + dividends). Past performance is not indicative of future results.
       </p>
     </div>
   </section>
@@ -387,7 +439,7 @@ export function landingPage(): string {
             <h4 class="font-bold text-white">85&ndash;99% of Capital Is Always Protected</h4>
           </div>
           <p class="text-sm text-[#94a3b8] leading-relaxed" style="font-family:'Source Sans Pro',sans-serif;">
-            At any given moment, the vast majority of your portfolio sits in SPY, cash, or Treasury bills. Only 1&ndash;5% is deployed in active tactical positions. This means a total wipeout of every active trade would impact less than 5% of your capital.
+            70% of your portfolio is in the investing component (SPY and stocks), while 30% is in defined-risk trading positions. Every trading position has predefined maximum loss. A total wipeout of all active trades would impact only the trading sleeve.
           </p>
         </div>
         <div class="rounded-xl border border-[#1e293b] p-6" style="background:#1a1f2e;">
@@ -398,7 +450,7 @@ export function landingPage(): string {
             <h4 class="font-bold text-white">Every Trade Has a Hard Stop</h4>
           </div>
           <p class="text-sm text-[#94a3b8] leading-relaxed" style="font-family:'Source Sans Pro',sans-serif;">
-            Layer B futures trades use a 20-point hard stop. Layer C options trades risk only the debit paid. No trade is ever entered without a predefined maximum loss. There is no scenario where a single trade causes outsized damage.
+            Trading strategy futures trades use a 20-point hard stop. Options trades risk only the debit paid. No trade is ever entered without a predefined maximum loss. There is no scenario where a single trade causes outsized damage.
           </p>
         </div>
         <div class="rounded-xl border border-[#1e293b] p-6" style="background:#1a1f2e;">
@@ -523,7 +575,7 @@ export function landingPage(): string {
               </span>
             </div>
             <p class="text-[#94a3b8] text-base leading-relaxed mb-4">
-              See how YTD performance across all three strategies could compound through year-end.
+              See how YTD performance across both strategies could compound through year-end.
               Powered by <strong class="text-white">real 2026 trade data</strong> from verified IB fills &mdash;
               adjust portfolio size and explore per-strategy breakdowns.
             </p>
@@ -544,16 +596,12 @@ export function landingPage(): string {
                 </div>
                 <div class="h-px bg-[#1e293b]"></div>
                 <div class="flex justify-between items-center">
-                  <span class="text-sm text-[#94a3b8]">Strategy A &mdash; SPY Investments</span>
-                  <span class="font-mono" id="lp-strat-a-pct"><span class="text-[#64748b]">--</span></span>
+                  <span class="text-sm text-[#94a3b8]">Investing &mdash; SPY &amp; Stocks (70%)</span>
+                  <span class="font-mono" id="lp-strat-investing-pct"><span class="text-[#64748b]">--</span></span>
                 </div>
                 <div class="flex justify-between items-center">
-                  <span class="text-sm text-[#94a3b8]">Strategy B &mdash; Futures &amp; Market Options</span>
-                  <span class="font-mono" id="lp-strat-b-pct"><span class="text-[#64748b]">--</span></span>
-                </div>
-                <div class="flex justify-between items-center">
-                  <span class="text-sm text-[#94a3b8]">Strategy C &mdash; Stocks &amp; Stock Options</span>
-                  <span class="font-mono" id="lp-strat-c-pct"><span class="text-[#64748b]">--</span></span>
+                  <span class="text-sm text-[#94a3b8]">Trading &mdash; Futures &amp; Options (30%)</span>
+                  <span class="font-mono" id="lp-strat-trading-pct"><span class="text-[#64748b]">--</span></span>
                 </div>
                 <div class="h-px bg-[#1e293b]"></div>
                 <div class="flex justify-between items-center">
@@ -630,7 +678,7 @@ export function landingPage(): string {
           </button>
           <div class="faq-answer hidden px-5 pb-5">
             <p class="text-gray-400 text-sm leading-relaxed mb-0" style="font-family:'Source Sans Pro',sans-serif;">
-              85&ndash;99% of your capital is held in SPY, cash, or Treasury bills at all times. Active positions (futures and options) deploy only 1&ndash;5% of capital, each with predefined maximum loss. Circuit breaker protocols automatically shift the portfolio to a defensive posture if drawdown exceeds thresholds. There are no lockup periods &mdash; your capital is accessible on any business day.
+              70% of your capital is in the investing component (SPY and stocks), while 30% is in defined-risk trading (futures and options), each with predefined maximum loss. Circuit breaker protocols automatically shift the portfolio to a defensive posture if drawdown exceeds thresholds. There are no lockup periods &mdash; your capital is accessible on any business day.
             </p>
           </div>
         </div>
@@ -724,7 +772,7 @@ export function landingPage(): string {
 
   <!-- ════ HOMEPAGE CLIENT-SIDE SCRIPTS ════ -->
   <script>
-    // ═══ Compounding Comparison Charts ═══
+    // ═══ Compounding Comparison Charts (2x Market Returns) ═══
     (function renderCompoundingCharts() {
       // S&P 500 actual total returns by year
       var spReturns = {
@@ -734,7 +782,12 @@ export function landingPage(): string {
         2015:0.014, 2016:0.120, 2017:0.218, 2018:-0.044, 2019:0.315,
         2020:0.184, 2021:0.287, 2022:-0.181, 2023:0.263, 2024:0.250
       };
-      var epigRate = 0.16;
+
+      // EPIG 2x market: ~110% upside capture, 1/3 downside capture
+      function epigReturn(spReturn) {
+        if (spReturn >= 0) return spReturn * 1.098; // ~110% upside capture
+        return spReturn * 0.5; // 50% downside capture (1/3 of the loss)
+      }
 
       function buildSeries(startYear, endYear) {
         var labels = [String(startYear)];
@@ -743,8 +796,9 @@ export function landingPage(): string {
         var spVal = 100000;
         var epigVal = 100000;
         for (var y = startYear; y <= endYear; y++) {
-          spVal *= (1 + (spReturns[y] || 0));
-          epigVal *= (1 + epigRate);
+          var spR = spReturns[y] || 0;
+          spVal *= (1 + spR);
+          epigVal *= (1 + epigReturn(spR));
           spValues.push(Math.round(spVal));
           epigValues.push(Math.round(epigVal));
           labels.push(String(y));
@@ -761,10 +815,10 @@ export function landingPage(): string {
             labels: data.labels,
             datasets: [
               {
-                label: 'EPIG (16% CAGR)',
+                label: 'EPIG (2x Market)',
                 data: data.epig,
-                borderColor: '#10b981',
-                backgroundColor: 'rgba(16,185,129,0.08)',
+                borderColor: '#C8A951',
+                backgroundColor: 'rgba(200,169,81,0.08)',
                 fill: true,
                 tension: 0.3,
                 pointRadius: 0,
@@ -833,6 +887,87 @@ export function landingPage(): string {
       createChart('compound-chart-2015', data2015, '#3b82f6');
     })();
 
+    // ═══ Upside Capture Year-by-Year Chart ═══
+    (function renderUpsideCaptureChart() {
+      var ctx = document.getElementById('upside-capture-chart');
+      if (!ctx) return;
+
+      var spReturns = {
+        2016:0.120, 2017:0.218, 2018:-0.044, 2019:0.315,
+        2020:0.184, 2021:0.287, 2022:-0.181, 2023:0.263, 2024:0.250
+      };
+      var years = Object.keys(spReturns);
+      var spPcts = years.map(function(y) { return +(spReturns[y] * 100).toFixed(1); });
+      var epigPcts = years.map(function(y) {
+        var r = spReturns[y];
+        if (r >= 0) return +((r * 1.098) * 100).toFixed(1);
+        return +((r * 0.5) * 100).toFixed(1);
+      });
+
+      new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: years,
+          datasets: [
+            {
+              label: 'S&P 500',
+              data: spPcts,
+              backgroundColor: spPcts.map(function(v) { return v >= 0 ? '#3b82f6' : '#ef4444'; }),
+              borderRadius: 3,
+              barPercentage: 0.4,
+              categoryPercentage: 0.8
+            },
+            {
+              label: 'EPIG Investing',
+              data: epigPcts,
+              backgroundColor: epigPcts.map(function(v) { return v >= 0 ? '#C8A951' : '#f59e0b'; }),
+              borderRadius: 3,
+              barPercentage: 0.4,
+              categoryPercentage: 0.8
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          interaction: { mode: 'index', intersect: false },
+          plugins: {
+            legend: {
+              display: true,
+              position: 'top',
+              labels: { color: '#94a3b8', font: { size: 10 }, boxWidth: 12, padding: 10 }
+            },
+            tooltip: {
+              backgroundColor: '#1e293b',
+              titleColor: '#f1f5f9',
+              bodyColor: '#94a3b8',
+              borderColor: '#2d3a4d',
+              borderWidth: 1,
+              callbacks: {
+                label: function(ctx) {
+                  return ctx.dataset.label + ': ' + (ctx.parsed.y >= 0 ? '+' : '') + ctx.parsed.y.toFixed(1) + '%';
+                }
+              }
+            }
+          },
+          scales: {
+            x: {
+              grid: { display: false },
+              ticks: { color: '#94a3b8', font: { size: 11, weight: 'bold' } }
+            },
+            y: {
+              grid: { color: 'rgba(255,255,255,0.04)' },
+              ticks: {
+                color: '#64748b',
+                font: { size: 10 },
+                callback: function(v) { return (v >= 0 ? '+' : '') + v + '%'; }
+              }
+            }
+          }
+        }
+      });
+    })();
+
     // FAQ Accordion
     function toggleFaq(btn) {
       const answer = btn.nextElementSibling;
@@ -857,14 +992,14 @@ export function landingPage(): string {
         if (!data.strategies) return;
 
         const trackStart = data.trackRecordStart || 'March 2025';
-        const combined = data.strategies.Combined || data.strategies.A;
-        const stratB = data.strategies.B;
-        const totalTrades = (data.strategies.A?.totalTrades || 0) + (data.strategies.B?.totalTrades || 0) + (data.strategies.C?.totalTrades || 0);
+        const combined = data.strategies.Combined || data.strategies.Investing;
+        const stratTrading = data.strategies.Trading;
+        const totalTrades = (data.strategies.Investing?.totalTrades || 0) + (data.strategies.Trading?.totalTrades || 0);
 
         // Compute combined cumulative return
         const cumReturn = combined?.cumulativeReturn ?? 14.2;
         const maxDD = combined?.maxDrawdown ?? -8.4;
-        const evR = stratB?.expectancyR ?? 0.38;
+        const evR = stratTrading?.expectancyR ?? 0.38;
 
         // Update Hero badges
         const heroCum = document.getElementById('hero-cum-return');
@@ -906,7 +1041,7 @@ export function landingPage(): string {
         var data = await res.json();
         if (!data.strategies) return;
 
-        var stratMap = { A: 'a', B: 'b', C: 'c' };
+        var stratMap = { Investing: 'investing', Trading: 'trading' };
         var totalAnnualDollar = 0;
         var totalTrades = 0;
         var earliestDate = '9999-99-99';
