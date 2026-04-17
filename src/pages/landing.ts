@@ -11,8 +11,8 @@ export function landingPage(): string {
         Every Trade Verified. Every Loss Disclosed.
       </p>
       <p style="font-family:'Source Sans Pro',sans-serif;max-width:680px;" class="text-base sm:text-[17px] text-white/80 mx-auto mb-12 leading-relaxed">
-        EPIG is a two-component managed investment strategy: 70% invested for 2&times; market returns,
-        30% in defined-risk trading targeting 50% annual returns. Built on the S&amp;P 500.
+        EPIG is a three-strategy managed investment system: 70% in SPY core for 2&times; market returns,
+        20% in defined-risk futures &amp; options, and 10% in episodic stock opportunities. Built on the S&amp;P 500.
         Executed in Interactive Brokers. Shared with full transparency.
       </p>
 
@@ -55,9 +55,10 @@ export function landingPage(): string {
       <h2 style="font-family:'Playfair Display',Georgia,serif;color:#C8A951;" class="text-3xl sm:text-4xl font-bold mb-8">What Is EPIG?</h2>
       <div style="font-family:'Source Sans Pro',sans-serif;max-width:640px;color:#94a3b8;" class="mx-auto text-base leading-[1.7] text-left space-y-4 mb-12">
         <p><strong class="text-white">EPIG</strong> stands for <strong class="text-white">Enduring Principal-Protected Income &amp; Growth</strong>.</p>
-        <p>It is a rules-based, managed investment strategy with two integrated components:</p>
-        <p><strong class="text-white">Investing (70%)</strong> &mdash; Your core equity allocation in SPY (S&amp;P 500 ETF) and select individual stocks. Engineered for <strong class="text-white">2&times; market returns</strong> through amplified upside capture (~110%) and structural downside protection (capturing only &frac13; of losses).</p>
-        <p><strong class="text-white">Trading (30%)</strong> &mdash; Defined-risk tactical trades in S&amp;P 500 futures (MES/ES), options verticals, and market-level options. Targets <strong class="text-white">50% annual return</strong> through systematic income generation and episodic opportunity capture.</p>
+        <p>It is a rules-based, managed investment strategy with three integrated components:</p>
+        <p><strong class="text-white">Strategy A &mdash; SPY Core (70%)</strong> &mdash; Your core equity allocation in SPY (S&amp;P 500 ETF). Engineered for <strong class="text-white">2&times; market returns</strong> through amplified upside capture (~110%) and structural downside protection (capturing only &frac13; of losses).</p>
+        <p><strong class="text-white">Strategy B &mdash; Futures &amp; Options (20%)</strong> &mdash; Defined-risk tactical trades in S&amp;P 500 futures (MES/ES) and options. Targets <strong class="text-white">50% annual return</strong> through systematic income generation.</p>
+        <p><strong class="text-white">Strategy C &mdash; Episodic Pivot (10%)</strong> &mdash; Opportunistic investments in individual stocks at opportune times. Adds asymmetric upside from conviction setups without compromising the core.</p>
         <p>The result: a strategy engineered to significantly outperform the market across full cycles while keeping capital at risk below 5%.</p>
       </div>
 
@@ -88,62 +89,62 @@ export function landingPage(): string {
     </div>
   </section>
 
-  <!-- ════ SECTION 3: TWO-STRATEGY DESIGN ════ -->
+  <!-- ════ SECTION 3: THREE-STRATEGY DESIGN ════ -->
   <section style="background:#111827;">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
       <div class="text-center mb-14">
-        <h2 style="font-family:'Playfair Display',Georgia,serif;" class="text-3xl sm:text-4xl font-bold text-white mb-4">Two Strategies. One Integrated System.</h2>
+        <h2 style="font-family:'Playfair Display',Georgia,serif;" class="text-3xl sm:text-4xl font-bold text-white mb-4">Three Strategies. One Integrated System.</h2>
         <p class="text-gray-400 text-lg max-w-3xl mx-auto leading-relaxed" style="font-family:'Source Sans Pro',sans-serif;">
-          Each component serves a distinct structural purpose. Together they create a managed portfolio that protects, generates income, and compounds &mdash; without requiring you to make a single trade.
+          Each strategy serves a distinct structural purpose. Together they create a managed portfolio that protects, generates income, and compounds &mdash; without requiring you to make a single trade.
         </p>
       </div>
 
-      <!-- Two Cards -->
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-10">
-        <!-- Investing Strategy -->
+      <!-- Three Cards -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-10">
+        <!-- Strategy A: SPY Core -->
         <div class="rounded-2xl border border-[#1e293b] bg-[#1a1f2e] p-6 relative overflow-hidden">
-          <div class="absolute top-0 left-0 right-0 h-1" style="background:linear-gradient(to right,#C8A951,#e0c878);"></div>
+          <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 to-blue-400"></div>
           <div class="flex items-center gap-3 mb-4 mt-2">
-            <span class="inline-flex items-center justify-center px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider" style="background:rgba(200,169,81,0.15);color:#C8A951;border:1px solid rgba(200,169,81,0.3);">Investing</span>
-            <span class="text-xs font-mono font-bold" style="color:#C8A951;">70% Allocation</span>
+            <span class="inline-flex items-center justify-center px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-blue-500/15 text-blue-400 border border-blue-500/30">Strategy A</span>
+            <span class="text-xs font-mono font-bold text-blue-400">70% Allocation</span>
           </div>
-          <h3 class="text-xl font-bold text-white mb-1">SPY &amp; Stocks</h3>
+          <h3 class="text-xl font-bold text-white mb-1">SPY Core</h3>
           <p class="text-[#8892a6] text-sm leading-relaxed mb-5" style="font-family:'Source Sans Pro',sans-serif;">
-            Your core equity allocation &mdash; SPY (S&amp;P 500 ETF) and select individual stocks. Engineered for <strong class="text-white">2&times; market returns</strong> through amplified upside capture and structural downside protection.
+            Your core market exposure &mdash; SPY (S&amp;P 500 ETF). Engineered for <strong class="text-white">2&times; market returns</strong> through amplified upside capture and structural downside protection.
           </p>
           <div class="space-y-3 mb-5">
             <div class="flex justify-between items-center">
               <span class="text-[#8892a6] text-sm">Capital Deployed</span>
-              <span style="color:#C8A951;" class="font-mono font-bold text-sm">70%</span>
+              <span class="text-blue-400 font-mono font-bold text-sm">70%</span>
             </div>
             <div class="h-px bg-[#1e293b]"></div>
             <div class="flex justify-between items-center">
               <span class="text-[#8892a6] text-sm">Target Return</span>
-              <span style="color:#C8A951;" class="font-mono font-bold text-sm">2&times; Market Returns</span>
+              <span class="text-blue-400 font-mono font-bold text-sm">2&times; Market</span>
             </div>
             <div class="h-px bg-[#1e293b]"></div>
             <div class="flex justify-between items-center">
-              <span class="text-[#8892a6] text-sm">How</span>
-              <span class="text-white text-sm">~110% upside, &frac13; downside capture</span>
+              <span class="text-[#8892a6] text-sm">Risk Profile</span>
+              <span class="text-white text-sm">Market-aligned</span>
             </div>
           </div>
         </div>
 
-        <!-- Trading Strategy -->
+        <!-- Strategy B: Futures & Options -->
         <div class="rounded-2xl border border-[#1e293b] bg-[#1a1f2e] p-6 relative overflow-hidden">
           <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-emerald-500 to-green-400"></div>
           <div class="flex items-center gap-3 mb-4 mt-2">
-            <span class="inline-flex items-center justify-center px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-emerald-500/15 text-emerald-400 border border-emerald-500/30">Trading</span>
-            <span class="text-xs font-mono font-bold text-emerald-400">30% Allocation</span>
+            <span class="inline-flex items-center justify-center px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-emerald-500/15 text-emerald-400 border border-emerald-500/30">Strategy B</span>
+            <span class="text-xs font-mono font-bold text-emerald-400">20% Allocation</span>
           </div>
           <h3 class="text-xl font-bold text-white mb-1">Futures &amp; Options</h3>
           <p class="text-[#8892a6] text-sm leading-relaxed mb-5" style="font-family:'Source Sans Pro',sans-serif;">
-            Defined-risk tactical trades &mdash; S&amp;P 500 futures (MES/ES) with hard stops, plus options verticals. Systematic income generation and episodic opportunity capture targeting <strong class="text-white">50% annual return</strong>.
+            Defined-risk tactical trades &mdash; S&amp;P 500 futures (MES/ES) with hard stops, plus options verticals. Systematic income generation targeting <strong class="text-white">50% annual return</strong>.
           </p>
           <div class="space-y-3 mb-5">
             <div class="flex justify-between items-center">
               <span class="text-[#8892a6] text-sm">Capital at Risk</span>
-              <span class="text-emerald-400 font-mono font-bold text-sm">30%</span>
+              <span class="text-emerald-400 font-mono font-bold text-sm">20%</span>
             </div>
             <div class="h-px bg-[#1e293b]"></div>
             <div class="flex justify-between items-center">
@@ -160,19 +161,48 @@ export function landingPage(): string {
             View Live Performance <i class="fas fa-arrow-right text-xs"></i>
           </a>
         </div>
+
+        <!-- Strategy C: Episodic Pivot -->
+        <div class="rounded-2xl border border-[#1e293b] bg-[#1a1f2e] p-6 relative overflow-hidden">
+          <div class="absolute top-0 left-0 right-0 h-1" style="background:linear-gradient(to right,#f59e0b,#fbbf24);"></div>
+          <div class="flex items-center gap-3 mb-4 mt-2">
+            <span class="inline-flex items-center justify-center px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider" style="background:rgba(245,158,11,0.15);color:#f59e0b;border:1px solid rgba(245,158,11,0.3);">Strategy C</span>
+            <span class="text-xs font-mono font-bold" style="color:#f59e0b;">10% Allocation</span>
+          </div>
+          <h3 class="text-xl font-bold text-white mb-1">Episodic Pivot</h3>
+          <p class="text-[#8892a6] text-sm leading-relaxed mb-5" style="font-family:'Source Sans Pro',sans-serif;">
+            Opportunistic allocation to individual stocks at opportune times. Conviction setups with asymmetric reward profiles &mdash; deployed selectively, not constantly.
+          </p>
+          <div class="space-y-3 mb-5">
+            <div class="flex justify-between items-center">
+              <span class="text-[#8892a6] text-sm">Capital at Risk</span>
+              <span style="color:#f59e0b;" class="font-mono font-bold text-sm">10%</span>
+            </div>
+            <div class="h-px bg-[#1e293b]"></div>
+            <div class="flex justify-between items-center">
+              <span class="text-[#8892a6] text-sm">Target Contribution</span>
+              <span style="color:#f59e0b;" class="font-mono font-bold text-sm">Asymmetric upside</span>
+            </div>
+            <div class="h-px bg-[#1e293b]"></div>
+            <div class="flex justify-between items-center">
+              <span class="text-[#8892a6] text-sm">Risk Profile</span>
+              <span class="text-white text-sm">Position-sized by conviction</span>
+            </div>
+          </div>
+        </div>
       </div>
 
       <!-- Summary Strip -->
       <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
         <div class="rounded-xl border border-[#1e293b] bg-[#1a1f2e] p-5 text-center">
-          <div class="text-xs text-[#8892a6] uppercase tracking-wider font-semibold mb-2">Investing Target</div>
-          <div class="text-2xl font-extrabold text-white font-mono">2<span class="text-lg text-[#8892a6]">&times; Market</span></div>
+          <div class="text-xs text-[#8892a6] uppercase tracking-wider font-semibold mb-2">Strategy A Target</div>
+          <div class="text-2xl font-extrabold text-blue-400 font-mono">2<span class="text-lg text-[#8892a6]">&times; Market</span></div>
           <div class="text-[11px] text-[#8892a6] mt-1">70% of portfolio</div>
         </div>
         <div class="rounded-xl border border-[#1e293b] bg-[#1a1f2e] p-5 text-center">
-          <div class="text-xs text-[#8892a6] uppercase tracking-wider font-semibold mb-2">Trading Target</div>
+          <div class="text-xs text-[#8892a6] uppercase tracking-wider font-semibold mb-2">Strategy B Target</div>
           <div class="text-2xl font-extrabold text-emerald-400 font-mono">50<span class="text-lg text-[#8892a6]">%</span></div>
-          <div class="text-[11px] text-[#8892a6] mt-1">30% of portfolio</div>
+          <div class="text-[11px] text-[#8892a6] mt-1">20% of portfolio</div>
         </div>
         <div class="rounded-xl border border-[#1e293b] bg-[#1a1f2e] p-5 text-center">
           <div class="text-xs text-[#8892a6] uppercase tracking-wider font-semibold mb-2">Principal at Risk</div>
@@ -194,7 +224,7 @@ export function landingPage(): string {
       <div class="text-center mb-14">
         <h2 style="font-family:'Playfair Display',Georgia,serif;color:#C8A951;" class="text-3xl sm:text-4xl font-bold mb-4">How 2&times; Market Returns Are Generated</h2>
         <p class="text-gray-400 text-lg max-w-3xl mx-auto" style="font-family:'Source Sans Pro',sans-serif;">
-          The investing component doesn&rsquo;t rely on predicting markets. It uses a structural edge: amplify upside slightly, protect aggressively on the downside, and let compounding do the rest.
+          Strategy A (SPY Core) doesn&rsquo;t rely on predicting markets. It uses a structural edge: amplify upside slightly, protect aggressively on the downside, and let compounding do the rest.
         </p>
       </div>
 
@@ -242,7 +272,7 @@ export function landingPage(): string {
 
         <!-- Right: Year-by-Year Chart -->
         <div class="rounded-xl border border-[#1e293b] p-5" style="background:#1a1f2e;">
-          <h4 class="text-sm font-bold text-white mb-1">S&amp;P 500 vs. EPIG Investing (Illustrative)</h4>
+          <h4 class="text-sm font-bold text-white mb-1">S&amp;P 500 vs. EPIG Strategy A (Illustrative)</h4>
           <p class="text-[10px] text-[#64748b] mb-4">Year-by-year total returns with ~110% upside capture, &frac13; downside capture</p>
           <div class="relative" style="height:340px;">
             <canvas id="upside-capture-chart"></canvas>
@@ -291,7 +321,7 @@ export function landingPage(): string {
             <tr class="bg-[#1a1f2e]">
               <td class="px-5 py-3 text-white font-medium">Market Exposure</td>
               <td class="px-5 py-3 text-gray-400">100% constant</td>
-              <td class="px-5 py-3 text-emerald-400">70% investing, 30% defined-risk trading</td>
+              <td class="px-5 py-3 text-emerald-400">70% SPY Core, 20% defined-risk F&amp;O, 10% episodic stocks</td>
             </tr>
             <tr class="bg-[#151a27]">
               <td class="px-5 py-3 text-white font-medium">Drawdown Risk</td>
@@ -439,7 +469,7 @@ export function landingPage(): string {
             <h4 class="font-bold text-white">85&ndash;99% of Capital Is Always Protected</h4>
           </div>
           <p class="text-sm text-[#94a3b8] leading-relaxed" style="font-family:'Source Sans Pro',sans-serif;">
-            70% of your portfolio is in the investing component (SPY and stocks), while 30% is in defined-risk trading positions. Every trading position has predefined maximum loss. A total wipeout of all active trades would impact only the trading sleeve.
+            70% of your portfolio is in Strategy A (SPY Core), 20% in Strategy B (Futures &amp; Options) with defined risk per trade, and 10% in Strategy C (Episodic Pivot) on conviction stock setups. Every trading position has predefined maximum loss. A total wipeout of all active trades would impact only the tactical sleeves.
           </p>
         </div>
         <div class="rounded-xl border border-[#1e293b] p-6" style="background:#1a1f2e;">
@@ -450,7 +480,7 @@ export function landingPage(): string {
             <h4 class="font-bold text-white">Every Trade Has a Hard Stop</h4>
           </div>
           <p class="text-sm text-[#94a3b8] leading-relaxed" style="font-family:'Source Sans Pro',sans-serif;">
-            Trading strategy futures trades use a 20-point hard stop. Options trades risk only the debit paid. No trade is ever entered without a predefined maximum loss. There is no scenario where a single trade causes outsized damage.
+            Strategy B futures trades use a 20-point hard stop. Options trades risk only the debit paid. Strategy C stock positions are sized by conviction with defined downside. No trade is ever entered without a predefined maximum loss. There is no scenario where a single trade causes outsized damage.
           </p>
         </div>
         <div class="rounded-xl border border-[#1e293b] p-6" style="background:#1a1f2e;">
@@ -575,7 +605,7 @@ export function landingPage(): string {
               </span>
             </div>
             <p class="text-[#94a3b8] text-base leading-relaxed mb-4">
-              See how YTD performance across both strategies could compound through year-end.
+              See how YTD performance across all three strategies could compound through year-end.
               Powered by <strong class="text-white">real 2026 trade data</strong> from verified IB fills &mdash;
               adjust portfolio size and explore per-strategy breakdowns.
             </p>
@@ -596,12 +626,16 @@ export function landingPage(): string {
                 </div>
                 <div class="h-px bg-[#1e293b]"></div>
                 <div class="flex justify-between items-center">
-                  <span class="text-sm text-[#94a3b8]">Investing &mdash; SPY &amp; Stocks (70%)</span>
-                  <span class="font-mono" id="lp-strat-investing-pct"><span class="text-[#64748b]">--</span></span>
+                  <span class="text-sm text-[#94a3b8]">Strategy A &mdash; SPY Core (70%)</span>
+                  <span class="font-mono" id="lp-strat-a-pct"><span class="text-[#64748b]">--</span></span>
                 </div>
                 <div class="flex justify-between items-center">
-                  <span class="text-sm text-[#94a3b8]">Trading &mdash; Futures &amp; Options (30%)</span>
-                  <span class="font-mono" id="lp-strat-trading-pct"><span class="text-[#64748b]">--</span></span>
+                  <span class="text-sm text-[#94a3b8]">Strategy B &mdash; Futures &amp; Options (20%)</span>
+                  <span class="font-mono" id="lp-strat-b-pct"><span class="text-[#64748b]">--</span></span>
+                </div>
+                <div class="flex justify-between items-center">
+                  <span class="text-sm text-[#94a3b8]">Strategy C &mdash; Episodic Pivot (10%)</span>
+                  <span class="font-mono" id="lp-strat-c-pct"><span class="text-[#64748b]">--</span></span>
                 </div>
                 <div class="h-px bg-[#1e293b]"></div>
                 <div class="flex justify-between items-center">
@@ -678,7 +712,7 @@ export function landingPage(): string {
           </button>
           <div class="faq-answer hidden px-5 pb-5">
             <p class="text-gray-400 text-sm leading-relaxed mb-0" style="font-family:'Source Sans Pro',sans-serif;">
-              70% of your capital is in the investing component (SPY and stocks), while 30% is in defined-risk trading (futures and options), each with predefined maximum loss. Circuit breaker protocols automatically shift the portfolio to a defensive posture if drawdown exceeds thresholds. There are no lockup periods &mdash; your capital is accessible on any business day.
+              70% of your capital is in Strategy A (SPY Core), 20% in Strategy B (Futures &amp; Options), and 10% in Strategy C (Episodic Pivot) &mdash; each tactical position has predefined maximum loss. Circuit breaker protocols automatically shift the portfolio to a defensive posture if drawdown exceeds thresholds. There are no lockup periods &mdash; your capital is accessible on any business day.
             </p>
           </div>
         </div>
@@ -918,7 +952,7 @@ export function landingPage(): string {
               categoryPercentage: 0.8
             },
             {
-              label: 'EPIG Investing',
+              label: 'EPIG Strategy A',
               data: epigPcts,
               backgroundColor: epigPcts.map(function(v) { return v >= 0 ? '#C8A951' : '#f59e0b'; }),
               borderRadius: 3,
@@ -992,14 +1026,14 @@ export function landingPage(): string {
         if (!data.strategies) return;
 
         const trackStart = data.trackRecordStart || 'March 2025';
-        const combined = data.strategies.Combined || data.strategies.Investing;
-        const stratTrading = data.strategies.Trading;
-        const totalTrades = (data.strategies.Investing?.totalTrades || 0) + (data.strategies.Trading?.totalTrades || 0);
+        const combined = data.strategies.Combined || data.strategies.A;
+        const stratB = data.strategies.B;
+        const totalTrades = (data.strategies.A?.totalTrades || 0) + (data.strategies.B?.totalTrades || 0) + (data.strategies.C?.totalTrades || 0);
 
         // Compute combined cumulative return
         const cumReturn = combined?.cumulativeReturn ?? 14.2;
         const maxDD = combined?.maxDrawdown ?? -8.4;
-        const evR = stratTrading?.expectancyR ?? 0.38;
+        const evR = stratB?.expectancyR ?? 0.38;
 
         // Update Hero badges
         const heroCum = document.getElementById('hero-cum-return');
@@ -1041,7 +1075,7 @@ export function landingPage(): string {
         var data = await res.json();
         if (!data.strategies) return;
 
-        var stratMap = { Investing: 'investing', Trading: 'trading' };
+        var stratMap = { A: 'a', B: 'b', C: 'c' };
         var totalAnnualDollar = 0;
         var totalTrades = 0;
         var earliestDate = '9999-99-99';

@@ -45,12 +45,12 @@ app.use('*', async (c, next) => {
 // ══════════════════════════════════════════════════════════
 app.get('/', (c) => c.html(layout('EPIG Investment Design | Verified Trade Performance', landingPage(), {
   title: 'EPIG Investment Design | Verified Trade Performance',
-  description: 'Every trade verified from a live IB account. Two integrated strategies targeting 2x market returns. See exactly how we protect capital and compound returns \u2014 free dashboard.',
+  description: 'Every trade verified from a live IB account. Three integrated strategies targeting 2x market returns. See exactly how we protect capital and compound returns \u2014 free dashboard.',
   path: '/',
 })))
 app.get('/dashboard', (c) => c.html(layout('Dashboard | EPIG', dashboardPage(), {
   title: 'Live Performance Dashboard | EPIG Investment Design',
-  description: 'Real-time strategy performance from a verified Interactive Brokers account. Track win rates, drawdowns, equity curves and per-trade P&L across Investing and Trading strategies.',
+  description: 'Real-time strategy performance from a verified Interactive Brokers account. Track win rates, drawdowns, equity curves and per-trade P&L across Strategy A (SPY Core), Strategy B (Futures & Options), and Strategy C (Episodic Pivot).',
   path: '/dashboard',
 })))
 // Pricing page hidden while compensation model is being finalized
@@ -61,7 +61,7 @@ app.get('/dashboard', (c) => c.html(layout('Dashboard | EPIG', dashboardPage(), 
 // })))
 app.get('/how-it-works', (c) => c.html(layout('How It Works | EPIG', howItWorksPage(), {
   title: 'How It Works | EPIG Investment Design',
-  description: 'See how EPIG verifies every trade using IB Flex Queries, how the 2-strategy system works, and how Discord alerts keep you informed in real time.',
+  description: 'See how EPIG verifies every trade using IB Flex Queries, how the 3-strategy system works, and how Discord alerts keep you informed in real time.',
   path: '/how-it-works',
 })))
 app.get('/faq', (c) => c.redirect('/#faq', 301))
@@ -84,7 +84,7 @@ app.get('/admin/upload', (c) => c.html(layout('Upload Trades | EPIG', adminPage(
 // ══════════════════════════════════════════════════════════
 app.get('/api/og-image', async (c) => {
   // Try to fetch live stats for dynamic numbers
-  let stratInvesting = '--', stratTrading = '--', totalPct = '--', totalDollar = '--'
+  let stratA = '--', stratB = '--', stratC = '--', totalPct = '--', totalDollar = '--'
   let tradeCount = '0', dateRange = '2026 YTD'
 
   try {
@@ -106,7 +106,7 @@ app.get('/api/og-image', async (c) => {
         let totalTrades = 0
         const pcts: Record<string, string> = {}
 
-        for (const strat of ['Investing', 'Trading']) {
+        for (const strat of ['A', 'B', 'C']) {
           const fills = rows.filter((r: any) => r.strategy === strat)
           if (fills.length === 0) { pcts[strat] = '--'; continue }
           const rts = buildRoundTrips(fills, strat)
@@ -119,8 +119,9 @@ app.get('/api/og-image', async (c) => {
           pcts[strat] = (pct >= 0 ? '+' : '') + pct.toFixed(1) + '%'
         }
 
-        stratInvesting = pcts['Investing'] || '--'
-        stratTrading = pcts['Trading'] || '--'
+        stratA = pcts['A'] || '--'
+        stratB = pcts['B'] || '--'
+        stratC = pcts['C'] || '--'
         const tPct = (totalAnnualPnl / 100000) * 100
         totalPct = (tPct >= 0 ? '+' : '') + tPct.toFixed(1) + '%'
         totalDollar = (totalAnnualPnl >= 0 ? '+$' : '-$') + Math.abs(Math.round(totalAnnualPnl)).toLocaleString()
@@ -182,28 +183,33 @@ app.get('/api/og-image', async (c) => {
   <text x="100" y="290" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="600" fill="#64748b" letter-spacing="2">STRATEGY</text>
   <text x="500" y="290" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="600" fill="#64748b" letter-spacing="2">ANNUALIZED RETURN</text>
 
-  <!-- Investing Strategy -->
-  <rect x="85" y="302" width="12" height="12" rx="3" fill="#E5A418"/>
-  <text x="110" y="314" font-family="Arial,Helvetica,sans-serif" font-size="16" fill="#94a3b8">Investing  |  SPY &amp; Stocks (70%)</text>
-  <text x="540" y="314" font-family="monospace" font-size="18" font-weight="bold" fill="${stratInvesting.startsWith('-') ? '#ef4444' : '#10b981'}">${stratInvesting}</text>
+  <!-- Strategy A: SPY Core -->
+  <rect x="85" y="300" width="12" height="12" rx="3" fill="#3b82f6"/>
+  <text x="110" y="312" font-family="Arial,Helvetica,sans-serif" font-size="15" fill="#94a3b8">A  |  SPY Core (70%)</text>
+  <text x="540" y="312" font-family="monospace" font-size="18" font-weight="bold" fill="${stratA.startsWith('-') ? '#ef4444' : '#10b981'}">${stratA}</text>
 
-  <!-- Trading Strategy -->
-  <rect x="85" y="348" width="12" height="12" rx="3" fill="#10b981"/>
-  <text x="110" y="360" font-family="Arial,Helvetica,sans-serif" font-size="16" fill="#94a3b8">Trading  |  Futures &amp; Options (30%)</text>
-  <text x="540" y="360" font-family="monospace" font-size="18" font-weight="bold" fill="${stratTrading.startsWith('-') ? '#ef4444' : '#10b981'}">${stratTrading}</text>
+  <!-- Strategy B: Futures & Options -->
+  <rect x="85" y="332" width="12" height="12" rx="3" fill="#10b981"/>
+  <text x="110" y="344" font-family="Arial,Helvetica,sans-serif" font-size="15" fill="#94a3b8">B  |  Futures &amp; Options (20%)</text>
+  <text x="540" y="344" font-family="monospace" font-size="18" font-weight="bold" fill="${stratB.startsWith('-') ? '#ef4444' : '#10b981'}">${stratB}</text>
+
+  <!-- Strategy C: Episodic Pivot -->
+  <rect x="85" y="364" width="12" height="12" rx="3" fill="#f59e0b"/>
+  <text x="110" y="376" font-family="Arial,Helvetica,sans-serif" font-size="15" fill="#94a3b8">C  |  Episodic Pivot (10%)</text>
+  <text x="540" y="376" font-family="monospace" font-size="18" font-weight="bold" fill="${stratC.startsWith('-') ? '#ef4444' : '#10b981'}">${stratC}</text>
 
   <!-- Divider line in card -->
-  <line x1="85" y1="385" x2="1115" y2="385" stroke="#1e293b" stroke-width="1"/>
+  <line x1="85" y1="395" x2="1115" y2="395" stroke="#1e293b" stroke-width="1"/>
 
   <!-- Combined projected return -->
-  <text x="100" y="420" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="600" fill="#f1f5f9">Projected Annual Return</text>
-  <text x="540" y="422" font-family="monospace" font-size="26" font-weight="bold" fill="${totalPct.startsWith('-') ? '#ef4444' : '#10b981'}">${totalPct}</text>
+  <text x="100" y="428" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="600" fill="#f1f5f9">Projected Annual Return</text>
+  <text x="540" y="430" font-family="monospace" font-size="26" font-weight="bold" fill="${totalPct.startsWith('-') ? '#ef4444' : '#10b981'}">${totalPct}</text>
 
   <!-- Dollar return -->
-  <text x="700" y="422" font-family="monospace" font-size="20" font-weight="bold" fill="${totalDollar.startsWith('-') ? '#ef4444' : '#10b981'}">${totalDollar}</text>
+  <text x="700" y="430" font-family="monospace" font-size="20" font-weight="bold" fill="${totalDollar.startsWith('-') ? '#ef4444' : '#10b981'}">${totalDollar}</text>
 
   <!-- Small disclaimer in card -->
-  <text x="100" y="472" font-family="Arial,Helvetica,sans-serif" font-size="10" fill="#64748b">${tradeCount} verified trades  |  $100K portfolio  |  ${dateRange}</text>
+  <text x="100" y="475" font-family="Arial,Helvetica,sans-serif" font-size="10" fill="#64748b">${tradeCount} verified trades  |  $100K portfolio  |  ${dateRange}</text>
 
   <!-- Bottom section -->
   <text x="60" y="535" font-family="Arial,Helvetica,sans-serif" font-size="16" fill="#94a3b8">
@@ -268,7 +274,7 @@ app.get('/api/dashboard/summary', async (c) => {
 
     const result: Record<string, any> = {}
 
-    for (const strat of ['Investing', 'Trading']) {
+    for (const strat of ['A', 'B', 'C']) {
       const fills = rows.filter((r: any) => r.strategy === strat)
       if (fills.length === 0) {
         result[strat] = buildEmptyStrategy(strat, latestSnapshot)
@@ -372,8 +378,9 @@ app.get('/api/dashboard/summary', async (c) => {
       }))
 
       const stratNames: Record<string, string> = {
-        Investing: 'Investing — SPY & Stocks',
-        Trading: 'Trading — Futures & Options',
+        A: 'Strategy A — SPY Core',
+        B: 'Strategy B — Futures & Options',
+        C: 'Strategy C — Episodic Pivot',
       }
 
       result[strat] = {
@@ -402,7 +409,7 @@ app.get('/api/dashboard/summary', async (c) => {
         totalPnl: round(totalPnl, 2),
         dataRange: { firstDate, lastDate, daySpan: Math.round(daySpan) },
         lastUpdated: lastDate ? lastDate + 'T16:00:00Z' : '2026-02-20T16:00:00Z',
-        currentAllocation: strat === 'Investing' ? {
+        currentAllocation: strat === 'A' ? {
           spy: latestSnapshot.spy_pct,
           stocks: latestSnapshot.stock_pct,
           cash: latestSnapshot.cash_pct,
@@ -415,14 +422,14 @@ app.get('/api/dashboard/summary', async (c) => {
           '30d': rolling30,
           '90d': rolling90,
         },
-        recentTrades: strat === 'Investing' ? undefined : recentTrades,
+        recentTrades: strat === 'A' ? undefined : recentTrades,
       }
     }
 
     // ── Build Combined Portfolio from all strategies ──
     const allClosed: any[] = []
     const allFills: any[] = []
-    for (const strat of ['Investing', 'Trading']) {
+    for (const strat of ['A', 'B', 'C']) {
       const fills = rows.filter((r: any) => r.strategy === strat)
       allFills.push(...fills)
       const rts = buildRoundTrips(fills, strat)
@@ -486,7 +493,7 @@ app.get('/api/dashboard/summary', async (c) => {
 
     // Per-strategy contribution
     const stratContrib: Record<string, number> = {}
-    for (const strat of ['Investing', 'Trading']) {
+    for (const strat of ['A', 'B', 'C']) {
       stratContrib[strat] = round(allClosed.filter((rt: any) => rt._strat === strat).reduce((s: number, rt: any) => s + rt.pnl, 0), 2)
     }
 
@@ -591,14 +598,19 @@ app.post('/api/admin/upload/preview', async (c) => {
       // Clean symbol (remove CUSIP padding for options)
       const cleanSymbol = symbol.trim().split(/\s+/)[0]
 
-      // Auto-classify strategy (two-strategy system)
-      // Investing = all stocks (SPY + individual stocks)
-      // Trading = all futures, futures options, and all options
+      // Auto-classify strategy (three-strategy system)
+      // A = SPY core (long-term SPY holdings + cash)
+      // B = Futures & Options (all FUT / FOP / OPT)
+      // C = Episodic Pivot (opportunistic individual stock picks)
       let strategy: string
       if (assetClass === 'FUT' || assetClass === 'FOP' || assetClass === 'OPT') {
-        strategy = 'Trading'
+        strategy = 'B'
+      } else if (assetClass === 'STK' && cleanSymbol === 'SPY') {
+        strategy = 'A'
+      } else if (assetClass === 'STK') {
+        strategy = 'C'
       } else {
-        strategy = 'Investing' // STK (any symbol), CASH, or unknown
+        strategy = 'A' // CASH or unknown
       }
 
       return {
@@ -694,9 +706,9 @@ app.post('/api/admin/upload/preview', async (c) => {
             trades[si].spreadGroup = spreadId
             trades[si].spreadType = spreadType
 
-            // Ensure both legs are Trading strategy (Futures and/or Options)
-            trades[bi].strategy = 'Trading'
-            trades[si].strategy = 'Trading'
+            // Ensure both legs are Strategy B (Futures & Options)
+            trades[bi].strategy = 'B'
+            trades[si].strategy = 'B'
 
             paired.add(bi)
             paired.add(si)
@@ -713,8 +725,9 @@ app.post('/api/admin/upload/preview', async (c) => {
       executionRows: executionRows.length,
       skippedRows: parsedRows.length - executionRows.length,
       byStrategy: {
-        Investing: trades.filter((t: any) => t.strategy === 'Investing').length,
-        Trading: trades.filter((t: any) => t.strategy === 'Trading').length,
+        A: trades.filter((t: any) => t.strategy === 'A').length,
+        B: trades.filter((t: any) => t.strategy === 'B').length,
+        C: trades.filter((t: any) => t.strategy === 'C').length,
       },
       byAssetClass: {
         STK: trades.filter((t: any) => t.assetClass === 'STK').length,
@@ -759,7 +772,7 @@ app.post('/api/admin/upload/confirm', async (c) => {
     let newCount = 0
     let dupCount = 0
     const errors: string[] = []
-    const strategyCounts: Record<string, number> = { Investing: 0, Trading: 0 }
+    const strategyCounts: Record<string, number> = { A: 0, B: 0, C: 0 }
 
     for (const trade of trades) {
       const tradeId = trade.tradeId || null
@@ -770,7 +783,7 @@ app.post('/api/admin/upload/confirm', async (c) => {
         if (existing) { dupCount++; continue }
       }
 
-      const strategy = trade.strategy || 'Investing'
+      const strategy = trade.strategy || 'A'
       const assetClass = trade.assetClass || 'STK'
       const side = trade.side === 'SELL' ? 'SELL' : 'BUY'
 
@@ -848,7 +861,7 @@ app.post('/api/admin/snapshot', async (c) => {
     ).bind(nextVersion, spy_pct, stock_pct, cash_pct, notes || '').run()
 
     await db.prepare(
-      "INSERT INTO audit_log (admin_id, action, entity, details) VALUES ('admin', 'SNAPSHOT', 'Investing', ?)"
+      "INSERT INTO audit_log (admin_id, action, entity, details) VALUES ('admin', 'SNAPSHOT', 'A', ?)"
     ).bind(`Allocation v${nextVersion}: SPY ${spy_pct}%, Stocks ${stock_pct}%, Cash ${cash_pct}%`).run()
 
     return c.json({ success: true, version: nextVersion })
@@ -887,7 +900,7 @@ app.get('/api/projector/stats', async (c) => {
 
     const result: Record<string, any> = {}
 
-    for (const strat of ['Investing', 'Trading']) {
+    for (const strat of ['A', 'B', 'C']) {
       const fills = rows.filter((r: any) => r.strategy === strat)
       if (fills.length === 0) { result[strat] = null; continue }
 
@@ -988,17 +1001,17 @@ app.get('/api/projector/stats', async (c) => {
 // ══════════════════════════════════════════════════════════
 app.get('/api/admin/strategy-counts', async (c) => {
   const db = c.env.DB
-  if (!db) return c.json({ Investing: 0, Trading: 0 })
+  if (!db) return c.json({ A: 0, B: 0, C: 0 })
 
   try {
     const result = await db.prepare("SELECT strategy, COUNT(*) as count FROM trades GROUP BY strategy").all()
-    const counts: Record<string, number> = { Investing: 0, Trading: 0 }
+    const counts: Record<string, number> = { A: 0, B: 0, C: 0 }
     for (const row of (result.results || []) as any[]) {
       counts[row.strategy] = row.count
     }
     return c.json(counts)
   } catch (e: any) {
-    return c.json({ Investing: 0, Trading: 0 })
+    return c.json({ A: 0, B: 0, C: 0 })
   }
 })
 
@@ -1101,7 +1114,7 @@ app.get('/api/admin/debug-pnl', async (c) => {
 
     const debug: Record<string, any> = { totalFills: rows.length }
 
-    for (const strat of ['Investing', 'Trading']) {
+    for (const strat of ['A', 'B', 'C']) {
       const fills = rows.filter((r: any) => r.strategy === strat)
       if (fills.length === 0) { debug[strat] = { fills: 0 }; continue }
 
@@ -1203,18 +1216,18 @@ export default app
  * Builds round-trip trades from individual IB fill records.
  *
  * For each strategy:
- * - **Investing (SPY + individual stocks)**: Groups fills by instrument.
+ * - **A (SPY core) / C (episodic stock picks)**: Groups fills by instrument.
  *   Uses FIFO matching: buys build a position, sells close it.
  *   When net position returns to zero → one completed round trip.
  *   P&L = sum of all NetCash values in the round trip.
  *
- * - **Trading (FUT/FOP + all OPT)**: Groups fills by instrument or by spread.
+ * - **B (Futures & Options)**: Groups fills by instrument or by spread.
  *   Each vertical spread = 2 legs opened then 2 legs closed = 1 round trip.
  *   If not a spread, falls back to instrument-level FIFO.
  */
 function buildRoundTrips(fills: any[], strategy: string): { pnl: number; closed: boolean; fillCount: number; firstDate: string; lastDate: string; riskDollar: number }[] {
-  if (strategy === 'Trading') {
-    // Trading strategy contains FUT, FOP, and OPT fills — use spread-aware builder
+  if (strategy === 'B') {
+    // Strategy B contains FUT, FOP, and OPT fills — use spread-aware builder
     return buildSpreadRoundTrips(fills)
   }
   return buildFifoRoundTrips(fills)
@@ -1379,7 +1392,7 @@ function buildFifoRoundTrips(fills: any[]): any[] {
 
 /**
  * Spread round-trip builder for OPT/FOP.
- * Trading strategy option trades may be vertical spreads: 2 legs open + 2 legs close = 1 trade.
+ * Strategy B option trades may be vertical spreads: 2 legs open + 2 legs close = 1 trade.
  *
  * Grouping logic:
  * 1. Group by expiry + putCall (all legs of a vertical share these)
@@ -1469,7 +1482,7 @@ function buildSpreadRoundTrips(fills: any[]): any[] {
     }
   }
 
-  // Handle non-option fills in Trading strategy with FIFO
+  // Handle non-option fills in Strategy B with FIFO
   if (nonOptFills.length > 0) {
     roundTrips.push(...buildFifoRoundTrips(nonOptFills))
   }
@@ -1846,8 +1859,9 @@ function computeRollingRTMetrics(closedRTs: any[], days: number): { winRate: num
 
 function buildEmptyStrategy(strat: string, snapshot: any): any {
   const names: Record<string, string> = {
-    Investing: 'Investing — SPY & Stocks',
-    Trading: 'Trading — Futures & Options',
+    A: 'Strategy A — SPY Core',
+    B: 'Strategy B — Futures & Options',
+    C: 'Strategy C — Episodic Pivot',
   }
   return {
     name: names[strat] || strat,
@@ -1858,10 +1872,10 @@ function buildEmptyStrategy(strat: string, snapshot: any): any {
     evPerTradeR: 0, projectedAnnualR: 0, tradesPerYear: 0, annualPnl: 0, totalPnl: 0,
     dataRange: { firstDate: '', lastDate: '', daySpan: 0 },
     lastUpdated: '2026-02-20T16:00:00Z',
-    currentAllocation: strat === 'Investing' ? { spy: snapshot.spy_pct, stocks: snapshot.stock_pct, cash: snapshot.cash_pct } : undefined,
+    currentAllocation: strat === 'A' ? { spy: snapshot.spy_pct, stocks: snapshot.stock_pct, cash: snapshot.cash_pct } : undefined,
     equityCurve: [], drawdownCurve: [], monthlyReturns: [],
     rollingMetrics: { '30d': { winRate: 0, expectancy: 0, trades: 0, expectancyR: 0 }, '90d': { winRate: 0, expectancy: 0, trades: 0, expectancyR: 0 } },
-    recentTrades: strat === 'Investing' ? undefined : [],
+    recentTrades: strat === 'A' ? undefined : [],
   }
 }
 
@@ -1891,17 +1905,17 @@ function buildFallbackSummary() {
   return {
     trackRecordStart: 'March 2025',
     strategies: {
-      Investing: {
-        name: 'Investing — SPY & Stocks',
+      A: {
+        name: 'Strategy A — SPY Core',
         cumulativeReturn: 14.2, cagr: 12.8, maxDrawdown: -8.4, sharpeRatio: 1.42, sortinoRatio: 2.1,
-        currentAllocation: { spy: 80, stocks: 15, cash: 5 },
+        currentAllocation: { spy: 70, stocks: 10, cash: 20 },
         lastUpdated: '2026-02-17T09:00:00Z',
         equityCurve: generateSyntheticEquityCurve(365, 0.035),
         drawdownCurve: generateSyntheticDrawdownCurve(365),
         monthlyReturns: generateSyntheticMonthlyReturns(),
       },
-      Trading: {
-        name: 'Trading — Futures & Options',
+      B: {
+        name: 'Strategy B — Futures & Options',
         cumulativeReturn: 38.6, cagr: 32.1, maxDrawdown: -12.3, sharpeRatio: 1.85, sortinoRatio: 2.8,
         winRate: 62.4, expectancyPoints: 4.2, expectancyR: 0.38, profitFactor: 1.92, totalTrades: 187,
         lastUpdated: '2026-02-17T09:00:00Z',
@@ -1910,6 +1924,17 @@ function buildFallbackSummary() {
         monthlyReturns: generateSyntheticMonthlyReturns(),
         rollingMetrics: { '30d': { winRate: 65.0, expectancy: 5.1, trades: 22 }, '90d': { winRate: 63.2, expectancy: 4.5, trades: 58 } },
         recentTrades: generateSyntheticTrades('futures', 20),
+      },
+      C: {
+        name: 'Strategy C — Episodic Pivot',
+        cumulativeReturn: 22.4, cagr: 19.8, maxDrawdown: -10.1, sharpeRatio: 1.55, sortinoRatio: 2.35,
+        winRate: 57.0, expectancyPoints: 3.1, expectancyR: 0.28, profitFactor: 1.65, totalTrades: 48,
+        lastUpdated: '2026-02-17T09:00:00Z',
+        equityCurve: generateSyntheticEquityCurve(365, 0.05),
+        drawdownCurve: generateSyntheticDrawdownCurve(365),
+        monthlyReturns: generateSyntheticMonthlyReturns(),
+        rollingMetrics: { '30d': { winRate: 58.0, expectancy: 4.0, trades: 8 }, '90d': { winRate: 56.0, expectancy: 3.2, trades: 18 } },
+        recentTrades: generateSyntheticTrades('stocks', 12),
       },
     },
   }
