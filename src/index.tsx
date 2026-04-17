@@ -17,6 +17,17 @@ const app = new Hono<{ Bindings: Bindings }>()
 
 app.use('/api/*', cors())
 
+// Prevent browser/CDN caching of HTML pages so deploys show up immediately
+app.use('*', async (c, next) => {
+  await next()
+  const ct = c.res.headers.get('content-type') || ''
+  if (ct.includes('text/html')) {
+    c.res.headers.set('Cache-Control', 'no-store, no-cache, must-revalidate, max-age=0')
+    c.res.headers.set('CDN-Cache-Control', 'no-store')
+    c.res.headers.set('Cloudflare-CDN-Cache-Control', 'no-store')
+  }
+})
+
 // ══════════════════════════════════════════════════════════
 // EPIG500 REDIRECT — 301 redirect epig500.ekantikcapital.com → epig.ekantikcapital.com
 // ══════════════════════════════════════════════════════════
