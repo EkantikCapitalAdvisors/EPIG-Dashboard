@@ -944,6 +944,107 @@ export function landingPage(): string {
     </div>
   </section>
 
+  <!-- ════ SECTION 11: THE WAITLIST ════ -->
+  <section id="waitlist" style="background:#111827;border-top:1px solid #1e293b;">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+      <div class="text-center mb-10">
+        <div class="inline-flex items-center gap-2 mb-5 px-3 py-1 rounded-full" style="background:rgba(200,169,81,0.06);border:1px solid rgba(200,169,81,0.22);">
+          <span class="text-[10px] font-bold uppercase tracking-[0.22em]" style="color:#C8A951;font-family:'Source Sans Pro',sans-serif;">Status Marker</span>
+        </div>
+        <h2 style="font-family:'Playfair Display',Georgia,serif;font-weight:400;" class="text-3xl sm:text-[40px] text-white leading-tight">
+          The Waitlist.
+        </h2>
+      </div>
+
+      <div class="space-y-5 text-[#cbd5e1] text-base sm:text-[17px] leading-[1.8] mb-10" style="font-family:'Source Sans Pro',sans-serif;">
+        <p>
+          When The Vehicle activates, founding members will be onboarded in the order the waitlist was joined.
+        </p>
+        <p>
+          The waitlist does not accept capital. It collects contact information so we can notify you when activation conditions are met. You are free to leave or join at any time. <strong class="text-white">No commitment is implied.</strong>
+        </p>
+      </div>
+
+      <!-- Waitlist Form -->
+      <div class="rounded-2xl p-6 sm:p-8 mb-10" style="background:#1a1f2e;border:1px solid rgba(200,169,81,0.32);">
+        <form id="waitlist-form" class="space-y-4" novalidate>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label for="wl-name" class="block text-[11px] font-bold uppercase tracking-[0.18em] mb-2" style="color:#94a3b8;font-family:'Source Sans Pro',sans-serif;">Name <span class="text-[#64748b] font-normal normal-case tracking-normal">(optional)</span></label>
+              <input type="text" id="wl-name" name="name" autocomplete="name" class="w-full px-4 py-3 rounded-lg text-[15px] text-white placeholder-[#64748b] outline-none transition-colors" style="background:#0f1420;border:1px solid #1e293b;font-family:'Source Sans Pro',sans-serif;" placeholder="Your name">
+            </div>
+            <div>
+              <label for="wl-email" class="block text-[11px] font-bold uppercase tracking-[0.18em] mb-2" style="color:#94a3b8;font-family:'Source Sans Pro',sans-serif;">Email <span style="color:#C8A951;">*</span></label>
+              <input type="email" id="wl-email" name="email" required autocomplete="email" class="w-full px-4 py-3 rounded-lg text-[15px] text-white placeholder-[#64748b] outline-none transition-colors" style="background:#0f1420;border:1px solid #1e293b;font-family:'Source Sans Pro',sans-serif;" placeholder="you@example.com">
+            </div>
+          </div>
+          <div>
+            <label for="wl-note" class="block text-[11px] font-bold uppercase tracking-[0.18em] mb-2" style="color:#94a3b8;font-family:'Source Sans Pro',sans-serif;">Note <span class="text-[#64748b] font-normal normal-case tracking-normal">(optional)</span></label>
+            <textarea id="wl-note" name="note" rows="3" class="w-full px-4 py-3 rounded-lg text-[15px] text-white placeholder-[#64748b] outline-none transition-colors resize-none" style="background:#0f1420;border:1px solid #1e293b;font-family:'Source Sans Pro',sans-serif;" placeholder="Anything you'd like us to know"></textarea>
+          </div>
+          <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pt-2">
+            <p class="text-[12px] text-[#64748b] leading-relaxed" style="font-family:'Source Sans Pro',sans-serif;">
+              We&rsquo;ll notify you when The Vehicle activates. No drip sequences.
+            </p>
+            <button type="submit" id="wl-submit" class="inline-flex items-center justify-center gap-2 px-7 py-3 rounded-lg text-[14px] font-semibold transition-all cursor-pointer border-0" style="background:#C8A951;color:#1B2A4A;">
+              <span id="wl-submit-label">Join The Waitlist</span>
+              <i class="fas fa-arrow-right text-xs"></i>
+            </button>
+          </div>
+          <div id="wl-message" class="hidden rounded-lg px-4 py-3 text-sm" style="font-family:'Source Sans Pro',sans-serif;"></div>
+        </form>
+      </div>
+
+      <!-- What joining means / does NOT mean -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <div class="rounded-xl p-6" style="background:#0f1420;border:1px solid #1e293b;">
+          <div class="flex items-center gap-2 mb-4">
+            <i class="fas fa-check text-[13px]" style="color:#C8A951;"></i>
+            <h4 class="text-sm font-bold uppercase tracking-[0.18em]" style="color:#C8A951;font-family:'Source Sans Pro',sans-serif;">What joining means</h4>
+          </div>
+          <ul class="space-y-2.5 list-none m-0 p-0 text-[14.5px] text-[#cbd5e1] leading-relaxed" style="font-family:'Source Sans Pro',sans-serif;">
+            <li class="flex items-start gap-3">
+              <span class="mt-[7px] inline-block w-1.5 h-1.5 rounded-full flex-shrink-0" style="background:#C8A951;"></span>
+              <span>You&rsquo;ll be notified when The Vehicle activates</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="mt-[7px] inline-block w-1.5 h-1.5 rounded-full flex-shrink-0" style="background:#C8A951;"></span>
+              <span>You&rsquo;ll have priority to review founding member documentation</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="mt-[7px] inline-block w-1.5 h-1.5 rounded-full flex-shrink-0" style="background:#C8A951;"></span>
+              <span>You can watch the Proof layer progress in the meantime</span>
+            </li>
+          </ul>
+        </div>
+        <div class="rounded-xl p-6" style="background:#0f1420;border:1px solid #1e293b;">
+          <div class="flex items-center gap-2 mb-4">
+            <i class="fas fa-xmark text-[13px]" style="color:#fca5a5;"></i>
+            <h4 class="text-sm font-bold uppercase tracking-[0.18em]" style="color:#fca5a5;font-family:'Source Sans Pro',sans-serif;">What it does NOT mean</h4>
+          </div>
+          <ul class="space-y-2.5 list-none m-0 p-0 text-[14.5px] text-[#cbd5e1] leading-relaxed" style="font-family:'Source Sans Pro',sans-serif;">
+            <li class="flex items-start gap-3">
+              <i class="fas fa-xmark text-[11px] mt-[5px] flex-shrink-0" style="color:#fca5a5;"></i>
+              <span>You are enrolled in any product</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <i class="fas fa-xmark text-[11px] mt-[5px] flex-shrink-0" style="color:#fca5a5;"></i>
+              <span>You have committed any capital</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <i class="fas fa-xmark text-[11px] mt-[5px] flex-shrink-0" style="color:#fca5a5;"></i>
+              <span>You have any preferential terms</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="text-center text-[#94a3b8] text-base italic mt-10" style="font-family:'Playfair Display',Georgia,serif;">
+        The waitlist is a status-marker, not a sales funnel.
+      </p>
+    </div>
+  </section>
+
   <!-- ════ SECTION 2: WHAT IS EPIG? ════ -->
   <section style="background:#111827;">
     <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
@@ -1878,6 +1979,57 @@ export function landingPage(): string {
         icon.classList.add('fa-minus');
       }
     }
+
+    // Waitlist form — POST /api/leads/subscribe
+    (function initWaitlistForm() {
+      const form = document.getElementById('waitlist-form');
+      if (!form) return;
+      const btn = document.getElementById('wl-submit');
+      const label = document.getElementById('wl-submit-label');
+      const msgBox = document.getElementById('wl-message');
+
+      function showMessage(text, kind) {
+        if (!msgBox) return;
+        msgBox.className = 'rounded-lg px-4 py-3 text-sm';
+        msgBox.style.fontFamily = "'Source Sans Pro',sans-serif";
+        if (kind === 'success') {
+          msgBox.style.background = 'rgba(16,185,129,0.08)';
+          msgBox.style.border = '1px solid rgba(16,185,129,0.35)';
+          msgBox.style.color = '#6ee7b7';
+        } else {
+          msgBox.style.background = 'rgba(239,68,68,0.08)';
+          msgBox.style.border = '1px solid rgba(239,68,68,0.35)';
+          msgBox.style.color = '#fca5a5';
+        }
+        msgBox.textContent = text;
+      }
+
+      form.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const email = document.getElementById('wl-email').value.trim();
+        if (!email || email.indexOf('@') === -1) {
+          showMessage('Please enter a valid email address.', 'error');
+          return;
+        }
+        if (btn) btn.disabled = true;
+        if (label) label.textContent = 'Joining\u2026';
+        try {
+          const res = await fetch('/api/leads/subscribe', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email: email })
+          });
+          if (!res.ok) throw new Error('Request failed');
+          showMessage("You're on the waitlist. We'll notify you when The Vehicle activates. No commitment is implied.", 'success');
+          form.reset();
+        } catch (err) {
+          showMessage('Something went wrong. Please try again or email info@ekantikcapital.com.', 'error');
+        } finally {
+          if (btn) btn.disabled = false;
+          if (label) label.textContent = 'Join The Waitlist';
+        }
+      });
+    })();
 
     // Live Data: Hero Badges + Proof Strip + Equity Curve
     (async function loadHomepageData() {
