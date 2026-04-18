@@ -701,6 +701,47 @@ export function landingPage(): string {
     </div>
   </section>
 
+  <!-- ════ SECTION 7: WHY THE DELAY? ════ -->
+  <section style="background:#111827;border-top:1px solid #1e293b;">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+      <div class="text-center mb-12">
+        <div class="inline-flex items-center gap-2 mb-5 px-3 py-1 rounded-full" style="background:rgba(200,169,81,0.06);border:1px solid rgba(200,169,81,0.22);">
+          <span class="text-[10px] font-bold uppercase tracking-[0.22em]" style="color:#C8A951;font-family:'Source Sans Pro',sans-serif;">On Integrity</span>
+        </div>
+        <h2 style="font-family:'Playfair Display',Georgia,serif;font-weight:400;" class="text-3xl sm:text-[40px] text-white leading-tight">
+          Why The Delay?
+        </h2>
+      </div>
+
+      <div class="space-y-5 text-[#cbd5e1] text-base sm:text-[17px] leading-[1.8] mb-12" style="font-family:'Source Sans Pro',sans-serif;">
+        <p>
+          Most managed-strategy products launch on backtest data and marketing. Founding members are solicited before the infrastructure to serve them is in place. Results are promised before the execution is proven.
+        </p>
+        <p class="text-white font-semibold" style="font-family:'Playfair Display',Georgia,serif;font-style:italic;">
+          Ekantik is doing the opposite.
+        </p>
+        <p>
+          The Vehicle will not open until three things are simultaneously true: <strong class="text-white">the edge is validated live</strong>, <strong class="text-white">the operator has proven adherence</strong>, and <strong class="text-white">the fiduciary infrastructure is fully operational</strong>. None of these can be rushed. All of them can be watched.
+        </p>
+        <p>
+          The radical-transparency commitment that defines the Ekantik Architecture applies to this page too. It is easier to market a ready-made product than to document a product being built. We are doing the harder thing on purpose.
+        </p>
+      </div>
+
+      <!-- Pull quote: The delay is the integrity. -->
+      <figure class="relative rounded-2xl px-6 sm:px-12 py-10 sm:py-12 text-center" style="background:radial-gradient(ellipse at 50% 0%, rgba(200,169,81,0.08) 0%, rgba(200,169,81,0.02) 70%);border:1px solid rgba(200,169,81,0.32);">
+        <div class="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-0.5 rounded-full" style="background:#111827;border:1px solid rgba(200,169,81,0.35);">
+          <span class="text-[10px] font-bold uppercase tracking-[0.28em]" style="color:#C8A951;font-family:'Source Sans Pro',sans-serif;">Pull Quote</span>
+        </div>
+        <blockquote class="m-0">
+          <p style="font-family:'Playfair Display',Georgia,serif;font-weight:400;font-style:italic;color:#C8A951;" class="text-3xl sm:text-[42px] leading-[1.15] mb-0">
+            The delay is the integrity.
+          </p>
+        </blockquote>
+      </figure>
+    </div>
+  </section>
+
   <!-- ════ SECTION 2: WHAT IS EPIG? ════ -->
   <section style="background:#111827;">
     <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
