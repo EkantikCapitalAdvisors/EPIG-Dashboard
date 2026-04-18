@@ -48,6 +48,127 @@ export function landingPage(): string {
     </div>
   </section>
 
+  <!-- ════ SECTION 2: THE BARBELL ARCHITECTURE ════ -->
+  <section style="background:#0f1420;border-top:1px solid #1e293b;">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+      <div class="text-center mb-12 max-w-3xl mx-auto">
+        <div class="inline-flex items-center gap-2 mb-5 px-3 py-1 rounded-full" style="background:rgba(200,169,81,0.06);border:1px solid rgba(200,169,81,0.22);">
+          <span class="text-[10px] font-bold uppercase tracking-[0.22em]" style="color:#C8A951;font-family:'Source Sans Pro',sans-serif;">The Design</span>
+        </div>
+        <h2 style="font-family:'Playfair Display',Georgia,serif;font-weight:400;" class="text-3xl sm:text-[40px] text-white mb-4 leading-tight">
+          A Barbell Applied to Managed Capital.
+        </h2>
+        <p class="text-[#94a3b8] text-lg leading-relaxed" style="font-family:'Source Sans Pro',sans-serif;">
+          Most of the capital defensive. A small sleeve precisely sized for asymmetric opportunity. Nothing in the middle.
+        </p>
+      </div>
+
+      <!-- Opening paragraph -->
+      <div class="max-w-3xl mx-auto mb-12 space-y-4 text-[#cbd5e1] text-base leading-[1.75]" style="font-family:'Source Sans Pro',sans-serif;">
+        <p>
+          EPIG is built on a <strong class="text-white">barbell structure</strong> &mdash; a portfolio design principle articulated by <em class="text-white">Nassim Taleb</em> in which the vast majority of capital is structurally defensive while a small, precisely-sized allocation captures asymmetric opportunity.
+        </p>
+        <p>
+          The barbell deliberately avoids the middle &mdash; moderate-risk positions that offer neither full protection nor meaningful upside. EPIG is the barbell applied to managed capital.
+        </p>
+      </div>
+
+      <!-- Before / After Comparison Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-10">
+        <!-- LEFT: Fully Invested S&P (Reference) -->
+        <div class="rounded-2xl border overflow-hidden" style="background:#1a1f2e;border-color:rgba(239,68,68,0.25);">
+          <div class="px-6 py-4" style="background:rgba(239,68,68,0.08);border-bottom:1px solid rgba(239,68,68,0.2);">
+            <div class="text-[11px] font-bold uppercase tracking-[0.2em] mb-1" style="color:#fca5a5;font-family:'Source Sans Pro',sans-serif;">Reference</div>
+            <h3 class="text-xl font-bold text-white leading-tight" style="font-family:'Playfair Display',Georgia,serif;">Fully Invested S&amp;P</h3>
+            <p class="text-[13px] text-[#94a3b8] mt-1">Traditional Buy &amp; Hold</p>
+          </div>
+          <div class="p-6 space-y-4" style="font-family:'Source Sans Pro',sans-serif;">
+            <div class="flex items-start gap-3">
+              <span class="mt-1.5 inline-block w-1.5 h-1.5 rounded-full flex-shrink-0" style="background:#ef4444;"></span>
+              <p class="text-sm text-[#cbd5e1] leading-relaxed"><strong class="text-white">Always in the market</strong> &mdash; full exposure to all phases.</p>
+            </div>
+            <div class="flex items-start gap-3">
+              <span class="mt-1.5 inline-block w-1.5 h-1.5 rounded-full flex-shrink-0" style="background:#ef4444;"></span>
+              <p class="text-sm text-[#cbd5e1] leading-relaxed"><strong class="text-white">Full drawdowns</strong> during corrections (30&ndash;50%+).</p>
+            </div>
+            <div class="flex items-start gap-3">
+              <span class="mt-1.5 inline-block w-1.5 h-1.5 rounded-full flex-shrink-0" style="background:#ef4444;"></span>
+              <p class="text-sm text-[#cbd5e1] leading-relaxed"><strong class="text-white">No cash cushion</strong> for opportunistic deployment.</p>
+            </div>
+            <div class="flex items-start gap-3">
+              <span class="mt-1.5 inline-block w-1.5 h-1.5 rounded-full flex-shrink-0" style="background:#ef4444;"></span>
+              <p class="text-sm text-[#cbd5e1] leading-relaxed">Returns <strong class="text-white">dependent on entry P/E</strong> of the S&amp;P.</p>
+            </div>
+            <div class="pt-4 mt-2 border-t border-[#1e293b] space-y-3">
+              <div class="flex justify-between items-center">
+                <span class="text-xs uppercase tracking-wider text-[#94a3b8]">Market Exposure</span>
+                <span class="text-sm font-semibold text-white">100% constant</span>
+              </div>
+              <div>
+                <div class="flex justify-between items-center mb-1.5">
+                  <span class="text-xs uppercase tracking-wider text-[#94a3b8]">Risk Profile</span>
+                  <span class="text-[11px] font-bold uppercase tracking-wider" style="color:#fca5a5;">High</span>
+                </div>
+                <div class="w-full h-1.5 rounded-full" style="background:#1e293b;">
+                  <div class="h-full rounded-full" style="width:92%;background:linear-gradient(to right,#ef4444,#f87171);"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT: EPIG Architecture (Design) -->
+        <div class="rounded-2xl border overflow-hidden" style="background:#1a1f2e;border-color:rgba(200,169,81,0.32);">
+          <div class="px-6 py-4" style="background:rgba(200,169,81,0.08);border-bottom:1px solid rgba(200,169,81,0.25);">
+            <div class="text-[11px] font-bold uppercase tracking-[0.2em] mb-1" style="color:#C8A951;font-family:'Source Sans Pro',sans-serif;">EPIG Architecture &middot; Design</div>
+            <h3 class="text-xl font-bold text-white leading-tight" style="font-family:'Playfair Display',Georgia,serif;">Selective Exposure</h3>
+            <p class="text-[13px] text-[#94a3b8] mt-1">Barbell applied to managed capital</p>
+          </div>
+          <div class="p-6 space-y-4" style="font-family:'Source Sans Pro',sans-serif;">
+            <div class="flex items-start gap-3">
+              <span class="mt-1.5 inline-block w-1.5 h-1.5 rounded-full flex-shrink-0" style="background:#C8A951;"></span>
+              <p class="text-sm text-[#cbd5e1] leading-relaxed"><strong class="text-white">95&ndash;99% of principal</strong> designed to remain fully secured.</p>
+            </div>
+            <div class="flex items-start gap-3">
+              <span class="mt-1.5 inline-block w-1.5 h-1.5 rounded-full flex-shrink-0" style="background:#C8A951;"></span>
+              <p class="text-sm text-[#cbd5e1] leading-relaxed"><strong class="text-white">1&ndash;3% VaR overlay</strong> &mdash; precisely controlled exposure.</p>
+            </div>
+            <div class="flex items-start gap-3">
+              <span class="mt-1.5 inline-block w-1.5 h-1.5 rounded-full flex-shrink-0" style="background:#C8A951;"></span>
+              <p class="text-sm text-[#cbd5e1] leading-relaxed"><strong class="text-white">Selectivity over constant exposure</strong> &mdash; quality over quantity.</p>
+            </div>
+            <div class="flex items-start gap-3">
+              <span class="mt-1.5 inline-block w-1.5 h-1.5 rounded-full flex-shrink-0" style="background:#C8A951;"></span>
+              <p class="text-sm text-[#cbd5e1] leading-relaxed"><strong class="text-white">Circuit breakers &amp; auto-shutdown</strong> protections built in.</p>
+            </div>
+            <div class="pt-4 mt-2 border-t border-[#1e293b] space-y-3">
+              <div class="flex justify-between items-center">
+                <span class="text-xs uppercase tracking-wider text-[#94a3b8]">Market Exposure</span>
+                <span class="text-sm font-semibold text-white">0% default &rarr; brief, capped spikes</span>
+              </div>
+              <div>
+                <div class="flex justify-between items-center mb-1.5">
+                  <span class="text-xs uppercase tracking-wider text-[#94a3b8]">Risk Profile</span>
+                  <span class="text-[11px] font-bold uppercase tracking-wider" style="color:#10b981;">Low</span>
+                </div>
+                <div class="w-full h-1.5 rounded-full" style="background:#1e293b;">
+                  <div class="h-full rounded-full" style="width:18%;background:linear-gradient(to right,#10b981,#34d399);"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Closing quotation bar -->
+      <div class="rounded-xl p-6 sm:p-7 text-center" style="background:rgba(200,169,81,0.05);border:1px solid rgba(200,169,81,0.2);border-left:3px solid #C8A951;">
+        <p class="text-base sm:text-lg text-[#e2e8f0] leading-relaxed italic max-w-3xl mx-auto" style="font-family:'Playfair Display',Georgia,serif;">
+          By harvesting only high-expectancy windows &mdash; and otherwise sitting in cash or Treasury bills &mdash; the design aims to out-compound a constant S&amp;P allocation across cycles while keeping principal structurally defended.
+        </p>
+      </div>
+    </div>
+  </section>
+
   <!-- ════ SECTION 2: WHAT IS EPIG? ════ -->
   <section style="background:#111827;">
     <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
