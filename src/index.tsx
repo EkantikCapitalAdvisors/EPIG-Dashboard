@@ -32,9 +32,9 @@ app.use('*', async (c, next) => {
 // ══════════════════════════════════════════════════════════
 // PUBLIC PAGES
 // ══════════════════════════════════════════════════════════
-app.get('/', (c) => c.html(layout('EPIG Investment Design | Verified Trade Performance', landingPage(), {
-  title: 'EPIG Investment Design | Verified Trade Performance',
-  description: 'Every trade verified from a live IB account. Two integrated strategies targeting 2x market returns. See exactly how we protect capital and compound returns \u2014 free dashboard.',
+app.get('/', (c) => c.html(layout('EPIG \u2014 The Vehicle, In Development | Ekantik Architecture', landingPage(), {
+  title: 'EPIG \u2014 The Vehicle, In Development | Ekantik Architecture',
+  description: 'EPIG is the Vehicle of the Ekantik Architecture \u2014 a managed-strategy layer in development. This page documents the barbell design, three-layer specifications, and activation conditions. It does not currently accept capital.',
   path: '/',
 })))
 app.get('/dashboard', (c) => c.html(layout('Dashboard | EPIG', dashboardPage(), {
