@@ -742,6 +742,31 @@ export function landingPage(): string {
     </div>
   </section>
 
+  <!-- ════ SECTION 8: WHAT THIS IS NOT ════ -->
+  <section style="background:#0f1420;border-top:1px solid #1e293b;">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+      <div class="text-center mb-10">
+        <div class="inline-flex items-center gap-2 mb-5 px-3 py-1 rounded-full" style="background:rgba(200,169,81,0.06);border:1px solid rgba(200,169,81,0.22);">
+          <span class="text-[10px] font-bold uppercase tracking-[0.22em]" style="color:#C8A951;font-family:'Source Sans Pro',sans-serif;">Honest Framing</span>
+        </div>
+        <h2 style="font-family:'Playfair Display',Georgia,serif;font-weight:400;" class="text-3xl sm:text-[40px] text-white leading-tight">
+          What This Is Not.
+        </h2>
+      </div>
+
+      <div class="rounded-2xl p-6 sm:p-8" style="background:rgba(200,169,81,0.05);border-left:3px solid #C8A951;border-top:1px solid rgba(200,169,81,0.18);border-right:1px solid rgba(200,169,81,0.18);border-bottom:1px solid rgba(200,169,81,0.18);">
+        <div class="space-y-4 text-[#cbd5e1] text-base sm:text-[17px] leading-[1.8]" style="font-family:'Source Sans Pro',sans-serif;">
+          <p>
+            EPIG is <strong class="text-white">not risk-free</strong>. All investing involves the possibility of loss. Drawdowns may exceed targets during extreme market dislocations. Past performance is not indicative of future results. The protections described above are <strong class="text-white">design features, not guarantees</strong>.
+          </p>
+          <p>
+            We believe the best way to earn trust is to be honest about risk &mdash; which is why the Proof layer publishes every loss alongside every win.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ════ SECTION 2: WHAT IS EPIG? ════ -->
   <section style="background:#111827;">
     <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
