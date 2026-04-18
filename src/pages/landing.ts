@@ -829,6 +829,121 @@ export function landingPage(): string {
     </div>
   </section>
 
+  <!-- ════ SECTION 10: FREQUENTLY ASKED QUESTIONS ════ -->
+  <section id="faq" style="background:#0f1420;border-top:1px solid #1e293b;">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+      <div class="text-center mb-10">
+        <div class="inline-flex items-center gap-2 mb-5 px-3 py-1 rounded-full" style="background:rgba(200,169,81,0.06);border:1px solid rgba(200,169,81,0.22);">
+          <span class="text-[10px] font-bold uppercase tracking-[0.22em]" style="color:#C8A951;font-family:'Source Sans Pro',sans-serif;">Questions</span>
+        </div>
+        <h2 style="font-family:'Playfair Display',Georgia,serif;font-weight:400;" class="text-3xl sm:text-[40px] text-white leading-tight">
+          Frequently Asked Questions.
+        </h2>
+      </div>
+
+      <div class="space-y-3" id="faq-accordion-v2">
+        <!-- Q1 (NEW): Why can't I invest yet? -->
+        <div class="rounded-xl border border-white/10 overflow-hidden">
+          <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between p-5 text-left hover:bg-white/[0.02] transition-colors cursor-pointer">
+            <span class="text-white font-semibold pr-4">Why can&rsquo;t I invest yet?</span>
+            <i class="fas fa-plus text-gray-400 faq-icon transition-transform flex-shrink-0"></i>
+          </button>
+          <div class="faq-answer hidden px-5 pb-5">
+            <div class="text-gray-400 text-sm leading-relaxed space-y-3" style="font-family:'Source Sans Pro',sans-serif;">
+              <p>Three conditions must be true before The Vehicle activates:</p>
+              <ol class="space-y-2 pl-5 list-decimal">
+                <li>The 100-trade consistency proof at the Proof layer completes and Setup Quality / Risk Discipline gates pass at threshold. Watch progress at <a href="https://10x.ekantikcapital.com" target="_blank" rel="noopener" class="no-underline hover:underline" style="color:#C8A951;">10x.ekantikcapital.com</a>.</li>
+                <li>Ekantik Capital Advisors completes RIA registration with the appropriate regulators, secures E&amp;O insurance, and establishes custodian relationships.</li>
+                <li>Founding member documentation &mdash; subscription agreements, fee structures, performance reporting protocols &mdash; is finalized and ready for onboarding.</li>
+              </ol>
+              <p class="mb-0">None of these can be rushed. The page will open when all three are true. The waitlist is how you&rsquo;ll be notified.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Q2 (UPDATED): Is this real money? (references Proof layer) -->
+        <div class="rounded-xl border border-white/10 overflow-hidden">
+          <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between p-5 text-left hover:bg-white/[0.02] transition-colors cursor-pointer">
+            <span class="text-white font-semibold pr-4">Is this real money?</span>
+            <i class="fas fa-plus text-gray-400 faq-icon transition-transform flex-shrink-0"></i>
+          </button>
+          <div class="faq-answer hidden px-5 pb-5">
+            <div class="text-gray-400 text-sm leading-relaxed space-y-3" style="font-family:'Source Sans Pro',sans-serif;">
+              <p>Edge validation happens at the Proof layer &mdash; not here. <a href="https://10x.ekantikcapital.com" target="_blank" rel="noopener" class="no-underline hover:underline" style="color:#C8A951;">10x.ekantikcapital.com</a> publishes every fill from a live Interactive Brokers account, with each trade carrying a unique IB TradeID. All data comes from IB Flex Query exports &mdash; standardized reports generated directly by Interactive Brokers. Real executions in a real brokerage account; no backtests, no paper trades, no hypotheticals.</p>
+              <p class="mb-0">This page (epig) documents the <em>architecture</em> being built. That page (10x) documents the <em>execution</em> being proven.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- How can I verify the data? -->
+        <div class="rounded-xl border border-white/10 overflow-hidden">
+          <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between p-5 text-left hover:bg-white/[0.02] transition-colors cursor-pointer">
+            <span class="text-white font-semibold pr-4">How can I verify the data?</span>
+            <i class="fas fa-plus text-gray-400 faq-icon transition-transform flex-shrink-0"></i>
+          </button>
+          <div class="faq-answer hidden px-5 pb-5">
+            <p class="text-gray-400 text-sm leading-relaxed mb-0" style="font-family:'Source Sans Pro',sans-serif;">
+              The Proof layer at <a href="https://10x.ekantikcapital.com" target="_blank" rel="noopener" class="no-underline hover:underline" style="color:#C8A951;">10x.ekantikcapital.com</a> publishes every trade with its IB TradeID. Raw IB Flex Query CSVs can be provided directly, or Interactive Brokers&rsquo; third-party reporting can be configured to deliver brokerage statements straight to your email. No middleman, no edits, no possibility of manipulation.
+            </p>
+          </div>
+        </div>
+
+        <!-- How is capital protected? -->
+        <div class="rounded-xl border border-white/10 overflow-hidden">
+          <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between p-5 text-left hover:bg-white/[0.02] transition-colors cursor-pointer">
+            <span class="text-white font-semibold pr-4">How is capital protected?</span>
+            <i class="fas fa-plus text-gray-400 faq-icon transition-transform flex-shrink-0"></i>
+          </button>
+          <div class="faq-answer hidden px-5 pb-5">
+            <p class="text-gray-400 text-sm leading-relaxed mb-0" style="font-family:'Source Sans Pro',sans-serif;">
+              When activated, 70&ndash;85% of capital is designed to sit in the structural floor (SPY, high-quality equities, cash equivalents), with a 1&ndash;3% VaR overlay deployed only when expectancy is positive. Every position has a pre-defined maximum loss. Circuit breakers enforced at trade, day, and week scope shift the portfolio to a defensive posture automatically. No lockup periods.
+            </p>
+          </div>
+        </div>
+
+        <!-- What happens in a 2008-style crash? -->
+        <div class="rounded-xl border border-white/10 overflow-hidden">
+          <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between p-5 text-left hover:bg-white/[0.02] transition-colors cursor-pointer">
+            <span class="text-white font-semibold pr-4">What happens in a 2008-style crash?</span>
+            <i class="fas fa-plus text-gray-400 faq-icon transition-transform flex-shrink-0"></i>
+          </button>
+          <div class="faq-answer hidden px-5 pb-5">
+            <div class="text-gray-400 text-sm leading-relaxed space-y-3" style="font-family:'Source Sans Pro',sans-serif;">
+              <p>The design is specifically built for this scenario. When corrections exceed defined thresholds, the structural floor shifts toward cash and Treasury bills, avoiding the deep drawdowns that devastate buy-and-hold portfolios. Market exposure defaults to 0%; exposure is deployed only in brief, capped spikes when expectancy is positive.</p>
+              <p class="italic text-gray-500 mb-0">These are design specifications of the architecture, not projections of what any individual account will produce. Whether the design holds in execution is what the Proof layer is currently validating.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Who is the operator? -->
+        <div class="rounded-xl border border-white/10 overflow-hidden">
+          <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between p-5 text-left hover:bg-white/[0.02] transition-colors cursor-pointer">
+            <span class="text-white font-semibold pr-4">Who will operate the strategy?</span>
+            <i class="fas fa-plus text-gray-400 faq-icon transition-transform flex-shrink-0"></i>
+          </button>
+          <div class="faq-answer hidden px-5 pb-5">
+            <p class="text-gray-400 text-sm leading-relaxed mb-0" style="font-family:'Source Sans Pro',sans-serif;">
+              Hiren Desai, Founder and Chief Investment Officer of Ekantik Capital Advisors. Hiren manages his own capital through the same architecture and executes every trade personally in Interactive Brokers. When The Vehicle activates, founding members will have direct access to the operator making every decision &mdash; not a call center or a junior associate.
+            </p>
+          </div>
+        </div>
+
+        <!-- What about fees? -->
+        <div class="rounded-xl border border-white/10 overflow-hidden">
+          <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between p-5 text-left hover:bg-white/[0.02] transition-colors cursor-pointer">
+            <span class="text-white font-semibold pr-4">What will it cost?</span>
+            <i class="fas fa-plus text-gray-400 faq-icon transition-transform flex-shrink-0"></i>
+          </button>
+          <div class="faq-answer hidden px-5 pb-5">
+            <p class="text-gray-400 text-sm leading-relaxed mb-0" style="font-family:'Source Sans Pro',sans-serif;">
+              Fee structures are part of the founding member documentation currently being finalized. Complete terms will be provided to waitlist members for review before activation. This page does not publish pricing while the infrastructure is still being built.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ════ SECTION 2: WHAT IS EPIG? ════ -->
   <section style="background:#111827;">
     <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
