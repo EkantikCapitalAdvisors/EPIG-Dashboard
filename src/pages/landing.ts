@@ -1045,6 +1045,89 @@ export function landingPage(): string {
     </div>
   </section>
 
+  <!-- ════ SECTION 12: THE EKANTIK ARCHITECTURE FOOTER ════ -->
+  <section style="background:#0a0e17;border-top:1px solid #1e293b;">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+      <div class="text-center mb-10">
+        <div class="inline-flex items-center gap-2 mb-5 px-3 py-1 rounded-full" style="background:rgba(200,169,81,0.06);border:1px solid rgba(200,169,81,0.22);">
+          <span class="text-[10px] font-bold uppercase tracking-[0.22em]" style="color:#C8A951;font-family:'Source Sans Pro',sans-serif;">The Map</span>
+        </div>
+        <h2 style="font-family:'Playfair Display',Georgia,serif;font-weight:400;letter-spacing:0.01em;" class="text-2xl sm:text-[32px] text-white leading-tight">
+          The Ekantik Architecture.
+        </h2>
+      </div>
+
+      <div class="rounded-2xl overflow-hidden" style="background:#111827;border:1px solid #1e293b;">
+        <!-- Row 1: The Doctrine -->
+        <a href="https://doubles.ekantikcapital.com" target="_blank" rel="noopener" class="flex items-center gap-4 px-5 sm:px-7 py-5 no-underline transition-colors border-b border-[#1e293b] hover:bg-white/[0.02]" style="font-family:'Source Sans Pro',sans-serif;">
+          <div class="flex items-center justify-center w-7 h-7 rounded-full flex-shrink-0" style="background:rgba(16,185,129,0.15);border:1px solid rgba(16,185,129,0.4);">
+            <i class="fas fa-check text-[11px]" style="color:#10b981;"></i>
+          </div>
+          <div class="flex-1 min-w-0">
+            <div class="flex items-baseline flex-wrap gap-2">
+              <span class="text-white font-semibold text-[15px] sm:text-base" style="font-family:'Playfair Display',Georgia,serif;">The Doctrine</span>
+              <span class="text-[10px] font-bold uppercase tracking-[0.18em]" style="color:#10b981;">Active</span>
+            </div>
+          </div>
+          <span class="hidden sm:inline text-[13px] text-[#94a3b8] font-mono">doubles.ekantikcapital.com</span>
+          <i class="fas fa-arrow-up-right-from-square text-[11px] flex-shrink-0" style="color:#64748b;"></i>
+        </a>
+
+        <!-- Row 2: The Proof -->
+        <a href="https://10x.ekantikcapital.com" target="_blank" rel="noopener" class="flex items-center gap-4 px-5 sm:px-7 py-5 no-underline transition-colors border-b border-[#1e293b] hover:bg-white/[0.02]" style="font-family:'Source Sans Pro',sans-serif;">
+          <div class="flex items-center justify-center w-7 h-7 rounded-full flex-shrink-0" style="background:rgba(16,185,129,0.15);border:1px solid rgba(16,185,129,0.4);">
+            <i class="fas fa-check text-[11px]" style="color:#10b981;"></i>
+          </div>
+          <div class="flex-1 min-w-0">
+            <div class="flex items-baseline flex-wrap gap-2">
+              <span class="text-white font-semibold text-[15px] sm:text-base" style="font-family:'Playfair Display',Georgia,serif;">The Proof</span>
+              <span class="text-[10px] font-bold uppercase tracking-[0.18em]" style="color:#10b981;">Active</span>
+            </div>
+          </div>
+          <span class="hidden sm:inline text-[13px] text-[#94a3b8] font-mono">10x.ekantikcapital.com</span>
+          <i class="fas fa-arrow-up-right-from-square text-[11px] flex-shrink-0" style="color:#64748b;"></i>
+        </a>
+
+        <!-- Row 3: The Research -->
+        <a href="https://alpha.ekantikcapital.com" target="_blank" rel="noopener" class="flex items-center gap-4 px-5 sm:px-7 py-5 no-underline transition-colors border-b border-[#1e293b] hover:bg-white/[0.02]" style="font-family:'Source Sans Pro',sans-serif;">
+          <div class="flex items-center justify-center w-7 h-7 rounded-full flex-shrink-0" style="background:rgba(16,185,129,0.15);border:1px solid rgba(16,185,129,0.4);">
+            <i class="fas fa-check text-[11px]" style="color:#10b981;"></i>
+          </div>
+          <div class="flex-1 min-w-0">
+            <div class="flex items-baseline flex-wrap gap-2">
+              <span class="text-white font-semibold text-[15px] sm:text-base" style="font-family:'Playfair Display',Georgia,serif;">The Research</span>
+              <span class="text-[10px] font-bold uppercase tracking-[0.18em]" style="color:#10b981;">Active</span>
+            </div>
+          </div>
+          <span class="hidden sm:inline text-[13px] text-[#94a3b8] font-mono">alpha.ekantikcapital.com</span>
+          <i class="fas fa-arrow-up-right-from-square text-[11px] flex-shrink-0" style="color:#64748b;"></i>
+        </a>
+
+        <!-- Row 4: The Vehicle (you are here) -->
+        <div class="flex items-center gap-4 px-5 sm:px-7 py-5" style="background:rgba(200,169,81,0.05);font-family:'Source Sans Pro',sans-serif;">
+          <div class="flex items-center justify-center w-7 h-7 rounded-full flex-shrink-0" style="background:rgba(200,169,81,0.18);border:1px solid rgba(200,169,81,0.55);">
+            <span class="inline-block w-2 h-2 rounded-full" style="background:#C8A951;box-shadow:0 0 8px rgba(200,169,81,0.7);"></span>
+          </div>
+          <div class="flex-1 min-w-0">
+            <div class="flex items-baseline flex-wrap gap-2">
+              <span class="text-white font-semibold text-[15px] sm:text-base" style="font-family:'Playfair Display',Georgia,serif;">The Vehicle</span>
+              <span class="text-[10px] font-bold uppercase tracking-[0.18em]" style="color:#C8A951;">In Development</span>
+              <span class="text-[10px] font-bold uppercase tracking-[0.18em] px-2 py-0.5 rounded" style="color:#1B2A4A;background:#C8A951;">You Are Here</span>
+            </div>
+          </div>
+          <span class="hidden sm:inline text-[13px] font-mono" style="color:#C8A951;">epig.ekantikcapital.com</span>
+        </div>
+      </div>
+
+      <!-- Closing triptych -->
+      <div class="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-4 text-center" style="font-family:'Playfair Display',Georgia,serif;">
+        <p class="text-[15px] italic" style="color:#C8A951;">The delay is the integrity.</p>
+        <p class="text-[15px] italic text-[#e2e8f0]">The architecture is the doctrine.</p>
+        <p class="text-[15px] italic text-[#94a3b8]">The Vehicle is the compounding engine.</p>
+      </div>
+    </div>
+  </section>
+
   <!-- ════ SECTION 2: WHAT IS EPIG? ════ -->
   <section style="background:#111827;">
     <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
