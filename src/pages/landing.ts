@@ -262,6 +262,207 @@ export function landingPage(): string {
     </div>
   </section>
 
+  <!-- ════ SECTION 4: THE THREE-LAYER DESIGN SPECIFICATIONS ════ -->
+  <section style="background:#0f1420;border-top:1px solid #1e293b;">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+      <div class="text-center mb-12 max-w-3xl mx-auto">
+        <div class="inline-flex items-center gap-2 mb-5 px-3 py-1 rounded-full" style="background:rgba(200,169,81,0.06);border:1px solid rgba(200,169,81,0.22);">
+          <span class="text-[10px] font-bold uppercase tracking-[0.22em]" style="color:#C8A951;font-family:'Source Sans Pro',sans-serif;">Engineering Specification</span>
+        </div>
+        <h2 style="font-family:'Playfair Display',Georgia,serif;font-weight:400;" class="text-3xl sm:text-[40px] text-white mb-4 leading-tight">
+          The Three-Layer Design.
+        </h2>
+        <p class="text-[#94a3b8] text-lg leading-relaxed" style="font-family:'Source Sans Pro',sans-serif;">
+          What EPIG is engineered to become when The Vehicle activates.
+        </p>
+      </div>
+
+      <!-- Opening paragraph -->
+      <div class="max-w-3xl mx-auto mb-12 text-[#cbd5e1] text-base leading-[1.75]" style="font-family:'Source Sans Pro',sans-serif;">
+        <p>
+          EPIG deploys the barbell through three distinct layers, each with defined role, risk budget, and contribution profile. The specifications below describe <strong class="text-white">how the system is designed</strong> &mdash; not how any individual account will perform. Performance depends on the operator&rsquo;s adherence to the design, which is what the Proof layer is currently validating.
+        </p>
+      </div>
+
+      <!-- Three layer cards -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-5 mb-12">
+        <!-- LAYER A — Structural Floor (blue) -->
+        <div class="rounded-2xl border overflow-hidden flex flex-col" style="background:#1a1f2e;border-color:rgba(59,130,246,0.3);">
+          <div class="px-6 py-4" style="background:rgba(59,130,246,0.08);border-bottom:1px solid rgba(59,130,246,0.25);">
+            <div class="flex items-center justify-between mb-1">
+              <span class="text-[10px] font-bold uppercase tracking-[0.22em]" style="color:#93c5fd;font-family:'Source Sans Pro',sans-serif;">Layer A</span>
+              <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded" style="background:rgba(59,130,246,0.15);color:#93c5fd;">Defensive End</span>
+            </div>
+            <h3 class="text-xl font-bold text-white leading-tight" style="font-family:'Playfair Display',Georgia,serif;">The Structural Floor</h3>
+            <p class="text-[13px] text-[#94a3b8] mt-1" style="font-family:'Source Sans Pro',sans-serif;">The defensive end of the barbell</p>
+          </div>
+          <div class="p-6 flex-1 flex flex-col" style="font-family:'Source Sans Pro',sans-serif;">
+            <div class="space-y-4 mb-5">
+              <div>
+                <div class="text-[10px] font-bold uppercase tracking-wider text-[#64748b] mb-1">Allocation</div>
+                <div class="text-white text-[15px] font-semibold">70&ndash;85% of capital</div>
+              </div>
+              <div>
+                <div class="text-[10px] font-bold uppercase tracking-wider text-[#64748b] mb-1">Instruments</div>
+                <div class="text-[#cbd5e1] text-sm leading-relaxed">SPY, high-quality equities, cash equivalents</div>
+              </div>
+            </div>
+            <div class="rounded-lg p-4 mb-5" style="background:rgba(59,130,246,0.05);border:1px solid rgba(59,130,246,0.15);">
+              <div class="text-[10px] font-bold uppercase tracking-wider mb-3" style="color:#93c5fd;">Design Specs</div>
+              <div class="space-y-2 text-[13px]">
+                <div class="flex justify-between items-center">
+                  <span class="text-[#94a3b8]">Expected Value</span>
+                  <span class="font-mono font-semibold text-white">1.0</span>
+                </div>
+                <div class="flex justify-between items-center">
+                  <span class="text-[#94a3b8]">Bets / Year</span>
+                  <span class="font-mono font-semibold text-white">5&ndash;15</span>
+                </div>
+                <div class="flex justify-between items-center">
+                  <span class="text-[#94a3b8]">Risk / Bet</span>
+                  <span class="font-mono font-semibold text-white">0.5&ndash;1%</span>
+                </div>
+              </div>
+            </div>
+            <div class="mt-auto pt-4 border-t border-[#1e293b] text-center">
+              <div class="text-[10px] font-bold uppercase tracking-wider text-[#64748b] mb-1">Contribution to total return</div>
+              <div class="text-2xl font-bold" style="color:#93c5fd;font-family:'JetBrains Mono',monospace;">~25%</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- LAYER B — Income Engine (orange) -->
+        <div class="rounded-2xl border overflow-hidden flex flex-col" style="background:#1a1f2e;border-color:rgba(251,146,60,0.32);">
+          <div class="px-6 py-4" style="background:rgba(251,146,60,0.08);border-bottom:1px solid rgba(251,146,60,0.25);">
+            <div class="flex items-center justify-between mb-1">
+              <span class="text-[10px] font-bold uppercase tracking-[0.22em]" style="color:#fdba74;font-family:'Source Sans Pro',sans-serif;">Layer B</span>
+              <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded" style="background:rgba(251,146,60,0.15);color:#fdba74;">Frequent-edge Tactical</span>
+            </div>
+            <h3 class="text-xl font-bold text-white leading-tight" style="font-family:'Playfair Display',Georgia,serif;">The Income Engine</h3>
+            <p class="text-[13px] text-[#94a3b8] mt-1" style="font-family:'Source Sans Pro',sans-serif;">The frequent-edge tactical layer</p>
+          </div>
+          <div class="p-6 flex-1 flex flex-col" style="font-family:'Source Sans Pro',sans-serif;">
+            <div class="space-y-4 mb-5">
+              <div>
+                <div class="text-[10px] font-bold uppercase tracking-wider text-[#64748b] mb-1">Allocation</div>
+                <div class="text-white text-[15px] font-semibold">3&ndash;5% of capital</div>
+              </div>
+              <div>
+                <div class="text-[10px] font-bold uppercase tracking-wider text-[#64748b] mb-1">Instruments</div>
+                <div class="text-[#cbd5e1] text-sm leading-relaxed">S&amp;P 500 intraday futures and options</div>
+              </div>
+            </div>
+            <div class="rounded-lg p-4 mb-5" style="background:rgba(251,146,60,0.05);border:1px solid rgba(251,146,60,0.18);">
+              <div class="text-[10px] font-bold uppercase tracking-wider mb-3" style="color:#fdba74;">Design Specs</div>
+              <div class="space-y-2 text-[13px]">
+                <div class="flex justify-between items-center">
+                  <span class="text-[#94a3b8]">Expected Value</span>
+                  <span class="font-mono font-semibold text-white">0.25&ndash;0.5</span>
+                </div>
+                <div class="flex justify-between items-center">
+                  <span class="text-[#94a3b8]">Bets / Year</span>
+                  <span class="font-mono font-semibold text-white">~150</span>
+                </div>
+                <div class="flex justify-between items-center">
+                  <span class="text-[#94a3b8]">Risk / Bet</span>
+                  <span class="font-mono font-semibold text-white">0.5%</span>
+                </div>
+              </div>
+            </div>
+            <div class="mt-auto pt-4 border-t border-[#1e293b] text-center">
+              <div class="text-[10px] font-bold uppercase tracking-wider text-[#64748b] mb-1">Contribution to total return</div>
+              <div class="text-2xl font-bold" style="color:#fdba74;font-family:'JetBrains Mono',monospace;">~50%</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- LAYER C — Convexity Sleeve (green) -->
+        <div class="rounded-2xl border overflow-hidden flex flex-col" style="background:#1a1f2e;border-color:rgba(16,185,129,0.32);">
+          <div class="px-6 py-4" style="background:rgba(16,185,129,0.08);border-bottom:1px solid rgba(16,185,129,0.25);">
+            <div class="flex items-center justify-between mb-1">
+              <span class="text-[10px] font-bold uppercase tracking-[0.22em]" style="color:#6ee7b7;font-family:'Source Sans Pro',sans-serif;">Layer C</span>
+              <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded" style="background:rgba(16,185,129,0.15);color:#6ee7b7;">Asymmetric End</span>
+            </div>
+            <h3 class="text-xl font-bold text-white leading-tight" style="font-family:'Playfair Display',Georgia,serif;">The Convexity Sleeve</h3>
+            <p class="text-[13px] text-[#94a3b8] mt-1" style="font-family:'Source Sans Pro',sans-serif;">The asymmetric-upside end of the barbell</p>
+          </div>
+          <div class="p-6 flex-1 flex flex-col" style="font-family:'Source Sans Pro',sans-serif;">
+            <div class="space-y-4 mb-5">
+              <div>
+                <div class="text-[10px] font-bold uppercase tracking-wider text-[#64748b] mb-1">Allocation</div>
+                <div class="text-white text-[15px] font-semibold">3&ndash;5% of capital</div>
+              </div>
+              <div>
+                <div class="text-[10px] font-bold uppercase tracking-wider text-[#64748b] mb-1">Instruments</div>
+                <div class="text-[#cbd5e1] text-sm leading-relaxed">Asymmetric equity positions at correction levels</div>
+              </div>
+            </div>
+            <div class="rounded-lg p-4 mb-5" style="background:rgba(16,185,129,0.05);border:1px solid rgba(16,185,129,0.18);">
+              <div class="text-[10px] font-bold uppercase tracking-wider mb-3" style="color:#6ee7b7;">Design Specs</div>
+              <div class="space-y-2 text-[13px]">
+                <div class="flex justify-between items-center">
+                  <span class="text-[#94a3b8]">Expected Value</span>
+                  <span class="font-mono font-semibold text-white">0.6</span>
+                </div>
+                <div class="flex justify-between items-center">
+                  <span class="text-[#94a3b8]">Bets / Year</span>
+                  <span class="font-mono font-semibold text-white">30&ndash;50</span>
+                </div>
+                <div class="flex justify-between items-center">
+                  <span class="text-[#94a3b8]">Risk / Bet</span>
+                  <span class="font-mono font-semibold text-white">0.5%</span>
+                </div>
+              </div>
+            </div>
+            <div class="mt-auto pt-4 border-t border-[#1e293b] text-center">
+              <div class="text-[10px] font-bold uppercase tracking-wider text-[#64748b] mb-1">Contribution to total return</div>
+              <div class="text-2xl font-bold" style="color:#6ee7b7;font-family:'JetBrains Mono',monospace;">~25%</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DESIGN TARGETS — WHEN ACTIVATED block -->
+      <div class="max-w-4xl mx-auto rounded-2xl overflow-hidden" style="background:#0a0e17;border:1px solid rgba(200,169,81,0.5);box-shadow:0 0 0 1px rgba(200,169,81,0.1);">
+        <div class="px-6 sm:px-8 py-5 text-center" style="background:rgba(200,169,81,0.08);border-bottom:1px solid rgba(200,169,81,0.25);">
+          <div class="text-[11px] font-bold uppercase tracking-[0.28em]" style="color:#C8A951;font-family:'Source Sans Pro',sans-serif;">Design Targets &mdash; When Activated</div>
+        </div>
+        <div class="px-6 sm:px-10 py-8">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-4 mb-8" style="font-family:'Source Sans Pro',sans-serif;">
+            <div class="flex justify-between items-baseline gap-4 pb-3 border-b border-[#1e293b]">
+              <span class="text-[13px] text-[#94a3b8]">Net CAGR target</span>
+              <span class="font-mono font-bold text-white text-base">26%</span>
+            </div>
+            <div class="flex justify-between items-baseline gap-4 pb-3 border-b border-[#1e293b]">
+              <span class="text-[13px] text-[#94a3b8]">Max capital at risk</span>
+              <span class="font-mono font-bold text-white text-base">&lt;5% at any given time</span>
+            </div>
+            <div class="flex justify-between items-baseline gap-4 pb-3 border-b border-[#1e293b]">
+              <span class="text-[13px] text-[#94a3b8]">Total bets per year</span>
+              <span class="font-mono font-bold text-white text-base">150&ndash;200</span>
+            </div>
+            <div class="flex justify-between items-baseline gap-4 pb-3 border-b border-[#1e293b]">
+              <span class="text-[13px] text-[#94a3b8]">Principal always secure</span>
+              <span class="font-mono font-bold text-white text-base">95&ndash;99%</span>
+            </div>
+            <div class="flex justify-between items-baseline gap-4 pb-3 sm:col-span-2">
+              <span class="text-[13px] text-[#94a3b8]">Market exposure</span>
+              <span class="font-mono font-bold text-white text-base">0% default &rarr; brief, capped spikes</span>
+            </div>
+          </div>
+          <p class="text-[13px] text-[#94a3b8] leading-relaxed mb-5" style="font-family:'Source Sans Pro',sans-serif;">
+            These are <strong class="text-white">design specifications of the architecture</strong>, not projections of what any individual account will produce. Design targets describe the system; outcomes depend on the operator&rsquo;s adherence, which is what the Proof layer is currently validating.
+          </p>
+          <div class="text-center">
+            <a href="https://10x.ekantikcapital.com" target="_blank" rel="noopener" class="inline-flex items-center gap-2 no-underline text-sm font-semibold" style="color:#C8A951;">
+              Watch adherence in real time <i class="fas fa-arrow-right text-xs"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ════ SECTION 2: WHAT IS EPIG? ════ -->
   <section style="background:#111827;">
     <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
