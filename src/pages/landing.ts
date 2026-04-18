@@ -169,6 +169,99 @@ export function landingPage(): string {
     </div>
   </section>
 
+  <!-- ════ SECTION 3: NEVER LOSE MONEY — THE FOUR PRINCIPLES ════ -->
+  <section style="background:#111827;border-top:1px solid #1e293b;">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+      <div class="text-center mb-12 max-w-3xl mx-auto">
+        <div class="inline-flex items-center gap-2 mb-5 px-3 py-1 rounded-full" style="background:rgba(200,169,81,0.06);border:1px solid rgba(200,169,81,0.22);">
+          <span class="text-[10px] font-bold uppercase tracking-[0.22em]" style="color:#C8A951;font-family:'Source Sans Pro',sans-serif;">Never Lose Money</span>
+        </div>
+        <h2 style="font-family:'Playfair Display',Georgia,serif;font-weight:400;" class="text-3xl sm:text-[40px] text-white mb-4 leading-tight">
+          The Four Principles Underneath The Design.
+        </h2>
+        <p class="text-[#94a3b8] text-lg leading-relaxed" style="font-family:'Source Sans Pro',sans-serif;">
+          Every investment decision runs through these four filters.
+        </p>
+      </div>
+
+      <!-- 2x2 Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-10">
+        <!-- Risk Management -->
+        <div class="rounded-2xl border border-[#1e293b] p-7" style="background:#1a1f2e;">
+          <div class="flex items-center gap-4 mb-4">
+            <div class="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0" style="background:rgba(200,169,81,0.12);border:1px solid rgba(200,169,81,0.3);">
+              <i class="fas fa-shield-halved text-lg" style="color:#C8A951;"></i>
+            </div>
+            <div>
+              <div class="text-[10px] font-bold uppercase tracking-[0.22em] mb-0.5" style="color:#C8A951;font-family:'Source Sans Pro',sans-serif;">Principle 1</div>
+              <h3 class="text-xl font-bold text-white leading-tight" style="font-family:'Playfair Display',Georgia,serif;">Risk Management</h3>
+            </div>
+          </div>
+          <p class="text-[#cbd5e1] text-[15px] leading-relaxed" style="font-family:'Source Sans Pro',sans-serif;">
+            Pre-committed caps and limits to prevent catastrophic loss. Stop-losses, circuit breakers, and hard stops enforced at <strong class="text-white">trade, day, and week</strong> scope.
+          </p>
+        </div>
+
+        <!-- Position Sizing -->
+        <div class="rounded-2xl border border-[#1e293b] p-7" style="background:#1a1f2e;">
+          <div class="flex items-center gap-4 mb-4">
+            <div class="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0" style="background:rgba(200,169,81,0.12);border:1px solid rgba(200,169,81,0.3);">
+              <i class="fas fa-scale-balanced text-lg" style="color:#C8A951;"></i>
+            </div>
+            <div>
+              <div class="text-[10px] font-bold uppercase tracking-[0.22em] mb-0.5" style="color:#C8A951;font-family:'Source Sans Pro',sans-serif;">Principle 2</div>
+              <h3 class="text-xl font-bold text-white leading-tight" style="font-family:'Playfair Display',Georgia,serif;">Position Sizing</h3>
+            </div>
+          </div>
+          <p class="text-[#cbd5e1] text-[15px] leading-relaxed" style="font-family:'Source Sans Pro',sans-serif;">
+            Every position sized <strong class="text-white">proportionally to capital, edge confidence, and volatility</strong>. Never risk too much on any single bet.
+          </p>
+        </div>
+
+        <!-- Expected Value -->
+        <div class="rounded-2xl border border-[#1e293b] p-7" style="background:#1a1f2e;">
+          <div class="flex items-center gap-4 mb-4">
+            <div class="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0" style="background:rgba(200,169,81,0.12);border:1px solid rgba(200,169,81,0.3);">
+              <i class="fas fa-calculator text-lg" style="color:#C8A951;"></i>
+            </div>
+            <div>
+              <div class="text-[10px] font-bold uppercase tracking-[0.22em] mb-0.5" style="color:#C8A951;font-family:'Source Sans Pro',sans-serif;">Principle 3</div>
+              <h3 class="text-xl font-bold text-white leading-tight" style="font-family:'Playfair Display',Georgia,serif;">Expected Value</h3>
+            </div>
+          </div>
+          <p class="text-[#cbd5e1] text-[15px] leading-relaxed" style="font-family:'Source Sans Pro',sans-serif;">
+            Positive average return per unit of risk. Expected value is calculated <strong class="text-white">before every position</strong>; if EV is negative or unclear, no position is taken.
+          </p>
+        </div>
+
+        <!-- Positive Expectancy -->
+        <div class="rounded-2xl border border-[#1e293b] p-7" style="background:#1a1f2e;">
+          <div class="flex items-center gap-4 mb-4">
+            <div class="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0" style="background:rgba(200,169,81,0.12);border:1px solid rgba(200,169,81,0.3);">
+              <i class="fas fa-chart-line text-lg" style="color:#C8A951;"></i>
+            </div>
+            <div>
+              <div class="text-[10px] font-bold uppercase tracking-[0.22em] mb-0.5" style="color:#C8A951;font-family:'Source Sans Pro',sans-serif;">Principle 4</div>
+              <h3 class="text-xl font-bold text-white leading-tight" style="font-family:'Playfair Display',Georgia,serif;">Positive Expectancy</h3>
+            </div>
+          </div>
+          <p class="text-[#cbd5e1] text-[15px] leading-relaxed" style="font-family:'Source Sans Pro',sans-serif;">
+            Every bet requires a <strong class="text-white">structural edge</strong> that tilts odds in your favor. Only execute when mathematical advantage is demonstrable.
+          </p>
+        </div>
+      </div>
+
+      <!-- Closing line -->
+      <p class="text-center text-[#94a3b8] text-base sm:text-lg italic leading-relaxed max-w-3xl mx-auto" style="font-family:'Playfair Display',Georgia,serif;">
+        These four principles, applied together, define the architecture. The doctrine at
+        <a href="https://doubles.ekantikcapital.com" target="_blank" rel="noopener" class="no-underline hover:underline" style="color:#C8A951;">doubles.ekantikcapital.com</a>
+        explains why they compound. The Proof layer at
+        <a href="https://10x.ekantikcapital.com" target="_blank" rel="noopener" class="no-underline hover:underline" style="color:#C8A951;">10x.ekantikcapital.com</a>
+        demonstrates whether they execute.
+      </p>
+    </div>
+  </section>
+
   <!-- ════ SECTION 2: WHAT IS EPIG? ════ -->
   <section style="background:#111827;">
     <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
