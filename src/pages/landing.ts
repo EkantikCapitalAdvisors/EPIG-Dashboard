@@ -1,49 +1,48 @@
 export function landingPage(): string {
   return `
-  <!-- ════ SECTION 1: HERO ════ -->
+  <!-- ════ SECTION 1: HERO — THE VEHICLE, IN DEVELOPMENT ════ -->
   <section class="relative overflow-hidden" style="background:#111827;">
-    <div class="absolute inset-0" style="background:radial-gradient(ellipse at 50% 0%, rgba(200,169,81,0.04) 0%, transparent 70%);"></div>
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-20 text-center relative">
-      <h1 style="font-family:'Playfair Display',Georgia,serif;font-weight:400;" class="text-3xl sm:text-4xl lg:text-[42px] text-white mb-4 leading-tight">
-        Your Capital, Managed with Structural Discipline.
-      </h1>
-      <p style="font-family:'Source Sans Pro','Calibri',sans-serif;color:#C8A951;" class="text-lg sm:text-[22px] font-normal mb-8">
-        Every Trade Verified. Every Loss Disclosed.
-      </p>
-      <p style="font-family:'Source Sans Pro',sans-serif;max-width:680px;" class="text-base sm:text-[17px] text-white/80 mx-auto mb-12 leading-relaxed">
-        EPIG is a two-component managed investment strategy: 70% invested for 2&times; market returns,
-        30% in defined-risk trading targeting 50% annual returns. Built on the S&amp;P 500.
-        Executed in Interactive Brokers. Shared with full transparency.
-      </p>
-
-      <!-- Proof Badges -->
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto mb-10">
-        <div class="rounded-xl bg-white/[0.08] border border-white/[0.12] p-4 text-center">
-          <div id="hero-cum-return" class="text-2xl sm:text-[28px] font-bold text-white" style="font-family:'JetBrains Mono',monospace;">14.2%</div>
-          <div class="text-xs text-white/60 mt-1">Cumulative Return</div>
-        </div>
-        <div class="rounded-xl bg-white/[0.08] border border-white/[0.12] p-4 text-center">
-          <div id="hero-trades" class="text-2xl sm:text-[28px] font-bold text-white" style="font-family:'JetBrains Mono',monospace;">187</div>
-          <div class="text-xs text-white/60 mt-1">Verified Trades</div>
-        </div>
-        <div class="rounded-xl bg-white/[0.08] border border-white/[0.12] p-4 text-center">
-          <div id="hero-drawdown" class="text-2xl sm:text-[28px] font-bold text-white" style="font-family:'JetBrains Mono',monospace;">-8.4%</div>
-          <div class="text-xs text-white/60 mt-1">Max Drawdown</div>
-        </div>
-        <div class="rounded-xl bg-white/[0.08] border border-white/[0.12] p-4 text-center">
-          <div id="hero-live-since" class="text-2xl sm:text-[28px] font-bold text-white" style="font-family:'JetBrains Mono',monospace;">Jan 2026</div>
-          <div class="text-xs text-white/60 mt-1">Live Since</div>
-        </div>
+    <div class="absolute inset-0" style="background:radial-gradient(ellipse at 50% 0%, rgba(200,169,81,0.05) 0%, transparent 70%);"></div>
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-20 text-center relative">
+      <!-- Architecture pill badge -->
+      <div class="inline-flex items-center gap-2 mb-7 px-4 py-1.5 rounded-full" style="background:rgba(200,169,81,0.08);border:1px solid rgba(200,169,81,0.35);">
+        <span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#C8A951;box-shadow:0 0 6px rgba(200,169,81,0.8);"></span>
+        <span class="text-[11px] font-bold uppercase tracking-[0.22em]" style="color:#C8A951;font-family:'Source Sans Pro',sans-serif;">Ekantik Architecture &middot; Layer 4</span>
       </div>
-      <p class="text-xs text-white/40 mb-10">All data from Interactive Brokers execution reports. Updated weekly.</p>
 
-      <!-- Dual CTA -->
-      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-        <a href="/dashboard" class="inline-flex items-center gap-2 no-underline px-8 py-3.5 rounded-lg text-base font-semibold transition-all" style="background:#C8A951;color:#1B2A4A;">
-          <i class="fas fa-chart-line"></i> View Live Performance Dashboard
+      <h1 style="font-family:'Playfair Display',Georgia,serif;font-weight:400;letter-spacing:0.01em;" class="text-4xl sm:text-5xl lg:text-[54px] text-white mb-5 leading-[1.08]">
+        The Vehicle &mdash; In Development.
+      </h1>
+
+      <p style="font-family:'Playfair Display',Georgia,serif;color:#C8A951;font-style:italic;font-weight:400;" class="text-lg sm:text-[22px] mb-10 max-w-[640px] mx-auto leading-snug">
+        The Doubling Engine, engineered for managed capital. Built on a barbell architecture.
+      </p>
+
+      <div style="font-family:'Source Sans Pro',sans-serif;max-width:640px;" class="mx-auto space-y-4 mb-10 text-white/80 text-base sm:text-[17px] leading-relaxed">
+        <p>
+          EPIG is the managed-strategy layer of the Ekantik Architecture. When activated, it will deploy a three-layer portfolio &mdash; structural floor, tactical income, convexity sleeve &mdash; backed by full fiduciary infrastructure.
+        </p>
+        <p>
+          Activation is gated on the Proof layer completing its 100-trade consistency proof. You can watch The Proof in real time.
+        </p>
+        <p class="text-white/60 text-[15px]">
+          This page documents the architecture being built. It does not currently accept capital, enroll founding members, or offer managed relationships.
+        </p>
+      </div>
+
+      <!-- Three CTAs: primary Watch The Proof, outlines for Doctrine and Waitlist -->
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
+        <a href="https://10x.ekantikcapital.com" target="_blank" rel="noopener" class="inline-flex items-center gap-2 no-underline px-7 py-3.5 rounded-lg text-sm sm:text-base font-semibold transition-all" style="background:#C8A951;color:#1B2A4A;">
+          <i class="fas fa-chart-line"></i> Watch The Proof
+          <i class="fas fa-arrow-right text-xs opacity-70"></i>
         </a>
-        <a href="https://calendly.com/hd-ekantikcapital/30min" target="_blank" rel="noopener" class="inline-flex items-center gap-2 no-underline px-8 py-3.5 rounded-lg text-base font-semibold border-2 border-white/40 text-white hover:bg-white/10 transition-all">
-          <i class="fas fa-calendar-check"></i> Schedule Founding Member Consultation
+        <a href="https://doubles.ekantikcapital.com" target="_blank" rel="noopener" class="inline-flex items-center gap-2 no-underline px-7 py-3.5 rounded-lg text-sm sm:text-base font-semibold border border-white/30 text-white hover:bg-white/5 transition-all">
+          <i class="fas fa-book-open"></i> Read The Doctrine
+          <i class="fas fa-arrow-right text-xs opacity-60"></i>
+        </a>
+        <a href="#waitlist" class="inline-flex items-center gap-2 no-underline px-7 py-3.5 rounded-lg text-sm sm:text-base font-semibold border transition-all" style="border-color:rgba(200,169,81,0.6);color:#C8A951;">
+          <i class="fas fa-envelope-open-text"></i> Join The Waitlist
+          <i class="fas fa-arrow-right text-xs opacity-70"></i>
         </a>
       </div>
     </div>

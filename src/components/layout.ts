@@ -6,7 +6,7 @@ interface SocialMeta {
 }
 
 const SITE_URL = 'https://epig-dashboard.pages.dev'
-const DEFAULT_DESCRIPTION = 'Verified IB trade data \u00b7 2 integrated strategies \u00b7 Full transparency. See exactly how we protect capital and compound returns \u2014 every trade tracked from a live brokerage account.'
+const DEFAULT_DESCRIPTION = 'EPIG is the Vehicle of the Ekantik Architecture \u2014 a managed-strategy layer in development. This page documents the barbell design, three-layer specifications, and activation conditions. It does not currently accept capital.'
 const DEFAULT_IMAGE = SITE_URL + '/static/og-image.png'
 
 export function layout(title: string, content: string, social?: SocialMeta): string {
@@ -132,11 +132,11 @@ export function layout(title: string, content: string, social?: SocialMeta): str
   </style>
 </head>
 <body class="min-h-screen">
-  <!-- Founding Member Banner -->
-  <div id="founding-banner" style="background:#C8A951;color:#1B2A4A;font-size:13px;text-align:center;padding:8px 40px 8px 8px;position:relative;">
-    EPIG is a managed strategy within the Ekantik Capital Financial Freedom program. Founding memberships limited to 25.
-    <a href="https://freedom.ekantikcapital.com#membership" style="color:#1B2A4A;font-weight:600;text-decoration:underline;margin-left:4px;">Learn more &rarr;</a>
-    <button id="dismiss-banner" style="position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;color:#1B2A4A;cursor:pointer;font-size:16px;padding:4px 8px;line-height:1;" aria-label="Dismiss banner">&times;</button>
+  <!-- Vehicle-in-Development Status Banner -->
+  <div id="status-banner" style="background:#0f1420;color:#C8A951;font-size:12px;text-align:center;padding:8px 40px 8px 8px;position:relative;border-bottom:1px solid rgba(200,169,81,0.25);letter-spacing:0.04em;">
+    <span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:#C8A951;margin-right:8px;vertical-align:middle;box-shadow:0 0 8px rgba(200,169,81,0.6);"></span>
+    <span style="font-family:'Source Sans Pro',sans-serif;text-transform:uppercase;font-weight:600;">The Vehicle &middot; In Development</span>
+    <span style="color:#64748b;font-weight:400;text-transform:none;margin-left:8px;">Activation gated on the Proof layer. This page does not currently accept capital.</span>
   </div>
 
   <!-- Navigation -->
@@ -155,14 +155,14 @@ export function layout(title: string, content: string, social?: SocialMeta): str
           </a>
         </div>
         <div class="hidden md:flex items-center gap-6">
-          <a href="/" class="nav-link">Home</a>
-          <a href="/dashboard" class="nav-link">Live Dashboard</a>
-          <a href="/projector" class="nav-link">Projector</a>
+          <a href="/" class="nav-link">The Vehicle</a>
+          <a href="https://10x.ekantikcapital.com" class="nav-link" target="_blank" rel="noopener">The Proof</a>
+          <a href="https://doubles.ekantikcapital.com" class="nav-link" target="_blank" rel="noopener">The Doctrine</a>
           <a href="/disclosures" class="nav-link">Disclosures</a>
-          <a href="https://freedom.ekantikcapital.com" class="no-underline" style="background:#C8A951;color:#1B2A4A;font-weight:600;border-radius:6px;padding:8px 20px;font-size:0.875rem;">Become a Founding Member</a>
+          <a href="/#waitlist" class="no-underline" style="border:1px solid #C8A951;color:#C8A951;font-weight:600;border-radius:6px;padding:7px 18px;font-size:0.875rem;">Join the Waitlist</a>
         </div>
         <div class="flex items-center gap-3">
-          <a href="https://freedom.ekantikcapital.com" class="md:hidden no-underline text-xs" style="background:#C8A951;color:#1B2A4A;font-weight:600;border-radius:6px;padding:6px 14px;">Founding Member</a>
+          <a href="/#waitlist" class="md:hidden no-underline text-xs" style="border:1px solid #C8A951;color:#C8A951;font-weight:600;border-radius:6px;padding:6px 12px;">Waitlist</a>
           <button id="mobile-menu-btn" class="md:hidden text-epig-textMuted hover:text-white">
             <i class="fas fa-bars text-xl"></i>
           </button>
@@ -172,9 +172,10 @@ export function layout(title: string, content: string, social?: SocialMeta): str
     <!-- Mobile menu -->
     <div id="mobile-menu" class="hidden md:hidden border-t border-epig-border bg-epig-bg px-4 py-3">
       <div class="flex flex-col gap-3">
-        <a href="/" class="nav-link py-2">Home</a>
-        <a href="/dashboard" class="nav-link py-2">Live Dashboard</a>
-        <a href="/projector" class="nav-link py-2">Projector</a>
+        <a href="/" class="nav-link py-2">The Vehicle</a>
+        <a href="https://10x.ekantikcapital.com" class="nav-link py-2" target="_blank" rel="noopener">The Proof</a>
+        <a href="https://doubles.ekantikcapital.com" class="nav-link py-2" target="_blank" rel="noopener">The Doctrine</a>
+        <a href="https://alpha.ekantikcapital.com" class="nav-link py-2" target="_blank" rel="noopener">The Research</a>
         <a href="/disclosures" class="nav-link py-2">Disclosures</a>
       </div>
     </div>
@@ -239,7 +240,7 @@ export function layout(title: string, content: string, social?: SocialMeta): str
   <!-- Footer -->
   <footer class="border-t border-epig-border mt-20">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <div class="grid grid-cols-1 md:grid-cols-5 gap-8 mb-8">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
         <div>
           <div class="flex items-center gap-3 mb-4">
             <div class="w-10 h-10 rounded-lg flex items-center justify-center" style="background:#E5A418;">
@@ -251,21 +252,16 @@ export function layout(title: string, content: string, social?: SocialMeta): str
             </div>
           </div>
           <p class="text-epig-textDim text-sm leading-relaxed">
-            EPIG is a managed investment strategy within the Ekantik Capital Financial Freedom program.
+            EPIG is the Vehicle of the Ekantik Architecture &mdash; a managed-strategy layer currently in development.
           </p>
         </div>
         <div>
-          <h4 class="font-semibold text-epig-text mb-4 text-sm uppercase tracking-wider">Platform</h4>
+          <h4 class="font-semibold text-epig-text mb-4 text-sm uppercase tracking-wider">Architecture</h4>
           <div class="flex flex-col gap-2">
-            <a href="/dashboard" class="text-epig-textDim text-sm hover:text-epig-text no-underline">Dashboard</a>
-            <a href="/projector" class="text-epig-textDim text-sm hover:text-epig-text no-underline">Performance Projector</a>
-          </div>
-        </div>
-        <div>
-          <h4 class="font-semibold text-epig-text mb-4 text-sm uppercase tracking-wider">Program</h4>
-          <div class="flex flex-col gap-2">
-            <a href="https://freedom.ekantikcapital.com" target="_blank" rel="noopener" class="text-epig-textDim text-sm hover:text-epig-text no-underline">Financial Freedom Program</a>
-            <a href="https://dashboard.ekantikcapital.com" target="_blank" rel="noopener" class="text-epig-textDim text-sm hover:text-epig-text no-underline">ECFS Live Performance</a>
+            <a href="https://doubles.ekantikcapital.com" target="_blank" rel="noopener" class="text-epig-textDim text-sm hover:text-epig-text no-underline">The Doctrine</a>
+            <a href="https://10x.ekantikcapital.com" target="_blank" rel="noopener" class="text-epig-textDim text-sm hover:text-epig-text no-underline">The Proof</a>
+            <a href="https://alpha.ekantikcapital.com" target="_blank" rel="noopener" class="text-epig-textDim text-sm hover:text-epig-text no-underline">The Research</a>
+            <a href="/" class="text-epig-textDim text-sm hover:text-epig-text no-underline">The Vehicle</a>
           </div>
         </div>
         <div>
@@ -279,6 +275,7 @@ export function layout(title: string, content: string, social?: SocialMeta): str
         <div>
           <h4 class="font-semibold text-epig-text mb-4 text-sm uppercase tracking-wider">Connect</h4>
           <div class="flex flex-col gap-2">
+            <a href="/#waitlist" class="text-epig-textDim text-sm hover:text-epig-text no-underline"><i class="fas fa-envelope-open-text mr-2"></i>Join the Waitlist</a>
             <a href="https://x.com/ekantikcapital" target="_blank" rel="noopener" class="text-epig-textDim text-sm hover:text-epig-text no-underline"><i class="fab fa-x-twitter mr-2"></i>X (formerly Twitter)</a>
             <a href="mailto:info@ekantikcapital.com" class="text-epig-textDim text-sm hover:text-epig-text no-underline"><i class="fas fa-envelope mr-2"></i>Contact</a>
           </div>
@@ -286,7 +283,7 @@ export function layout(title: string, content: string, social?: SocialMeta): str
       </div>
       <div class="section-divider pt-6 flex flex-col md:flex-row items-center justify-between gap-4">
         <p class="text-epig-textDim text-xs">
-          &copy; 2026 Ekantik Capital Advisors LLC. All rights reserved. EPIG Investment Design is for informational and educational purposes only. Nothing herein constitutes investment advice.
+          &copy; 2026 Ekantik Capital Advisors LLC. All rights reserved. This page documents an investment architecture in development; it is informational and does not constitute investment advice or an offer.
         </p>
         <p class="text-epig-textDim text-xs">
           Past performance is not indicative of future results.
@@ -296,18 +293,6 @@ export function layout(title: string, content: string, social?: SocialMeta): str
   </footer>
 
   <script>
-    // Founding member banner dismiss
-    (function() {
-      const banner = document.getElementById('founding-banner');
-      if (banner && sessionStorage.getItem('bannerDismissed')) {
-        banner.style.display = 'none';
-      }
-      document.getElementById('dismiss-banner')?.addEventListener('click', () => {
-        if (banner) banner.style.display = 'none';
-        sessionStorage.setItem('bannerDismissed', '1');
-      });
-    })();
-
     // Mobile menu toggle
     document.getElementById('mobile-menu-btn')?.addEventListener('click', () => {
       document.getElementById('mobile-menu')?.classList.toggle('hidden');
@@ -324,7 +309,7 @@ export function layout(title: string, content: string, social?: SocialMeta): str
       const url = encodeURIComponent(window.location.href);
       const title = encodeURIComponent(document.title);
       const text = encodeURIComponent(
-        'Check out EPIG Investment Design — verified trade performance from a live IB account. 2 integrated strategies, full transparency.'
+        'EPIG \u2014 the Vehicle of the Ekantik Architecture. A managed-strategy layer in development, publicly documented: barbell design, three-layer specifications, and the delay as integrity.'
       );
 
       // Desktop sidebar links
