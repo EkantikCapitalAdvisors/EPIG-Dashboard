@@ -463,6 +463,128 @@ export function landingPage(): string {
     </div>
   </section>
 
+  <!-- ════ SECTION 5: THE SCALE FRAMEWORK ════ -->
+  <section style="background:#111827;border-top:1px solid #1e293b;">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+      <div class="text-center mb-12 max-w-3xl mx-auto">
+        <div class="inline-flex items-center gap-2 mb-5 px-3 py-1 rounded-full" style="background:rgba(200,169,81,0.06);border:1px solid rgba(200,169,81,0.22);">
+          <span class="text-[10px] font-bold uppercase tracking-[0.22em]" style="color:#C8A951;font-family:'Source Sans Pro',sans-serif;">Institutional Criteria</span>
+        </div>
+        <h2 style="font-family:'Playfair Display',Georgia,serif;font-weight:400;" class="text-3xl sm:text-[40px] text-white mb-4 leading-tight">
+          The SCALE Framework.
+        </h2>
+        <p class="text-[#e2e8f0] text-lg leading-relaxed mb-3" style="font-family:'Source Sans Pro',sans-serif;">
+          How institutional allocators evaluate managed strategies.
+        </p>
+        <p class="text-[#94a3b8] text-[15px] leading-relaxed" style="font-family:'Source Sans Pro',sans-serif;">
+          EPIG is engineered to satisfy all five attributes. The Proof layer is validating whether the design holds in execution.
+        </p>
+      </div>
+
+      <!-- Opening paragraph -->
+      <div class="max-w-3xl mx-auto mb-10 text-[#cbd5e1] text-base leading-[1.75]" style="font-family:'Source Sans Pro',sans-serif;">
+        <p>
+          Institutional allocators use a five-attribute framework &mdash; <strong class="text-white">SCALE</strong> &mdash; to evaluate managed investment strategies. EPIG&rsquo;s architecture is engineered to satisfy all five. Whether execution delivers on the design is what the Proof layer at
+          <a href="https://10x.ekantikcapital.com" target="_blank" rel="noopener" class="no-underline hover:underline" style="color:#C8A951;">10x.ekantikcapital.com</a>
+          is currently testing.
+        </p>
+      </div>
+
+      <!-- SCALE Rows -->
+      <div class="rounded-2xl overflow-hidden border border-[#1e293b] mb-10" style="background:#1a1f2e;">
+        <!-- S — SCALABLE CAPACITY -->
+        <div class="flex flex-col md:flex-row gap-4 md:gap-6 p-6 md:p-7 border-b border-[#1e293b]">
+          <div class="flex md:flex-col items-center gap-4 md:gap-2 md:w-44 flex-shrink-0">
+            <div class="w-14 h-14 rounded-xl flex items-center justify-center flex-shrink-0" style="background:rgba(200,169,81,0.12);border:1px solid rgba(200,169,81,0.35);">
+              <span class="text-[28px] font-bold" style="color:#C8A951;font-family:'Playfair Display',Georgia,serif;">S</span>
+            </div>
+            <div class="md:text-center">
+              <div class="text-[10px] font-bold uppercase tracking-[0.2em]" style="color:#C8A951;font-family:'Source Sans Pro',sans-serif;">Scalable</div>
+              <div class="text-[13px] font-semibold text-white uppercase tracking-wider">Capacity</div>
+            </div>
+          </div>
+          <p class="text-[#cbd5e1] text-[15px] leading-relaxed flex-1" style="font-family:'Source Sans Pro',sans-serif;">
+            Performance and slippage <strong class="text-white">designed to remain stable</strong> as account size 10-folds. S&amp;P 500 futures are the most liquid instruments globally.
+          </p>
+        </div>
+
+        <!-- C — CONTROLLED RISK -->
+        <div class="flex flex-col md:flex-row gap-4 md:gap-6 p-6 md:p-7 border-b border-[#1e293b]">
+          <div class="flex md:flex-col items-center gap-4 md:gap-2 md:w-44 flex-shrink-0">
+            <div class="w-14 h-14 rounded-xl flex items-center justify-center flex-shrink-0" style="background:rgba(200,169,81,0.12);border:1px solid rgba(200,169,81,0.35);">
+              <span class="text-[28px] font-bold" style="color:#C8A951;font-family:'Playfair Display',Georgia,serif;">C</span>
+            </div>
+            <div class="md:text-center">
+              <div class="text-[10px] font-bold uppercase tracking-[0.2em]" style="color:#C8A951;font-family:'Source Sans Pro',sans-serif;">Controlled</div>
+              <div class="text-[13px] font-semibold text-white uppercase tracking-wider">Risk</div>
+            </div>
+          </div>
+          <p class="text-[#cbd5e1] text-[15px] leading-relaxed flex-1" style="font-family:'Source Sans Pro',sans-serif;">
+            Max drawdown, volatility, and tail loss <strong class="text-white">pre-defined</strong>. 0.5&ndash;1% risk per position, scaled with profits. Principal preservation is the first principle.
+          </p>
+        </div>
+
+        <!-- A — ABSOLUTE RETURNS -->
+        <div class="flex flex-col md:flex-row gap-4 md:gap-6 p-6 md:p-7 border-b border-[#1e293b]">
+          <div class="flex md:flex-col items-center gap-4 md:gap-2 md:w-44 flex-shrink-0">
+            <div class="w-14 h-14 rounded-xl flex items-center justify-center flex-shrink-0" style="background:rgba(200,169,81,0.12);border:1px solid rgba(200,169,81,0.35);">
+              <span class="text-[28px] font-bold" style="color:#C8A951;font-family:'Playfair Display',Georgia,serif;">A</span>
+            </div>
+            <div class="md:text-center">
+              <div class="text-[10px] font-bold uppercase tracking-[0.2em]" style="color:#C8A951;font-family:'Source Sans Pro',sans-serif;">Absolute</div>
+              <div class="text-[13px] font-semibold text-white uppercase tracking-wider">Returns</div>
+            </div>
+          </div>
+          <p class="text-[#cbd5e1] text-[15px] leading-relaxed flex-1" style="font-family:'Source Sans Pro',sans-serif;">
+            <strong class="text-white">Designed to deliver positive returns</strong> across market regimes &mdash; not dependent on market direction. Multi-regime resilience is a design objective, not a claim.
+          </p>
+        </div>
+
+        <!-- L — LIQUIDITY -->
+        <div class="flex flex-col md:flex-row gap-4 md:gap-6 p-6 md:p-7 border-b border-[#1e293b]">
+          <div class="flex md:flex-col items-center gap-4 md:gap-2 md:w-44 flex-shrink-0">
+            <div class="w-14 h-14 rounded-xl flex items-center justify-center flex-shrink-0" style="background:rgba(200,169,81,0.12);border:1px solid rgba(200,169,81,0.35);">
+              <span class="text-[28px] font-bold" style="color:#C8A951;font-family:'Playfair Display',Georgia,serif;">L</span>
+            </div>
+            <div class="md:text-center">
+              <div class="text-[10px] font-bold uppercase tracking-[0.2em]" style="color:#C8A951;font-family:'Source Sans Pro',sans-serif;">Liquidity</div>
+              <div class="text-[13px] font-semibold text-white uppercase tracking-wider">&nbsp;</div>
+            </div>
+          </div>
+          <p class="text-[#cbd5e1] text-[15px] leading-relaxed flex-1" style="font-family:'Source Sans Pro',sans-serif;">
+            Primarily in cash, <strong class="text-white">deployed opportunistically</strong> into S&amp;P 500 futures with controlled overnight exposure. No lock-up periods.
+          </p>
+        </div>
+
+        <!-- E — EVIDENCE -->
+        <div class="flex flex-col md:flex-row gap-4 md:gap-6 p-6 md:p-7">
+          <div class="flex md:flex-col items-center gap-4 md:gap-2 md:w-44 flex-shrink-0">
+            <div class="w-14 h-14 rounded-xl flex items-center justify-center flex-shrink-0" style="background:rgba(200,169,81,0.12);border:1px solid rgba(200,169,81,0.35);">
+              <span class="text-[28px] font-bold" style="color:#C8A951;font-family:'Playfair Display',Georgia,serif;">E</span>
+            </div>
+            <div class="md:text-center">
+              <div class="text-[10px] font-bold uppercase tracking-[0.2em]" style="color:#C8A951;font-family:'Source Sans Pro',sans-serif;">Evidence</div>
+              <div class="text-[13px] font-semibold text-white uppercase tracking-wider">&nbsp;</div>
+            </div>
+          </div>
+          <p class="text-[#cbd5e1] text-[15px] leading-relaxed flex-1" style="font-family:'Source Sans Pro',sans-serif;">
+            <strong class="text-white">Real-time trade logs and broker statements.</strong> Every fill timestamped and verifiable. The Proof layer publishes adherence and execution data live.
+          </p>
+        </div>
+      </div>
+
+      <!-- Closing line + CTA -->
+      <div class="max-w-3xl mx-auto text-center">
+        <p class="text-[#cbd5e1] text-base leading-relaxed mb-6" style="font-family:'Source Sans Pro',sans-serif;">
+          A strategy that passes the SCALE test covers what institutional allocators rank highest: capacity to grow, risk you can live with, returns worth paying for, friction-free access, and verifiable proof. EPIG is being engineered to pass all five. The Proof layer is where <em class="text-white">&ldquo;engineered to pass&rdquo;</em> becomes <em class="text-white">&ldquo;demonstrably passing.&rdquo;</em>
+        </p>
+        <a href="https://10x.ekantikcapital.com" target="_blank" rel="noopener" class="inline-flex items-center gap-2 no-underline px-6 py-3 rounded-lg text-sm font-semibold border transition-all" style="border-color:rgba(200,169,81,0.6);color:#C8A951;">
+          See the Proof layer <i class="fas fa-arrow-right text-xs"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
   <!-- ════ SECTION 2: WHAT IS EPIG? ════ -->
   <section style="background:#111827;">
     <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
