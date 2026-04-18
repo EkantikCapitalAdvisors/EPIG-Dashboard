@@ -585,6 +585,122 @@ export function landingPage(): string {
     </div>
   </section>
 
+  <!-- ════ SECTION 6: WHAT'S BEING BUILT / NOT HAPPENING / MUST BE TRUE ════ -->
+  <section style="background:#0f1420;border-top:1px solid #1e293b;">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+      <div class="text-center mb-12 max-w-3xl mx-auto">
+        <div class="inline-flex items-center gap-2 mb-5 px-3 py-1 rounded-full" style="background:rgba(200,169,81,0.06);border:1px solid rgba(200,169,81,0.22);">
+          <span class="text-[10px] font-bold uppercase tracking-[0.22em]" style="color:#C8A951;font-family:'Source Sans Pro',sans-serif;">Status Transparency</span>
+        </div>
+        <h2 style="font-family:'Playfair Display',Georgia,serif;font-weight:400;" class="text-3xl sm:text-[40px] text-white mb-4 leading-tight">
+          Where The Vehicle Stands Today.
+        </h2>
+        <p class="text-[#94a3b8] text-lg leading-relaxed" style="font-family:'Source Sans Pro',sans-serif;">
+          What is actively being built, what is explicitly not happening, and what must be true before activation.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-5" style="font-family:'Source Sans Pro',sans-serif;">
+        <!-- COLUMN 1: WHAT'S BEING BUILT NOW -->
+        <div class="rounded-2xl border overflow-hidden flex flex-col" style="background:#1a1f2e;border-color:rgba(200,169,81,0.32);">
+          <div class="px-6 py-5" style="background:rgba(200,169,81,0.08);border-bottom:1px solid rgba(200,169,81,0.25);">
+            <div class="flex items-center gap-3 mb-1">
+              <div class="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0" style="background:rgba(200,169,81,0.18);border:1px solid rgba(200,169,81,0.4);">
+                <i class="fas fa-hammer text-xs" style="color:#C8A951;"></i>
+              </div>
+              <span class="text-[10px] font-bold uppercase tracking-[0.22em]" style="color:#C8A951;">In Progress</span>
+            </div>
+            <h3 class="text-lg sm:text-xl font-bold text-white leading-tight mt-2" style="font-family:'Playfair Display',Georgia,serif;">What&rsquo;s Being Built Now</h3>
+          </div>
+          <ul class="p-6 space-y-3 flex-1 list-none m-0">
+            <li class="flex items-start gap-3 text-[#cbd5e1] text-[14.5px] leading-relaxed">
+              <span class="mt-[7px] inline-block w-1.5 h-1.5 rounded-full flex-shrink-0" style="background:#C8A951;"></span>
+              <span>Legal and compliance infrastructure <span class="text-[#94a3b8]">(RIA registration process)</span></span>
+            </li>
+            <li class="flex items-start gap-3 text-[#cbd5e1] text-[14.5px] leading-relaxed">
+              <span class="mt-[7px] inline-block w-1.5 h-1.5 rounded-full flex-shrink-0" style="background:#C8A951;"></span>
+              <span>E&amp;O insurance and custodian relationships</span>
+            </li>
+            <li class="flex items-start gap-3 text-[#cbd5e1] text-[14.5px] leading-relaxed">
+              <span class="mt-[7px] inline-block w-1.5 h-1.5 rounded-full flex-shrink-0" style="background:#C8A951;"></span>
+              <span>The three-layer portfolio architecture <span class="text-[#94a3b8]">(shown above)</span></span>
+            </li>
+            <li class="flex items-start gap-3 text-[#cbd5e1] text-[14.5px] leading-relaxed">
+              <span class="mt-[7px] inline-block w-1.5 h-1.5 rounded-full flex-shrink-0" style="background:#C8A951;"></span>
+              <span>Founding member terms, documentation, and onboarding process</span>
+            </li>
+            <li class="flex items-start gap-3 text-[#cbd5e1] text-[14.5px] leading-relaxed">
+              <span class="mt-[7px] inline-block w-1.5 h-1.5 rounded-full flex-shrink-0" style="background:#C8A951;"></span>
+              <span>The edge validation at the Proof layer <a href="https://10x.ekantikcapital.com" target="_blank" rel="noopener" class="no-underline hover:underline" style="color:#C8A951;">(10x.ekantikcapital.com)</a></span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- COLUMN 2: WHAT'S NOT HAPPENING YET -->
+        <div class="rounded-2xl border overflow-hidden flex flex-col" style="background:#1a1f2e;border-color:rgba(239,68,68,0.28);">
+          <div class="px-6 py-5" style="background:rgba(239,68,68,0.07);border-bottom:1px solid rgba(239,68,68,0.22);">
+            <div class="flex items-center gap-3 mb-1">
+              <div class="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0" style="background:rgba(239,68,68,0.15);border:1px solid rgba(239,68,68,0.35);">
+                <i class="fas fa-ban text-xs" style="color:#fca5a5;"></i>
+              </div>
+              <span class="text-[10px] font-bold uppercase tracking-[0.22em]" style="color:#fca5a5;">Not Yet</span>
+            </div>
+            <h3 class="text-lg sm:text-xl font-bold text-white leading-tight mt-2" style="font-family:'Playfair Display',Georgia,serif;">What&rsquo;s Not Happening Yet</h3>
+          </div>
+          <ul class="p-6 space-y-3 flex-1 list-none m-0">
+            <li class="flex items-start gap-3 text-[#cbd5e1] text-[14.5px] leading-relaxed">
+              <i class="fas fa-xmark text-[11px] mt-[5px] flex-shrink-0" style="color:#fca5a5;"></i>
+              <span>Capital is <strong class="text-white">not</strong> being accepted</span>
+            </li>
+            <li class="flex items-start gap-3 text-[#cbd5e1] text-[14.5px] leading-relaxed">
+              <i class="fas fa-xmark text-[11px] mt-[5px] flex-shrink-0" style="color:#fca5a5;"></i>
+              <span>Founding member enrollment is <strong class="text-white">not</strong> open</span>
+            </li>
+            <li class="flex items-start gap-3 text-[#cbd5e1] text-[14.5px] leading-relaxed">
+              <i class="fas fa-xmark text-[11px] mt-[5px] flex-shrink-0" style="color:#fca5a5;"></i>
+              <span><strong class="text-white">No</strong> managed relationships are currently active</span>
+            </li>
+            <li class="flex items-start gap-3 text-[#cbd5e1] text-[14.5px] leading-relaxed">
+              <i class="fas fa-xmark text-[11px] mt-[5px] flex-shrink-0" style="color:#fca5a5;"></i>
+              <span><strong class="text-white">No</strong> performance is being solicited or promoted</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- COLUMN 3: WHAT MUST BE TRUE -->
+        <div class="rounded-2xl border overflow-hidden flex flex-col" style="background:#1a1f2e;border-color:rgba(59,130,246,0.3);">
+          <div class="px-6 py-5" style="background:rgba(59,130,246,0.07);border-bottom:1px solid rgba(59,130,246,0.22);">
+            <div class="flex items-center gap-3 mb-1">
+              <div class="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0" style="background:rgba(59,130,246,0.16);border:1px solid rgba(59,130,246,0.38);">
+                <i class="fas fa-key text-xs" style="color:#93c5fd;"></i>
+              </div>
+              <span class="text-[10px] font-bold uppercase tracking-[0.22em]" style="color:#93c5fd;">Activation Gates</span>
+            </div>
+            <h3 class="text-lg sm:text-xl font-bold text-white leading-tight mt-2" style="font-family:'Playfair Display',Georgia,serif;">What Must Be True Before The Vehicle Activates</h3>
+          </div>
+          <ul class="p-6 space-y-3 flex-1 list-none m-0">
+            <li class="flex items-start gap-3 text-[#cbd5e1] text-[14.5px] leading-relaxed">
+              <i class="fas fa-check text-[11px] mt-[5px] flex-shrink-0" style="color:#93c5fd;"></i>
+              <span>The 100-trade consistency proof at the Proof layer completes</span>
+            </li>
+            <li class="flex items-start gap-3 text-[#cbd5e1] text-[14.5px] leading-relaxed">
+              <i class="fas fa-check text-[11px] mt-[5px] flex-shrink-0" style="color:#93c5fd;"></i>
+              <span>Setup Quality and Risk Discipline gates pass at thresholds</span>
+            </li>
+            <li class="flex items-start gap-3 text-[#cbd5e1] text-[14.5px] leading-relaxed">
+              <i class="fas fa-check text-[11px] mt-[5px] flex-shrink-0" style="color:#93c5fd;"></i>
+              <span>RIA registration completes and compliance infrastructure is live</span>
+            </li>
+            <li class="flex items-start gap-3 text-[#cbd5e1] text-[14.5px] leading-relaxed">
+              <i class="fas fa-check text-[11px] mt-[5px] flex-shrink-0" style="color:#93c5fd;"></i>
+              <span>Founding member documentation and legal structure is in place</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ════ SECTION 2: WHAT IS EPIG? ════ -->
   <section style="background:#111827;">
     <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
