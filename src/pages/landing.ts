@@ -767,6 +767,68 @@ export function landingPage(): string {
     </div>
   </section>
 
+  <!-- ════ SECTION 9: THE PERSON BEHIND THE PORTFOLIO ════ -->
+  <section style="background:#111827;border-top:1px solid #1e293b;">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+      <div class="text-center mb-10">
+        <div class="inline-flex items-center gap-2 mb-5 px-3 py-1 rounded-full" style="background:rgba(200,169,81,0.06);border:1px solid rgba(200,169,81,0.22);">
+          <span class="text-[10px] font-bold uppercase tracking-[0.22em]" style="color:#C8A951;font-family:'Source Sans Pro',sans-serif;">The Operator</span>
+        </div>
+        <h2 style="font-family:'Playfair Display',Georgia,serif;font-weight:400;" class="text-3xl sm:text-[40px] text-white leading-tight">
+          The Person Behind the Portfolio.
+        </h2>
+      </div>
+
+      <div class="text-center mb-10">
+        <h3 class="text-2xl font-bold text-white mb-1" style="font-family:'Playfair Display',Georgia,serif;">Hiren Desai</h3>
+        <p class="text-gray-400" style="font-family:'Source Sans Pro',sans-serif;">Founder &amp; Chief Investment Officer, Ekantik Capital Advisors LLC</p>
+      </div>
+
+      <div style="font-family:'Source Sans Pro',sans-serif;" class="space-y-6 text-gray-300 text-base leading-[1.7] mb-12">
+        <!-- The Question That Started It All -->
+        <div class="rounded-xl bg-white/[0.04] border border-white/10 p-6">
+          <h4 class="text-lg font-bold text-white mb-4" style="font-family:'Playfair Display',Georgia,serif;">The Question That Started It All</h4>
+          <p>I wasn&rsquo;t working in finance. I was a management consultant at Deloitte focused on <strong class="text-white">cybersecurity</strong> &mdash; analyzing risk, designing resilient systems, and documenting failure modes.</p>
+          <p class="mt-3">But I became obsessed with a personal question that had nothing to do with my day job:</p>
+          <blockquote class="my-4 pl-5 py-3 rounded-r-lg" style="border-left:3px solid #C8A951;background:rgba(200,169,81,0.06);">
+            <p class="text-white italic mb-0">Is there a way to invest without losing money in downturns, while still capturing upside when markets rise?</p>
+          </blockquote>
+          <p>I looked everywhere. Mutual funds gave me market beta with fees. Hedge funds promised alpha but came with hidden drawdowns. Systematic strategies either chased returns and accepted volatility, or preserved capital and gave up growth.</p>
+          <p class="mt-3">No one seemed to be engineering a system with <strong class="text-white">risk control as the foundation, not an afterthought.</strong></p>
+          <p class="mt-3">I couldn&rsquo;t find what I was looking for. So I started building it myself &mdash; nights and weekends at Deloitte, while still working in cybersecurity. What began as curious part-time exploration became an obsession I couldn&rsquo;t ignore.</p>
+        </div>
+
+        <!-- The All-In Decision -->
+        <div class="rounded-xl bg-white/[0.04] border border-white/10 p-6">
+          <h4 class="text-lg font-bold text-white mb-4" style="font-family:'Playfair Display',Georgia,serif;">The All-In Decision</h4>
+          <p>In 2008, I made the decision: <strong class="text-white">I quit Deloitte to pursue this full-time.</strong></p>
+          <p class="mt-3">The part-time tinkering wasn&rsquo;t enough. I needed to go all-in. For <strong class="text-white">5 years</strong>, I did nothing but market modeling &mdash; no corporate job, no safety net, just pure research and system development. I studied market behavior across regimes, ran simulations, documented failure modes, and built what I call <strong class="text-white">reality models</strong>: a structured approach to protecting capital while capturing growth.</p>
+          <p class="mt-3">The best metaphor is building aircraft autopilot software. During development, you&rsquo;re not trying to impress anyone with smooth test flights. You&rsquo;re <strong class="text-white">deliberately stress-testing the system</strong>, finding edge cases, documenting what causes failures, and refining controls until behavior is predictable.</p>
+          <p class="mt-3">Early prototypes crash in the simulator &mdash; not because they&rsquo;re broken, but because <strong class="text-white">that&rsquo;s how you find what breaks them</strong>. You document failure modes <strong class="text-white">before</strong> passengers board.</p>
+          <blockquote class="mt-4 pl-5 py-3 rounded-r-lg" style="border-left:3px solid #C8A951;background:rgba(200,169,81,0.06);">
+            <p class="text-white italic mb-0">My cybersecurity background taught me that <strong>resilient systems are built by studying what breaks them, not by hoping they work.</strong></p>
+          </blockquote>
+        </div>
+      </div>
+
+      <!-- Credibility Strip -->
+      <div class="grid grid-cols-3 gap-4">
+        <div class="text-center p-4 rounded-lg border border-white/10">
+          <div class="text-xl font-bold text-white" style="font-family:'JetBrains Mono',monospace;">15+</div>
+          <div class="text-xs text-gray-400 mt-1">Years in Markets</div>
+        </div>
+        <div class="text-center p-4 rounded-lg border border-white/10">
+          <div class="text-xl font-bold text-white">100%</div>
+          <div class="text-xs text-gray-400 mt-1">Fiduciary</div>
+        </div>
+        <div class="text-center p-4 rounded-lg border border-white/10">
+          <div class="text-xl font-bold" style="color:#C8A951;">&#10003;</div>
+          <div class="text-xs text-gray-400 mt-1">Skin in the Game</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ════ SECTION 2: WHAT IS EPIG? ════ -->
   <section style="background:#111827;">
     <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
