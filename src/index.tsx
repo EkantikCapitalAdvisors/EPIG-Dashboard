@@ -10,7 +10,18 @@ import { termsPage } from './pages/terms'
 import { privacyPage } from './pages/privacy'
 import { adminPage } from './pages/admin'
 import { faqPage } from './pages/faq'
+import { offlinePage } from './pages/offline'
 import { layout } from './components/layout'
+
+// ──────────────────────────────────────────────────────────
+// SITE STATUS GATE
+// Flip OFFLINE_MODE to false to bring the public-facing pages
+// (landing, dashboard, projector, FAQ, how-it-works) back online.
+// While OFFLINE_MODE is true those routes return the offline
+// placeholder; legal pages (/disclosures, /terms, /privacy), the
+// admin console, and the /api/* surface remain reachable.
+// ──────────────────────────────────────────────────────────
+const OFFLINE_MODE = true
 
 type Bindings = { DB: D1Database }
 const app = new Hono<{ Bindings: Bindings }>()
@@ -32,34 +43,52 @@ app.use('*', async (c, next) => {
 // ══════════════════════════════════════════════════════════
 // PUBLIC PAGES
 // ══════════════════════════════════════════════════════════
-app.get('/', (c) => c.html(layout('EPIG \u2014 The Vehicle, In Development | Ekantik Architecture', landingPage(), {
-  title: 'EPIG \u2014 The Vehicle, In Development | Ekantik Architecture',
-  description: 'EPIG is the Vehicle of the Ekantik Architecture \u2014 a managed-strategy layer in development. This page documents the barbell design, three-layer specifications, and activation conditions. It does not currently accept capital.',
-  path: '/',
-})))
-app.get('/dashboard', (c) => c.html(layout('Dashboard | EPIG', dashboardPage(), {
-  title: 'Live Performance Dashboard | EPIG Investment Design',
-  description: 'Real-time strategy performance from a verified Interactive Brokers account. Track win rates, drawdowns, equity curves and per-trade P&L across Investing and Trading strategies.',
-  path: '/dashboard',
-})))
+app.get('/', (c) => {
+  if (OFFLINE_MODE) return c.html(offlinePage())
+  return c.html(layout('EPIG \u2014 The Vehicle, In Development | Ekantik Architecture', landingPage(), {
+    title: 'EPIG \u2014 The Vehicle, In Development | Ekantik Architecture',
+    description: 'EPIG is the Vehicle of the Ekantik Architecture \u2014 a managed-strategy layer in development. This page documents the barbell design, three-layer specifications, and activation conditions. It does not currently accept capital.',
+    path: '/',
+  }))
+})
+app.get('/dashboard', (c) => {
+  if (OFFLINE_MODE) return c.html(offlinePage())
+  return c.html(layout('Dashboard | EPIG', dashboardPage(), {
+    title: 'Live Performance Dashboard | EPIG Investment Design',
+    description: 'Real-time strategy performance from a verified Interactive Brokers account. Track win rates, drawdowns, equity curves and per-trade P&L across Investing and Trading strategies.',
+    path: '/dashboard',
+  }))
+})
 // Pricing page hidden while compensation model is being finalized
 // app.get('/pricing', (c) => c.html(layout('Pricing | EPIG', pricingPage(), {
 //   title: 'Pricing | EPIG Investment Design',
 //   description: 'Free dashboard access forever. Subscribe for real-time Discord trade alerts on every Investing and Trading strategy entry and exit. Start with a free trial.',
 //   path: '/pricing',
 // })))
-app.get('/how-it-works', (c) => c.html(layout('How It Works | EPIG', howItWorksPage(), {
-  title: 'How It Works | EPIG Investment Design',
-  description: 'See how EPIG verifies every trade using IB Flex Queries, how the 2-strategy system works, and how Discord alerts keep you informed in real time.',
-  path: '/how-it-works',
-})))
-app.get('/faq', (c) => c.redirect('/#faq', 301))
-app.get('/projector', (c) => c.html(layout('Performance Projector | EPIG', projectorPage(), {
-  title: 'Performance Projector | EPIG Investment Design',
-  description: 'Project year-end returns based on real 2026 YTD trade data. Adjust portfolio size and explore per-strategy breakdowns with live verified data.',
-  path: '/projector',
-})))
-app.get('/calculator', (c) => c.redirect('/projector'))
+app.get('/how-it-works', (c) => {
+  if (OFFLINE_MODE) return c.html(offlinePage())
+  return c.html(layout('How It Works | EPIG', howItWorksPage(), {
+    title: 'How It Works | EPIG Investment Design',
+    description: 'See how EPIG verifies every trade using IB Flex Queries, how the 2-strategy system works, and how Discord alerts keep you informed in real time.',
+    path: '/how-it-works',
+  }))
+})
+app.get('/faq', (c) => {
+  if (OFFLINE_MODE) return c.html(offlinePage())
+  return c.redirect('/#faq', 301)
+})
+app.get('/projector', (c) => {
+  if (OFFLINE_MODE) return c.html(offlinePage())
+  return c.html(layout('Performance Projector | EPIG', projectorPage(), {
+    title: 'Performance Projector | EPIG Investment Design',
+    description: 'Project year-end returns based on real 2026 YTD trade data. Adjust portfolio size and explore per-strategy breakdowns with live verified data.',
+    path: '/projector',
+  }))
+})
+app.get('/calculator', (c) => {
+  if (OFFLINE_MODE) return c.html(offlinePage())
+  return c.redirect('/projector')
+})
 app.get('/disclosures', (c) => c.html(layout('Disclosures | EPIG', disclosuresPage())))
 app.get('/terms', (c) => c.html(layout('Terms of Service | EPIG', termsPage())))
 app.get('/privacy', (c) => c.html(layout('Privacy Policy | EPIG', privacyPage())))
